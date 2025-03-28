@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:healthstack/core/routing/app_router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:healthstack/core/routing/routes.dart';
+import 'package:healthstack/core/theming/colors.dart';
 
 class HealthStackApp extends StatelessWidget {
   final AppRouter appRouter;
@@ -13,9 +15,9 @@ class HealthStackApp extends StatelessWidget {
       designSize: const Size(375, 812),
       minTextAdapt: true,
       child: MaterialApp(
-        title: 'hospital App',
+        title: 'HealthStack App',
         theme: ThemeData(
-          primaryColor:ColorsManager.mainBlue,
+          primaryColor: ColorsManager.mainBlue,
           scaffoldBackgroundColor: Colors.white,
         ),
         debugShowCheckedModeBanner: false,

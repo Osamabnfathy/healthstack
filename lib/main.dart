@@ -4,7 +4,7 @@ import 'package:healthstack/core/routing/app_router.dart';
 import 'package:healthstack/health_stack_app.dart';
 
 void main() {
-  setupGetIt();
+  // setupGetIt();
   runApp(
     HealthStackApp(
       appRouter: AppRouter(),
