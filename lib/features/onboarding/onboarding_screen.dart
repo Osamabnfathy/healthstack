@@ -15,14 +15,13 @@ class OnBoardingScreen extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.only(top: 30.h, bottom: 30.h),
+            padding: EdgeInsets.only(top: 35.h, bottom: 30.h),
             
             child: Column(
               children: [
                 const HealthstackLogoAndName(),
                 
-                // verticalSpace(70),
-                SizedBox(height: 30.h,),
+                SizedBox(height: 25.h,),
                 
                 const DoctorImageAndText(),
                 
@@ -30,15 +29,14 @@ class OnBoardingScreen extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 30.w),
                   child: Column(
                     children: [
-                      // verticalSpace(20),
                       SizedBox(height: 20.h,),
                       Text(
                         'Manage and schedule all of your medical appointments easily with Us.\nWe\'ll help you to get a new experience.',
                         style: TextStyles.font13GrayRegular,
                         textAlign: TextAlign.center,
                       ),
-                      // verticalSpace(30),
                       SizedBox(height: 30.h,),
+                      
                       const GetStartedButton(),
                     ],
                   ),

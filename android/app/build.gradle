@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.healthstack.healthstack"
-    compileSdk = 34
+    compileSdk = 35
     ndkVersion "27.2.12479018"
 
     compileOptions {
