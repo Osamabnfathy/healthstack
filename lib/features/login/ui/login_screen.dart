@@ -9,58 +9,59 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 30.h),
-        child: Column(
-          children: [
-            //Text(
-            //  "Patient Login",
-            //  style: TextStyles.font24BlueBold,
-            //),
-            //verticalSpace(10),
-           // Image.asset(AppImages.ambulancepng),
-           // verticalSpace(20),
-            Column(
-              children: [
-                const EmailAndPassword(),
-                verticalSpace(18),
-                Align(
-                  alignment: AlignmentDirectional.centerEnd,
-                  child: Text(
-                    "Forgot Password?",
-                    style: TextStyles.font13BlueRegular,
-                  ),
-                ),
-                verticalSpace(28),
-                AppTextButton(
-                    buttonText: "login",
-                    textStyle: TextStyles.font16WhiteSemiBold,
-                    onPressed: () {
-                      validateThenDoLogin(context);
-                    }),
-                verticalSpace(16),
-                DontHaveAccountText(),
-                verticalSpace(16),
-                LoginAsAdmin(),
-                verticalSpace(16),
-                LoginAsDoctor(),
-                const LoginBlocListener(),
-              ],
-            )
-          ],
-        ),
-      )),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 30.h),
+          child: const Column(
+            children: [
+              //Text(
+              //  "Patient Login",
+              //  style: TextStyles.font24BlueBold,
+              //),
+              //verticalSpace(10),
+             // Image.asset(AppImages.ambulancepng),
+             // verticalSpace(20),
+              // Column(
+              //   children: [
+              //     const EmailAndPassword(),
+              //     verticalSpace(18),
+              //     Align(
+              //       alignment: AlignmentDirectional.centerEnd,
+              //       child: Text(
+              //         "Forgot Password?",
+              //         style: TextStyles.font13BlueRegular,
+              //       ),
+              //     ),
+              //     verticalSpace(28),
+              //     AppTextButton(
+              //         buttonText: "login",
+              //         textStyle: TextStyles.font16WhiteSemiBold,
+              //         onPressed: () {
+              //           validateThenDoLogin(context);
+              //         }),
+              //     verticalSpace(16),
+              //     DontHaveAccountText(),
+              //     verticalSpace(16),
+              //     LoginAsAdmin(),
+              //     verticalSpace(16),
+              //     LoginAsDoctor(),
+              //     const LoginBlocListener(),
+              //   ],
+              // )
+            ],
+          ),
+        )
+      ),
     );
   }
 
-  void validateThenDoLogin(BuildContext context) {
-    if (context.read()<LoginCubit>().formKey.currentState!.validate()) {
-      context.read<LoginCubit>().emitLoginStates(LoginRequestBody(
-        email: context.read<LoginCubit>().emailController.text,
-        password: context.read<LoginCubit>().passwordController.text,
-      ));
-    }
-  }
+  // void validateThenDoLogin(BuildContext context) {
+  //   if (context.read()<LoginCubit>().formKey.currentState!.validate()) {
+  //     context.read<LoginCubit>().emitLoginStates(LoginRequestBody(
+  //       email: context.read<LoginCubit>().emailController.text,
+  //       password: context.read<LoginCubit>().passwordController.text,
+  //     ));
+  //   }
+  // }
 }
 
 /*
