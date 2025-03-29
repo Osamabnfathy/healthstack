@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:healthstack/core/theming/styles.dart';
 import 'package:healthstack/features/onboarding/widgets/doctor_image_and_text.dart';
 import 'package:healthstack/features/onboarding/widgets/get_started_button.dart';
@@ -21,7 +22,7 @@ class OnBoardingScreen extends StatelessWidget {
               children: [
                 const HealthstackLogoAndName(),
                 
-                SizedBox(height: 25.h,),
+                verticalSpace(25.h),
                 
                 const DoctorImageAndText(),
                 
@@ -35,7 +36,7 @@ class OnBoardingScreen extends StatelessWidget {
                         style: TextStyles.font13GrayRegular,
                         textAlign: TextAlign.center,
                       ),
-                      SizedBox(height: 30.h,),
+                      verticalSpace(30.h),
                       
                       const GetStartedButton(),
                     ],
