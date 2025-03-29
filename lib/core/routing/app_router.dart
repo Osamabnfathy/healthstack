@@ -16,6 +16,11 @@ class AppRouter {
           builder: (_) => const OnBoardingScreen(),
         );
         
+        
+      case Routes.loginScreen:
+        return MaterialPageRoute(
+          builder: (_) => const LoginScreen(),
+        );
       // case Routes.loginScreen:
       //   return MaterialPageRoute(
       //     builder: (_) => BlocProvider(
