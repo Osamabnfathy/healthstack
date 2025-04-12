@@ -5,6 +5,8 @@ import 'package:healthstack/core/routing/routes.dart';
 import 'package:healthstack/core/di/dependency_injection.dart';
 import 'package:healthstack/features/home/ui/home_screen.dart';
 import 'package:healthstack/features/login/ui/login_screen.dart';
+import 'package:healthstack/features/sign_up/ui/sign_up_screen.dart';
+import 'package:healthstack/features/sign_up/logic/sign_up_cubit.dart';
 import 'package:healthstack/features/onboarding/onboarding_screen.dart';
 import 'package:healthstack/features/login/logic/cubit/login_cubit.dart';
 
@@ -41,6 +43,14 @@ class AppRouter {
           builder: (_) => const HomeScreen(),
         );
          
+      case Routes.signUpScreen:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<SignupCubit>(),
+            child: const SignupScreen(),
+          ),
+        );
+      
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

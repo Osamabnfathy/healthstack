@@ -1,20 +1,20 @@
-import 'package:json_annotation/json_annotation.dart';
-part 'api_error_model.g.dart';
+import 'package:json_annotation/json_annotation.dart';  
 
-@JsonSerializable()
-class ApiErrorModel {
-  // @JsonKey(name: "non_field_errors") used case the api name is not message
-  @JsonKey(name: "non_field_errors")
-  final List<String>? message;
-  final int? code;
+part 'api_error_model.g.dart';  
 
-  ApiErrorModel({
-    required this.message,
-    this.code,
-  });
+@JsonSerializable(includeIfNull: false)  
+class ApiErrorModel {  
 
-  factory ApiErrorModel.fromJson(Map<String, dynamic> json) =>
-      _$ApiErrorModelFromJson(json);
+  final String? message;   
+  final String? code;  
 
-  Map<String, dynamic> toJson() => _$ApiErrorModelToJson(this);
-}
+  ApiErrorModel({  
+    this.message,  
+    this.code,  
+  });  
+
+  factory ApiErrorModel.fromJson(Map<String, dynamic> json) =>  
+      _$ApiErrorModelFromJson(json);  
+
+  Map<String, dynamic> toJson() => _$ApiErrorModelToJson(this);   
+}  
