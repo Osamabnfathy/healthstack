@@ -21,9 +21,9 @@ class AppTextButton extends StatelessWidget {
     this.verticalPadding,
     this.buttonHeight,
     this.buttonWidth,
+    required this.onPressed,
     required this.buttonText,
     required this.textStyle,
-    required this.onPressed,
   });
 
   @override
@@ -53,6 +53,7 @@ class AppTextButton extends StatelessWidget {
       ),
       
       onPressed: onPressed,
+      
       child: Text(
         buttonText,
         style: textStyle,
