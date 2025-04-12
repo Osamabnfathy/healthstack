@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:healthstack/health_stack_app.dart';
 import 'package:healthstack/core/routing/routes.dart';
+import 'package:healthstack/core/di/dependency_injection.dart';
+import 'package:healthstack/features/home/ui/home_screen.dart';
 import 'package:healthstack/features/login/ui/login_screen.dart';
 import 'package:healthstack/features/onboarding/onboarding_screen.dart';
+import 'package:healthstack/features/login/logic/cubit/login_cubit.dart';
 
 class AppRouter {
   Route? generateRoute(RouteSettings settings) {
@@ -13,26 +16,30 @@ class AppRouter {
     switch (settings.name) {
       case Routes.onBoardingScreen:
         return MaterialPageRoute(
-          builder: (_) => const OnBoardingScreen(),
+          // ignore: deprecated_member_use
+          builder: (_) => WillPopScope(
+            onWillPop: () async {
+              SystemNavigator.pop(); // Exit the app when back is pressed on OnBoarding
+              return false;
+            },
+            child: const OnBoardingScreen(),
+          ),
         );
         
         
       case Routes.loginScreen:
         return MaterialPageRoute(
-          builder: (_) => const LoginScreen(),
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<LoginCubit>(),
+            child: const LoginScreen(),
+          ),
         );
-      // case Routes.loginScreen:
-      //   return MaterialPageRoute(
-      //     builder: (_) => BlocProvider(
-      //       create: (context) => getIt<LoginCubit>(),
-      //       child: const LoginScreen(),
-      //     ),
-      //   );
          
-      // case Routes.homeScreen:
-      //   return MaterialPageRoute(
-      //     builder: (_) => const HomeScreen(),
-      //   );
+         
+      case Routes.homeScreen:
+        return MaterialPageRoute(
+          builder: (_) => const HomeScreen(),
+        );
          
       default:
         return MaterialPageRoute(

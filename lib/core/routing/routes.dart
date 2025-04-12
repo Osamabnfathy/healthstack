@@ -1,6 +1,8 @@
 // just screen names i need to route
 
 class Routes {
+  // screen of closing the app
+  static const String back = '/';
   // screen appears first when app starts
   static const String onBoardingScreen = '/onBoardingScreen';
   // screen of home
@@ -9,4 +11,6 @@ class Routes {
   static const String loginScreen = '/logintScreen';
   // screen of sign up
   static const String signUpScreen = '/signUpScreen';
+  // screen of forgot password
+  static const String forgotPasswordScreen = '/forgotPasswordScreen';
 }
