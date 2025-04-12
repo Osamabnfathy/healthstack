@@ -53,7 +53,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
             hintText: 'Username',
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'Please enter a valid email';
+                return 'Please enter a valid Username';
               }
             },
             controller: context.read<LoginCubit>().userNameController,
@@ -82,13 +82,13 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
           ),
           verticalSpace(24),
           
-          PasswordValidations(
-            hasLowerCase: hasLowercase,
-            hasUpperCase: hasUppercase,
-            hasSpecialCharacters: hasSpecialCharacters,
-            hasNumber: hasNumber,
-            hasMinLength: hasMinLength,
-          ),
+          // PasswordValidations(
+          //   hasLowerCase: hasLowercase,
+          //   hasUpperCase: hasUppercase,
+          //   hasSpecialCharacters: hasSpecialCharacters,
+          //   hasNumber: hasNumber,
+          //   hasMinLength: hasMinLength,
+          // ),
         ],
       ),
     );

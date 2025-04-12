@@ -2,8 +2,6 @@ import 'package:dio/dio.dart';
 import 'api_constants.dart';
 import 'api_error_model.dart';
 
-
-
 // TODO: wallahy I will refactor this .. Omar Ahmed
 enum DataSource {
   NO_CONTENT,
@@ -18,21 +16,19 @@ enum DataSource {
   SEND_TIMEOUT,
   CACHE_ERROR,
   NO_INTERNET_CONNECTION,
-  // API_LOGIC_ERROR,
   DEFAULT
 }
 
 class ResponseCode {
-  static const int SUCCESS = 200; // success with data
-  static const int NO_CONTENT = 201; // success with no data (no content)
-  static const int BAD_REQUEST = 400; // failure, API rejected request
-  static const int UNAUTORISED = 401; // failure, user is not authorised
-  static const int FORBIDDEN = 403; //  failure, API rejected request
-  static const int INTERNAL_SERVER_ERROR = 500; // failure, crash in server side
-  static const int NOT_FOUND = 404; // failure, not found
-  static const int API_LOGIC_ERROR = 422; // API , lOGIC ERROR
+  static const int SUCCESS = 200;
+  static const int NO_CONTENT = 201;
+  static const int BAD_REQUEST = 400;
+  static const int UNAUTORISED = 401;
+  static const int FORBIDDEN = 403;
+  static const int INTERNAL_SERVER_ERROR = 500;
+  static const int NOT_FOUND = 404;
+  static const int API_LOGIC_ERROR = 422;
 
-  // local status code
   static const int CONNECT_TIMEOUT = -1;
   static const int CANCEL = -2;
   static const int RECIEVE_TIMEOUT = -3;
@@ -43,20 +39,13 @@ class ResponseCode {
 }
 
 class ResponseMessage {
-  static const String NO_CONTENT =
-      ApiErrors.noContent; // success with no data (no content)
-  static const String BAD_REQUEST =
-      ApiErrors.badRequestError; // failure, API rejected request
-  static const String UNAUTORISED =
-      ApiErrors.unauthorizedError; // failure, user is not authorised
-  static const String FORBIDDEN =
-      ApiErrors.forbiddenError; //  failure, API rejected request
-  static const String INTERNAL_SERVER_ERROR =
-      ApiErrors.internalServerError; // failure, crash in server side
-  static const String NOT_FOUND =
-      ApiErrors.notFoundError; // failure, crash in server side
+  static const String NO_CONTENT = ApiErrors.noContent;
+  static const String BAD_REQUEST = ApiErrors.badRequestError;
+  static const String UNAUTORISED = ApiErrors.unauthorizedError;
+  static const String FORBIDDEN = ApiErrors.forbiddenError;
+  static const String INTERNAL_SERVER_ERROR = ApiErrors.internalServerError;
+  static const String NOT_FOUND = ApiErrors.notFoundError;
 
-  // local status code
   static String CONNECT_TIMEOUT = ApiErrors.timeoutError;
   static String CANCEL = ApiErrors.defaultError;
   static String RECIEVE_TIMEOUT = ApiErrors.timeoutError;
@@ -71,55 +60,69 @@ extension DataSourceExtension on DataSource {
     switch (this) {
       case DataSource.NO_CONTENT:
         return ApiErrorModel(
-            code: ResponseCode.NO_CONTENT, message: [ResponseMessage.NO_CONTENT]);
-            
+          code: ResponseCode.NO_CONTENT.toString(),
+          message: ResponseMessage.NO_CONTENT,
+        );
       case DataSource.BAD_REQUEST:
         return ApiErrorModel(
-            code: ResponseCode.BAD_REQUEST, message: [ResponseMessage.BAD_REQUEST]);
-      
+          code: ResponseCode.BAD_REQUEST.toString(),
+          message: ResponseMessage.BAD_REQUEST,
+        );
       case DataSource.FORBIDDEN:
         return ApiErrorModel(
-            code: ResponseCode.FORBIDDEN, message: [ResponseMessage.FORBIDDEN]);
-      
+          code: ResponseCode.FORBIDDEN.toString(),
+          message: ResponseMessage.FORBIDDEN,
+        );
       case DataSource.UNAUTORISED:
         return ApiErrorModel(
-            code: ResponseCode.UNAUTORISED, message: [ResponseMessage.UNAUTORISED]);
-      
+          code: ResponseCode.UNAUTORISED.toString(),
+          message: ResponseMessage.UNAUTORISED,
+        );
       case DataSource.NOT_FOUND:
         return ApiErrorModel(
-            code: ResponseCode.NOT_FOUND, message: [ResponseMessage.NOT_FOUND]);
-      
+          code: ResponseCode.NOT_FOUND.toString(),
+          message: ResponseMessage.NOT_FOUND,
+        );
       case DataSource.INTERNAL_SERVER_ERROR:
         return ApiErrorModel(
-            code: ResponseCode.INTERNAL_SERVER_ERROR, message: [ResponseMessage.INTERNAL_SERVER_ERROR]);
-      
+          code: ResponseCode.INTERNAL_SERVER_ERROR.toString(),
+          message: ResponseMessage.INTERNAL_SERVER_ERROR,
+        );
       case DataSource.CONNECT_TIMEOUT:
         return ApiErrorModel(
-            code: ResponseCode.CONNECT_TIMEOUT, message: [ResponseMessage.CONNECT_TIMEOUT]);
-      
+          code: ResponseCode.CONNECT_TIMEOUT.toString(),
+          message: ResponseMessage.CONNECT_TIMEOUT,
+        );
       case DataSource.CANCEL:
         return ApiErrorModel(
-            code: ResponseCode.CANCEL, message: [ResponseMessage.CANCEL]);
-      
+          code: ResponseCode.CANCEL.toString(),
+          message: ResponseMessage.CANCEL,
+        );
       case DataSource.RECIEVE_TIMEOUT:
         return ApiErrorModel(
-            code: ResponseCode.RECIEVE_TIMEOUT, message: [ResponseMessage.RECIEVE_TIMEOUT]);
-      
+          code: ResponseCode.RECIEVE_TIMEOUT.toString(),
+          message: ResponseMessage.RECIEVE_TIMEOUT,
+        );
       case DataSource.SEND_TIMEOUT:
         return ApiErrorModel(
-            code: ResponseCode.SEND_TIMEOUT, message: [ResponseMessage.SEND_TIMEOUT]);
-      
+          code: ResponseCode.SEND_TIMEOUT.toString(),
+          message: ResponseMessage.SEND_TIMEOUT,
+        );
       case DataSource.CACHE_ERROR:
         return ApiErrorModel(
-            code: ResponseCode.CACHE_ERROR, message: [ResponseMessage.CACHE_ERROR]);
-      
+          code: ResponseCode.CACHE_ERROR.toString(),
+          message: ResponseMessage.CACHE_ERROR,
+        );
       case DataSource.NO_INTERNET_CONNECTION:
         return ApiErrorModel(
-            code: ResponseCode.NO_INTERNET_CONNECTION, message: [ResponseMessage.NO_INTERNET_CONNECTION]);
-      
+          code: ResponseCode.NO_INTERNET_CONNECTION.toString(),
+          message: ResponseMessage.NO_INTERNET_CONNECTION,
+        );
       case DataSource.DEFAULT:
         return ApiErrorModel(
-            code: ResponseCode.DEFAULT, message: [ResponseMessage.DEFAULT]);
+          code: ResponseCode.DEFAULT.toString(),
+          message: ResponseMessage.DEFAULT,
+        );
     }
   }
 }
@@ -129,10 +132,8 @@ class ErrorHandler implements Exception {
 
   ErrorHandler.handle(dynamic error) {
     if (error is DioException) {
-      // dio error so its an error from response of the API or from dio itself
       apiErrorModel = _handleError(error);
     } else {
-      // default error
       apiErrorModel = DataSource.DEFAULT.getFailure();
     }
   }
@@ -146,29 +147,41 @@ ApiErrorModel _handleError(DioException error) {
       return DataSource.SEND_TIMEOUT.getFailure();
     case DioExceptionType.receiveTimeout:
       return DataSource.RECIEVE_TIMEOUT.getFailure();
-    case DioExceptionType.badResponse:
-      if (error.response != null &&
-          error.response?.statusCode != null &&
-          error.response?.statusMessage != null) {
-        return ApiErrorModel.fromJson(error.response!.data);
-      } else {
-        return DataSource.DEFAULT.getFailure();
-      }
-    case DioExceptionType.unknown:
-      if (error.response != null &&
-          error.response?.statusCode != null &&
-          error.response?.statusMessage != null) {
-        return ApiErrorModel.fromJson(error.response!.data);
-      } else {
-        return DataSource.DEFAULT.getFailure();
-      }
     case DioExceptionType.cancel:
       return DataSource.CANCEL.getFailure();
     case DioExceptionType.connectionError:
-      return DataSource.DEFAULT.getFailure();
     case DioExceptionType.badCertificate:
       return DataSource.DEFAULT.getFailure();
+    case DioExceptionType.unknown:
     case DioExceptionType.badResponse:
+      final data = error.response?.data;
+
+      if (data is Map<String, dynamic>) {
+        // Case: specific field errors like username, email, etc.
+        for (var key in data.keys) {
+          final value = data[key];
+          if (value is List && value.isNotEmpty) {
+            return ApiErrorModel(
+              code: error.response?.statusCode.toString(),
+              message: value.first.toString(),
+            );
+          } else if (value is String) {
+            return ApiErrorModel(
+              code: error.response?.statusCode.toString(),
+              message: value,
+            );
+          }
+        }
+
+        // Case: flat "message"
+        if (data.containsKey("message")) {
+          return ApiErrorModel(
+            code: data["code"]?.toString(),
+            message: data["message"].toString(),
+          );
+        }
+      }
+
       return DataSource.DEFAULT.getFailure();
   }
 }
