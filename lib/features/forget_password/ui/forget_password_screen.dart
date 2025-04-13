@@ -25,6 +25,7 @@ class ForgetPasswordScreen extends StatelessWidget {
           // title: const Text("Forgot Password"),
           leading: BackButton(onPressed: () => Navigator.of(context).pop(), color: ColorsManager.mainBlue,),
         ),
+        
         body: SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 20.h), // Adjusted vertical padding
