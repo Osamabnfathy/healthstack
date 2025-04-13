@@ -12,5 +12,5 @@ class Routes {
   // screen of sign up
   static const String signUpScreen = '/signUpScreen';
   // screen of forgot password
-  static const String forgotPasswordScreen = '/forgotPasswordScreen';
+  static const String forgetPasswordScreen = '/forgetPasswordScreen';
 }

@@ -10,10 +10,15 @@ class HealthstackLogoAndName extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Image.asset('assets/icons/healthstack_logo.png',),
+        Baseline(
+          baseline: 25.h,
+          baselineType: TextBaseline.alphabetic,
+          child: Image.asset('assets/icons/medicare.png',)
+        ),
         SizedBox(width: 10.w,),
+        
         Text(
-          'Health Stack',
+          'MediCare',
           style: TextStyles.font24BlackBold,
         ),
       ],

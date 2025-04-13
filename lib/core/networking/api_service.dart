@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:healthstack/features/forget_password/data/models/forget_password_request_body.dart';
+import 'package:healthstack/features/forget_password/data/models/forget_password_response.dart';
 import 'package:healthstack/features/login/data/models/login_request_body.dart';
 import 'package:healthstack/features/login/data/models/login_response.dart';
 import 'package:healthstack/features/sign_up/data/models/sign_up_request_body.dart';
@@ -19,5 +21,10 @@ abstract class ApiService {
   @POST(ApiConstants.signup)
   Future<SignupResponse> signup(
     @Body() SignupRequestBody signupRequestBody,
+  );
+  
+  @POST(ApiConstants.resetPassword) 
+  Future<ForgetPasswordResponse> requestPasswordReset(
+    @Body() ForgetPasswordRequestBody forgetPasswordRequestBody,
   );
 }
