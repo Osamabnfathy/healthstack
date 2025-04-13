@@ -55,7 +55,7 @@ class LoginScreen extends StatelessWidget {
                           style: TextStyles.font13BlueRegular,
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              context.pushNamed(Routes.forgotPasswordScreen);
+                              context.pushNamed(Routes.forgetPasswordScreen);
                             },
                         ),
                       ),

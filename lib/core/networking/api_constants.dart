@@ -3,6 +3,7 @@ class ApiConstants {
 
   static const String login = "login/";
   static const String signup = "patient_register/";
+  static const String resetPassword = "password_reset/";
   
 }
 

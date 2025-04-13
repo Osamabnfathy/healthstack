@@ -1,4 +1,3 @@
-import 'password_validations.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/helpers/spacing.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

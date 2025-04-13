@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import '../../logic/sign_up_state.dart';
 import '../../../../core/routing/routes.dart';

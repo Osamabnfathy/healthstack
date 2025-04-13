@@ -6,6 +6,8 @@ import 'package:healthstack/core/networking/dio_factory.dart';
 import 'package:healthstack/core/networking/api_service.dart';
 import 'package:healthstack/features/sign_up/logic/sign_up_cubit.dart';
 import 'package:healthstack/features/sign_up/data/repos/sign_up_repo.dart';
+import 'package:healthstack/features/forget_password/data/repos/forget_password_repo.dart';
+import 'package:healthstack/features/forget_password/logic/cubit/forget_password_cubit.dart';
 
 
 final getIt = GetIt.instance;
@@ -23,6 +25,10 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<SignupRepo>(() => SignupRepo(getIt()));
   getIt.registerFactory<SignupCubit>(() => SignupCubit(getIt()));
 
+  // Reset Password
+  getIt.registerLazySingleton<ForgetPasswordRepo>(() =>ForgetPasswordRepo(getIt()));
+  getIt.registerFactory<ForgetPasswordCubit>(() => ForgetPasswordCubit(getIt()));  
+  
   // // home
   // getIt.registerLazySingleton<HomeApiService>(() => HomeApiService(dio));
   // getIt.registerLazySingleton<HomeRepo>(() => HomeRepo(getIt()));

@@ -15,6 +15,7 @@ LoginResponse _$LoginResponseFromJson(Map<String, dynamic> json) =>
           : UserData.fromJson(json['user'] as Map<String, dynamic>),
     );
 
+// ignore: unused_element
 Map<String, dynamic> _$LoginResponseToJson(LoginResponse instance) =>
     <String, dynamic>{
       'refresh': instance.refresh,
@@ -29,6 +30,7 @@ UserData _$UserDataFromJson(Map<String, dynamic> json) => UserData(
       isDoctor: json['is_doctor'] as bool?,
     );
 
+// ignore: unused_element
 Map<String, dynamic> _$UserDataToJson(UserData instance) => <String, dynamic>{
       'id': instance.id,
       'username': instance.userName,

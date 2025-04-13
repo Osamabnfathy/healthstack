@@ -142,5 +142,6 @@ class TextStyles {
     color: ColorsManager.mainBlue,
   );
 
+  // ignore: prefer_typing_uninitialized_variables, non_constant_identifier_names
   static var BlueLogo;
 }

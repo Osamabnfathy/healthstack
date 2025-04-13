@@ -9,10 +9,12 @@ import 'package:healthstack/features/sign_up/ui/sign_up_screen.dart';
 import 'package:healthstack/features/sign_up/logic/sign_up_cubit.dart';
 import 'package:healthstack/features/onboarding/onboarding_screen.dart';
 import 'package:healthstack/features/login/logic/cubit/login_cubit.dart';
+import 'package:healthstack/features/forget_password/ui/forget_password_screen.dart';
 
 class AppRouter {
   Route? generateRoute(RouteSettings settings) {
     //this arguments to be passed in any screen like this ( arguments as ClassName )
+    // ignore: unused_local_variable
     final arguments = settings.arguments;
 
     switch (settings.name) {
@@ -50,7 +52,11 @@ class AppRouter {
             child: const SignupScreen(),
           ),
         );
-      
+        
+      case Routes.forgetPasswordScreen:
+        return MaterialPageRoute(
+          builder: (_) => const ForgetPasswordScreen(),
+        );
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
