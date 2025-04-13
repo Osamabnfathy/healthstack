@@ -22,8 +22,10 @@ class SignupScreen extends StatelessWidget {
         preferredSize: Size.fromHeight(30.h),
         child: AppBar(
           backgroundColor: Colors.white,
-          leading: BackButton(onPressed: () => Navigator.of(context).pop(), color: ColorsManager.mainBlue, 
-          style: ButtonStyle(iconSize: WidgetStateProperty.all(25.sp)),)
+          leading: BackButton(
+            onPressed: () => Navigator.of(context).pop(), color: ColorsManager.mainBlue, 
+            style: ButtonStyle(iconSize: WidgetStateProperty.all(25.sp)),
+          )
         ),
       ),
       

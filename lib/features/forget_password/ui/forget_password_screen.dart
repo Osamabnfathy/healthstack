@@ -22,8 +22,12 @@ class ForgetPasswordScreen extends StatelessWidget {
       child: Scaffold(
         // AppBar might be nice
         appBar: AppBar(
-          // title: const Text("Forgot Password"),
-          leading: BackButton(onPressed: () => Navigator.of(context).pop(), color: ColorsManager.mainBlue,),
+          backgroundColor: Colors.white,
+          leading: BackButton(
+            onPressed: () => Navigator.of(context).pop(), color: ColorsManager.mainBlue,
+            style: ButtonStyle(iconSize: WidgetStateProperty.all(25.sp)), // Adjusted icon size
+          ),
+          
         ),
         
         body: SafeArea(
