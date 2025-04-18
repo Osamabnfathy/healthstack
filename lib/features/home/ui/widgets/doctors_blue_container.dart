@@ -44,15 +44,15 @@ class DoctorsBlueContainer extends StatelessWidget {
                     onPressed: () {
                       context.pushNamed(Routes.doctorsScreen);
                     },
+                    
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(48.0),
-                      ),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0),),
                     ),
+                    
                     child: Text(
-                      'Doctors List',
-                      style: TextStyles.font12BlueRegular,
+                      'See Doctors',
+                      style: TextStyles.font14BlueSemiBold,
                     ),
                   ),
                 ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/core/theming/styles.dart';
 import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,6 +17,7 @@ class DoctorsListView extends StatelessWidget {
             margin: EdgeInsets.only(bottom: 16.h),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
+              color: ColorsManager.moreLighterGray,
             ),
             
             child: Row(

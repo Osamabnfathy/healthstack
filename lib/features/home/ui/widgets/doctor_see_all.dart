@@ -4,15 +4,15 @@ import 'package:healthstack/core/theming/styles.dart';
 import 'package:healthstack/core/helpers/extensions.dart';
 
 
-class RecommendAndSeeAll extends StatelessWidget {
-  const RecommendAndSeeAll({super.key});
+class DoctorsAndSeeAll extends StatelessWidget {
+  const DoctorsAndSeeAll({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Text(
-          'Recommended Doctors',
+          'Doctors',
           style: TextStyles.font18DarkBlueSemiBold,
         ),
         const Spacer(),
