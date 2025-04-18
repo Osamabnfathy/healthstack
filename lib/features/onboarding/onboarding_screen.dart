@@ -20,9 +20,8 @@ class OnBoardingScreen extends StatelessWidget {
             
             child: Column(
               children: [
-                const HealthstackLogoAndName(),
-                
-                verticalSpace(25.h),
+                const HealthstackLogoAndName(),  
+                verticalSpace(30.h),
                 
                 const DoctorImageAndText(),
                 

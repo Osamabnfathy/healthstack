@@ -1,4 +1,13 @@
+import 'widgets/home_top_bar.dart';
 import 'package:flutter/material.dart';
+import 'widgets/hospitals_and_see_all.dart';
+import 'widgets/doctors_blue_container.dart';
+import 'package:healthstack/core/helpers/spacing.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:healthstack/features/home/ui/widgets/recommend_doctor_see_all.dart';
+import 'package:healthstack/features/home/ui/widgets/drawer/ui/drawer_screen.dart';
+import 'package:healthstack/features/home/ui/widgets/doctors_list/doctors_list_view.dart';
+import 'package:healthstack/features/home/ui/widgets/hospitals_list/hospitals_list_view.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -6,10 +15,39 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Home'),),
-    
-      body: Center(
-        child: Text('Welcome to the Home Screen!'),
+      endDrawer: const EndDrawer(), // Use your custom drawer
+      backgroundColor: Colors.white,
+      
+      body: SafeArea(
+        child: Builder(
+          builder: (BuildContext context) {
+            return Container(
+              width: double.infinity,
+              margin: EdgeInsets.symmetric(horizontal:20.w, vertical:16.h),
+              
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  HomeTopBar(onMenuPressed: () => Scaffold.of(context).openEndDrawer(),),
+                  
+                  const DoctorsBlueContainer(),
+                  verticalSpace(24),
+                  
+                  const HospitalsAndSeeAll(),
+                  verticalSpace(16),
+                  
+                  const HospitalsListView(),
+                  verticalSpace(8),
+                  
+                  const RecommendAndSeeAll(),
+                  verticalSpace(16),
+                  
+                  const DoctorsListView(),
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }
