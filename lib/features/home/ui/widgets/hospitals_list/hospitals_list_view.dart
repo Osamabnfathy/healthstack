@@ -24,9 +24,7 @@ class _SpecialityListViewState extends State<HospitalsListView> {
         itemCount: 8, // widget.specializationDataList.length,
         itemBuilder: (context, index) {
           return Container(
-            padding: EdgeInsetsDirectional.only(
-              start: index == 0 ? 0 : 18.w,
-            ),
+            padding: EdgeInsetsDirectional.only(start: index == 0 ? 0 : 18.w,),
             
             child: Column(
               mainAxisSize: MainAxisSize.min,

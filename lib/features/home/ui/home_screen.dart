@@ -4,7 +4,7 @@ import 'widgets/hospitals_and_see_all.dart';
 import 'widgets/doctors_blue_container.dart';
 import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:healthstack/features/home/ui/widgets/recommend_doctor_see_all.dart';
+import 'package:healthstack/features/home/ui/widgets/doctor_see_all.dart';
 import 'package:healthstack/features/home/ui/widgets/drawer/ui/drawer_screen.dart';
 import 'package:healthstack/features/home/ui/widgets/doctors_list/doctors_list_view.dart';
 import 'package:healthstack/features/home/ui/widgets/hospitals_list/hospitals_list_view.dart';
@@ -37,9 +37,9 @@ class HomeScreen extends StatelessWidget {
                   verticalSpace(16),
                   
                   const HospitalsListView(),
-                  verticalSpace(8),
+                  verticalSpace(2),
                   
-                  const RecommendAndSeeAll(),
+                  const DoctorsAndSeeAll(),
                   verticalSpace(16),
                   
                   const DoctorsListView(),

@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:healthstack/core/di/dependency_injection.dart';
 
 void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
   setupGetIt();
   await ScreenUtil.ensureScreenSize();
   runApp(

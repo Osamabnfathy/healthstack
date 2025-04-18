@@ -23,6 +23,7 @@ class HomeTopBar extends StatelessWidget {
               'Hi,Osama ',
               style: TextStyles.font18DarkBlueBold,
             ),
+            
             Text(
               'How Are you Today?',
               style: TextStyles.font12GrayRegular,
