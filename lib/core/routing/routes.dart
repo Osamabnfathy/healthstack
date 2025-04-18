@@ -13,4 +13,14 @@ class Routes {
   static const String signUpScreen = '/signUpScreen';
   // screen of forgot password
   static const String forgetPasswordScreen = '/forgetPasswordScreen';
+  // screen of appointment
+  static const String appointmentScreen = '/appointmentScreen';
+  // screen of medical records
+  static const String medicalRecordScreen = '/medicalRecordScreen';
+  // screen of profile
+  static const String profileScreen = '/profileScreen';
+  // screen of doctors
+  static const String doctorsScreen = '/doctorsScreen';
+  // screen of hospitals
+  static const String hospitalsScreen = '/hospitalsScreen';
 }
