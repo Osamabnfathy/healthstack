@@ -1,79 +1,77 @@
-// import 'package:cached_network_image/cached_network_image.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter_screenutil/flutter_screenutil.dart';
-// import 'package:shimmer/shimmer.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:healthstack/core/theming/colors.dart';
+import 'package:healthstack/core/theming/styles.dart';
+import 'package:healthstack/core/helpers/spacing.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:healthstack/features/home/data/models/doctors_response_model.dart';
 
-// import '../../../../../core/helpers/spacing.dart';
-// import '../../../../../core/theming/colors.dart';
-// import '../../../../../core/theming/styles.dart';
-// import '../../../data/models/specializations_response_model.dart';
+class DoctorsListViewItem extends StatelessWidget {
+  final DoctorData? doctorsData;
+  final int itemIndex;
+  
+  const DoctorsListViewItem({
+    super.key,
+    required this.doctorsData,
+    required this.itemIndex,
+  });
 
-// class DoctorsListViewItem extends StatelessWidget {
-//   final Doctors? doctorsModel;
-//   const DoctorsListViewItem({super.key, this.doctorsModel});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       margin: EdgeInsets.only(bottom: 16.h),
-//       child: Row(
-//         children: [
-//           CachedNetworkImage(
-//             imageUrl:
-//                 "https://static.wikia.nocookie.net/five-world-war/images/6/64/Hisoka.jpg/revision/latest?cb=20190313114050",
-//             progressIndicatorBuilder: (context, url, downloadProgress) {
-//               return Shimmer.fromColors(
-//                 baseColor: ColorsManager.lightGray,
-//                 highlightColor: Colors.white,
-//                 child: Container(
-//                   width: 110.w,
-//                   height: 120.h,
-//                   decoration: BoxDecoration(
-//                     shape: BoxShape.rectangle,
-//                     borderRadius: BorderRadius.circular(12.0),
-//                     color: Colors.white,
-//                   ),
-//                 ),
-//               );
-//             },
-//             imageBuilder: (context, imageProvider) => Container(
-//               width: 110.w,
-//               height: 120.h,
-//               decoration: BoxDecoration(
-//                 shape: BoxShape.rectangle,
-//                 borderRadius: BorderRadius.circular(12.0),
-//                 image: DecorationImage(
-//                   image: imageProvider,
-//                   fit: BoxFit.cover,
-//                 ),
-//               ),
-//             ),
-//           ),
-//           horizontalSpace(16),
-//           Expanded(
-//             child: Column(
-//               crossAxisAlignment: CrossAxisAlignment.start,
-//               children: [
-//                 Text(
-//                   doctorsModel?.name ?? 'Name',
-//                   style: TextStyles.font18DarkBlueBold,
-//                   overflow: TextOverflow.ellipsis,
-//                 ),
-//                 verticalSpace(5),
-//                 Text(
-//                   '${doctorsModel?.degree} | ${doctorsModel?.phone}',
-//                   style: TextStyles.font12GrayMedium,
-//                 ),
-//                 verticalSpace(5),
-//                 Text(
-//                   doctorsModel?.email ?? 'Email',
-//                   style: TextStyles.font12GrayMedium,
-//                 ),
-//               ],
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    
+    String getDisplayText(String? value) {
+      return (value == null || value.trim().isEmpty) ? 'Not Available' : value;
+    }
+  
+    return Container(
+      margin: EdgeInsets.only(bottom: 16.h),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        color: ColorsManager.lightBlue,
+      ),
+      
+      child: Row(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(12.0),
+            child: doctorsData?.featuredImage != null 
+                ? Image.network(doctorsData!.featuredImage!, width: 110.w, height: 120.h, fit: BoxFit.cover) 
+                : Image.asset("assets/images/doctor-books.png", width: 110.w, height: 120.h, fit: BoxFit.cover),
+          ),
+          horizontalSpace(16),
+          
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  doctorsData?.name ?? 'Doctor' ,
+                  style: TextStyles.font18DarkBlueBold,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                verticalSpace(5),
+                
+                Text(
+                  '${getDisplayText(doctorsData?.phoneNumber)} | ${getDisplayText(doctorsData?.email)}',
+                  style: TextStyles.font12GrayRegular,
+                ),
+                verticalSpace(5),
+                
+                Text(
+                  doctorsData?.visitingHour ?? 'Not Available',
+                  style: TextStyles.font12GrayRegular,
+                ),
+                verticalSpace(5),
+                
+                Text(
+                  'Constultation: ${getDisplayText(doctorsData?.consultationFee.toString())} | Report: ${getDisplayText(doctorsData?.reportFee.toString())}',
+                  style: TextStyles.font12GrayRegular,
+                )
+              ]
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
