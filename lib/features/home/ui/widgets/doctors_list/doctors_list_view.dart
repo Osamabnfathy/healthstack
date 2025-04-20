@@ -12,16 +12,14 @@ class DoctorsListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView.builder(
-        itemCount: doctorsDataList.length, // widget.specializationDataList.length,
-        itemBuilder: (context, index) {
-          return DoctorsListViewItem(
-            itemIndex: index,
-            doctorsData: doctorsDataList[index], // Replace with actual data model
-          );
-        },
-      ),
+    return ListView.builder(
+      itemCount: doctorsDataList.length, // widget.specializationDataList.length,
+      itemBuilder: (context, index) {
+        return DoctorsListViewItem(
+          itemIndex: index,
+          doctorsData: doctorsDataList[index], // Replace with actual data model
+        );
+      },
     );
   }
 }

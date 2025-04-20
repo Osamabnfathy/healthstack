@@ -10,10 +10,10 @@ class HomeState with _$HomeState {
   const factory HomeState.initial() = _Initial;
   
   const factory HomeState.hospitalsLoading() = HospitalsLoading;
-  const factory HomeState.hospitalsSuccess(HospitalsResponseModel hospitalsResponseModel) = HospitalsSuccess;
+  const factory HomeState.hospitalsSuccess(List<HospitalData> hospitalsList) = HospitalsSuccess;
   const factory HomeState.hospitalsError(ErrorHandler error) = HospitalsError;
   
   const factory HomeState.doctorsLoading() = DoctorsLoading;
-  const factory HomeState.doctorsSuccess(DoctorsResponseModel doctorsResponseModel) = DoctorsSuccess;
+  const factory HomeState.doctorsSuccess(List<DoctorData> doctorsList) = DoctorsSuccess;
   const factory HomeState.doctorsError(ErrorHandler error) = DoctorsError;
 }

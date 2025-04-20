@@ -10,7 +10,7 @@ class HomeRepo {
   HomeRepo(this._homeApiServices);
 
   // Fetches home data from the API
-  Future<ApiResult<HospitalsResponseModel>> getHospitalList() async {
+  Future<ApiResult<List<HospitalData>>> getHospitalList() async {
     try {
       final response = await _homeApiServices.getHospitalList();
       return ApiResult.success(response);
@@ -20,7 +20,7 @@ class HomeRepo {
     }
   }
   
-  Future<ApiResult<DoctorsResponseModel>> getDoctorList() async {
+  Future<ApiResult<List<DoctorData>>> getDoctorList() async {
     try {
       final response = await _homeApiServices.getDoctorList();
       return ApiResult.success(response);

@@ -36,10 +36,11 @@ DoctorData _$DoctorDataFromJson(Map<String, dynamic> json) => DoctorData(
       visitingHour: json['visiting_hour'] as String?,
       consultationFee: (json['consultation_fee'] as num?)?.toInt(),
       reportFee: (json['report_fee'] as num?)?.toInt(),
+      dob: json['dob'] as String?,
       user: (json['user'] as num?)?.toInt(),
-      departmentName: json['department_name'] as String?,
-      sepecialization: json['sepecialization'] as String?,
-      hospitalName: json['hospital_name'] as String?,
+      departmentName: (json['department_name'] as num?)?.toInt(),
+      specialization: (json['specialization'] as num?)?.toInt(),
+      hospitalName: (json['hospital_name'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$DoctorDataToJson(DoctorData instance) =>
@@ -59,8 +60,9 @@ Map<String, dynamic> _$DoctorDataToJson(DoctorData instance) =>
       'visiting_hour': instance.visitingHour,
       'consultation_fee': instance.consultationFee,
       'report_fee': instance.reportFee,
+      'dob': instance.dob,
       'user': instance.user,
       'department_name': instance.departmentName,
-      'sepecialization': instance.sepecialization,
+      'specialization': instance.specialization,
       'hospital_name': instance.hospitalName,
     };

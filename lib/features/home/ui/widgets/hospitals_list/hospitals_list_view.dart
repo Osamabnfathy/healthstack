@@ -20,7 +20,7 @@ class HospitalsListView extends StatelessWidget {
       
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: 5, // widget.specializationDataList.length,
+        itemCount: hospitalsDataList.length, 
         itemBuilder: (context, index) {
           return HospitalsListViewItem(
             itemIndex: index,

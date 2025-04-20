@@ -1,5 +1,3 @@
-import 'package:healthstack/features/home/data/models/doctors_response_model.dart';
-
 import 'widgets/home_top_bar.dart';
 import 'package:flutter/material.dart';
 import 'widgets/hospitals_and_see_all.dart';
@@ -57,15 +55,12 @@ class HomeScreen extends StatelessWidget {
                             ),
                           );
                         },
-                        hospitalsSuccess: (hospitalsResponseModel) {
-                          var hospitalsList = hospitalsResponseModel.hospitals;
-                          return Expanded(
-                            child: Column(
-                              children: [       
-                                HospitalsListView(hospitalsDataList: hospitalsList ?? [],),
-                                verticalSpace(2),
-                              ]
-                            ),
+                        hospitalsSuccess: (hospitalsList) {
+                          return Column(
+                            children: [       
+                              HospitalsListView(hospitalsDataList: hospitalsList,),
+                              verticalSpace(2),
+                            ]
                           );
                         },
                         hospitalsError: (errorHandler) {
@@ -96,14 +91,9 @@ class HomeScreen extends StatelessWidget {
                             ),
                           );
                         },
-                        doctorsSuccess: (doctorsResponseModel) {
-                          var doctorssList = doctorsResponseModel.doctors;
+                        doctorsSuccess: (doctorsList) {
                           return Expanded(
-                            child: Column(
-                              children: [       
-                                DoctorsListView(doctorsDataList: doctorssList ?? [],),
-                              ]
-                            ),
+                            child: DoctorsListView(doctorsDataList: doctorsList,)
                           );
                         },
                         doctorsError: (errorHandler) {

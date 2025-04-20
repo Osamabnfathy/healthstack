@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/core/theming/styles.dart';
@@ -18,6 +18,13 @@ class DoctorsListViewItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+  
+    final Widget placeholder = Image.asset(
+      "assets/images/doctor-books.png", 
+      width: 110.w, 
+      height: 120.h, 
+      fit: BoxFit.cover
+    );
     
     String getDisplayText(String? value) {
       return (value == null || value.trim().isEmpty) ? 'Not Available' : value;
@@ -35,8 +42,38 @@ class DoctorsListViewItem extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(12.0),
             child: doctorsData?.featuredImage != null 
-                ? Image.network(doctorsData!.featuredImage!, width: 110.w, height: 120.h, fit: BoxFit.cover) 
-                : Image.asset("assets/images/doctor-books.png", width: 110.w, height: 120.h, fit: BoxFit.cover),
+                ? Image.network(
+                  doctorsData!.featuredImage!, 
+                  width: 110.w, 
+                  height: 120.h, 
+                  fit: BoxFit.cover,
+                  
+                  errorBuilder: (context, error, stackTrace) {
+                      return placeholder;
+                    },
+
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if (loadingProgress == null) {
+                        return child;
+                      }
+                      
+                      return SizedBox( 
+                        width: 40.w,
+                        height: 40.h,
+                        child: Center(
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2.0,
+                            value: loadingProgress.expectedTotalBytes != null
+                                ? loadingProgress.cumulativeBytesLoaded /
+                                    loadingProgress.expectedTotalBytes!
+                                : null, 
+                          ),
+                        ),
+                      );
+                    },
+                )
+                    
+                : placeholder,
           ),
           horizontalSpace(16),
           
@@ -52,21 +89,22 @@ class DoctorsListViewItem extends StatelessWidget {
                 verticalSpace(5),
                 
                 Text(
-                  '${getDisplayText(doctorsData?.phoneNumber)} | ${getDisplayText(doctorsData?.email)}',
+                  'Email: ${getDisplayText(doctorsData?.email)}',
                   style: TextStyles.font12GrayRegular,
                 ),
                 verticalSpace(5),
                 
                 Text(
-                  doctorsData?.visitingHour ?? 'Not Available',
+                  'Phone Number: ${getDisplayText(doctorsData?.phoneNumber)}',
                   style: TextStyles.font12GrayRegular,
                 ),
                 verticalSpace(5),
                 
                 Text(
-                  'Constultation: ${getDisplayText(doctorsData?.consultationFee.toString())} | Report: ${getDisplayText(doctorsData?.reportFee.toString())}',
+                  'Working Hours: ${getDisplayText(doctorsData?.visitingHour)}',
                   style: TextStyles.font12GrayRegular,
-                )
+                ),
+                
               ]
             ),
           ),

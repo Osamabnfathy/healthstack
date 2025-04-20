@@ -12,8 +12,8 @@ abstract class HomeApiServices {
   factory HomeApiServices(Dio dio) = _HomeApiServices;
   
   @GET(ApiConstants.hospitalList)
-  Future<HospitalsResponseModel> getHospitalList();
+  Future<List<HospitalData>> getHospitalList();
   
   @GET(ApiConstants.doctorList)
-  Future<DoctorsResponseModel> getDoctorList();
+  Future<List<DoctorData>> getDoctorList();
 }

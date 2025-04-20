@@ -24,12 +24,12 @@ class _HomeApiServices implements HomeApiServices {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<HospitalsResponseModel> getHospitalList() async {
+  Future<List<HospitalData>> getHospitalList() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<HospitalsResponseModel>(Options(
+    final _options = _setStreamType<List<HospitalData>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -45,10 +45,12 @@ class _HomeApiServices implements HomeApiServices {
           _dio.options.baseUrl,
           baseUrl,
         )));
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late HospitalsResponseModel _value;
+    final _result = await _dio.fetch<List<dynamic>>(_options);
+    late List<HospitalData> _value;
     try {
-      _value = HospitalsResponseModel.fromJson(_result.data!);
+      _value = _result.data!
+          .map((dynamic i) => HospitalData.fromJson(i as Map<String, dynamic>))
+          .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -57,12 +59,12 @@ class _HomeApiServices implements HomeApiServices {
   }
 
   @override
-  Future<DoctorsResponseModel> getDoctorList() async {
+  Future<List<DoctorData>> getDoctorList() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<DoctorsResponseModel>(Options(
+    final _options = _setStreamType<List<DoctorData>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -78,10 +80,12 @@ class _HomeApiServices implements HomeApiServices {
           _dio.options.baseUrl,
           baseUrl,
         )));
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late DoctorsResponseModel _value;
+    final _result = await _dio.fetch<List<dynamic>>(_options);
+    late List<DoctorData> _value;
     try {
-      _value = DoctorsResponseModel.fromJson(_result.data!);
+      _value = _result.data!
+          .map((dynamic i) => DoctorData.fromJson(i as Map<String, dynamic>))
+          .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

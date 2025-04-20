@@ -26,6 +26,11 @@ class DoctorsResponseModel {
       };
 }
 
+String? _stringFromJson(dynamic jsonValue) {
+  if (jsonValue == null) return null;
+  // Handles cases where the JSON provides an int, double, or String
+  return jsonValue.toString();
+}
 
 @JsonSerializable()
 class DoctorData {
@@ -51,12 +56,13 @@ class DoctorData {
   final int? consultationFee;
   @JsonKey(name: 'report_fee')
   final int? reportFee;
+  final String? dob; // Date of Birth, if applicable
   final int? user; // Represents the linked user ID
   @JsonKey(name: 'department_name')
-  final String? departmentName;
-  final String? sepecialization; // Note: Typo in original, kept for consistency with input
+  final int? departmentName;
+  final int? specialization; // Note: Typo in original, kept for consistency with input
   @JsonKey(name: 'hospital_name')
-  final String? hospitalName;
+  final int? hospitalName;
 
   DoctorData({
     this.id,
@@ -74,9 +80,10 @@ class DoctorData {
     this.visitingHour,
     this.consultationFee,
     this.reportFee,
+    this.dob,
     this.user,
     this.departmentName,
-    this.sepecialization,
+    this.specialization,
     this.hospitalName,
   });
 
