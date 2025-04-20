@@ -1,19 +1,18 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter_svg/svg.dart';
-import 'package:healthstack/core/helpers/spacing.dart';
+import 'package:flutter/material.dart';
 import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/core/theming/styles.dart';
+import 'package:healthstack/core/helpers/spacing.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:healthstack/features/home/data/models/hospitals_response_model.dart';
+import 'package:healthstack/features/home/ui/widgets/hospitals_list/hospitals_list_view_item.dart';
 
-
-class HospitalsListView extends StatefulWidget {
-  const HospitalsListView({super.key});
-
-  @override
-  State<HospitalsListView> createState() => _SpecialityListViewState();
-}
-
-class _SpecialityListViewState extends State<HospitalsListView> {
+class HospitalsListView extends StatelessWidget {
+  final List<HospitalData> hospitalsDataList;
+  
+  const HospitalsListView({super.key, required this.hospitalsDataList});
+  
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -21,31 +20,11 @@ class _SpecialityListViewState extends State<HospitalsListView> {
       
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: 8, // widget.specializationDataList.length,
+        itemCount: hospitalsDataList.length, 
         itemBuilder: (context, index) {
-          return Container(
-            padding: EdgeInsetsDirectional.only(start: index == 0 ? 0 : 18.w,),
-            
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                CircleAvatar(
-                  radius: 28,
-                  backgroundColor: ColorsManager.lightBlue,
-                  child: SvgPicture.asset(
-                    'assets/svgs/general_speciality.svg',
-                    height: 40.h,
-                    width: 40.w,
-                  ),
-                ),
-                verticalSpace(8),
-                
-                Text(
-                  "hospital name",
-                  style: TextStyles.font12DarkBlueRegular,
-                ),
-              ],
-            ),
+          return HospitalsListViewItem(
+            itemIndex: index,
+            hospitalsData: hospitalsDataList[index],
           );
         },
       ),
@@ -53,18 +32,3 @@ class _SpecialityListViewState extends State<HospitalsListView> {
   }
 }
 
-          // return GestureDetector(
-          //   onTap: () {
-          //     setState(() {
-          //       selectedSpecializationIndex = index;
-          //     });
-          //     // context.read<HomeCubit>().getDoctorsList(
-          //     //       specializationId: widget.specializationDataList[index]?.id,
-          //     //     );
-          //   },
-          //   child: SpecialityListViewItem(
-          //     specializationsData: widget.specializationDataList[index],
-          //     itemIndex: index,
-          //     selectedIndex: selectedSpecializationIndex,
-          //   ),
-          // );

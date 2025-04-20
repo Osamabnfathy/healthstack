@@ -4,7 +4,20 @@ class ApiConstants {
   static const String login = "login/";
   static const String signup = "patient_register/";
   static const String resetPassword = "password_reset/";
-  
+  static const String logout = "logout/";
+  static const String changePassword = "change_password/";
+  static const String hospitalList = "hospital/";
+  static const String hospitalDetails = "hospital/id/";
+  static const String doctorList = "doctor/";
+  static const String doctorDetails = "doctor/id/";
+  static const String patientProfile = "patient_profile/id/";
+  static const String appointments = "appointment/";
+  static const String prescription = "prescription/";
+  static const String prescriptionMedicine = "prescription_medicine/";
+  static const String perscriptionTest = "prescription_test/";
+  static const String report = "report/";
+  static const String payment = "payment/";
+  static const String allPrescriptionData = "all_prescription_data/";
 }
 
 class ApiErrors {

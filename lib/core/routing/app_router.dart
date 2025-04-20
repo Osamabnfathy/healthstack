@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:healthstack/core/routing/routes.dart';
+import 'package:healthstack/features/home/logic/cubit/home_cubit.dart';
 import 'package:healthstack/features/home/ui/home_screen.dart';
 import 'package:healthstack/core/di/dependency_injection.dart';
 import 'package:healthstack/features/login/ui/login_screen.dart';
@@ -47,7 +48,10 @@ class AppRouter {
          
       case Routes.homeScreen:
         return MaterialPageRoute(
-          builder: (_) => const HomeScreen(),
+          builder: (_) => BlocProvider(
+            create: (context) => HomeCubit(getIt())..getHospitalList()..getDoctorList(),
+            child: const HomeScreen(),
+          ),
         );
          
       case Routes.signUpScreen:
@@ -89,13 +93,7 @@ class AppRouter {
       );
       
       default:
-        return MaterialPageRoute(
-          builder: (_) => Scaffold(
-            body: Center(
-              child: Text("no route define for ${settings.name}"),
-            ),
-          ),
-        );
+        return null;
     }
   }
 }
