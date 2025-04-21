@@ -1,26 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:healthstack/core/routing/routes.dart';
 import 'package:healthstack/core/theming/styles.dart';
-import 'package:healthstack/core/helpers/extensions.dart';
 
 
-class HospitalsAndSeeAll extends StatelessWidget {
-  const HospitalsAndSeeAll({super.key});
+class SpecialityAndSeeAll extends StatelessWidget {
+  const SpecialityAndSeeAll({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Text(
-          'Hospitals',
+          'Doctors Speciality',
           style: TextStyles.font18DarkBlueSemiBold,
         ),
         const Spacer(),
         
-         InkWell(
-          onTap: () {
-            context.pushNamed(Routes.hospitalsScreen);
-          },
+        InkWell(
+          onTap: () {},
           child: Text(
             'See All',
             style: TextStyles.font12BlueRegular,

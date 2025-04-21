@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'home_api_services.dart';
+part of 'hospital_api_services.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,8 +8,8 @@ part of 'home_api_services.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations
 
-class _HomeApiServices implements HomeApiServices {
-  _HomeApiServices(
+class _HospitalApiServices implements HospitalApiServices {
+  _HospitalApiServices(
     this._dio, {
     this.baseUrl,
     this.errorLogger,
@@ -24,19 +24,19 @@ class _HomeApiServices implements HomeApiServices {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<List<SpecializationsResponseModel>> getSpecializations() async {
+  Future<List<HospitalData>> getHospitalList() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<List<SpecializationsResponseModel>>(Options(
+    final _options = _setStreamType<List<HospitalData>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
-          'hospital_department/',
+          'hospital/',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -46,47 +46,10 @@ class _HomeApiServices implements HomeApiServices {
           baseUrl,
         )));
     final _result = await _dio.fetch<List<dynamic>>(_options);
-    late List<SpecializationsResponseModel> _value;
+    late List<HospitalData> _value;
     try {
       _value = _result.data!
-          .map((dynamic i) =>
-              SpecializationsResponseModel.fromJson(i as Map<String, dynamic>))
-          .toList();
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
-      rethrow;
-    }
-    return _value;
-  }
-
-  @override
-  Future<List<DoctorsResponseModel>> getDoctors() async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<List<DoctorsResponseModel>>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-        .compose(
-          _dio.options,
-          'doctor/',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        )));
-    final _result = await _dio.fetch<List<dynamic>>(_options);
-    late List<DoctorsResponseModel> _value;
-    try {
-      _value = _result.data!
-          .map((dynamic i) =>
-              DoctorsResponseModel.fromJson(i as Map<String, dynamic>))
+          .map((dynamic i) => HospitalData.fromJson(i as Map<String, dynamic>))
           .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:healthstack/core/helpers/constants.dart';
 import 'package:healthstack/core/networking/dio_factory.dart';
 import 'package:healthstack/core/helpers/shared_pref_helper.dart';
-import 'package:healthstack/core/networking/api_error_model.dart';
 import 'package:healthstack/features/login/data/repos/login_repo.dart';
 import 'package:healthstack/features/login/logic/cubit/login_state.dart';
 import 'package:healthstack/features/login/data/models/login_request_body.dart';
@@ -25,15 +25,15 @@ class LoginCubit extends Cubit<LoginState> {
       ),
     );
     response.when(success: (loginResponse) async {
-      // await saveUserToken(loginResponse.access ?? '');
+      await saveUserToken(loginResponse.access ?? '');
       emit(LoginState.success(loginResponse));
     }, failure: (error) {
       emit(LoginState.error(error: error.apiErrorModel.message ?? ''));
     });
   }
 
-  // Future<void> saveUserToken(String token) async {
-  //   await SharedPrefHelper.setSecuredString(SharedPrefKeys.userToken, token);
-  //   DioFactory.setTokenIntoHeaderAfterLogin(token);
-  // }
+  Future<void> saveUserToken(String token) async {
+    await SharedPrefHelper.setSecuredString(SharedPrefKeys.userToken, token);
+    DioFactory.setTokenIntoHeaderAfterLogin(token);
+  }
 }

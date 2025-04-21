@@ -1,30 +1,29 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:healthstack/core/networking/api_error_handler.dart';
-import 'package:healthstack/features/home/data/models/hospitals_response_model.dart';
-import 'package:healthstack/features/home/data/repos/home_repo.dart';
 import 'home_state.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:healthstack/features/home/data/repos/home_repo.dart';
+
 
 
 class HomeCubit extends Cubit<HomeState> {
   final HomeRepo _homeRepo;
   HomeCubit(this._homeRepo) : super(HomeState.initial());
   
-  void getHospitalList() async {
-    emit(const HomeState.hospitalsLoading());
-    final response = await _homeRepo.getHospitalList();
+  void getSpecializations() async {
+    emit(const HomeState.specializationsLoading());
+    final response = await _homeRepo.getSpecializations();
     response.when(
-      success: (hospitalsList) {
-        emit(HomeState.hospitalsSuccess(hospitalsList));
+      success: (specializationsResponseModel) {
+        emit(HomeState.specializationsSuccess(specializationsResponseModel));
       },
       failure: (error) {
-        emit(HomeState.hospitalsError(error));
+        emit(HomeState.specializationsError(error));
       },
     );
   }
   
-  void getDoctorList() async {
+  void getDoctors() async {
     emit(const HomeState.doctorsLoading());
-    final response = await _homeRepo.getDoctorList();
+    final response = await _homeRepo.getDoctors();
     response.when(
       success: (doctorsList) {
         emit(HomeState.doctorsSuccess(doctorsList));

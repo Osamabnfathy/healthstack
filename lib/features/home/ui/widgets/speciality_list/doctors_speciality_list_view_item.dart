@@ -3,25 +3,25 @@ import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/core/theming/styles.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:healthstack/features/home/data/models/hospitals_response_model.dart';
+import 'package:healthstack/features/home/data/models/specialization_response_model.dart';
 
-class HospitalsListViewItem extends StatelessWidget {
-  final HospitalData? hospitalsData;
-  final int itemIndex;
+class DoctorsSpecialityListViewItem extends StatelessWidget {
+  final SpecializationsResponseModel? specializationsData;
+  final int? itemIndex;
 
-  const HospitalsListViewItem({
+  const DoctorsSpecialityListViewItem({
     super.key,
-    required this.hospitalsData,
-    required this.itemIndex,
+    this.specializationsData,
+    this.itemIndex,
   });
 
   @override
   Widget build(BuildContext context) {
     final Widget placeholder = Image.asset(
-      'assets/icons/hospital.png', 
-      height: 40.h, 
-      width: 40.w,
-      fit: BoxFit.contain, 
+      'assets/icons/general.png', 
+      height: 60.h, 
+      width: 60.w,
+      fit: BoxFit.fill, 
     );
 
     return Container(
@@ -30,16 +30,16 @@ class HospitalsListViewItem extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           CircleAvatar(
-            radius: 30, 
+            radius: 35, 
             backgroundColor: ColorsManager.lightBlue,
             
             child: ClipOval( 
-              child: hospitalsData?.featuredImage != null && hospitalsData!.featuredImage!.isNotEmpty
+              child: specializationsData?.featuredImage != null && specializationsData!.featuredImage!.isNotEmpty
                 ? Image.network(
-                    hospitalsData!.featuredImage!, 
-                    height: 50.h, 
-                    width: 50.w, 
-                    fit: BoxFit.cover,
+                    specializationsData!.featuredImage!, 
+                    height: 60.h, 
+                    width: 60.w, 
+                    fit: BoxFit.fill,
                   
                     errorBuilder: (context, error, stackTrace) {
                       return placeholder;
@@ -58,7 +58,7 @@ class HospitalsListViewItem extends StatelessWidget {
                             strokeWidth: 2.0,
                             value: loadingProgress.expectedTotalBytes != null
                                 ? loadingProgress.cumulativeBytesLoaded /
-                                    loadingProgress.expectedTotalBytes!
+                                  loadingProgress.expectedTotalBytes!
                                 : null, 
                           ),
                         ),
@@ -72,7 +72,7 @@ class HospitalsListViewItem extends StatelessWidget {
           verticalSpace(8),
           
           Text(
-            hospitalsData?.name ?? 'Hospital',
+            specializationsData?.hospitalDepartmentName ?? 'Specialization',
             style: TextStyles.font12DarkBlueRegular,
             maxLines: 1, // Prevent long names from wrapping excessively
             overflow: TextOverflow.ellipsis, // Add ellipsis for overflow

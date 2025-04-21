@@ -27,13 +27,13 @@ class ButtonsList extends StatelessWidget {
         icon: Icons.science_outlined,
       ),
       
-      // MenuItemData(
-      //   'Payment',
-      //   Colors.pink.shade50,
-      //   Colors.pink,
-      //   () => context.pushNamed(Routes.paymentScreen),
-      //   icon: Icons.payment_outlined,
-      // ),
+      MenuItemData(
+        'Hospitals',
+        Colors.pink.shade50,
+        Colors.pink,
+        () => context.pushNamed(Routes.hospitalsScreen),
+        icon: Icons.local_hospital,
+      ),
       
       MenuItemData(
         'About Us',

@@ -59,6 +59,10 @@ dependencies:
   # adapting screen and font size
   flutter_screenutil: ^5.9.3
   provider: ^6.1.4
+  # shared preferences for local storage
+  shared_preferences: ^2.5.3
+  # secure the token
+  flutter_secure_storage: ^9.2.4
 
 
 dev_dependencies:

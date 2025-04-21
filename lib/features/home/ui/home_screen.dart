@@ -1,17 +1,12 @@
 import 'widgets/home_top_bar.dart';
 import 'package:flutter/material.dart';
-import 'widgets/hospitals_and_see_all.dart';
+import 'widgets/speciality_and_see_all.dart';
 import 'widgets/doctors_blue_container.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:healthstack/features/home/logic/cubit/home_cubit.dart';
-import 'package:healthstack/features/home/logic/cubit/home_state.dart';
-import 'package:healthstack/features/home/ui/widgets/doctor_see_all.dart';
 import 'package:healthstack/features/home/ui/widgets/drawer/ui/drawer_screen.dart';
-import 'package:healthstack/features/home/ui/widgets/doctors_list/doctors_list_view.dart';
-import 'package:healthstack/features/home/ui/widgets/hospitals_list/hospitals_list_view.dart';
+import 'package:healthstack/features/home/ui/widgets/doctors_list/doctors_Bloc_builder.dart';
+import 'package:healthstack/features/home/ui/widgets/speciality_list/specializations_bloc_builder.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -37,74 +32,13 @@ class HomeScreen extends StatelessWidget {
                   const DoctorsBlueContainer(),
                   verticalSpace(24),
                   
-                  const HospitalsAndSeeAll(),
+                  const SpecialityAndSeeAll(),
                   verticalSpace(16),   
                   
-                  BlocBuilder<HomeCubit, HomeState>(
-                    buildWhen: (previous, current) => 
-                      current is HospitalsLoading ||
-                      current is HospitalsSuccess ||
-                      current is HospitalsError,
-                    builder: (context, state) {
-                      return state.maybeWhen(
-                        hospitalsLoading: () {
-                          return const SizedBox(
-                            height: 100,
-                            child: CircularProgressIndicator(
-                              color: ColorsManager.mainBlue,
-                            ),
-                          );
-                        },
-                        hospitalsSuccess: (hospitalsList) {
-                          return Column(
-                            children: [       
-                              HospitalsListView(hospitalsDataList: hospitalsList,),
-                              verticalSpace(2),
-                            ]
-                          );
-                        },
-                        hospitalsError: (errorHandler) {
-                          return const SizedBox.shrink();
-                        },
-                        orElse: () {
-                          return const SizedBox.shrink();
-                        },
-                      );
-                    },
-                  ),
+                  SpecializationsBlocBuilder(),
+                  verticalSpace(10),
                   
-                  const DoctorsAndSeeAll(),
-                  verticalSpace(16),
-                  
-                  BlocBuilder<HomeCubit, HomeState>(
-                    buildWhen: (previous, current) => 
-                      current is DoctorsLoading ||
-                      current is DoctorsSuccess ||
-                      current is DoctorsError,
-                    builder: (context, state) {
-                      return state.maybeWhen(
-                        doctorsLoading: () {
-                          return const SizedBox(
-                            height: 100,
-                            child: CircularProgressIndicator(
-                              color: ColorsManager.mainBlue,
-                            ),
-                          );
-                        },
-                        doctorsSuccess: (doctorsList) {
-                          return Expanded(
-                            child: DoctorsListView(doctorsDataList: doctorsList,)
-                          );
-                        },
-                        doctorsError: (errorHandler) {
-                          return const SizedBox.shrink();
-                        },
-                        orElse: () {
-                          return const SizedBox.shrink();
-                        },
-                      );
-                    },
-                  )
+                  DoctorsListBlocBuilder(),
                 ],
               ),
             );

@@ -1,14 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
-import 'package:healthstack/features/home/data/apis/home_api_services.dart';
-import 'package:healthstack/features/home/data/repos/home_repo.dart';
-import 'package:healthstack/features/home/logic/cubit/home_cubit.dart';
 import '../../features/login/data/repos/login_repo.dart';
 import '../../features/login/logic/cubit/login_cubit.dart';
 import 'package:healthstack/core/networking/dio_factory.dart';
 import 'package:healthstack/core/networking/api_service.dart';
+import 'package:healthstack/features/home/data/repos/home_repo.dart';
 import 'package:healthstack/features/sign_up/logic/sign_up_cubit.dart';
 import 'package:healthstack/features/sign_up/data/repos/sign_up_repo.dart';
+import 'package:healthstack/features/home/data/apis/home_api_services.dart';
 import 'package:healthstack/features/forget_password/data/repos/forget_password_repo.dart';
 import 'package:healthstack/features/forget_password/logic/cubit/forget_password_cubit.dart';
 
@@ -32,7 +31,7 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<ForgetPasswordRepo>(() =>ForgetPasswordRepo(getIt()));
   getIt.registerFactory<ForgetPasswordCubit>(() => ForgetPasswordCubit(getIt()));  
   
-  // Home Hospitals List
+  // Home
   getIt.registerLazySingleton<HomeApiServices>(() => HomeApiServices(dio));
   getIt.registerLazySingleton<HomeRepo>(() => HomeRepo(getIt()));
 }

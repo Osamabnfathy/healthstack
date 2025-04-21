@@ -51,7 +51,7 @@ class DoctorsBlueContainer extends StatelessWidget {
                     ),
                     
                     child: Text(
-                      'See Doctors',
+                      'Doctors List',
                       style: TextStyles.font14BlueSemiBold,
                     ),
                   ),

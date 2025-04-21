@@ -9,19 +9,7 @@ part of 'doctors_response_model.dart';
 DoctorsResponseModel _$DoctorsResponseModelFromJson(
         Map<String, dynamic> json) =>
     DoctorsResponseModel(
-      doctors: (json['doctors'] as List<dynamic>?)
-          ?.map((e) => DoctorData.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
-
-Map<String, dynamic> _$DoctorsResponseModelToJson(
-        DoctorsResponseModel instance) =>
-    <String, dynamic>{
-      'doctors': instance.doctors,
-    };
-
-DoctorData _$DoctorDataFromJson(Map<String, dynamic> json) => DoctorData(
-      id: (json['doctor_id'] as num?)?.toInt(),
+      doctorId: (json['doctor_id'] as num?)?.toInt(),
       name: json['name'] as String?,
       username: json['username'] as String?,
       gender: json['gender'] as String?,
@@ -43,9 +31,10 @@ DoctorData _$DoctorDataFromJson(Map<String, dynamic> json) => DoctorData(
       hospitalName: (json['hospital_name'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$DoctorDataToJson(DoctorData instance) =>
+Map<String, dynamic> _$DoctorsResponseModelToJson(
+        DoctorsResponseModel instance) =>
     <String, dynamic>{
-      'doctor_id': instance.id,
+      'doctor_id': instance.doctorId,
       'name': instance.name,
       'username': instance.username,
       'gender': instance.gender,

@@ -3,29 +3,6 @@ import 'package:json_annotation/json_annotation.dart';
 // Make sure this filename matches your file name
 part 'doctors_response_model.g.dart';
 
-@JsonSerializable()
-class DoctorsResponseModel {
-  List<DoctorData>? doctors; // This will hold the parsed list
-
-  DoctorsResponseModel({
-    this.doctors,
-  });
-
-  
-  factory DoctorsResponseModel.fromJson(Map<String, dynamic> json) {
-    // The API response is a list, so we map it to a list of HospitalData objects
-    final List<dynamic> doctorList = json as List;
-    return DoctorsResponseModel(
-      doctors: doctorList.map((item) => DoctorData.fromJson(item)).toList(),
-    );
-  }
-
-  // Method to convert the object back to JSON
-  Map<String, dynamic> toJson() => {
-        'doctors': doctors?.map((e) => e.toJson()).toList(),
-      };
-}
-
 String? _stringFromJson(dynamic jsonValue) {
   if (jsonValue == null) return null;
   // Handles cases where the JSON provides an int, double, or String
@@ -33,9 +10,9 @@ String? _stringFromJson(dynamic jsonValue) {
 }
 
 @JsonSerializable()
-class DoctorData {
-  @JsonKey(name: 'doctor_id') // Maps JSON key 'doctor_id' to Dart field 'id'
-  final int? id; // Changed name to be consistent with data object naming
+class DoctorsResponseModel {
+  @JsonKey(name: 'doctor_id') 
+  final int? doctorId; 
   final String? name;
   final String? username;
   final String? gender;
@@ -64,8 +41,8 @@ class DoctorData {
   @JsonKey(name: 'hospital_name')
   final int? hospitalName;
 
-  DoctorData({
-    this.id,
+  DoctorsResponseModel({
+    this.doctorId,
     this.name,
     this.username,
     this.gender,
@@ -87,10 +64,10 @@ class DoctorData {
     this.hospitalName,
   });
 
-  // Factory constructor for creating a new DoctorData instance from a map.
-  factory DoctorData.fromJson(Map<String, dynamic> json) =>
-      _$DoctorDataFromJson(json);
+  // Factory constructor for creating a new DoctorsResponseModel instance from a map.
+  factory DoctorsResponseModel.fromJson(Map<String, dynamic> json) =>
+      _$DoctorsResponseModelFromJson(json);
 
-  // Method for converting a DoctorData instance to a map.
-  Map<String, dynamic> toJson() => _$DoctorDataToJson(this);
+  // Method for converting a DoctorsResponseModel instance to a map.
+  Map<String, dynamic> toJson() => _$DoctorsResponseModelToJson(this);
 }
