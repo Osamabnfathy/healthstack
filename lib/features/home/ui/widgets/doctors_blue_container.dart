@@ -63,7 +63,7 @@ class DoctorsBlueContainer extends StatelessWidget {
           Positioned(
             right: 8.w,
             child: Image.asset(
-              'assets/images/doctor-books.png',
+              'assets/images/doctor-book.png',
               fit: BoxFit.cover, 
               height: 200.h,
               width: 160.w,
