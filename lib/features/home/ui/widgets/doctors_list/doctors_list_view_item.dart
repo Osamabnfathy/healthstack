@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/core/theming/styles.dart';
 import 'package:healthstack/core/helpers/spacing.dart';
@@ -7,13 +6,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:healthstack/features/home/data/models/doctors_response_model.dart';
 
 class DoctorsListViewItem extends StatelessWidget {
-  final DoctorData? doctorsData;
-  final int itemIndex;
+  final DoctorsResponseModel? doctorsData;
+  final int? itemIndex;
   
   const DoctorsListViewItem({
     super.key,
-    required this.doctorsData,
-    required this.itemIndex,
+    this.doctorsData,
+    this.itemIndex,
   });
 
   @override
@@ -65,7 +64,7 @@ class DoctorsListViewItem extends StatelessWidget {
                             strokeWidth: 2.0,
                             value: loadingProgress.expectedTotalBytes != null
                                 ? loadingProgress.cumulativeBytesLoaded /
-                                    loadingProgress.expectedTotalBytes!
+                                  loadingProgress.expectedTotalBytes!
                                 : null, 
                           ),
                         ),
@@ -89,13 +88,13 @@ class DoctorsListViewItem extends StatelessWidget {
                 verticalSpace(5),
                 
                 Text(
-                  'Email: ${getDisplayText(doctorsData?.email)}',
+                  'Phone: ${getDisplayText(doctorsData?.phoneNumber)}',
                   style: TextStyles.font12GrayRegular,
                 ),
                 verticalSpace(5),
                 
                 Text(
-                  'Phone Number: ${getDisplayText(doctorsData?.phoneNumber)}',
+                  'Email: ${getDisplayText(doctorsData?.email)}',
                   style: TextStyles.font12GrayRegular,
                 ),
                 verticalSpace(5),

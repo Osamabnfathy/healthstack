@@ -6,9 +6,9 @@ class ApiConstants {
   static const String resetPassword = "password_reset/";
   static const String logout = "logout/";
   static const String changePassword = "change_password/";
-  static const String hospitalList = "hospital/";
+  static const String hospitals = "hospital/";
   static const String hospitalDetails = "hospital/id/";
-  static const String doctorList = "doctor/";
+  static const String doctors = "doctor/";
   static const String doctorDetails = "doctor/id/";
   static const String patientProfile = "patient_profile/id/";
   static const String appointments = "appointment/";
@@ -18,6 +18,7 @@ class ApiConstants {
   static const String report = "report/";
   static const String payment = "payment/";
   static const String allPrescriptionData = "all_prescription_data/";
+  static const String specializations = "hospital_department/";
 }
 
 class ApiErrors {

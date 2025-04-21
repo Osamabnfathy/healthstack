@@ -46,14 +46,6 @@ class AppRouter {
         );
          
          
-      case Routes.homeScreen:
-        return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => HomeCubit(getIt())..getHospitalList()..getDoctorList(),
-            child: const HomeScreen(),
-          ),
-        );
-         
       case Routes.signUpScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
@@ -62,35 +54,54 @@ class AppRouter {
           ),
         );
         
+        
       case Routes.forgetPasswordScreen:
         return MaterialPageRoute(
           builder: (_) => const ForgetPasswordScreen(),
         );
+         
+         
+      case Routes.homeScreen:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => HomeCubit(getIt())..getSpecializations()..getDoctors(),
+            child: const HomeScreen(),
+          ),
+        );
+        
         
       case Routes.appointmentScreen:
         return MaterialPageRoute(
           builder: (_) => const AppointmentScreen(),
       );
         
+        
       case Routes.medicalRecordScreen:
         return MaterialPageRoute(
           builder: (_) => const MedicalRecordScreen(),
       );
+      
       
       case Routes.profileScreen:
         return MaterialPageRoute(
           builder: (_) => const ProfileScreen(),
       );
       
+      
       case Routes.doctorsScreen:
         return MaterialPageRoute(
           builder: (_) => const DoctorsScreen(),
       );
       
+      
       case Routes.hospitalsScreen:
         return MaterialPageRoute(
           builder: (_) => const HospitalsScreen(),
-      );
+          // builder: (_) => BlocProvider(
+          //   create: (context) => getIt<HospitalCubit>(),
+          //   child: const HospitalsScreen(),
+          // ),
+        );
       
       default:
         return null;

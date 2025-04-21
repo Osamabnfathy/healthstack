@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:healthstack/core/routing/app_router.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:healthstack/core/routing/routes.dart';
 import 'package:healthstack/core/theming/colors.dart';
+import 'package:healthstack/core/helpers/constants.dart';
+import 'package:healthstack/core/routing/app_router.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HealthStackApp extends StatelessWidget {
   final AppRouter appRouter;
@@ -21,7 +22,7 @@ class HealthStackApp extends StatelessWidget {
           scaffoldBackgroundColor: Colors.white,
         ),
         debugShowCheckedModeBanner: false,
-        initialRoute: Routes.onBoardingScreen,
+        initialRoute: isLoggedInUser ? Routes.homeScreen : Routes.onBoardingScreen,
         onGenerateRoute: appRouter.generateRoute,
       ),
     );
