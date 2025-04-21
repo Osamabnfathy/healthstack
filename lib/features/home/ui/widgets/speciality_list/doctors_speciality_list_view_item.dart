@@ -3,21 +3,35 @@ import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/core/theming/styles.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:healthstack/features/home/data/models/hospitals_response_model.dart';
 import 'package:healthstack/features/home/data/models/specialization_response_model.dart';
 
 class DoctorsSpecialityListViewItem extends StatelessWidget {
-  final SpecializationsResponseModel? specializationsData;
   final int? itemIndex;
+  final SpecializationsResponseModel? specializationsData;
+  final List<HospitalsResponseModel>? hospitalsDataList;
 
   const DoctorsSpecialityListViewItem({
     super.key,
+    this.itemIndex, 
     this.specializationsData,
-    this.itemIndex,
+    this.hospitalsDataList,
   });
+  
 
   @override
   Widget build(BuildContext context) {
-    final Widget placeholder = Image.asset(
+    String? hospitalName;
+    if (specializationsData?.hospital != null && hospitalsDataList != null) {
+      final matchingHospital = hospitalsDataList!.firstWhere(
+        (hospital) => hospital.hospitalId == specializationsData!.hospital,
+        orElse: () => HospitalsResponseModel(hospitalId: null, name: 'Unknown Hospital'),
+      );
+      hospitalName = matchingHospital.name;
+      print('matching hospital: ${matchingHospital.name}');
+    }
+  
+    final Widget placeholderImage = Image.asset(
       'assets/icons/general.png', 
       height: 60.h, 
       width: 60.w,
@@ -40,40 +54,35 @@ class DoctorsSpecialityListViewItem extends StatelessWidget {
                     height: 60.h, 
                     width: 60.w, 
                     fit: BoxFit.fill,
-                  
-                    errorBuilder: (context, error, stackTrace) {
-                      return placeholder;
-                    },
-
+                    
+                    errorBuilder: (context, error, stackTrace) => placeholderImage,
                     loadingBuilder: (context, child, loadingProgress) {
-                      if (loadingProgress == null) {
-                        return child;
-                      }
-                      
-                      return SizedBox( 
-                        width: 40.w,
-                        height: 40.h,
-                        child: Center(
-                          child: CircularProgressIndicator(
-                            strokeWidth: 2.0,
-                            value: loadingProgress.expectedTotalBytes != null
-                                ? loadingProgress.cumulativeBytesLoaded /
-                                  loadingProgress.expectedTotalBytes!
-                                : null, 
-                          ),
+                      if (loadingProgress == null) return child;
+                      return Center(
+                        child: CircularProgressIndicator(
+                          value: loadingProgress.expectedTotalBytes != null
+                              ? loadingProgress.cumulativeBytesLoaded / (loadingProgress.expectedTotalBytes ?? 1)
+                              : null,
                         ),
                       );
                     },
                 )
-                    
-                : placeholder,
+                : placeholderImage,
             ),
           ),
-          verticalSpace(8),
+          verticalSpace(8.h),
+          
           
           Text(
             specializationsData?.hospitalDepartmentName ?? 'Specialization',
             style: TextStyles.font12DarkBlueRegular,
+            maxLines: 1, // Prevent long names from wrapping excessively
+            overflow: TextOverflow.ellipsis, // Add ellipsis for overflow
+          ),
+          
+          Text(
+            hospitalName ?? 'Unknown Hospital', // display the name of the hospital here 
+            style: TextStyles.font12GrayRegular,
             maxLines: 1, // Prevent long names from wrapping excessively
             overflow: TextOverflow.ellipsis, // Add ellipsis for overflow
           ),

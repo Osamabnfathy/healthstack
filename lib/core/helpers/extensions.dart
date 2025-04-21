@@ -32,3 +32,7 @@ extension StringExtension on String? {
 extension ListExtension<T> on List<T>? {
   bool isNullOrEmpty() => this == null || this!.isEmpty;
 }
+
+String getDisplayText(String? value) {
+  return (value == null || value.trim().isEmpty) ? 'N/A' : value;
+}

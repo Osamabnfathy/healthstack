@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:healthstack/core/routing/routes.dart';
-import 'package:healthstack/features/home/logic/cubit/home_cubit.dart';
 import 'package:healthstack/features/home/ui/home_screen.dart';
 import 'package:healthstack/core/di/dependency_injection.dart';
 import 'package:healthstack/features/login/ui/login_screen.dart';
@@ -10,6 +9,7 @@ import 'package:healthstack/features/doctors/ui/doctors_screen.dart';
 import 'package:healthstack/features/profile/ui/profile_screen.dart';
 import 'package:healthstack/features/sign_up/ui/sign_up_screen.dart';
 import 'package:healthstack/features/sign_up/logic/sign_up_cubit.dart';
+import 'package:healthstack/features/home/logic/cubit/home_cubit.dart';
 import 'package:healthstack/features/onboarding/onboarding_screen.dart';
 import 'package:healthstack/features/login/logic/cubit/login_cubit.dart';
 import 'package:healthstack/features/hospitals/ui/hospitals_screen.dart';
@@ -64,7 +64,7 @@ class AppRouter {
       case Routes.homeScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => HomeCubit(getIt())..getSpecializations()..getDoctors(),
+            create: (context) => HomeCubit(getIt())..getDoctors()..getHospitalList()..getSpecializations(),
             child: const HomeScreen(),
           ),
         );
@@ -96,11 +96,10 @@ class AppRouter {
       
       case Routes.hospitalsScreen:
         return MaterialPageRoute(
-          builder: (_) => const HospitalsScreen(),
-          // builder: (_) => BlocProvider(
-          //   create: (context) => getIt<HospitalCubit>(),
-          //   child: const HospitalsScreen(),
-          // ),
+          builder: (_) => BlocProvider(
+            create: (context) => HomeCubit(getIt())..getHospitalList(),
+            child: const HospitalsScreen(),
+          ),
         );
       
       default:
