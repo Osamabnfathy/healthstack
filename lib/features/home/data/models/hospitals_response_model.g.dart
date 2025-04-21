@@ -9,18 +9,6 @@ part of 'hospitals_response_model.dart';
 HospitalsResponseModel _$HospitalsResponseModelFromJson(
         Map<String, dynamic> json) =>
     HospitalsResponseModel(
-      hospitals: (json['hospitals'] as List<dynamic>?)
-          ?.map((e) => HospitalData.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
-
-Map<String, dynamic> _$HospitalsResponseModelToJson(
-        HospitalsResponseModel instance) =>
-    <String, dynamic>{
-      'hospitals': instance.hospitals,
-    };
-
-HospitalData _$HospitalDataFromJson(Map<String, dynamic> json) => HospitalData(
       hospitalId: (json['hospital_id'] as num?)?.toInt(),
       name: json['name'] as String?,
       address: json['address'] as String?,
@@ -36,7 +24,8 @@ HospitalData _$HospitalDataFromJson(Map<String, dynamic> json) => HospitalData(
       vipCabinNo: (json['vip_cabin_no'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$HospitalDataToJson(HospitalData instance) =>
+Map<String, dynamic> _$HospitalsResponseModelToJson(
+        HospitalsResponseModel instance) =>
     <String, dynamic>{
       'hospital_id': instance.hospitalId,
       'name': instance.name,

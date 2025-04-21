@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:healthstack/features/home/data/models/hospitals_response_model.dart';
 import 'package:healthstack/features/home/data/models/specialization_response_model.dart';
 import 'package:healthstack/features/home/ui/widgets/speciality_list/doctors_speciality_list_view_item.dart';
 
 class DoctorsSpecialityListView extends StatelessWidget {
   final List<SpecializationsResponseModel>? specializationsDataList;
+  final List<HospitalsResponseModel>? hospitalsDataList;
   
-  const DoctorsSpecialityListView({super.key, this.specializationsDataList});
+  const DoctorsSpecialityListView({
+    super.key, 
+    this.specializationsDataList,
+    this.hospitalsDataList  
+  });
   
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 100.h,
+      height: 110.h,
       
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
@@ -20,6 +26,7 @@ class DoctorsSpecialityListView extends StatelessWidget {
           return DoctorsSpecialityListViewItem(
             itemIndex: index,
             specializationsData: specializationsDataList?[index],
+            hospitalsDataList: hospitalsDataList,
           );
         },
       ),

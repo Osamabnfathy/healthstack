@@ -36,7 +36,7 @@ class HomeScreen extends StatelessWidget {
                   verticalSpace(16),   
                   
                   SpecializationsBlocBuilder(),
-                  verticalSpace(10),
+                  verticalSpace(15),
                   
                   DoctorsListBlocBuilder(),
                 ],

@@ -24,7 +24,8 @@ class ForgetPasswordScreen extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.white,
           leading: BackButton(
-            onPressed: () => Navigator.of(context).pop(), color: ColorsManager.mainBlue,
+            onPressed: () => Navigator.of(context).pop(), 
+            color: ColorsManager.mainBlue,
             style: ButtonStyle(iconSize: WidgetStateProperty.all(25.sp)), // Adjusted icon size
           ),
           

@@ -19,12 +19,13 @@ class DoctorsListBlocBuilder extends StatelessWidget {
       builder: (context, state) {
         return state.maybeWhen(
           doctorsLoading: () {
-            return setupLoading();
+            return SizedBox.shrink();
+            // return setupLoading();
           },
           
-          doctorsSuccess: (doctorsList) {
+          doctorsSuccess: (doctorsResponseModel) {
             return Expanded(
-              child: DoctorsListView(doctorsDataList: doctorsList,)
+              child: DoctorsListView(doctorsDataList: doctorsResponseModel,)
             );
           },
           

@@ -19,13 +19,17 @@ class SpecializationsBlocBuilder extends StatelessWidget {
       builder: (context, state) {
         return state.maybeWhen(
           specializationsLoading: () {
-            return setupLoading();
+            return SizedBox.shrink();
+            // return setupLoading();
           },
           
           specializationsSuccess: (specializationsResponseModel) {
             return Column(
               children: [       
-                DoctorsSpecialityListView(specializationsDataList: specializationsResponseModel,),
+                DoctorsSpecialityListView(
+                  specializationsDataList: specializationsResponseModel,
+                  hospitalsDataList: context.read<HomeCubit>().hospitalsDataList,
+                ),
               ]
             );
           },
@@ -44,7 +48,7 @@ class SpecializationsBlocBuilder extends StatelessWidget {
   
   Widget setupLoading() {
     return const SizedBox(
-      height: 100,
+      height: 50,
       child: CircularProgressIndicator(
         color: ColorsManager.mainBlue,
       ),

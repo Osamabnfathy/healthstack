@@ -10,10 +10,9 @@ class ProfileInformation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Original _buildHeader logic goes here
     return Container(
       color: ColorsManager.lightBlue,
-      padding: EdgeInsets.only(top: 50.h, bottom: 20.h, left: 20.w, right: 20.w),
+      padding: EdgeInsets.only(top: 40.h, bottom: 20.h, left: 20.w, right: 20.w),
       
       child: Column(
         children: [
@@ -22,12 +21,12 @@ class ProfileInformation extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () => Navigator.pop(context), // Close drawer action
-                child: Icon(Icons.arrow_back, color: ColorsManager.darkBlue),
+                child: Icon(Icons.arrow_back_ios_new_outlined, color: ColorsManager.darkBlue, size: 20.sp,),
               ),
               
               Text(
                 'Profile',
-                style: TextStyles.font18DarkBlueSemiBold,
+                style: TextStyles.font20DarkBlueSemiBold,
               ),
               
               InkWell(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:healthstack/core/theming/colors.dart';
-import 'package:healthstack/features/hospitals/logic/cubit/hospital_cubit.dart';
-import 'package:healthstack/features/hospitals/logic/cubit/hospital_state.dart';
+import 'package:healthstack/features/home/logic/cubit/home_cubit.dart';
+import 'package:healthstack/features/home/logic/cubit/home_state.dart';
 import 'package:healthstack/features/hospitals/ui/widgets/hospitals_list_view.dart';
 
 class HospitalsListBlocBuilder extends StatelessWidget {
@@ -10,7 +10,7 @@ class HospitalsListBlocBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HospitalCubit, HospitalState>(
+    return BlocBuilder<HomeCubit, HomeState>(
       buildWhen: (previous, current) => 
         current is HospitalsLoading ||
         current is HospitalsSuccess ||
@@ -19,15 +19,12 @@ class HospitalsListBlocBuilder extends StatelessWidget {
       builder: (context, state) {
         return state.maybeWhen(
           hospitalsLoading: () {
-            return setupLoading();
+            return const SizedBox.shrink();
+            // return setupLoading();
           },
           
-          hospitalsSuccess: (hospitalsList) {
-            return Column(
-              children: [       
-                HospitalsListView(hospitalsDataList: hospitalsList,),
-              ]
-            );
+          hospitalsSuccess: (hospitalsResponseModel) {
+            return HospitalsListView(hospitalsDataList: hospitalsResponseModel,);
           },
           
           hospitalsError: (errorHandler) {

@@ -13,6 +13,7 @@ analyzer:
     unused_element_parameter: ignore
     type_literal_in_constant_pattern: ignore
     avoid_print: ignore
+    deprecated_member_use: ignore
 include: package:flutter_lints/flutter.yaml
 
 linter:

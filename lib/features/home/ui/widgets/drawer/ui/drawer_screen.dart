@@ -13,7 +13,6 @@ class EndDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       backgroundColor: ColorsManager.lighterGray,
-      // ignore: deprecated_member_use
       shadowColor: Colors.grey.withOpacity(0.3),
       elevation: 10,
       
