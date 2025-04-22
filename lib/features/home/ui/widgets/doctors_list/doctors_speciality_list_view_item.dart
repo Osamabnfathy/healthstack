@@ -89,12 +89,12 @@ class DoctorsSpecialityListViewItem extends StatelessWidget {
                 verticalSpace(5),
                 
                 Text(
-                  'Email: ${getDisplayText(doctorsData?.email)}',
+                  'Fees: ${getDisplayText(doctorsData?.reportFee.toString())} - ${getDisplayText(doctorsData?.consultationFee.toString())}',
                   style: TextStyles.font12GrayMedium,
-                  maxLines: 1, // Prevent long names from wrapping excessively
-                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1, 
+                  overflow: TextOverflow.ellipsis, 
                 ),
-                verticalSpace(5),
+                verticalSpace(5.h),
                 
                 Text(
                   'Working Hours: ${getDisplayText(doctorsData?.visitingHour)}',

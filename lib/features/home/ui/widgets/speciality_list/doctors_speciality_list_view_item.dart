@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:healthstack/core/helpers/extensions.dart';
 import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/core/theming/styles.dart';
@@ -81,7 +82,7 @@ class DoctorsSpecialityListViewItem extends StatelessWidget {
           ),
           
           Text(
-            hospitalName ?? 'Unknown Hospital', // display the name of the hospital here 
+            getDisplayText(hospitalName), // display the name of the hospital here 
             style: TextStyles.font12GrayMedium,
             maxLines: 1, // Prevent long names from wrapping excessively
             overflow: TextOverflow.ellipsis, // Add ellipsis for overflow

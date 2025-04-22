@@ -1,3 +1,6 @@
+import 'package:healthstack/features/home/data/models/doctors_response_model.dart';
+import 'package:healthstack/features/home/data/models/specialization_response_model.dart';
+
 import 'home_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:healthstack/features/home/data/repos/home_repo.dart';
@@ -7,6 +10,8 @@ import 'package:healthstack/features/home/data/models/hospitals_response_model.d
 
 class HomeCubit extends Cubit<HomeState> {
   List<HospitalsResponseModel>? hospitalsDataList;
+  List<DoctorsResponseModel>? doctorsDataList;
+  List<SpecializationsResponseModel>? specializationsDataList;
   final HomeRepo _homeRepo;
   HomeCubit(this._homeRepo) : super(HomeState.initial());
   
@@ -15,6 +20,7 @@ class HomeCubit extends Cubit<HomeState> {
     final response = await _homeRepo.getSpecializations();
     response.when(
       success: (specializationsResponseModel) {
+        specializationsDataList = specializationsResponseModel;
         emit(HomeState.specializationsSuccess(specializationsResponseModel));
       },
       failure: (error) {
@@ -28,6 +34,7 @@ class HomeCubit extends Cubit<HomeState> {
     final response = await _homeRepo.getDoctors();
     response.when(
       success: (doctorsResponseModel) {
+        doctorsDataList = doctorsResponseModel;
         emit(HomeState.doctorsSuccess(doctorsResponseModel));
       },
       failure: (error) {

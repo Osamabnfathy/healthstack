@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:healthstack/core/theming/styles.dart';
 
 
-class SpecialityAndSeeAll extends StatelessWidget {
-  const SpecialityAndSeeAll({super.key});
+class DoctorsSpecialityAndSeeAll extends StatelessWidget {
+  const DoctorsSpecialityAndSeeAll({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,13 +15,13 @@ class SpecialityAndSeeAll extends StatelessWidget {
         ),
         const Spacer(),
         
-        InkWell(
-          onTap: () {},
-          child: Text(
-            'See All',
-            style: TextStyles.font12BlueRegular,
-          ),
-        )
+        // InkWell(
+        //   onTap: () {},
+        //   child: Text(
+        //     'See All',
+        //     style: TextStyles.font12BlueRegular,
+        //   ),
+        // )
       ],
     );
   }

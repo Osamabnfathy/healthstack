@@ -30,7 +30,11 @@ class DoctorsListBlocBuilder extends StatelessWidget {
               return name.contains(searchQuery);
             }).toList();
 
-            return DoctorsListView(doctorsDataList: filteredDoctors);
+            return DoctorsListView(
+              doctorsDataList: filteredDoctors,
+              hospitalsDataList: context.read<HomeCubit>().hospitalsDataList, 
+              specializationsDataList: context.read<HomeCubit>().specializationsDataList, 
+            );
           },
           
           doctorsError: (errorHandler) {
