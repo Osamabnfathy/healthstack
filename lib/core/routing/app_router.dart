@@ -91,7 +91,7 @@ class AppRouter {
       case Routes.doctorsScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => HomeCubit(getIt())..getDoctorsList(),
+            create: (context) => HomeCubit(getIt())..getDoctorsList()..getHospitalList(),
             child: const DoctorsScreen(),
           )
         );
@@ -100,7 +100,7 @@ class AppRouter {
       case Routes.hospitalsScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => HomeCubit(getIt())..getHospitalList(),
+            create: (context) => HomeCubit(getIt())..getHospitalList()..getDoctorsList(),
             child: const HospitalsScreen(),
           ),
         );

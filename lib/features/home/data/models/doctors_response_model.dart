@@ -15,7 +15,6 @@ class DoctorsResponseModel {
   final int? doctorId; 
   final String? name;
   final String? username;
-  final String? gender;
   final String? description;
   final String? department;
   @JsonKey(name: 'featured_image') // Maps JSON key to Dart field
@@ -26,7 +25,6 @@ class DoctorsResponseModel {
   @JsonKey(name: 'phone_number')
   final String? phoneNumber;
   final String? degree;
-  final String? nid;
   @JsonKey(name: 'visiting_hour')
   final String? visitingHour;
   @JsonKey(name: 'consultation_fee')
@@ -45,7 +43,6 @@ class DoctorsResponseModel {
     this.doctorId,
     this.name,
     this.username,
-    this.gender,
     this.description,
     this.department,
     this.featuredImage,
@@ -53,7 +50,6 @@ class DoctorsResponseModel {
     this.phoneNumber,
     this.degree,
     this.certificateImage,
-    this.nid,
     this.visitingHour,
     this.consultationFee,
     this.reportFee,
