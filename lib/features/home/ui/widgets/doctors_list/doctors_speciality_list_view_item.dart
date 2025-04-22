@@ -6,11 +6,11 @@ import 'package:healthstack/core/helpers/extensions.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:healthstack/features/home/data/models/doctors_response_model.dart';
 
-class DoctorsListViewItem extends StatelessWidget {
+class DoctorsSpecialityListViewItem extends StatelessWidget {
   final DoctorsResponseModel? doctorsData;
   final int? itemIndex;
   
-  const DoctorsListViewItem({
+  const DoctorsSpecialityListViewItem({
     super.key,
     this.doctorsData,
     this.itemIndex,
@@ -28,7 +28,7 @@ class DoctorsListViewItem extends StatelessWidget {
     
   
     return Container(
-      margin: EdgeInsets.only(bottom: 16.h),
+      padding: EdgeInsetsDirectional.only(bottom: 15.h),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         color: ColorsManager.lightBlue,
@@ -82,7 +82,7 @@ class DoctorsListViewItem extends StatelessWidget {
                 
                 Text(
                   'Phone: ${getDisplayText(doctorsData?.phoneNumber)}',
-                  style: TextStyles.font12GrayRegular,
+                  style: TextStyles.font12GrayMedium,
                   maxLines: 1, // Prevent long names from wrapping excessively
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -90,7 +90,7 @@ class DoctorsListViewItem extends StatelessWidget {
                 
                 Text(
                   'Email: ${getDisplayText(doctorsData?.email)}',
-                  style: TextStyles.font12GrayRegular,
+                  style: TextStyles.font12GrayMedium,
                   maxLines: 1, // Prevent long names from wrapping excessively
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -98,7 +98,7 @@ class DoctorsListViewItem extends StatelessWidget {
                 
                 Text(
                   'Working Hours: ${getDisplayText(doctorsData?.visitingHour)}',
-                  style: TextStyles.font12GrayRegular,
+                  style: TextStyles.font12GrayMedium,
                   maxLines: 1, // Prevent long names from wrapping excessively
                   overflow: TextOverflow.ellipsis,
                 ),

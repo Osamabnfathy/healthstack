@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/core/theming/styles.dart';
+import 'package:healthstack/core/helpers/spacing.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
 class SearchAndFilterBar extends StatelessWidget {
@@ -22,19 +23,18 @@ class SearchAndFilterBar extends StatelessWidget {
           child: TextField(
             controller: searchController,
             decoration: InputDecoration(
-              hintText: 'Search',
-              hintStyle: TextStyles.font15DarkBlueMedium
-                  .copyWith(color: ColorsManager.lightGray),
+              hintText: 'Search...',
+              hintStyle: TextStyles.font15LightGrayMedium,
               prefixIcon: const Icon(
-                Icons.search,
+                Icons.search_rounded,
                 color: ColorsManager.lightGray,
               ),
               
               filled: true,
               fillColor: ColorsManager.moreLighterGray,
-              // contentPadding: const EdgeInsets.symmetric(vertical: 0),
+              
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(12.r),
                 borderSide: BorderSide.none,
               ),
             ),
@@ -46,11 +46,10 @@ class SearchAndFilterBar extends StatelessWidget {
           height: 50,
           width: 50,
           decoration: BoxDecoration(
-            color: ColorsManager.moreLightGray,
+            color: ColorsManager.moreLighterGray,
             borderRadius: BorderRadius.circular(12),
             boxShadow: [
               BoxShadow(
-                // ignore: deprecated_member_use
                 color: ColorsManager.gray.withOpacity(0.1),
                 blurRadius: 6,
                 offset: const Offset(0, 2),

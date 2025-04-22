@@ -23,7 +23,7 @@ class HomeCubit extends Cubit<HomeState> {
     );
   }
   
-  void getDoctors() async {
+  void getDoctorsList() async {
     emit(const HomeState.doctorsLoading());
     final response = await _homeRepo.getDoctors();
     response.when(

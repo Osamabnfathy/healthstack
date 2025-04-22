@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:healthstack/core/helpers/extensions.dart';
 import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/core/theming/styles.dart';
-import 'package:healthstack/core/helpers/extensions.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:healthstack/features/home/data/models/hospitals_response_model.dart';
+import 'package:healthstack/features/home/data/models/doctors_response_model.dart';
 
-class HospitalsListViewItem extends StatelessWidget {
-  final HospitalsResponseModel? hospitalsData;
+
+class DoctorsListViewItem extends StatelessWidget {
+  final DoctorsResponseModel? doctorsData;
   final int? itemIndex;
 
-  const HospitalsListViewItem({
+  const DoctorsListViewItem({
     super.key,
-    this.hospitalsData,
+    this.doctorsData,
     this.itemIndex,
   });
 
   @override
   Widget build(BuildContext context) {
     final Widget placeholderImage = Image.asset(
-      'assets/icons/hospital.png', 
+      'assets/icons/doctor.png', 
       height: 110.h, 
       width: 120.w,
       fit: BoxFit.fill, 
@@ -27,22 +28,21 @@ class HospitalsListViewItem extends StatelessWidget {
     
     return InkWell(
       onTap: () {
-        // Handle tap event here, e.g., navigate to hospital details page
+        // Handle tap event here, e.g., navigate to doctor details page
       },
     
       child: Container(
-        margin: EdgeInsetsDirectional.symmetric(horizontal: 12.w, vertical: 12.h),
+        margin: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
         padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
         decoration: BoxDecoration(
+          color: Colors.white,
           borderRadius: BorderRadius.circular(16),
-          color: ColorsManager.lightBlue,
           boxShadow: [
             BoxShadow(
-              color: ColorsManager.gray.withOpacity(0.2),
-              spreadRadius: 1,
+              color: ColorsManager.gray.withOpacity(0.05),
               blurRadius: 10,
               offset: const Offset(0, 4),
-            )
+            ),
           ],
         ),
         
@@ -50,9 +50,9 @@ class HospitalsListViewItem extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(12.r),
-              child: hospitalsData?.featuredImage != null && hospitalsData!.featuredImage!.isNotEmpty
+              child: doctorsData?.featuredImage != null && doctorsData!.featuredImage!.isNotEmpty
                   ? Image.network(
-                    hospitalsData!.featuredImage!, 
+                    doctorsData!.featuredImage!, 
                     width: 110.w, 
                     height: 120.h, 
                     fit: BoxFit.fill,
@@ -78,7 +78,7 @@ class HospitalsListViewItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    hospitalsData?.name ?? 'Hospital',
+                    doctorsData?.name ?? 'Doctor',
                     style: TextStyles.font18DarkBlueBold,
                     maxLines: 1, 
                     overflow: TextOverflow.ellipsis, 
@@ -86,7 +86,7 @@ class HospitalsListViewItem extends StatelessWidget {
                   verticalSpace(5.h),
                   
                   Text(
-                    'Phone: ${getDisplayText(hospitalsData?.phoneNumber.toString())}',
+                    'Phone: ${getDisplayText(doctorsData?.phoneNumber)}',
                     style: TextStyles.font12GrayMedium,
                     maxLines: 1, 
                     overflow: TextOverflow.ellipsis, 
@@ -94,7 +94,7 @@ class HospitalsListViewItem extends StatelessWidget {
                   verticalSpace(5.h),
                   
                   Text(
-                    'Email: ${getDisplayText(hospitalsData?.email)}',
+                    'Email: ${getDisplayText(doctorsData?.email)}',
                     style: TextStyles.font12GrayMedium,
                     maxLines: 1, 
                     overflow: TextOverflow.ellipsis, 
@@ -102,11 +102,12 @@ class HospitalsListViewItem extends StatelessWidget {
                   verticalSpace(5.h),
                   
                   Text(
-                    'Address: ${getDisplayText(hospitalsData?.address)}',
+                    'Working Hours: ${getDisplayText(doctorsData?.visitingHour)}',
                     style: TextStyles.font12GrayMedium,
                     maxLines: 1, 
                     overflow: TextOverflow.ellipsis, 
                   ),
+                  verticalSpace(5.h),
                 ],
               ),
             ),

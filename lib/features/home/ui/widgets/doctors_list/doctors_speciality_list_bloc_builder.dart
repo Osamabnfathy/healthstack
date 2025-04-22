@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/features/home/logic/cubit/home_cubit.dart';
 import 'package:healthstack/features/home/logic/cubit/home_state.dart';
-import 'package:healthstack/features/home/ui/widgets/doctors_list/doctors_list_view.dart';
+import 'package:healthstack/features/home/ui/widgets/doctors_list/doctors_speciality_list_view.dart';
 
-class DoctorsListBlocBuilder extends StatelessWidget {
-  const DoctorsListBlocBuilder({super.key});
+class DoctorsSpecialityListBlocBuilder extends StatelessWidget {
+  const DoctorsSpecialityListBlocBuilder({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class DoctorsListBlocBuilder extends StatelessWidget {
           
           doctorsSuccess: (doctorsResponseModel) {
             return Expanded(
-              child: DoctorsListView(doctorsDataList: doctorsResponseModel,)
+              child: DoctorsSpecialityListView(doctorsDataList: doctorsResponseModel,)
             );
           },
           
