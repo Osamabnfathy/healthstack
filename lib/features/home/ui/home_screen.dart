@@ -5,8 +5,8 @@ import 'widgets/doctors_blue_container.dart';
 import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:healthstack/features/home/ui/widgets/drawer/ui/drawer_screen.dart';
-import 'package:healthstack/features/home/ui/widgets/doctors_list/doctors_Bloc_builder.dart';
 import 'package:healthstack/features/home/ui/widgets/speciality_list/specializations_bloc_builder.dart';
+import 'package:healthstack/features/home/ui/widgets/doctors_list/doctors_speciality_list_bloc_builder.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -38,7 +38,7 @@ class HomeScreen extends StatelessWidget {
                   SpecializationsBlocBuilder(),
                   verticalSpace(15),
                   
-                  DoctorsListBlocBuilder(),
+                  DoctorsSpecialityListBlocBuilder(),
                 ],
               ),
             );

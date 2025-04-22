@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:healthstack/core/theming/colors.dart';
-import 'package:healthstack/core/theming/styles.dart';
 import 'package:healthstack/core/helpers/spacing.dart';
+import 'package:healthstack/core/widgets/search_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:healthstack/features/doctors/data/doctors_data.dart';
-import 'package:healthstack/features/doctors/ui/widgets/search_bar.dart';
-import 'package:healthstack/features/doctors/ui/widgets/doctor_list_view.dart';
+import 'package:healthstack/core/widgets/custom_app_bar.dart';
+import 'package:healthstack/features/doctors/ui/widgets/doctors_list_bloc_builder.dart';
 
 
 class DoctorsScreen extends StatefulWidget {
@@ -18,24 +17,18 @@ class DoctorsScreen extends StatefulWidget {
 
 class _DoctorPageState extends State<DoctorsScreen> {
   late TextEditingController searchController;
-  late List<Map<String, dynamic>> filteredDoctors;
+  String searchQuery = '';
 
   @override
   void initState() {
     super.initState();
     searchController = TextEditingController();
-    filteredDoctors = doctors;
     searchController.addListener(_onSearchChanged);
   }
 
   void _onSearchChanged() {
-    final query = searchController.text.toLowerCase();
     setState(() {
-      filteredDoctors = doctors.where((doctor) {
-        return doctor['name'].toLowerCase().contains(query) ||
-            doctor['specialty'].toLowerCase().contains(query) ||
-            doctor['hospital'].toLowerCase().contains(query);
-      }).toList();
+      searchQuery = searchController.text.trim().toLowerCase();
     });
   }
 
@@ -50,35 +43,30 @@ class _DoctorPageState extends State<DoctorsScreen> {
     return Scaffold(
       backgroundColor: ColorsManager.moreLightGray,
       
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        title: Text(
-          'Find Doctor', 
-          style: TextStyles.font20DarkBlueSemiBold,
-        ),
-        leading: InkWell(
-          onTap: () => Navigator.pop(context), // Close drawer action
-          child: Icon(Icons.arrow_back_ios_new_outlined, color: ColorsManager.darkBlue, size: 20.sp,),
-        ),
-      ),
+      appBar: CustomAppBar(title: 'Find Doctor'),
       
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Column(
-            children: [
-              SearchAndFilterBar(
-                searchController: searchController,
-                onFilterPressed: () {
-                  // Handle filter button press
-                },
-              ),
-              verticalSpace(20),
+        child: Builder(
+          builder: (BuildContext context) {
+            return Container(
+              width: double.infinity,
+              margin: EdgeInsets.fromLTRB(12.w, 5.h, 12.w, 15.h),
               
-              DoctorsListView(doctors: filteredDoctors),
-            ],
-          ),
+              child: Column(
+                children: [
+                  SearchAndFilterBar(
+                    searchController: searchController,
+                    onFilterPressed: () {},
+                  ),
+                  verticalSpace(10),
+                  
+                  Expanded(
+                    child: DoctorsListBlocBuilder(searchQuery: searchQuery),
+                  )
+                ],
+              ),
+            );
+          }
         ),
       ),
     );

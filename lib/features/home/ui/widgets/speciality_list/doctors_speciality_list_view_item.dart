@@ -82,7 +82,7 @@ class DoctorsSpecialityListViewItem extends StatelessWidget {
           
           Text(
             hospitalName ?? 'Unknown Hospital', // display the name of the hospital here 
-            style: TextStyles.font12GrayRegular,
+            style: TextStyles.font12GrayMedium,
             maxLines: 1, // Prevent long names from wrapping excessively
             overflow: TextOverflow.ellipsis, // Add ellipsis for overflow
           ),

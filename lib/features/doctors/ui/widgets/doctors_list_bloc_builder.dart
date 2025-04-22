@@ -3,38 +3,37 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/features/home/logic/cubit/home_cubit.dart';
 import 'package:healthstack/features/home/logic/cubit/home_state.dart';
-import 'package:healthstack/features/hospitals/ui/widgets/hospitals_list_view.dart';
+import 'package:healthstack/features/doctors/ui/widgets/doctors_list_view.dart';
 
-class HospitalsListBlocBuilder extends StatelessWidget {
+class DoctorsListBlocBuilder extends StatelessWidget {
   final String searchQuery;
-  const HospitalsListBlocBuilder({super.key, required this.searchQuery});
+  const DoctorsListBlocBuilder({super.key, required this.searchQuery});
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
       buildWhen: (previous, current) => 
-        current is HospitalsLoading ||
-        current is HospitalsSuccess ||
-        current is HospitalsError,
-        
+        current is DoctorsLoading ||
+        current is DoctorsSuccess ||
+        current is DoctorsError,
       builder: (context, state) {
         return state.maybeWhen(
-          hospitalsLoading: () {
+          doctorsLoading: () {
             return const SizedBox.shrink();
             // return setupLoading();
           },
           
-          hospitalsSuccess: (hospitalsResponseModel) {
-            // Filter hospitals based on the search query
-            final filteredHospitals = hospitalsResponseModel.where((hospital) {
-              final name = hospital.name?.toLowerCase() ?? '';
+          doctorsSuccess: (doctorsResponseModel) {
+            // Filter doctors based on the search query
+            final filteredDoctors = doctorsResponseModel.where((doctor) {
+              final name = doctor.name?.toLowerCase() ?? '';
               return name.contains(searchQuery);
             }).toList();
 
-            return HospitalsListView(hospitalsDataList: filteredHospitals);
+            return DoctorsListView(doctorsDataList: filteredDoctors);
           },
           
-          hospitalsError: (errorHandler) {
+          doctorsError: (errorHandler) {
             return const SizedBox.shrink();
           },
           
@@ -42,7 +41,7 @@ class HospitalsListBlocBuilder extends StatelessWidget {
             return const SizedBox.shrink();
           },
         );
-      },
+      }  
     );
   }
   

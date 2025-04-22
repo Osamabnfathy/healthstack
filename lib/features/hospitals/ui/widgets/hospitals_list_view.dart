@@ -10,8 +10,6 @@ class HospitalsListView extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-  
-    
     return ListView.builder(
       itemCount: hospitalsDataList?.length, 
       itemBuilder: (context, index) {

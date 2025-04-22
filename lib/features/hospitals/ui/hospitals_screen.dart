@@ -1,29 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:healthstack/core/helpers/spacing.dart';
+import 'package:healthstack/core/widgets/custom_app_bar.dart';
+import 'package:healthstack/core/widgets/search_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:healthstack/core/theming/colors.dart';
-import 'package:healthstack/core/theming/styles.dart';
 import 'package:healthstack/features/hospitals/ui/widgets/hospitals_list_bloc_builder.dart';
 
-class HospitalsScreen extends StatelessWidget {
+class HospitalsScreen extends StatefulWidget {
   const HospitalsScreen({super.key});
 
+  @override
+  State<HospitalsScreen> createState() => _HospitalsScreenState();
+}
+
+class _HospitalsScreenState extends State<HospitalsScreen> {
+  late TextEditingController searchController;
+  String searchQuery = '';
+
+  @override
+  void initState() {
+    super.initState();
+    searchController = TextEditingController();
+    searchController.addListener(_onSearchChanged);
+  }
+
+  void _onSearchChanged() {
+    setState(() {
+      searchQuery = searchController.text.trim().toLowerCase();
+    });
+  }
+
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        title: Text(
-          'Find Hospital', 
-          style: TextStyles.font20DarkBlueSemiBold,
-        ),
-        leading: InkWell(
-          onTap: () => Navigator.pop(context), // Close drawer action
-          child: Icon(Icons.arrow_back_ios_new_outlined, color: ColorsManager.darkBlue, size: 20.sp,),
-        ),
-      ),
+      appBar: CustomAppBar(title: 'Find Hospital'),
       
       body: SafeArea(
         child: Builder(
@@ -34,8 +51,15 @@ class HospitalsScreen extends StatelessWidget {
               
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                
                 children: [                  
-                  Expanded(child: HospitalsListBlocBuilder()),
+                  SearchAndFilterBar(
+                    searchController: searchController, 
+                    onFilterPressed: (){}
+                  ),
+                  verticalSpace(10),
+                  
+                  Expanded(child: HospitalsListBlocBuilder(searchQuery: searchQuery)),
                 ],
               ),
             );
