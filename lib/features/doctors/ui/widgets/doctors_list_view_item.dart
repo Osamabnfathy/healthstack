@@ -4,7 +4,7 @@ import 'package:healthstack/core/theming/styles.dart';
 import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:healthstack/core/helpers/extensions.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:healthstack/features/doctors/ui/widgets/doctor_details_page.dart';
+import 'package:healthstack/features/doctors/ui/widgets/doctor_details/doctor_details_screen.dart';
 import 'package:healthstack/features/home/data/models/doctors_response_model.dart';
 import 'package:healthstack/features/home/data/models/hospitals_response_model.dart';
 import 'package:healthstack/features/home/data/models/specialization_response_model.dart';
@@ -46,7 +46,7 @@ class DoctorsListViewItem extends StatelessWidget {
     return InkWell(
       onTap: () {
         Navigator.push(context, MaterialPageRoute(
-            builder: (context) => DoctorDetailsPage(
+            builder: (context) => DoctorDetailsScreen(
               doctorsData: doctorsData,
               hospitalsData: hospitalsDataList,
               specializationsData: specializationsDataList,

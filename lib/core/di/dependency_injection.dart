@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:healthstack/features/home/logic/cubit/home_cubit.dart';
 import '../../features/login/data/repos/login_repo.dart';
 import '../../features/login/logic/cubit/login_cubit.dart';
 import 'package:healthstack/core/networking/dio_factory.dart';
@@ -33,5 +34,6 @@ Future<void> setupGetIt() async {
   
   // Home
   getIt.registerLazySingleton<HomeApiServices>(() => HomeApiServices(dio));
-  getIt.registerLazySingleton<HomeRepo>(() => HomeRepo(getIt()));
+  getIt.registerLazySingleton<HomeRepo>(() => HomeRepo(getIt<HomeApiServices>()));
+  getIt.registerFactory<HomeCubit>(() => HomeCubit(getIt<HomeRepo>()));
 }

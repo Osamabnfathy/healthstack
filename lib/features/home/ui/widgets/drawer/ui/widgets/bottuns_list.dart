@@ -1,15 +1,19 @@
+import 'buttons_items.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:healthstack/core/helpers/extensions.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:healthstack/core/routing/routes.dart';
 import 'package:healthstack/core/theming/colors.dart';
-import 'buttons_items.dart';
+import 'package:healthstack/core/helpers/extensions.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:healthstack/features/home/logic/cubit/home_cubit.dart';
 
 class ButtonsList extends StatelessWidget {
   const ButtonsList({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final homeCubitInstance = context.read<HomeCubit>();
+    
     final menuItems = [
       MenuItemData(
         'Personal Information',
@@ -31,7 +35,7 @@ class ButtonsList extends StatelessWidget {
         'Hospitals',
         Colors.pink.shade50,
         Colors.pink,
-        () => context.pushNamed(Routes.hospitalsScreen),
+        () => context.pushNamed(Routes.hospitalsScreen, arguments: homeCubitInstance),
         icon: Icons.local_hospital,
       ),
       

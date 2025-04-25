@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:healthstack/features/home/logic/cubit/home_cubit.dart';
 import '../../../../core/theming/styles.dart';
 import 'package:healthstack/core/routing/routes.dart';
 import 'package:healthstack/core/helpers/spacing.dart';
@@ -10,6 +12,8 @@ class DoctorsBlueContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final homeCubitInstance = context.read<HomeCubit>();
+    
     return SizedBox(
       height: 195.h,
       child: Stack(
@@ -42,7 +46,10 @@ class DoctorsBlueContainer extends StatelessWidget {
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () {
-                      context.pushNamed(Routes.doctorsScreen);
+                      context.pushNamed(
+                        Routes.doctorsScreen,
+                        arguments: homeCubitInstance,
+                      );
                     },
                     
                     style: ElevatedButton.styleFrom(

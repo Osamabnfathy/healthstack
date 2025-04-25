@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:healthstack/core/helpers/spacing.dart';
-import 'package:healthstack/core/widgets/custom_app_bar.dart';
 import 'package:healthstack/core/widgets/search_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:healthstack/core/widgets/custom_app_bar.dart';
 import 'package:healthstack/features/hospitals/ui/widgets/hospitals_list_bloc_builder.dart';
 
 class HospitalsScreen extends StatefulWidget {
@@ -36,12 +36,9 @@ class _HospitalsScreenState extends State<HospitalsScreen> {
   }
   
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {    
     return Scaffold(
       backgroundColor: Colors.white,
-      
-      appBar: CustomAppBar(title: 'Find Hospital'),
-      
       body: SafeArea(
         child: Builder(
           builder: (BuildContext context) {
@@ -52,14 +49,18 @@ class _HospitalsScreenState extends State<HospitalsScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 
-                children: [                  
+                children: [ 
+                  const CustomAppBar(title: 'Find Hospitals'),   
+                                
                   SearchAndFilterBar(
                     searchController: searchController, 
                     onFilterPressed: (){}
                   ),
                   verticalSpace(10),
                   
-                  Expanded(child: HospitalsListBlocBuilder(searchQuery: searchQuery)),
+                  Expanded(child: HospitalsListBlocBuilder(
+                    searchQuery: searchQuery,
+                  )),
                 ],
               ),
             );

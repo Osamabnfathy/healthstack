@@ -42,18 +42,18 @@ class _DoctorPageState extends State<DoctorsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorsManager.moreLightGray,
-      
-      appBar: CustomAppBar(title: 'Find Doctor'),
-      
       body: SafeArea(
         child: Builder(
           builder: (BuildContext context) {
             return Container(
               width: double.infinity,
+              color: Colors.white,
               margin: EdgeInsets.fromLTRB(12.w, 5.h, 12.w, 15.h),
               
               child: Column(
                 children: [
+                  const CustomAppBar(title: 'Find Doctor'), 
+                   
                   SearchAndFilterBar(
                     searchController: searchController,
                     onFilterPressed: () {},
@@ -61,7 +61,9 @@ class _DoctorPageState extends State<DoctorsScreen> {
                   verticalSpace(10),
                   
                   Expanded(
-                    child: DoctorsListBlocBuilder(searchQuery: searchQuery),
+                    child: DoctorsListBlocBuilder(
+                      searchQuery: searchQuery,
+                    ),
                   )
                 ],
               ),
