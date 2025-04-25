@@ -89,21 +89,38 @@ class AppRouter {
       
       
       case Routes.doctorsScreen:
-        return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => HomeCubit(getIt())..getDoctorsList()..getHospitalList(),
-            child: const DoctorsScreen(),
-          )
-        );
-      
+        if (arguments is HomeCubit) {
+          final homeCubitInstance = arguments;
+          return MaterialPageRoute(
+            builder: (context) => BlocProvider.value(
+              value: homeCubitInstance, 
+              child: const DoctorsScreen(), 
+            ),
+          );
+        } 
+        else {
+          print("ERROR: Incorrect arguments passed to Doctors Screen route.");
+          return MaterialPageRoute(
+            builder: (_) => const Scaffold(body: Center(child: Text("Error: Missing data for Doctors screen.")))
+          );
+        }
       
       case Routes.hospitalsScreen:
-        return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => HomeCubit(getIt())..getHospitalList()..getDoctorsList(),
-            child: const HospitalsScreen(),
-          ),
-        );
+        if (arguments is HomeCubit) {
+          final homeCubitInstance = arguments;
+          return MaterialPageRoute(
+            builder: (context) => BlocProvider.value(
+              value: homeCubitInstance, 
+              child: const HospitalsScreen(), 
+            ),
+          );
+        } 
+        else {
+          print("ERROR: Incorrect arguments passed to Hospitals Screen route.");
+          return MaterialPageRoute(
+            builder: (_) => const Scaffold(body: Center(child: Text("Error: Missing data for Hospitals screen.")))
+          );
+        }
       
       default:
         return null;

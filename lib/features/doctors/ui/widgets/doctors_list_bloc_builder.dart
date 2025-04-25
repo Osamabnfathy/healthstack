@@ -1,60 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/features/home/logic/cubit/home_cubit.dart';
 import 'package:healthstack/features/home/logic/cubit/home_state.dart';
+import 'package:healthstack/features/home/data/models/doctors_response_model.dart';
+import 'package:healthstack/features/home/data/models/hospitals_response_model.dart';
+import 'package:healthstack/features/home/data/models/specialization_response_model.dart';
 import 'package:healthstack/features/doctors/ui/widgets/doctors_list_view.dart';
 
 class DoctorsListBlocBuilder extends StatelessWidget {
   final String searchQuery;
+
   const DoctorsListBlocBuilder({super.key, required this.searchQuery});
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
-      buildWhen: (previous, current) => 
-        current is DoctorsLoading ||
-        current is DoctorsSuccess ||
-        current is DoctorsError,
       builder: (context, state) {
-        return state.maybeWhen(
-          doctorsLoading: () {
-            return const SizedBox.shrink();
-            // return setupLoading();
-          },
-          
-          doctorsSuccess: (doctorsResponseModel) {
-            // Filter doctors based on the search query
-            final filteredDoctors = doctorsResponseModel.where((doctor) {
-              final name = doctor.name?.toLowerCase() ?? '';
-              return name.contains(searchQuery);
-            }).toList();
+        final homeCubit = context.read<HomeCubit>();
+        final List<DoctorsResponseModel> doctorsDataList = homeCubit.doctorsDataList ?? [];
+        final List<HospitalsResponseModel> hospitalsDataList = homeCubit.hospitalsDataList ?? [];
+        final List<SpecializationsResponseModel> specializationsDataList = homeCubit.specializationsDataList ?? [];
 
-            return DoctorsListView(
-              doctorsDataList: filteredDoctors,
-              hospitalsDataList: context.read<HomeCubit>().hospitalsDataList, 
-              specializationsDataList: context.read<HomeCubit>().specializationsDataList, 
-            );
-          },
-          
-          doctorsError: (errorHandler) {
-            return const SizedBox.shrink();
-          },
-          
-          orElse: () {
-            return const SizedBox.shrink();
-          },
-        );
-      }  
-    );
-  }
-  
-  Widget setupLoading() {
-    return const SizedBox(
-      height: 100,
-      child: CircularProgressIndicator(
-        color: ColorsManager.mainBlue,
-      ),
+        if (doctorsDataList.isEmpty && state is! DoctorsError) {
+          print("Showing Loading (Doctors empty, not error, fetch incomplete)");
+          return const Center(child: CircularProgressIndicator());
+        }
+
+        if (state is DoctorsError) {
+          print("Showing Doctors Error: ${state.error}");
+          return Center(child: Text('Error loading doctors: ${state.error}'));
+        }
+
+        if (doctorsDataList.isNotEmpty) {
+          print("Showing Filtered Doctors ListView with ${doctorsDataList.length} total doctors.");
+          return DoctorsListView(
+            searchQuery: searchQuery,
+            doctorsDataList: doctorsDataList,
+            hospitalsDataList: hospitalsDataList,
+            specializationsDataList: specializationsDataList,
+          );
+        }
+
+        print("Showing 'No doctors found' (Fetch complete or error state not matched)");
+        return const Center(child: Text('No doctors found.'));
+      },
     );
   }
 }

@@ -4,16 +4,23 @@ import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/core/theming/styles.dart';
 import 'package:healthstack/core/helpers/extensions.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:healthstack/features/home/data/models/doctors_response_model.dart';
 import 'package:healthstack/features/home/data/models/hospitals_response_model.dart';
+import 'package:healthstack/features/home/data/models/specialization_response_model.dart';
+import 'package:healthstack/features/hospitals/ui/widgets/hospital_details/hospital_details_screen.dart';
 
 class HospitalsListViewItem extends StatelessWidget {
-  final HospitalsResponseModel? hospitalsData;
   final int? itemIndex;
+  final HospitalsResponseModel? hospitalsData;
+  final List<DoctorsResponseModel>? doctorsDataList;
+  final List<SpecializationsResponseModel>? specializationsDataList;
 
   const HospitalsListViewItem({
     super.key,
-    this.hospitalsData,
     this.itemIndex,
+    this.hospitalsData,
+    this.doctorsDataList,
+    this.specializationsDataList,
   });
 
   @override
@@ -27,7 +34,14 @@ class HospitalsListViewItem extends StatelessWidget {
     
     return InkWell(
       onTap: () {
-        // Handle tap event here, e.g., navigate to hospital details page
+        Navigator.push(context, MaterialPageRoute(
+            builder: (context) => HospitalDetailsScreen(
+              hospitalsData: hospitalsData,
+              doctorsData: doctorsDataList,
+              specializationsData: specializationsDataList,
+            ),
+          ),
+        );
       },
     
       child: Container(

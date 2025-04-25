@@ -10,7 +10,7 @@ import 'package:healthstack/core/helpers/shared_pref_helper.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   
-  setupGetIt();
+  await setupGetIt();
   await ScreenUtil.ensureScreenSize();
   await checkIfLogedInUser();
   runApp(
