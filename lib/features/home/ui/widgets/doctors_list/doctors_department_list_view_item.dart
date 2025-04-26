@@ -5,108 +5,121 @@ import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:healthstack/core/helpers/extensions.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:healthstack/features/home/data/models/doctors_response_model.dart';
+import 'package:healthstack/features/home/data/models/hospitals_response_model.dart';
+import 'package:healthstack/features/home/data/models/departments_response_model.dart';
+import 'package:healthstack/features/doctors/ui/widgets/doctor_details/doctor_details_screen.dart';
 
 class DoctorsDepartmentListViewItem extends StatelessWidget {
   final DoctorsResponseModel? doctorsData;
+  final List<HospitalsResponseModel>? hospitalsDataList;
+  final List<DepartmentsResponseModel>? departmentsDataList;
   final int? itemIndex;
   
   const DoctorsDepartmentListViewItem({
     super.key,
-    this.doctorsData,
     this.itemIndex,
+    this.doctorsData,
+    this.hospitalsDataList,
+    this.departmentsDataList,
   });
 
   @override
   Widget build(BuildContext context) {
   
     final Widget placeholderImage = Image.asset(
-      "assets/images/doctor-books.png", 
+      "assets/icons/doctor.png", 
       width: 110.w, 
       height: 120.h, 
-      fit: BoxFit.cover
+      fit: BoxFit.fill,
     );
     
   
-    return Container(
-      padding: EdgeInsetsDirectional.only(bottom: 15.h),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-        color: ColorsManager.lightBlue,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            spreadRadius: 1,
-            blurRadius: 3,
-            offset: const Offset(0, 2),
-          )
-        ],
-      ),
-      
-      child: Row(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(12.0),
-            child: doctorsData?.featuredImage != null && doctorsData!.featuredImage!.isNotEmpty
-                ? Image.network(
-                  doctorsData!.featuredImage!, 
-                  width: 110.w, 
-                  height: 120.h, 
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) => placeholderImage,
-                  loadingBuilder: (context, child, loadingProgress) {
-                    if (loadingProgress == null) return child;
-                    return Center(
-                      child: CircularProgressIndicator(
-                        value: loadingProgress.expectedTotalBytes != null
-                            ? loadingProgress.cumulativeBytesLoaded / (loadingProgress.expectedTotalBytes ?? 1)
-                            : null,
-                      ),
-                    );
-                  },
-                )
-                : placeholderImage,
-          ),
-          horizontalSpace(16),
-          
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  doctorsData?.name ?? 'Doctor' ,
-                  style: TextStyles.font18DarkBlueBold,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1, // Prevent long names from wrapping excessively
-                ),
-                verticalSpace(5),
-                
-                Text(
-                  'Phone: ${getDisplayText(doctorsData?.phoneNumber)}',
-                  style: TextStyles.font12GrayMedium,
-                  maxLines: 1, // Prevent long names from wrapping excessively
-                  overflow: TextOverflow.ellipsis,
-                ),
-                verticalSpace(5),
-                
-                Text(
-                  'Fees: ${getDisplayText(doctorsData?.reportFee.toString())} - ${getDisplayText(doctorsData?.consultationFee.toString())}',
-                  style: TextStyles.font12GrayMedium,
-                  maxLines: 1, 
-                  overflow: TextOverflow.ellipsis, 
-                ),
-                verticalSpace(5.h),
-                
-                Text(
-                  'Working Hours: ${getDisplayText(doctorsData?.visitingHour)}',
-                  style: TextStyles.font12GrayMedium,
-                  maxLines: 1, // Prevent long names from wrapping excessively
-                  overflow: TextOverflow.ellipsis,
-                ),
-                
-              ]
+    return InkWell(
+      onTap: () {
+        if (doctorsData?.doctorId != null) {
+          Navigator.push(
+            context, 
+            MaterialPageRoute(
+              builder: (context) => DoctorDetailsScreen(
+                doctorsData: doctorsData,
+                hospitalsData: hospitalsDataList,
+                departmentsData: departmentsDataList,
+              ),
             ),
-          ),
-        ],
+          );
+        }
+      },
+    
+      child: Container(
+        margin: EdgeInsets.symmetric(vertical: 12.h),
+        padding: EdgeInsetsDirectional.symmetric(horizontal: 10.w, vertical: 10.h),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16.r),
+          color: ColorsManager.lightBlue,
+          boxShadow: [
+            BoxShadow(
+              color: ColorsManager.gray.withOpacity(0.2),
+              blurRadius: 10,
+              offset: const Offset(0, 4),
+            )
+          ],
+        ),
+        
+        child: Row(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(12.r),
+              child: doctorsData?.featuredImage != null && doctorsData!.featuredImage!.isNotEmpty
+                  ? Image.network(
+                    doctorsData!.featuredImage!, 
+                    width: 110.w, 
+                    height: 120.h, 
+                    fit: BoxFit.fill,
+                  )
+                  : placeholderImage,
+            ),
+            horizontalSpace(15),
+            
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    doctorsData?.name ?? 'Doctor' ,
+                    style: TextStyles.font18DarkBlueBold,
+                    maxLines: 1, // Prevent long names from wrapping excessively
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  verticalSpace(5),
+                  
+                  Text(
+                    'Phone: ${getDisplayText(doctorsData?.phoneNumber)}',
+                    style: TextStyles.font12GrayMedium,
+                    maxLines: 1, 
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  verticalSpace(5),
+                  
+                  Text(
+                    'Fees: ${getDisplayText(doctorsData?.reportFee.toString())} - ${getDisplayText(doctorsData?.consultationFee.toString())}',
+                    style: TextStyles.font12GrayMedium,
+                    maxLines: 1, 
+                    overflow: TextOverflow.ellipsis, 
+                  ),
+                  verticalSpace(5),
+                  
+                  Text(
+                    'Working Hours: ${getDisplayText(doctorsData?.visitingHour)}',
+                    style: TextStyles.font12GrayMedium,
+                    maxLines: 1, // Prevent long names from wrapping excessively
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  
+                ]
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

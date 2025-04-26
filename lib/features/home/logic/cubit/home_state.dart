@@ -21,4 +21,6 @@ class HomeState with _$HomeState {
   const factory HomeState.hospitalsLoading() = HospitalsLoading;
   const factory HomeState.hospitalsSuccess(List<HospitalsResponseModel> hospitalsResponseModel) = HospitalsSuccess;
   const factory HomeState.hospitalsError(ErrorHandler error) = HospitalsError;
+
+  const factory HomeState.departmentSelected(int departmentId) = DepartmentSelected;
 }
