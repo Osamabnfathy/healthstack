@@ -64,7 +64,7 @@ class AppRouter {
       case Routes.homeScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => HomeCubit(getIt())..getDoctorsList()..getHospitalList()..getSpecializations(),
+            create: (context) => HomeCubit(getIt())..getDoctorsList()..getHospitalList()..getDepartments(),
             child: const HomeScreen(),
           ),
         );

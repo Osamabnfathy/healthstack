@@ -7,18 +7,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:healthstack/core/widgets/app_text_button.dart';
 import 'package:healthstack/features/home/data/models/doctors_response_model.dart';
 import 'package:healthstack/features/home/data/models/hospitals_response_model.dart';
-import 'package:healthstack/features/home/data/models/specialization_response_model.dart';
+import 'package:healthstack/features/home/data/models/departments_response_model.dart';
 
 class DoctorDetailsScreen extends StatelessWidget {
   final DoctorsResponseModel? doctorsData;
   final List<HospitalsResponseModel>? hospitalsData;
-  final List<SpecializationsResponseModel>? specializationsData;
+  final List<DepartmentsResponseModel>? departmentsData;
 
   const DoctorDetailsScreen({
     super.key, 
     required this.doctorsData,
     required this.hospitalsData,
-    required this.specializationsData,  
+    required this.departmentsData,  
   });
 
   @override
@@ -34,15 +34,15 @@ class DoctorDetailsScreen extends StatelessWidget {
 
     // Find the specialization name
     String? departmentName;
-    if (doctorsData?.departmentName != null && specializationsData != null) {
-      final matchingSpecialization = specializationsData!.firstWhere(
+    if (doctorsData?.departmentName != null && departmentsData != null) {
+      final matchingDepartment = departmentsData!.firstWhere(
         (specialization) => specialization.hospitalDepartmentId == doctorsData!.departmentName,
-        orElse: () => SpecializationsResponseModel(
+        orElse: () => DepartmentsResponseModel(
           hospitalDepartmentId: null,
           hospitalDepartmentName: 'Unknown Specialization',
         ),
       );
-      departmentName = matchingSpecialization.hospitalDepartmentName;
+      departmentName = matchingDepartment.hospitalDepartmentName;
     }
     
     final Widget placeholderImage = Image.asset(

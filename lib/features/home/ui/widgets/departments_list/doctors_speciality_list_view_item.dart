@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:healthstack/core/helpers/extensions.dart';
 import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/core/theming/styles.dart';
+import 'package:healthstack/core/helpers/extensions.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:healthstack/features/home/data/models/hospitals_response_model.dart';
-import 'package:healthstack/features/home/data/models/specialization_response_model.dart';
+import 'package:healthstack/features/home/data/models/departments_response_model.dart';
 
-class DoctorsSpecialityListViewItem extends StatelessWidget {
+class DoctorsDepartmentListViewItem extends StatelessWidget {
   final int? itemIndex;
-  final SpecializationsResponseModel? specializationsData;
+  final DepartmentsResponseModel? departmentsData;
   final List<HospitalsResponseModel>? hospitalsDataList;
 
-  const DoctorsSpecialityListViewItem({
+  const DoctorsDepartmentListViewItem({
     super.key,
     this.itemIndex, 
-    this.specializationsData,
+    this.departmentsData,
     this.hospitalsDataList,
   });
   
@@ -23,9 +23,9 @@ class DoctorsSpecialityListViewItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String? hospitalName;
-    if (specializationsData?.hospital != null && hospitalsDataList != null) {
+    if (departmentsData?.hospital != null && hospitalsDataList != null) {
       final matchingHospital = hospitalsDataList!.firstWhere(
-        (hospital) => hospital.hospitalId == specializationsData!.hospital,
+        (hospital) => hospital.hospitalId == departmentsData!.hospital,
         orElse: () => HospitalsResponseModel(hospitalId: null, name: 'Unknown Hospital'),
       );
       hospitalName = matchingHospital.name;
@@ -49,9 +49,9 @@ class DoctorsSpecialityListViewItem extends StatelessWidget {
             backgroundColor: ColorsManager.lightBlue,
             
             child: ClipOval( 
-              child: specializationsData?.featuredImage != null && specializationsData!.featuredImage!.isNotEmpty
+              child: departmentsData?.featuredImage != null && departmentsData!.featuredImage!.isNotEmpty
                 ? Image.network(
-                    specializationsData!.featuredImage!, 
+                    departmentsData!.featuredImage!, 
                     height: 60.h, 
                     width: 60.w, 
                     fit: BoxFit.fill,
@@ -75,7 +75,7 @@ class DoctorsSpecialityListViewItem extends StatelessWidget {
           
           
           Text(
-            specializationsData?.hospitalDepartmentName ?? 'Specialization',
+            departmentsData?.hospitalDepartmentName ?? 'Specialization',
             style: TextStyles.font12DarkBlueRegular,
             maxLines: 1, // Prevent long names from wrapping excessively
             overflow: TextOverflow.ellipsis, // Add ellipsis for overflow

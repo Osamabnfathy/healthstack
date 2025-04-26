@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:healthstack/core/helpers/extensions.dart';
-import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/core/theming/styles.dart';
-import 'package:healthstack/features/doctors/ui/widgets/doctor_details/doctor_details_screen.dart';
+import 'package:healthstack/core/helpers/spacing.dart';
+import 'package:healthstack/core/helpers/extensions.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:healthstack/features/home/data/models/doctors_response_model.dart';
 import 'package:healthstack/features/home/data/models/hospitals_response_model.dart';
-import 'package:healthstack/features/home/data/models/specialization_response_model.dart';
+import 'package:healthstack/features/home/data/models/departments_response_model.dart';
+import 'package:healthstack/features/doctors/ui/widgets/doctor_details/doctor_details_screen.dart';
 
 class HospitalDoctorsScreen extends StatelessWidget {
   final int hospitalId;
   final List<DoctorsResponseModel>? doctorsData;
   final List<HospitalsResponseModel>? hospitalsDataList;
-  final List<SpecializationsResponseModel>? specializationsDataList;
+  final List<DepartmentsResponseModel>? departmentsDataList;
 
   const HospitalDoctorsScreen({
     super.key,
     required this.doctorsData,
     required this.hospitalId,
     required this.hospitalsDataList,
-    required this.specializationsDataList,
+    required this.departmentsDataList,
   });
 
   @override
@@ -60,10 +60,10 @@ class HospitalDoctorsScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 final doctor = filteredDoctors[index];
                 String? departmentName;
-                if (doctor.departmentName != null && specializationsDataList != null) {
-                  final matchingSpecialization = specializationsDataList!.firstWhere(
+                if (doctor.departmentName != null && departmentsDataList != null) {
+                  final matchingSpecialization = departmentsDataList!.firstWhere(
                     (specialization) => specialization.hospitalDepartmentId == doctor.departmentName,
-                    orElse: () => SpecializationsResponseModel(
+                    orElse: () => DepartmentsResponseModel(
                       hospitalDepartmentId: null,
                       hospitalDepartmentName: 'Unknown Specialization',
                     ),
@@ -79,7 +79,7 @@ class HospitalDoctorsScreen extends StatelessWidget {
                         builder: (context) => DoctorDetailsScreen(
                           doctorsData: doctor,
                           hospitalsData: hospitalsDataList,
-                          specializationsData: specializationsDataList,
+                          departmentsData: departmentsDataList,
                         ),
                       ),
                     );

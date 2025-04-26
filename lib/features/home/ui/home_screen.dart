@@ -1,12 +1,12 @@
 import 'widgets/home_top_bar.dart';
 import 'package:flutter/material.dart';
-import 'widgets/speciality_and_see_all.dart';
+import 'widgets/departments_and_see_all.dart';
 import 'widgets/doctors_blue_container.dart';
 import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:healthstack/features/home/ui/widgets/drawer/ui/drawer_screen.dart';
-import 'package:healthstack/features/home/ui/widgets/speciality_list/specializations_bloc_builder.dart';
-import 'package:healthstack/features/home/ui/widgets/doctors_list/doctors_speciality_list_bloc_builder.dart';
+import 'package:healthstack/features/home/ui/widgets/departments_list/departments_bloc_builder.dart';
+import 'package:healthstack/features/home/ui/widgets/doctors_list/doctors_department_list_bloc_builder.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -32,13 +32,13 @@ class HomeScreen extends StatelessWidget {
                   const DoctorsBlueContainer(),
                   verticalSpace(24),
                   
-                  const DoctorsSpecialityAndSeeAll(),
+                  const DepartmentsAndSeeAll(),
                   verticalSpace(16),   
                   
-                  SpecializationsBlocBuilder(),
+                  DepartmentsBlocBuilder(),
                   verticalSpace(15),
                   
-                  DoctorsSpecialityListBlocBuilder(),
+                  DoctorsDepartmentListBlocBuilder(),
                 ],
               ),
             );
