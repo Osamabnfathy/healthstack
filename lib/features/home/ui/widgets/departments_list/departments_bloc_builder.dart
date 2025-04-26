@@ -1,12 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:healthstack/core/theming/colors.dart';
+import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:healthstack/features/home/logic/cubit/home_cubit.dart';
 import 'package:healthstack/features/home/logic/cubit/home_state.dart';
-import 'package:healthstack/features/home/ui/widgets/departments_list/doctors_department_list_view.dart';
+import 'package:healthstack/features/home/data/models/departments_response_model.dart';
+import 'package:healthstack/features/home/ui/widgets/departments_list/department_list_view.dart';
+import 'package:healthstack/features/home/ui/widgets/departments_list/departments_shimmer_loading.dart';
+import 'package:healthstack/features/home/ui/widgets/doctors_list/doctors_shimmer_loading.dart';
 
 class DepartmentsBlocBuilder extends StatelessWidget {
-  const DepartmentsBlocBuilder({super.key});
+  final int? selectedIndex;
+  final Function(int departmentId)? onDepartmentSelected;
+  final Function(List<DepartmentsResponseModel> departments)? onDepartmentsLoaded;
+
+  const DepartmentsBlocBuilder({
+    super.key, 
+    this.selectedIndex,
+    this.onDepartmentsLoaded,
+    this.onDepartmentSelected,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,14 +31,16 @@ class DepartmentsBlocBuilder extends StatelessWidget {
       builder: (context, state) {
         return state.maybeWhen(
           departmentsLoading: () {
-            return SizedBox.shrink();
-            // return setupLoading();
+            return setupLoading();
           },
           
           departmentsSuccess: (departmentsResponseModel) {
+            onDepartmentsLoaded?.call(departmentsResponseModel);
             return Column(
               children: [       
-                DoctorsDepartmentListView(
+                DepartmentsListView(
+                  selectedIndex: selectedIndex,
+                  onDepartmentSelected: onDepartmentSelected,
                   departmentsDataList: departmentsResponseModel,
                   hospitalsDataList: context.read<HomeCubit>().hospitalsDataList,
                 ),
@@ -47,11 +61,14 @@ class DepartmentsBlocBuilder extends StatelessWidget {
   }
   
   Widget setupLoading() {
-    return const SizedBox(
-      height: 50,
-      child: CircularProgressIndicator(
-        color: ColorsManager.mainBlue,
-      ),
+    return Expanded(
+      child: Column(
+        children: [
+          DepartmentsShimmerLoading(),
+          verticalSpace(10),
+          DoctorsShimmerLoading(),
+        ]
+      )      
     );
   }
 }

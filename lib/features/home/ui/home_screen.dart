@@ -1,3 +1,6 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:healthstack/features/home/logic/cubit/home_cubit.dart';
+
 import 'widgets/home_top_bar.dart';
 import 'package:flutter/material.dart';
 import 'widgets/departments_and_see_all.dart';
@@ -6,10 +9,17 @@ import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:healthstack/features/home/ui/widgets/drawer/ui/drawer_screen.dart';
 import 'package:healthstack/features/home/ui/widgets/departments_list/departments_bloc_builder.dart';
-import 'package:healthstack/features/home/ui/widgets/doctors_list/doctors_department_list_bloc_builder.dart';
+import 'package:healthstack/features/home/ui/widgets/doctors_list/doctors_department_bloc_builder.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int? selectedDepartmentId; 
 
   @override
   Widget build(BuildContext context) {
@@ -35,10 +45,30 @@ class HomeScreen extends StatelessWidget {
                   const DepartmentsAndSeeAll(),
                   verticalSpace(16),   
                   
-                  DepartmentsBlocBuilder(),
-                  verticalSpace(15),
+                  DepartmentsBlocBuilder(
+                    selectedIndex: _getSelectedIndex(context),
+                    onDepartmentSelected: (departmentId) {
+                      setState(() {
+                      selectedDepartmentId = departmentId; 
+                    });
+                    },
+                    
+                    onDepartmentsLoaded: (departments) {
+                      // Set the first department as default
+                      if (selectedDepartmentId == null && departments.isNotEmpty) {
+                        WidgetsBinding.instance.addPostFrameCallback((_) {
+                          setState(() {
+                          selectedDepartmentId = departments.first.hospitalDepartmentId;
+                          });
+                        });
+                      }
+                    },
+                  ),
+                  verticalSpace(10),
                   
-                  DoctorsDepartmentListBlocBuilder(),
+                  DoctorsDepartmentBlocBuilder(
+                    selectedDepartmentId: selectedDepartmentId,
+                  ),
                 ],
               ),
             );
@@ -46,5 +76,13 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+  
+  // Helper method to calculate the selected index
+  int? _getSelectedIndex(BuildContext context) {
+    final departments = context.read<HomeCubit>().departmentsDataList;
+    if (departments == null || selectedDepartmentId == null) return null;
+
+    return departments.indexWhere((department) => department.hospitalDepartmentId == selectedDepartmentId);
   }
 }

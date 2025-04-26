@@ -60,7 +60,7 @@ class DoctorsListViewItem extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
         decoration: BoxDecoration(
           color: ColorsManager.lightBlue,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(16.r),
           boxShadow: [
             BoxShadow(
               color: ColorsManager.gray.withOpacity(0.2),
@@ -95,7 +95,7 @@ class DoctorsListViewItem extends StatelessWidget {
                   )
                   : placeholderImage,
             ),
-            horizontalSpace(10.w),
+            horizontalSpace(15),
             
             Expanded(
               child: Column(
@@ -107,7 +107,7 @@ class DoctorsListViewItem extends StatelessWidget {
                     maxLines: 1, 
                     overflow: TextOverflow.ellipsis, 
                   ),
-                  verticalSpace(5.h),
+                  verticalSpace(5),
                   
                   Text(
                     'Phone: ${getDisplayText(doctorsData?.phoneNumber)}',
@@ -115,7 +115,7 @@ class DoctorsListViewItem extends StatelessWidget {
                     maxLines: 1, 
                     overflow: TextOverflow.ellipsis, 
                   ),
-                  verticalSpace(5.h),
+                  verticalSpace(5),
                   
                   Text(
                     'Fees: ${getDisplayText(doctorsData?.reportFee.toString())} - ${getDisplayText(doctorsData?.consultationFee.toString())}',
@@ -123,7 +123,7 @@ class DoctorsListViewItem extends StatelessWidget {
                     maxLines: 1, 
                     overflow: TextOverflow.ellipsis, 
                   ),
-                  verticalSpace(5.h),
+                  verticalSpace(5),
                   
                   Text(
                     'Working Hours: ${getDisplayText(doctorsData?.visitingHour)}',
@@ -131,7 +131,7 @@ class DoctorsListViewItem extends StatelessWidget {
                     maxLines: 1, 
                     overflow: TextOverflow.ellipsis, 
                   ),
-                  verticalSpace(5.h),
+                  verticalSpace(5),
                   
                   Text(
                     'Hospital: ${getDisplayText(hospitalName)}',
@@ -139,7 +139,7 @@ class DoctorsListViewItem extends StatelessWidget {
                     maxLines: 1, 
                     overflow: TextOverflow.ellipsis, 
                   ),
-                  verticalSpace(5.h),
+                  verticalSpace(5),
                 ],
               ),
             ),
