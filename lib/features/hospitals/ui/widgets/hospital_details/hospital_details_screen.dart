@@ -8,6 +8,7 @@ import 'package:healthstack/core/widgets/app_text_button.dart';
 import 'package:healthstack/features/home/data/models/doctors_response_model.dart';
 import 'package:healthstack/features/home/data/models/hospitals_response_model.dart';
 import 'package:healthstack/features/home/data/models/specialization_response_model.dart';
+import 'package:healthstack/features/hospitals/ui/widgets/hospital_details/hospital_doctors_screen.dart';
 
 class HospitalDetailsScreen extends StatelessWidget {
   final HospitalsResponseModel? hospitalsData ;
@@ -45,7 +46,24 @@ class HospitalDetailsScreen extends StatelessWidget {
         padding: EdgeInsets.all(15.w),
         child: AppTextButton(
           onPressed: () {
-            
+            if (hospitalsData?.hospitalId != null && doctorsData != null) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => HospitalDoctorsScreen(
+                    doctorsData: doctorsData!, 
+                    hospitalId: hospitalsData!.hospitalId!, 
+                    hospitalsDataList: [hospitalsData!], 
+                    specializationsDataList: specializationsData,
+                  ),
+                ),
+              );
+            } else {
+              // Handle case where hospitalId or doctorsData is null
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Unable to load doctors for this hospital.')),
+              );
+            }
           },
           buttonText: "See Hospital Doctors",
           textStyle: TextStyles.font18WhiteMedium,
