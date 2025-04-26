@@ -1,5 +1,5 @@
 import 'package:healthstack/features/home/data/models/doctors_response_model.dart';
-import 'package:healthstack/features/home/data/models/specialization_response_model.dart';
+import 'package:healthstack/features/home/data/models/departments_response_model.dart';
 
 import 'home_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,20 +11,20 @@ import 'package:healthstack/features/home/data/models/hospitals_response_model.d
 class HomeCubit extends Cubit<HomeState> {
   List<HospitalsResponseModel>? hospitalsDataList;
   List<DoctorsResponseModel>? doctorsDataList;
-  List<SpecializationsResponseModel>? specializationsDataList;
+  List<DepartmentsResponseModel>? departmentsDataList;
   final HomeRepo _homeRepo;
   HomeCubit(this._homeRepo) : super(HomeState.initial());
   
-  void getSpecializations() async {
-    emit(const HomeState.specializationsLoading());
-    final response = await _homeRepo.getSpecializations();
+  void getDepartments() async {
+    emit(const HomeState.departmentsLoading());
+    final response = await _homeRepo.getDepartments();
     response.when(
-      success: (specializationsResponseModel) {
-        specializationsDataList = specializationsResponseModel;
-        emit(HomeState.specializationsSuccess(specializationsResponseModel));
+      success: (departmentsResponseModel) {
+        departmentsDataList = departmentsResponseModel;
+        emit(HomeState.departmentsSuccess(departmentsResponseModel));
       },
       failure: (error) {
-        emit(HomeState.specializationsError(error));
+        emit(HomeState.departmentsError(error));
       },
     );
   }

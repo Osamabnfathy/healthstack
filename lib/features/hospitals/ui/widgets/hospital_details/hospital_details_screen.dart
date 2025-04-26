@@ -7,19 +7,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:healthstack/core/widgets/app_text_button.dart';
 import 'package:healthstack/features/home/data/models/doctors_response_model.dart';
 import 'package:healthstack/features/home/data/models/hospitals_response_model.dart';
-import 'package:healthstack/features/home/data/models/specialization_response_model.dart';
+import 'package:healthstack/features/home/data/models/departments_response_model.dart';
 import 'package:healthstack/features/hospitals/ui/widgets/hospital_details/hospital_doctors_screen.dart';
 
 class HospitalDetailsScreen extends StatelessWidget {
   final HospitalsResponseModel? hospitalsData ;
   final List<DoctorsResponseModel>? doctorsData;
-  final List<SpecializationsResponseModel>? specializationsData;
+  final List<DepartmentsResponseModel>? departmentsData;
 
   const HospitalDetailsScreen({
     super.key, 
     required this.doctorsData,
     required this.hospitalsData,
-    required this.specializationsData,  
+    required this.departmentsData,  
   });
 
   @override
@@ -54,7 +54,7 @@ class HospitalDetailsScreen extends StatelessWidget {
                     doctorsData: doctorsData!, 
                     hospitalId: hospitalsData!.hospitalId!, 
                     hospitalsDataList: [hospitalsData!], 
-                    specializationsDataList: specializationsData,
+                    departmentsDataList: departmentsData,
                   ),
                 ),
               );

@@ -6,11 +6,11 @@ import 'package:healthstack/core/helpers/extensions.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:healthstack/features/home/data/models/doctors_response_model.dart';
 
-class DoctorsSpecialityListViewItem extends StatelessWidget {
+class DoctorsDepartmentListViewItem extends StatelessWidget {
   final DoctorsResponseModel? doctorsData;
   final int? itemIndex;
   
-  const DoctorsSpecialityListViewItem({
+  const DoctorsDepartmentListViewItem({
     super.key,
     this.doctorsData,
     this.itemIndex,

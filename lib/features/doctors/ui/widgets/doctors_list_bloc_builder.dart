@@ -4,7 +4,7 @@ import 'package:healthstack/features/home/logic/cubit/home_cubit.dart';
 import 'package:healthstack/features/home/logic/cubit/home_state.dart';
 import 'package:healthstack/features/home/data/models/doctors_response_model.dart';
 import 'package:healthstack/features/home/data/models/hospitals_response_model.dart';
-import 'package:healthstack/features/home/data/models/specialization_response_model.dart';
+import 'package:healthstack/features/home/data/models/departments_response_model.dart';
 import 'package:healthstack/features/doctors/ui/widgets/doctors_list_view.dart';
 
 class DoctorsListBlocBuilder extends StatelessWidget {
@@ -19,7 +19,7 @@ class DoctorsListBlocBuilder extends StatelessWidget {
         final homeCubit = context.read<HomeCubit>();
         final List<DoctorsResponseModel> doctorsDataList = homeCubit.doctorsDataList ?? [];
         final List<HospitalsResponseModel> hospitalsDataList = homeCubit.hospitalsDataList ?? [];
-        final List<SpecializationsResponseModel> specializationsDataList = homeCubit.specializationsDataList ?? [];
+        final List<DepartmentsResponseModel> departmentsDataList = homeCubit.departmentsDataList ?? [];
 
         if (doctorsDataList.isEmpty && state is! DoctorsError) {
           print("Showing Loading (Doctors empty, not error, fetch incomplete)");
@@ -37,7 +37,7 @@ class DoctorsListBlocBuilder extends StatelessWidget {
             searchQuery: searchQuery,
             doctorsDataList: doctorsDataList,
             hospitalsDataList: hospitalsDataList,
-            specializationsDataList: specializationsDataList,
+            departmentsDataList: departmentsDataList,
           );
         }
 

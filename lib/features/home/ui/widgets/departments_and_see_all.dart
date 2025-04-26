@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:healthstack/core/theming/styles.dart';
 
 
-class DoctorsSpecialityAndSeeAll extends StatelessWidget {
-  const DoctorsSpecialityAndSeeAll({super.key});
+class DepartmentsAndSeeAll extends StatelessWidget {
+  const DepartmentsAndSeeAll({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Text(
-          'Doctors Speciality',
+          'Departments',
           style: TextStyles.font18DarkBlueSemiBold,
         ),
         const Spacer(),

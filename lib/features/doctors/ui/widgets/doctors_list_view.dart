@@ -3,20 +3,20 @@ import 'package:healthstack/core/theming/styles.dart';
 import 'package:healthstack/features/home/data/models/doctors_response_model.dart';
 import 'package:healthstack/features/home/data/models/hospitals_response_model.dart';
 import 'package:healthstack/features/doctors/ui/widgets/doctors_list_view_item.dart';
-import 'package:healthstack/features/home/data/models/specialization_response_model.dart';
+import 'package:healthstack/features/home/data/models/departments_response_model.dart';
 
 class DoctorsListView extends StatelessWidget {
   final String searchQuery;
   final List<DoctorsResponseModel>? doctorsDataList;
   final List<HospitalsResponseModel>? hospitalsDataList;
-  final List<SpecializationsResponseModel>? specializationsDataList;
+  final List<DepartmentsResponseModel>? departmentsDataList;
 
   const DoctorsListView({
     super.key, 
     required this.searchQuery,
     required this.doctorsDataList,
     required this.hospitalsDataList,
-    required this.specializationsDataList,
+    required this.departmentsDataList,
   });
   
    @override
@@ -34,7 +34,7 @@ class DoctorsListView extends StatelessWidget {
               return DoctorsListViewItem(
                 doctorsData: filteredDoctors[index],
                 hospitalsDataList: hospitalsDataList,
-                specializationsDataList: specializationsDataList,
+                departmentsDataList: departmentsDataList,
               );
             },
           );

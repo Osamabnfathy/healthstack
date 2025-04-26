@@ -18,7 +18,7 @@ class ApiConstants {
   static const String report = "report/";
   static const String payment = "payment/";
   static const String allPrescriptionData = "all_prescription_data/";
-  static const String specializations = "hospital_department/";
+  static const String departments = "hospital_department/";
 }
 
 class ApiErrors {

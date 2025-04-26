@@ -7,21 +7,21 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:healthstack/features/doctors/ui/widgets/doctor_details/doctor_details_screen.dart';
 import 'package:healthstack/features/home/data/models/doctors_response_model.dart';
 import 'package:healthstack/features/home/data/models/hospitals_response_model.dart';
-import 'package:healthstack/features/home/data/models/specialization_response_model.dart';
+import 'package:healthstack/features/home/data/models/departments_response_model.dart';
 
 
 class DoctorsListViewItem extends StatelessWidget {
   final int? itemIndex;
   final DoctorsResponseModel? doctorsData;
   final List<HospitalsResponseModel>? hospitalsDataList;
-  final List<SpecializationsResponseModel>? specializationsDataList;
+  final List<DepartmentsResponseModel>? departmentsDataList;
 
   const DoctorsListViewItem({
     super.key,
     this.itemIndex,
     this.doctorsData,
     this.hospitalsDataList,
-    this.specializationsDataList,
+    this.departmentsDataList,
   });
 
   @override
@@ -49,7 +49,7 @@ class DoctorsListViewItem extends StatelessWidget {
             builder: (context) => DoctorDetailsScreen(
               doctorsData: doctorsData,
               hospitalsData: hospitalsDataList,
-              specializationsData: specializationsDataList,
+              departmentsData: departmentsDataList,
             ),
           ),
         );

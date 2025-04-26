@@ -3,33 +3,38 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/features/home/logic/cubit/home_cubit.dart';
 import 'package:healthstack/features/home/logic/cubit/home_state.dart';
-import 'package:healthstack/features/home/ui/widgets/doctors_list/doctors_speciality_list_view.dart';
+import 'package:healthstack/features/home/ui/widgets/departments_list/doctors_department_list_view.dart';
 
-class DoctorsSpecialityListBlocBuilder extends StatelessWidget {
-  const DoctorsSpecialityListBlocBuilder({super.key});
+class DepartmentsBlocBuilder extends StatelessWidget {
+  const DepartmentsBlocBuilder({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
       buildWhen: (previous, current) => 
-        current is DoctorsLoading ||
-        current is DoctorsSuccess ||
-        current is DoctorsError,
-      
+        current is DepartmentsLoading ||
+        current is DepartmentsSuccess ||
+        current is DepartmentsError,
+        
       builder: (context, state) {
         return state.maybeWhen(
-          doctorsLoading: () {
+          departmentsLoading: () {
             return SizedBox.shrink();
             // return setupLoading();
           },
           
-          doctorsSuccess: (doctorsResponseModel) {
-            return Expanded(
-              child: DoctorsSpecialityListView(doctorsDataList: doctorsResponseModel,)
+          departmentsSuccess: (departmentsResponseModel) {
+            return Column(
+              children: [       
+                DoctorsDepartmentListView(
+                  departmentsDataList: departmentsResponseModel,
+                  hospitalsDataList: context.read<HomeCubit>().hospitalsDataList,
+                ),
+              ]
             );
           },
           
-          doctorsError: (errorHandler) {
+          departmentsError: (errorHandler) {
             return const SizedBox.shrink();
           },
           
@@ -43,7 +48,7 @@ class DoctorsSpecialityListBlocBuilder extends StatelessWidget {
   
   Widget setupLoading() {
     return const SizedBox(
-      height: 100,
+      height: 50,
       child: CircularProgressIndicator(
         color: ColorsManager.mainBlue,
       ),
