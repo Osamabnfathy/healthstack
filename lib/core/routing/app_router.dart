@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:healthstack/core/routing/routes.dart';
+import 'package:healthstack/features/book_appointment/ui/first_appointment_screen.dart';
 import 'package:healthstack/features/home/ui/home_screen.dart';
 import 'package:healthstack/core/di/dependency_injection.dart';
 import 'package:healthstack/features/login/ui/login_screen.dart';
@@ -119,6 +120,23 @@ class AppRouter {
           print("ERROR: Incorrect arguments passed to Hospitals Screen route.");
           return MaterialPageRoute(
             builder: (_) => const Scaffold(body: Center(child: Text("Error: Missing data for Hospitals screen.")))
+          );
+        }
+        
+        case Routes.firstAppointmentScreen:
+        if (arguments is HomeCubit) {
+          final homeCubitInstance = arguments;
+          return MaterialPageRoute(
+            builder: (context) => BlocProvider.value(
+              value: homeCubitInstance, 
+              child: const FirstAppointmentScreen(), 
+            ),
+          );
+        } 
+        else {
+          print("ERROR: Incorrect arguments passed to the Booking Screen route.");
+          return MaterialPageRoute(
+            builder: (_) => const Scaffold(body: Center(child: Text("Error: Missing data for Booking screen.")))
           );
         }
       

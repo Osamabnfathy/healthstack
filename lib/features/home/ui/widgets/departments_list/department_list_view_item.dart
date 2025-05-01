@@ -76,6 +76,7 @@ class DepartmentsListViewItem extends StatelessWidget {
                         height: 65.h, 
                         width: 65.w, 
                         fit: BoxFit.fill,
+                        errorBuilder: (context, error, stackTrace) => placeholderImage,
                     )
                     : placeholderImage,
                 ),

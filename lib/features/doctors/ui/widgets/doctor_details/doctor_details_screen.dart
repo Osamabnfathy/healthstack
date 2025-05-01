@@ -5,6 +5,7 @@ import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:healthstack/core/helpers/extensions.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:healthstack/core/widgets/app_text_button.dart';
+import 'package:healthstack/features/book_appointment/ui/first_appointment_screen.dart';
 import 'package:healthstack/features/home/data/models/doctors_response_model.dart';
 import 'package:healthstack/features/home/data/models/hospitals_response_model.dart';
 import 'package:healthstack/features/home/data/models/departments_response_model.dart';
@@ -66,9 +67,21 @@ class DoctorDetailsScreen extends StatelessWidget {
         padding: EdgeInsets.all(15.w),
         child: AppTextButton(
           onPressed: () {
-            
+            Navigator.push(
+              context, 
+              MaterialPageRoute(
+                builder: (context) => FirstAppointmentScreen(
+                  visitingHour: doctorsData?.visitingHour,
+                  doctorName: doctorsData?.name,
+                  doctorId: doctorsData?.doctorId,
+                  doctorImage: doctorsData?.featuredImage,
+                  hospitalName: hospitalName,
+                  departmentName: departmentName,
+                ),
+              ),
+            );
           },
-          buttonText: "Book Appointment",
+          buttonText: "Book an Appointment",
           textStyle: TextStyles.font18WhiteMedium,
           backgroundColor: ColorsManager.mainBlue,
           borderRadius: 12.0.r,
@@ -120,7 +133,7 @@ class DoctorDetailsScreen extends StatelessWidget {
                         verticalSpace(5.h),
                         
                         Text(
-                          'Hospital: $hospitalName',
+                          'Hospital: ${getDisplayText(hospitalName)}',
                           style: TextStyles.font16GrayMedium,
                         ),
                         verticalSpace(5.h),
