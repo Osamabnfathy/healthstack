@@ -65,6 +65,7 @@ dependencies:
   flutter_secure_storage: ^9.2.4
   # shimmer for loading animation
   shimmer: ^3.0.0
+  lottie: ^3.1.0
 
 
 dev_dependencies:

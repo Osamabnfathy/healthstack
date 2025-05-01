@@ -1,0 +1,84 @@
+import 'package:flutter/material.dart';
+import 'package:healthstack/core/routing/routes.dart';
+import 'package:healthstack/core/theming/colors.dart';
+import 'package:healthstack/core/theming/styles.dart';
+import 'package:healthstack/core/helpers/spacing.dart';
+import 'package:healthstack/core/helpers/extensions.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:healthstack/core/widgets/app_text_button.dart';
+import 'package:healthstack/features/book_appointment/ui/third_widgets/success_indicator.dart';
+import 'package:healthstack/features/book_appointment/ui/third_widgets/confirmation_doctor_info_card.dart';
+import 'package:healthstack/features/book_appointment/ui/third_widgets/confirmation_booking_info_card.dart';
+
+class SummaryScreen extends StatelessWidget {
+  final Map<String, dynamic>? bookingInfoData;
+  final Map<String, dynamic>? doctorInfoData;
+  
+  const SummaryScreen({
+    super.key,
+    this.bookingInfoData,
+    this.doctorInfoData,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final bookingInfo = {
+      'Date': bookingInfoData?['Date'] ?? "",
+      'Time': bookingInfoData?['Time'] ?? "",
+      'Appointment Type': bookingInfoData?['Appointment Type'] ?? "",
+    };  
+    
+    final doctorInfo = {
+      'Doctor Name': doctorInfoData?['Doctor Name'] ?? "",
+      'Hospital Name': doctorInfoData?['Hospital Name'] ?? "",
+      'Department Name': doctorInfoData?['Department Name'] ?? "",
+      'Doctor Image': doctorInfoData?['Doctor Image'] ?? "",
+    };
+
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios_new_outlined, color: ColorsManager.darkBlue),
+          onPressed: () => Navigator.pop(context),
+        ),
+      ),
+      
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.all(15.w),
+        child: AppTextButton(
+          onPressed: () {
+            context.pushNamedAndRemoveUntil(Routes.homeScreen, predicate: (Route<dynamic> route) { return false; });
+          },
+          buttonText: "Done",
+          textStyle: TextStyles.font18WhiteMedium,
+          backgroundColor: ColorsManager.mainBlue,
+          borderRadius: 12.0.r,
+          buttonHeight: 55.0.h,
+        ),
+      ),
+    
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.all(16.w),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                BookingSuccessWidget(),
+                verticalSpace(30),
+                
+                ConfirmationBookingInfoCard(bookingInfo: bookingInfo),
+                verticalSpace(20),
+                
+                ConfirmationDoctorInfoCard(doctorInfo: doctorInfo),
+                verticalSpace(20),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
