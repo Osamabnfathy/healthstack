@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:healthstack/core/routing/routes.dart';
 import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/core/theming/styles.dart';
 import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:healthstack/core/widgets/app_text_button.dart';
+import 'package:healthstack/features/home/data/models/doctors_response_model.dart';
+import 'package:healthstack/features/book_appointment/logic/book_appointment_cubit.dart';
+import 'package:healthstack/features/book_appointment/logic/book_appointment_state.dart';
 import 'package:healthstack/features/book_appointment/ui/seconds_widgets/doctor_info_card.dart';
 import 'package:healthstack/features/book_appointment/ui/seconds_widgets/bookink_info_card.dart';
 import 'package:healthstack/features/book_appointment/ui/seconds_widgets/message_text_field.dart';
-import 'package:healthstack/features/book_appointment/ui/third_booking_confirmation_screen.dart';
 import 'package:healthstack/features/book_appointment/ui/seconds_widgets/summary_step_numbers.dart';
 
 class SecondAppointmentScreen extends StatelessWidget {
-  final String? selectedDate;
+  final String selectedDate;
   final String? selectedTime;
   final String? selectedAppointmentType;
   final int? doctorId;
@@ -20,11 +24,10 @@ class SecondAppointmentScreen extends StatelessWidget {
   final String? doctorImage;
   final String? hospitalName;
   final String? departmentName;
-  
-  
+
   const SecondAppointmentScreen({
     super.key,
-    this.selectedDate,
+    required this.selectedDate,
     this.selectedTime,
     this.selectedAppointmentType,
     this.doctorId,
@@ -37,13 +40,13 @@ class SecondAppointmentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TextEditingController messageController = TextEditingController();
-    
+
     final bookingInfo = {
-      'Date': DateFormat('MMM d, y').format(DateTime.parse(selectedDate!)),
+      'Date': DateFormat('MMM d, y').format(DateTime.parse(selectedDate)),
       'Time': selectedTime,
       'Appointment Type': selectedAppointmentType,
     };
-    
+
     final doctorInfo = {
       'Doctor ID': doctorId,
       'Doctor Name': doctorName,
@@ -52,61 +55,139 @@ class SecondAppointmentScreen extends StatelessWidget {
       'Doctor Image': doctorImage,
     };
 
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_new_outlined, color: ColorsManager.darkBlue),
-          onPressed: () => Navigator.pop(context),
-        ),
-      ),
-      
-      bottomNavigationBar: Padding(
-        padding: EdgeInsets.all(15.w),
-        child: AppTextButton(
-          onPressed: () {
-            Navigator.push(
-              context, 
-              MaterialPageRoute(
-                builder: (context) => SummaryScreen(
-                  bookingInfoData: bookingInfo,
-                  doctorInfoData: doctorInfo,
-                ),
-              ),
-            );
-          },
-          buttonText: "Book Now",
-          textStyle: TextStyles.font18WhiteMedium,
-          backgroundColor: ColorsManager.mainBlue,
-          borderRadius: 12.0.r,
-          buttonHeight: 55.0.h,
-        ),
-      ),
-      
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.all(16.w),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SummaryStepsNumbers(currentStep: 2),
-                verticalSpace(30),
-                
-                BookingInfoCard(bookingInfo: bookingInfo),
-                verticalSpace(30),
-                
-                DoctorInfoCard(doctorInfo: doctorInfo),
-                verticalSpace(30),
-                
-                MessageTextField(messageController: messageController,),
-                verticalSpace(30),
-              ],
+    String _parseTimeFromString(String timeString) {
+      final sanitizedTimeString = timeString.trim().replaceAll(RegExp(r'\s+'), ' ');
+    
+      final timeParts = sanitizedTimeString.split(' ');
+      if (timeParts.length != 2) {
+        throw FormatException("Invalid time format: $timeString");
+      }
+    
+      final time = timeParts[0];
+      final amPm = timeParts[1].toUpperCase();
+    
+      final timeSplit = time.split(':');
+      if (timeSplit.length != 2) {
+        throw FormatException("Invalid time format: $timeString");
+      }
+    
+      final hour = int.parse(timeSplit[0]);
+      final minute = int.parse(timeSplit[1]);
+    
+      int adjustedHour = hour;
+      if (amPm == 'PM' && hour != 12) {
+        adjustedHour += 12;
+      } else if (amPm == 'AM' && hour == 12) {
+        adjustedHour = 0;
+      }
+    
+      return '${adjustedHour.toString().padLeft(2, '0')}:${minute.toString().padLeft(2, '0')}:00';
+    }
+
+    String _parseDate(String dateString) {
+      final dateParts = dateString.split(' ');
+      final date = dateParts[0];
+      return date;
+    }
+
+    return Builder(
+      builder: (innerContext) {
+        final bookApptCubit = innerContext.read<BookAppointmentCubit>();
+
+        bookApptCubit.updateBookingDetails(
+          date: _parseDate(selectedDate),
+          time: _parseTimeFromString(selectedTime!),
+          type: selectedAppointmentType,
+          doctor: DoctorsResponseModel(
+            doctorId: doctorId,
+          ),
+        );
+
+        messageController.addListener(() {
+          bookApptCubit.updateMessage(messageController.text);
+        });
+
+        return Scaffold(
+          backgroundColor: Colors.white,
+          appBar: AppBar(
+            backgroundColor: Colors.white,
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back_ios_new_outlined, color: ColorsManager.darkBlue),
+              onPressed: () => Navigator.pop(context),
             ),
           ),
-        ),
-      ),
+          
+          bottomNavigationBar: Padding(
+            padding: EdgeInsets.all(15.w),
+            child: AppTextButton(
+              onPressed: () {
+                bookApptCubit.updateMessage(messageController.text);
+                bookApptCubit.submitBooking();
+                print("time: ${_parseTimeFromString(selectedTime!)}");
+              },
+              buttonText: "Book Now",
+              textStyle: TextStyles.font18WhiteMedium,
+              backgroundColor: ColorsManager.mainBlue,
+              borderRadius: 12.0.r,
+              buttonHeight: 55.0.h,
+            ),
+          ),
+          
+          body: BlocListener<BookAppointmentCubit, BookAppointmentState>(
+            listener: (context, state) {
+              if (state is BookAppointmentLoading) {
+                showDialog(
+                  context: context,
+                  builder: (context) => const Center(child: CircularProgressIndicator()),
+                );
+              } 
+              
+              else if (state is BookAppointmentSuccess) {
+                Navigator.pop(context);
+                Navigator.pushReplacementNamed(
+                  context,
+                  Routes.summaryScreen,
+                  arguments: {
+                    'bookingInfo': bookingInfo,
+                    'doctorInfo': doctorInfo,
+                  },
+                );
+              } 
+              
+              else if (state is BookAppointmentError) {
+                Navigator.pop(context);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(state.error)),
+                );
+              }
+            },
+            
+            child: SafeArea(
+              child: Padding(
+                padding: EdgeInsets.all(16.w),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SummaryStepsNumbers(currentStep: 2),
+                      verticalSpace(30),
+                      
+                      BookingInfoCard(bookingInfo: bookingInfo),
+                      verticalSpace(30),
+                      
+                      DoctorInfoCard(doctorInfo: doctorInfo),
+                      verticalSpace(30),
+                      
+                      MessageTextField(messageController: messageController),
+                      verticalSpace(30),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }
