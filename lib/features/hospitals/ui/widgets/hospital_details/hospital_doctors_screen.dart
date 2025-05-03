@@ -51,7 +51,7 @@ class HospitalDoctorsScreen extends StatelessWidget {
           ? Center(
               child: Text(
                 'No doctors found for this hospital.',
-                style: TextStyles.font16GrayMedium,
+                style: TextStyles.font20DarkBlueSemiBold,
               ),
             )
           : ListView.builder(

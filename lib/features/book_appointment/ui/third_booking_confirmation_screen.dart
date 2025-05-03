@@ -21,7 +21,7 @@ class SummaryScreen extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {  
     final bookingInfo = {
       'Date': bookingInfoData?['Date'] ?? "",
       'Time': bookingInfoData?['Time'] ?? "",
@@ -37,14 +37,6 @@ class SummaryScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_new_outlined, color: ColorsManager.darkBlue),
-          onPressed: () => Navigator.pop(context),
-        ),
-      ),
-      
       bottomNavigationBar: Padding(
         padding: EdgeInsets.all(15.w),
         child: AppTextButton(

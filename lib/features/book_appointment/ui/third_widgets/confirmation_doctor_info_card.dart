@@ -6,7 +6,7 @@ import 'package:healthstack/core/theming/styles.dart';
 
 
 class ConfirmationDoctorInfoCard extends StatelessWidget {
-  final Map<String, dynamic> doctorInfo;
+  final Map<dynamic, dynamic> doctorInfo;
   
   const ConfirmationDoctorInfoCard({
     super.key, 
@@ -23,6 +23,7 @@ class ConfirmationDoctorInfoCard extends StatelessWidget {
           style: TextStyles.font16DarkBlueBold,
         ),
         verticalSpace(15),
+        
         Container(
           padding: EdgeInsets.all(16.w),
           decoration: BoxDecoration(
@@ -37,6 +38,7 @@ class ConfirmationDoctorInfoCard extends StatelessWidget {
               ),
             ],
           ),
+          
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -57,6 +59,7 @@ class ConfirmationDoctorInfoCard extends StatelessWidget {
                 ),
               ),
               horizontalSpace(12),
+              
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

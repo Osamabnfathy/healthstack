@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:healthstack/core/routing/routes.dart';
 import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/core/theming/styles.dart';
 import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:healthstack/core/widgets/app_text_button.dart';
-import 'package:healthstack/features/book_appointment/ui/second_appointment_screen.dart';
+import 'package:healthstack/features/book_appointment/logic/book_appointment_cubit.dart';
 import 'package:healthstack/features/book_appointment/ui/first_widgets/steps_numbers.dart';
 import 'package:healthstack/features/book_appointment/ui/first_widgets/time_selection.dart';
 import 'package:healthstack/features/book_appointment/ui/first_widgets/date_selection.dart';
@@ -206,22 +208,24 @@ class _FirstAppointmentScreenState extends State<FirstAppointmentScreen> {
                 final String selectedTime = availableTimes[selectedTimeIndex].format(context);
                 final String selectedappointmentType = appointmentTypes[selectedAppointmentType];
               
-                Navigator.push(
-                  context, 
-                  MaterialPageRoute(
-                    builder: (context) => SecondAppointmentScreen(
-                      selectedDate: selectedDate,
-                      selectedTime: selectedTime,
-                      selectedAppointmentType: selectedappointmentType,
-                      doctorId: widget.doctorId,
-                      doctorName: widget.doctorName,
-                      doctorImage: widget.doctorImage,
-                      hospitalName: widget.hospitalName,
-                      departmentName: widget.departmentName,
-                    ),
-                  ),
-                );
+                Navigator.pushNamed(
+                  context,
+                  Routes.secondAppointmentScreen,
+                  arguments: {
+                    'selectedDate': selectedDate,
+                    'selectedTime': selectedTime,
+                    'selectedAppointmentType': selectedappointmentType,
+                    'doctorId': widget.doctorId,
+                    'doctorName': widget.doctorName,
+                    'doctorImage': widget.doctorImage,
+                    'hospitalName': widget.hospitalName,
+                    'departmentName': widget.departmentName,
+                    'cubit': context.read<BookAppointmentCubit>(),
+                  },
+                );              
               },
+              
+              
               
               buttonText: "Continue",
               textStyle: TextStyles.font18WhiteMedium,

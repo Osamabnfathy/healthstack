@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:healthstack/core/routing/routes.dart';
 import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/core/theming/styles.dart';
 import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:healthstack/core/helpers/extensions.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:healthstack/core/widgets/app_text_button.dart';
-import 'package:healthstack/features/book_appointment/ui/first_appointment_screen.dart';
 import 'package:healthstack/features/home/data/models/doctors_response_model.dart';
 import 'package:healthstack/features/home/data/models/hospitals_response_model.dart';
 import 'package:healthstack/features/home/data/models/departments_response_model.dart';
@@ -67,18 +67,17 @@ class DoctorDetailsScreen extends StatelessWidget {
         padding: EdgeInsets.all(15.w),
         child: AppTextButton(
           onPressed: () {
-            Navigator.push(
+            Navigator.pushNamed(
               context, 
-              MaterialPageRoute(
-                builder: (context) => FirstAppointmentScreen(
-                  visitingHour: doctorsData?.visitingHour,
-                  doctorName: doctorsData?.name,
-                  doctorId: doctorsData?.doctorId,
-                  doctorImage: doctorsData?.featuredImage,
-                  hospitalName: hospitalName,
-                  departmentName: departmentName,
-                ),
-              ),
+              Routes.firstAppointmentScreen,
+              arguments: {
+                'visitingHour': doctorsData?.visitingHour,
+                'doctorId': doctorsData?.doctorId,
+                'doctorName': doctorsData?.name,
+                'doctorImage': doctorsData?.featuredImage,
+                'hospitalName': hospitalName, 
+                'departmentName': departmentName, 
+              }              
             );
           },
           buttonText: "Book an Appointment",
