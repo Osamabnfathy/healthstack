@@ -6,6 +6,13 @@ class SharedPrefHelper {
   // private constructor as I don't want to allow creating an instance of this class itself.
   SharedPrefHelper._();
 
+  /// Removes a value from FlutterSecureStorage with given [key].
+  static removeSecured(String key) async {
+    const flutterSecureStorage = FlutterSecureStorage();
+    debugPrint('FlutterSecureStorage : removeSecured with key : $key');
+    await flutterSecureStorage.delete(key: key);
+  }
+  
   /// Removes a value from SharedPreferences with given [key].
   static removeData(String key) async {
     debugPrint('SharedPrefHelper : data with key : $key has been removed');

@@ -148,7 +148,7 @@ class DoctorDetailsScreen extends StatelessWidget {
                 verticalSpace(10.h),
                     
                 Text(
-                  'Description:',
+                  'About Me:',
                   style: TextStyles.font18DarkBlueBold,
                 ),
                 verticalSpace(5.h),

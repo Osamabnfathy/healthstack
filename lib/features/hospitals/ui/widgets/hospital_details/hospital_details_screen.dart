@@ -123,7 +123,7 @@ class HospitalDetailsScreen extends StatelessWidget {
             verticalSpace(10.h),
             
             Text(
-              'Description:',
+              'About Our Hospital:',
               style: TextStyles.font18DarkBlueBold,
             ),
             verticalSpace(5.h),
