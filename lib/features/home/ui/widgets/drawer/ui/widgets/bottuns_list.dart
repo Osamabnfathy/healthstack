@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:healthstack/core/routing/routes.dart';
 import 'package:healthstack/core/theming/colors.dart';
+import 'package:healthstack/core/helpers/constants.dart';
 import 'package:healthstack/core/helpers/extensions.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:healthstack/core/helpers/shared_pref_helper.dart';
 import 'package:healthstack/features/home/logic/cubit/home_cubit.dart';
 
 class ButtonsList extends StatelessWidget {
@@ -57,9 +59,15 @@ class ButtonsList extends StatelessWidget {
       
       MenuItemData(
         'Sign Out',
-        Colors.red.shade50,
-        Colors.red,
-        () => context.pushNamedAndRemoveUntil(Routes.loginScreen, predicate: (Route<dynamic> route) { return false; }),
+      Colors.red.shade50,
+      Colors.red,
+      () async {
+        await SharedPrefHelper.removeSecured(SharedPrefKeys.userToken);
+        context.pushNamedAndRemoveUntil(
+          Routes.loginScreen,
+          predicate: (Route<dynamic> route) => false,
+        );
+      },
         icon: Icons.exit_to_app,
       ),
     ];
