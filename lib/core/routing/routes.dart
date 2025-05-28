@@ -27,4 +27,7 @@ class Routes {
   static const String firstAppointmentScreen = '/firstAppointmentScreen';
   static const String secondAppointmentScreen = '/seconAppointmentScreen';
   static const String summaryScreen = '/thirdAppointmentScreen';
+  
+  // change password screen
+  static const String changePasswordScreen = '/changePasswordScreen';
 }

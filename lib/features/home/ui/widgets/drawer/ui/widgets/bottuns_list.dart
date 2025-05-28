@@ -18,6 +18,30 @@ class ButtonsList extends StatelessWidget {
     
     final menuItems = [
       MenuItemData(
+        'Medical Records',
+        Colors.green.shade50,
+        Colors.green,
+        () {/* navigation  */},
+        icon: Icons.medical_information_outlined,
+      ),
+      
+      MenuItemData(
+        'Hospitals List',
+        Colors.pink.shade50,
+        Colors.pink,
+        () => context.pushNamed(Routes.hospitalsScreen, arguments: homeCubitInstance),
+        icon: Icons.local_hospital,
+      ),
+      
+      MenuItemData(
+        'Change Password',
+        Colors.purple.shade50,
+        Colors.purple,
+        () => context.pushNamed(Routes.changePasswordScreen),
+        icon: Icons.lock_outline,
+      ),
+      
+      MenuItemData(
         'Personal Information',
         Colors.blue.shade50,
         Colors.blue,
@@ -26,19 +50,18 @@ class ButtonsList extends StatelessWidget {
       ),
       
       MenuItemData(
-        'My Test & Diagnostic',
-        Colors.green.shade50,
-        Colors.green,
-        () {/* navigation  */},
-        icon: Icons.science_outlined,
-      ),
-      
-      MenuItemData(
-        'Hospitals',
-        Colors.pink.shade50,
-        Colors.pink,
-        () => context.pushNamed(Routes.hospitalsScreen, arguments: homeCubitInstance),
-        icon: Icons.local_hospital,
+        'Sign Out',
+      Colors.red.shade50,
+      Colors.red,
+      () async {
+        await SharedPrefHelper.removeSecured(SharedPrefKeys.userToken);
+        // ignore: use_build_context_synchronously
+        context.pushNamedAndRemoveUntil(
+          Routes.loginScreen, (route) => false,
+          predicate: (Route<dynamic> route) => false,
+        );
+      },
+        icon: Icons.exit_to_app,
       ),
       
       MenuItemData(
@@ -46,29 +69,7 @@ class ButtonsList extends StatelessWidget {
         Colors.amber.shade50,
         Colors.amber.shade700,
         () {/*navigation */},
-        icon: Icons.info_outline,
-      ),
-      
-      MenuItemData(
-        'Contact Us',
-        Colors.purple.shade50,
-        Colors.purple,
-        () {/* navigation*/},
-        icon: Icons.phone_outlined,
-      ),
-      
-      MenuItemData(
-        'Sign Out',
-      Colors.red.shade50,
-      Colors.red,
-      () async {
-        await SharedPrefHelper.removeSecured(SharedPrefKeys.userToken);
-        context.pushNamedAndRemoveUntil(
-          Routes.loginScreen,
-          predicate: (Route<dynamic> route) => false,
-        );
-      },
-        icon: Icons.exit_to_app,
+        icon: Icons.call,
       ),
     ];
 

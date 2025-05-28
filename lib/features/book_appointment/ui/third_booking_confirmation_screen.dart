@@ -41,7 +41,9 @@ class SummaryScreen extends StatelessWidget {
         padding: EdgeInsets.all(15.w),
         child: AppTextButton(
           onPressed: () {
-            context.pushNamedAndRemoveUntil(Routes.homeScreen, predicate: (Route<dynamic> route) { return false; });
+            context.pushNamedAndRemoveUntil(
+              Routes.homeScreen, (route) => false,
+              predicate: (Route<dynamic> route) { return false; });
           },
           buttonText: "Done",
           textStyle: TextStyles.font18WhiteMedium,

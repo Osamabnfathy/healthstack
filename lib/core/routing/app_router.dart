@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:healthstack/core/routing/routes.dart';
+import 'package:healthstack/features/change_password/logic/change_password_cubit.dart';
+import 'package:healthstack/features/change_password/ui/change_password_screen.dart';
 import 'package:healthstack/features/home/ui/home_screen.dart';
 import 'package:healthstack/core/di/dependency_injection.dart';
 import 'package:healthstack/features/login/ui/login_screen.dart';
@@ -153,6 +155,15 @@ class AppRouter {
             bookingInfoData: args['bookingInfo'],
             doctorInfoData: args['doctorInfo'],
           )
+        );  
+        
+        
+      case Routes.changePasswordScreen:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<ChangePasswordCubit>(),
+            child: const ChangePasswordScreen(),
+          ),
         );  
         
         
