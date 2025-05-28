@@ -47,7 +47,7 @@ class MyAppointmentAndMedicalRecords extends StatelessWidget {
           children: [
             _buildQuickActionItem(
               context,
-              'My Appointment',
+              'Appointments',
               () => context.pushNamed(Routes.appointmentScreen),
             ),
             
@@ -61,7 +61,7 @@ class MyAppointmentAndMedicalRecords extends StatelessWidget {
             
             _buildQuickActionItem(
               context,
-              'Medical records',
+              'Prescriptions',
               () => context.pushNamed(Routes.medicalRecordScreen),
             ),
           ],

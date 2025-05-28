@@ -3,7 +3,7 @@ import '../../../../core/helpers/spacing.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:healthstack/core/helpers/app_regex.dart';
 import '../../../../core/widgets/app_text_form_field.dart';
-import '../../../login/ui/widgets/password_validations.dart';
+import '../../../../core/widgets/password_validations.dart';
 import 'package:healthstack/features/sign_up/logic/sign_up_cubit.dart';
 
 

@@ -9,7 +9,9 @@ import 'package:healthstack/features/home/logic/cubit/home_cubit.dart';
 import 'package:healthstack/features/sign_up/logic/sign_up_cubit.dart';
 import 'package:healthstack/features/sign_up/data/repos/sign_up_repo.dart';
 import 'package:healthstack/features/home/data/apis/home_api_services.dart';
+import 'package:healthstack/features/change_password/logic/change_password_cubit.dart';
 import 'package:healthstack/features/book_appointment/logic/book_appointment_cubit.dart';
+import 'package:healthstack/features/change_password/data/repo/change_password_repo.dart';
 import 'package:healthstack/features/forget_password/data/repos/forget_password_repo.dart';
 import 'package:healthstack/features/forget_password/logic/cubit/forget_password_cubit.dart';
 import 'package:healthstack/features/book_appointment/data/repos/book_appointment_repo.dart';
@@ -41,4 +43,8 @@ Future<void> setupGetIt() async {
   
   getIt.registerLazySingleton<BookAppointmentRepo>(() => BookAppointmentRepo(getIt()));
   getIt.registerFactory<BookAppointmentCubit>(() => BookAppointmentCubit(getIt()));
+  
+  // Change Password
+  getIt.registerLazySingleton<ChangePasswordRepo>(() => ChangePasswordRepo(getIt()));
+  getIt.registerFactory<ChangePasswordCubit>(() => ChangePasswordCubit(getIt()));
 }
