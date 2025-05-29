@@ -4,6 +4,7 @@ import 'package:healthstack/features/home/data/repos/home_repo.dart';
 import 'package:healthstack/features/home/data/models/doctors_response_model.dart';
 import 'package:healthstack/features/home/data/models/hospitals_response_model.dart';
 import 'package:healthstack/features/home/data/models/departments_response_model.dart';
+import 'package:healthstack/features/home/data/models/patient_profile_response_model.dart';
 
 
 class HomeCubit extends Cubit<HomeState> {
@@ -12,6 +13,7 @@ class HomeCubit extends Cubit<HomeState> {
   List<DoctorsResponseModel>? doctorsDataList;
   List<HospitalsResponseModel>? hospitalsDataList;
   List<DepartmentsResponseModel>? departmentsDataList;
+  PatientProfileResponseModel? patientProfileData;
   HomeCubit(this._homeRepo) : super(HomeState.initial());
   
   void getDepartmentId(int departmentId) {
@@ -57,6 +59,20 @@ class HomeCubit extends Cubit<HomeState> {
       },
       failure: (error) {
         emit(HomeState.hospitalsError(error));
+      },
+    );
+  }
+  
+  void getPatientProfile() async {
+    emit(const HomeState.patientProfileLoading());
+    final response = await _homeRepo.getPatientProfile();
+    response.when(
+      success: (patientProfileResponseModel) {
+        patientProfileData = patientProfileResponseModel;
+        emit(HomeState.patientProfileSuccess(patientProfileResponseModel));
+      },
+      failure: (error) {
+        emit(HomeState.patientProfileError(error));
       },
     );
   }

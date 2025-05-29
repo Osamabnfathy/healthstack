@@ -3,6 +3,7 @@ import 'package:healthstack/core/networking/api_error_handler.dart';
 import 'package:healthstack/features/home/data/models/doctors_response_model.dart';
 import 'package:healthstack/features/home/data/models/hospitals_response_model.dart';
 import 'package:healthstack/features/home/data/models/departments_response_model.dart';
+import 'package:healthstack/features/home/data/models/patient_profile_response_model.dart';
 
 part 'home_state.freezed.dart';
 
@@ -23,4 +24,8 @@ class HomeState with _$HomeState {
   const factory HomeState.hospitalsError(ErrorHandler error) = HospitalsError;
 
   const factory HomeState.departmentSelected(int departmentId) = DepartmentSelected;
+  
+  const factory HomeState.patientProfileLoading() = PatientProfileLoading;
+  const factory HomeState.patientProfileSuccess(PatientProfileResponseModel patientProfileResponseModel) = PatientProfileSuccess;
+  const factory HomeState.patientProfileError(ErrorHandler error) = PatientProfileError;
 }

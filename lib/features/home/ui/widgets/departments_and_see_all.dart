@@ -13,15 +13,6 @@ class DepartmentsAndSeeAll extends StatelessWidget {
           'Departments',
           style: TextStyles.font18DarkBlueSemiBold,
         ),
-        const Spacer(),
-        
-        // InkWell(
-        //   onTap: () {},
-        //   child: Text(
-        //     'See All',
-        //     style: TextStyles.font12BlueRegular,
-        //   ),
-        // )
       ],
     );
   }

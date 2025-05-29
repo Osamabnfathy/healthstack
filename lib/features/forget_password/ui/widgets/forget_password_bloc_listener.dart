@@ -17,19 +17,7 @@ class ForgetPasswordBlocListener extends StatelessWidget {
           current is Loading || current is Success || current is Error,
       listener: (context, state) {
         state.whenOrNull(
-          loading: () {
-            // // Show a loading indicator (optional, could rely on button indicator)
-            // // Consider if a full-screen dialog is desired for password reset
-            // showDialog(
-            //   context: context,
-            //   barrierDismissible: false, // Prevent dismissing during load
-            //   builder: (context) => const Center(
-            //     child: CircularProgressIndicator(
-            //       color: ColorsManager.mainBlue,
-            //     ),
-            //   ),
-            // );
-          },
+          loading: () {},
           success: (response) {
             // Dismiss loading indicator if shown
             context.pop();

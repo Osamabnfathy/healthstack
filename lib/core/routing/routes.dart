@@ -3,26 +3,40 @@
 class Routes {
   // screen of closing the app
   static const String back = '/';
+  
   // screen appears first when app starts
   static const String onBoardingScreen = '/onBoardingScreen';
+  
   // screen of home
   static const String homeScreen = '/homeScreen';
+  
   // screen of login
   static const String loginScreen = '/logintScreen';
+  
   // screen of sign up
   static const String signUpScreen = '/signUpScreen';
+  
   // screen of forgot password
   static const String forgetPasswordScreen = '/forgetPasswordScreen';
+  
   // screen of appointment
   static const String appointmentScreen = '/appointmentScreen';
+  
+  // screen of prescriptions
+  static const String prescriptionsScreen = '/prescriptionsScreen';
+  
   // screen of medical records
   static const String medicalRecordScreen = '/medicalRecordScreen';
+  
   // screen of profile
   static const String profileScreen = '/profileScreen';
+  
   // screen of doctors
   static const String doctorsScreen = '/doctorsScreen';
+  
   // screen of hospitals
   static const String hospitalsScreen = '/hospitalsScreen';
+  
   // screen of booking appointment
   static const String firstAppointmentScreen = '/firstAppointmentScreen';
   static const String secondAppointmentScreen = '/seconAppointmentScreen';
@@ -30,4 +44,5 @@ class Routes {
   
   // change password screen
   static const String changePasswordScreen = '/changePasswordScreen';
+
 }

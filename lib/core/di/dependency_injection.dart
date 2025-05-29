@@ -41,6 +41,7 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<HomeRepo>(() => HomeRepo(getIt<HomeApiServices>()));
   getIt.registerFactory<HomeCubit>(() => HomeCubit(getIt<HomeRepo>()));
   
+  // Book Appointment
   getIt.registerLazySingleton<BookAppointmentRepo>(() => BookAppointmentRepo(getIt()));
   getIt.registerFactory<BookAppointmentCubit>(() => BookAppointmentCubit(getIt()));
   
