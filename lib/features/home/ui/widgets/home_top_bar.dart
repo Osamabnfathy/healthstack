@@ -6,10 +6,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeTopBar extends StatelessWidget {
   final VoidCallback onMenuPressed;
+  final String? patientName;
 
   const HomeTopBar({
     super.key,
     required this.onMenuPressed,
+    this.patientName,
   });
 
   @override
@@ -20,7 +22,7 @@ class HomeTopBar extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Hi,Osama ',
+              'Hi, $patientName',
               style: TextStyles.font18DarkBlueBold,
             ),
             

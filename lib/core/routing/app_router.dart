@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:healthstack/core/routing/routes.dart';
-import 'package:healthstack/features/change_password/logic/change_password_cubit.dart';
-import 'package:healthstack/features/change_password/ui/change_password_screen.dart';
 import 'package:healthstack/features/home/ui/home_screen.dart';
 import 'package:healthstack/core/di/dependency_injection.dart';
 import 'package:healthstack/features/login/ui/login_screen.dart';
@@ -15,9 +13,11 @@ import 'package:healthstack/features/home/logic/cubit/home_cubit.dart';
 import 'package:healthstack/features/onboarding/onboarding_screen.dart';
 import 'package:healthstack/features/login/logic/cubit/login_cubit.dart';
 import 'package:healthstack/features/hospitals/ui/hospitals_screen.dart';
-import 'package:healthstack/features/appointment/ui/apointment_screen.dart';
+import 'package:healthstack/features/my_appointment/ui/my_appointment.dart';
 import 'package:healthstack/features/medical_record/ui/medical_record_screen.dart';
+import 'package:healthstack/features/change_password/ui/change_password_screen.dart';
 import 'package:healthstack/features/forget_password/ui/forget_password_screen.dart';
+import 'package:healthstack/features/change_password/logic/change_password_cubit.dart';
 import 'package:healthstack/features/book_appointment/ui/first_appointment_screen.dart';
 import 'package:healthstack/features/book_appointment/ui/second_appointment_screen.dart';
 import 'package:healthstack/features/book_appointment/logic/book_appointment_cubit.dart';
@@ -34,7 +34,7 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => WillPopScope(
             onWillPop: () async {
-              SystemNavigator.pop(); // Exit the app when back is pressed on OnBoarding
+              SystemNavigator.pop(); 
               return false;
             },
             child: const OnBoardingScreen(),
@@ -69,7 +69,7 @@ class AppRouter {
       case Routes.homeScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => HomeCubit(getIt())..getDoctorsList()..getHospitalList()..getDepartments(),
+            create: (context) => HomeCubit(getIt())..getPatientProfile()..getDoctorsList()..getHospitalList()..getDepartments(),
             child: const HomeScreen(),
           ),
         );
@@ -169,9 +169,15 @@ class AppRouter {
         
       case Routes.appointmentScreen:
         return MaterialPageRoute(
-          builder: (_) => const AppointmentScreen(),
+          builder: (_) => const MyAppointmentScreen(),
         );
         
+      
+      case Routes.prescriptionsScreen:
+        return MaterialPageRoute(
+          builder: (_) => const MyAppointmentScreen(), // !! edit it don't forget
+        );
+      
         
       case Routes.medicalRecordScreen:
         return MaterialPageRoute(

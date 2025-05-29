@@ -1,9 +1,10 @@
-import 'package:healthstack/core/networking/api_error_handler.dart';
 import 'package:healthstack/core/networking/api_result.dart';
+import 'package:healthstack/core/networking/api_error_handler.dart';
 import 'package:healthstack/features/home/data/apis/home_api_services.dart';
 import 'package:healthstack/features/home/data/models/doctors_response_model.dart';
 import 'package:healthstack/features/home/data/models/hospitals_response_model.dart';
 import 'package:healthstack/features/home/data/models/departments_response_model.dart';
+import 'package:healthstack/features/home/data/models/patient_profile_response_model.dart';
 
 
 class HomeRepo {
@@ -35,6 +36,16 @@ class HomeRepo {
   Future<ApiResult<List<HospitalsResponseModel>>> getHospitals() async {
     try {
       final response = await _homeApiServices.getHospitals();
+      return ApiResult.success(response);
+    } 
+    catch (error) {
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
+  
+  Future<ApiResult<PatientProfileResponseModel>> getPatientProfile() async {
+    try {
+      final response = await _homeApiServices.getPatientProfile();
       return ApiResult.success(response);
     } 
     catch (error) {

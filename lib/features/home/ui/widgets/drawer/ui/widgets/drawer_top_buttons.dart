@@ -62,7 +62,7 @@ class MyAppointmentAndMedicalRecords extends StatelessWidget {
             _buildQuickActionItem(
               context,
               'Prescriptions',
-              () => context.pushNamed(Routes.medicalRecordScreen),
+              () => context.pushNamed(Routes.prescriptionsScreen),
             ),
           ],
         ),

@@ -24,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      endDrawer: const EndDrawer(), // Use your custom drawer
+      endDrawer: const EndDrawer(), 
       backgroundColor: Colors.white,
       
       body: SafeArea(
@@ -37,7 +37,10 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  HomeTopBar(onMenuPressed: () => Scaffold.of(context).openEndDrawer(),),
+                  HomeTopBar(
+                    onMenuPressed: () => Scaffold.of(context).openEndDrawer(),
+                    patientName: context.watch<HomeCubit>().patientProfileData?.name ?? 'Patient',
+                  ),
                   
                   const DoctorsBlueContainer(),
                   verticalSpace(24),

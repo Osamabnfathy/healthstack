@@ -34,6 +34,11 @@ mixin _$HomeState {
         hospitalsSuccess,
     required TResult Function(ErrorHandler error) hospitalsError,
     required TResult Function(int departmentId) departmentSelected,
+    required TResult Function() patientProfileLoading,
+    required TResult Function(
+            PatientProfileResponseModel patientProfileResponseModel)
+        patientProfileSuccess,
+    required TResult Function(ErrorHandler error) patientProfileError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -52,6 +57,10 @@ mixin _$HomeState {
         hospitalsSuccess,
     TResult? Function(ErrorHandler error)? hospitalsError,
     TResult? Function(int departmentId)? departmentSelected,
+    TResult? Function()? patientProfileLoading,
+    TResult? Function(PatientProfileResponseModel patientProfileResponseModel)?
+        patientProfileSuccess,
+    TResult? Function(ErrorHandler error)? patientProfileError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -70,6 +79,10 @@ mixin _$HomeState {
         hospitalsSuccess,
     TResult Function(ErrorHandler error)? hospitalsError,
     TResult Function(int departmentId)? departmentSelected,
+    TResult Function()? patientProfileLoading,
+    TResult Function(PatientProfileResponseModel patientProfileResponseModel)?
+        patientProfileSuccess,
+    TResult Function(ErrorHandler error)? patientProfileError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -86,6 +99,11 @@ mixin _$HomeState {
     required TResult Function(HospitalsSuccess value) hospitalsSuccess,
     required TResult Function(HospitalsError value) hospitalsError,
     required TResult Function(DepartmentSelected value) departmentSelected,
+    required TResult Function(PatientProfileLoading value)
+        patientProfileLoading,
+    required TResult Function(PatientProfileSuccess value)
+        patientProfileSuccess,
+    required TResult Function(PatientProfileError value) patientProfileError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -101,6 +119,9 @@ mixin _$HomeState {
     TResult? Function(HospitalsSuccess value)? hospitalsSuccess,
     TResult? Function(HospitalsError value)? hospitalsError,
     TResult? Function(DepartmentSelected value)? departmentSelected,
+    TResult? Function(PatientProfileLoading value)? patientProfileLoading,
+    TResult? Function(PatientProfileSuccess value)? patientProfileSuccess,
+    TResult? Function(PatientProfileError value)? patientProfileError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -116,6 +137,9 @@ mixin _$HomeState {
     TResult Function(HospitalsSuccess value)? hospitalsSuccess,
     TResult Function(HospitalsError value)? hospitalsError,
     TResult Function(DepartmentSelected value)? departmentSelected,
+    TResult Function(PatientProfileLoading value)? patientProfileLoading,
+    TResult Function(PatientProfileSuccess value)? patientProfileSuccess,
+    TResult Function(PatientProfileError value)? patientProfileError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -198,6 +222,11 @@ class _$InitialImpl implements _Initial {
         hospitalsSuccess,
     required TResult Function(ErrorHandler error) hospitalsError,
     required TResult Function(int departmentId) departmentSelected,
+    required TResult Function() patientProfileLoading,
+    required TResult Function(
+            PatientProfileResponseModel patientProfileResponseModel)
+        patientProfileSuccess,
+    required TResult Function(ErrorHandler error) patientProfileError,
   }) {
     return initial();
   }
@@ -219,6 +248,10 @@ class _$InitialImpl implements _Initial {
         hospitalsSuccess,
     TResult? Function(ErrorHandler error)? hospitalsError,
     TResult? Function(int departmentId)? departmentSelected,
+    TResult? Function()? patientProfileLoading,
+    TResult? Function(PatientProfileResponseModel patientProfileResponseModel)?
+        patientProfileSuccess,
+    TResult? Function(ErrorHandler error)? patientProfileError,
   }) {
     return initial?.call();
   }
@@ -240,6 +273,10 @@ class _$InitialImpl implements _Initial {
         hospitalsSuccess,
     TResult Function(ErrorHandler error)? hospitalsError,
     TResult Function(int departmentId)? departmentSelected,
+    TResult Function()? patientProfileLoading,
+    TResult Function(PatientProfileResponseModel patientProfileResponseModel)?
+        patientProfileSuccess,
+    TResult Function(ErrorHandler error)? patientProfileError,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -262,6 +299,11 @@ class _$InitialImpl implements _Initial {
     required TResult Function(HospitalsSuccess value) hospitalsSuccess,
     required TResult Function(HospitalsError value) hospitalsError,
     required TResult Function(DepartmentSelected value) departmentSelected,
+    required TResult Function(PatientProfileLoading value)
+        patientProfileLoading,
+    required TResult Function(PatientProfileSuccess value)
+        patientProfileSuccess,
+    required TResult Function(PatientProfileError value) patientProfileError,
   }) {
     return initial(this);
   }
@@ -280,6 +322,9 @@ class _$InitialImpl implements _Initial {
     TResult? Function(HospitalsSuccess value)? hospitalsSuccess,
     TResult? Function(HospitalsError value)? hospitalsError,
     TResult? Function(DepartmentSelected value)? departmentSelected,
+    TResult? Function(PatientProfileLoading value)? patientProfileLoading,
+    TResult? Function(PatientProfileSuccess value)? patientProfileSuccess,
+    TResult? Function(PatientProfileError value)? patientProfileError,
   }) {
     return initial?.call(this);
   }
@@ -298,6 +343,9 @@ class _$InitialImpl implements _Initial {
     TResult Function(HospitalsSuccess value)? hospitalsSuccess,
     TResult Function(HospitalsError value)? hospitalsError,
     TResult Function(DepartmentSelected value)? departmentSelected,
+    TResult Function(PatientProfileLoading value)? patientProfileLoading,
+    TResult Function(PatientProfileSuccess value)? patientProfileSuccess,
+    TResult Function(PatientProfileError value)? patientProfileError,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -368,6 +416,11 @@ class _$DepartmentsLoadingImpl implements DepartmentsLoading {
         hospitalsSuccess,
     required TResult Function(ErrorHandler error) hospitalsError,
     required TResult Function(int departmentId) departmentSelected,
+    required TResult Function() patientProfileLoading,
+    required TResult Function(
+            PatientProfileResponseModel patientProfileResponseModel)
+        patientProfileSuccess,
+    required TResult Function(ErrorHandler error) patientProfileError,
   }) {
     return departmentsLoading();
   }
@@ -389,6 +442,10 @@ class _$DepartmentsLoadingImpl implements DepartmentsLoading {
         hospitalsSuccess,
     TResult? Function(ErrorHandler error)? hospitalsError,
     TResult? Function(int departmentId)? departmentSelected,
+    TResult? Function()? patientProfileLoading,
+    TResult? Function(PatientProfileResponseModel patientProfileResponseModel)?
+        patientProfileSuccess,
+    TResult? Function(ErrorHandler error)? patientProfileError,
   }) {
     return departmentsLoading?.call();
   }
@@ -410,6 +467,10 @@ class _$DepartmentsLoadingImpl implements DepartmentsLoading {
         hospitalsSuccess,
     TResult Function(ErrorHandler error)? hospitalsError,
     TResult Function(int departmentId)? departmentSelected,
+    TResult Function()? patientProfileLoading,
+    TResult Function(PatientProfileResponseModel patientProfileResponseModel)?
+        patientProfileSuccess,
+    TResult Function(ErrorHandler error)? patientProfileError,
     required TResult orElse(),
   }) {
     if (departmentsLoading != null) {
@@ -432,6 +493,11 @@ class _$DepartmentsLoadingImpl implements DepartmentsLoading {
     required TResult Function(HospitalsSuccess value) hospitalsSuccess,
     required TResult Function(HospitalsError value) hospitalsError,
     required TResult Function(DepartmentSelected value) departmentSelected,
+    required TResult Function(PatientProfileLoading value)
+        patientProfileLoading,
+    required TResult Function(PatientProfileSuccess value)
+        patientProfileSuccess,
+    required TResult Function(PatientProfileError value) patientProfileError,
   }) {
     return departmentsLoading(this);
   }
@@ -450,6 +516,9 @@ class _$DepartmentsLoadingImpl implements DepartmentsLoading {
     TResult? Function(HospitalsSuccess value)? hospitalsSuccess,
     TResult? Function(HospitalsError value)? hospitalsError,
     TResult? Function(DepartmentSelected value)? departmentSelected,
+    TResult? Function(PatientProfileLoading value)? patientProfileLoading,
+    TResult? Function(PatientProfileSuccess value)? patientProfileSuccess,
+    TResult? Function(PatientProfileError value)? patientProfileError,
   }) {
     return departmentsLoading?.call(this);
   }
@@ -468,6 +537,9 @@ class _$DepartmentsLoadingImpl implements DepartmentsLoading {
     TResult Function(HospitalsSuccess value)? hospitalsSuccess,
     TResult Function(HospitalsError value)? hospitalsError,
     TResult Function(DepartmentSelected value)? departmentSelected,
+    TResult Function(PatientProfileLoading value)? patientProfileLoading,
+    TResult Function(PatientProfileSuccess value)? patientProfileSuccess,
+    TResult Function(PatientProfileError value)? patientProfileError,
     required TResult orElse(),
   }) {
     if (departmentsLoading != null) {
@@ -576,6 +648,11 @@ class _$DepartmentsSuccessImpl implements DepartmentsSuccess {
         hospitalsSuccess,
     required TResult Function(ErrorHandler error) hospitalsError,
     required TResult Function(int departmentId) departmentSelected,
+    required TResult Function() patientProfileLoading,
+    required TResult Function(
+            PatientProfileResponseModel patientProfileResponseModel)
+        patientProfileSuccess,
+    required TResult Function(ErrorHandler error) patientProfileError,
   }) {
     return departmentsSuccess(departmentsResponseModel);
   }
@@ -597,6 +674,10 @@ class _$DepartmentsSuccessImpl implements DepartmentsSuccess {
         hospitalsSuccess,
     TResult? Function(ErrorHandler error)? hospitalsError,
     TResult? Function(int departmentId)? departmentSelected,
+    TResult? Function()? patientProfileLoading,
+    TResult? Function(PatientProfileResponseModel patientProfileResponseModel)?
+        patientProfileSuccess,
+    TResult? Function(ErrorHandler error)? patientProfileError,
   }) {
     return departmentsSuccess?.call(departmentsResponseModel);
   }
@@ -618,6 +699,10 @@ class _$DepartmentsSuccessImpl implements DepartmentsSuccess {
         hospitalsSuccess,
     TResult Function(ErrorHandler error)? hospitalsError,
     TResult Function(int departmentId)? departmentSelected,
+    TResult Function()? patientProfileLoading,
+    TResult Function(PatientProfileResponseModel patientProfileResponseModel)?
+        patientProfileSuccess,
+    TResult Function(ErrorHandler error)? patientProfileError,
     required TResult orElse(),
   }) {
     if (departmentsSuccess != null) {
@@ -640,6 +725,11 @@ class _$DepartmentsSuccessImpl implements DepartmentsSuccess {
     required TResult Function(HospitalsSuccess value) hospitalsSuccess,
     required TResult Function(HospitalsError value) hospitalsError,
     required TResult Function(DepartmentSelected value) departmentSelected,
+    required TResult Function(PatientProfileLoading value)
+        patientProfileLoading,
+    required TResult Function(PatientProfileSuccess value)
+        patientProfileSuccess,
+    required TResult Function(PatientProfileError value) patientProfileError,
   }) {
     return departmentsSuccess(this);
   }
@@ -658,6 +748,9 @@ class _$DepartmentsSuccessImpl implements DepartmentsSuccess {
     TResult? Function(HospitalsSuccess value)? hospitalsSuccess,
     TResult? Function(HospitalsError value)? hospitalsError,
     TResult? Function(DepartmentSelected value)? departmentSelected,
+    TResult? Function(PatientProfileLoading value)? patientProfileLoading,
+    TResult? Function(PatientProfileSuccess value)? patientProfileSuccess,
+    TResult? Function(PatientProfileError value)? patientProfileError,
   }) {
     return departmentsSuccess?.call(this);
   }
@@ -676,6 +769,9 @@ class _$DepartmentsSuccessImpl implements DepartmentsSuccess {
     TResult Function(HospitalsSuccess value)? hospitalsSuccess,
     TResult Function(HospitalsError value)? hospitalsError,
     TResult Function(DepartmentSelected value)? departmentSelected,
+    TResult Function(PatientProfileLoading value)? patientProfileLoading,
+    TResult Function(PatientProfileSuccess value)? patientProfileSuccess,
+    TResult Function(PatientProfileError value)? patientProfileError,
     required TResult orElse(),
   }) {
     if (departmentsSuccess != null) {
@@ -784,6 +880,11 @@ class _$DepartmentsErrorImpl implements DepartmentsError {
         hospitalsSuccess,
     required TResult Function(ErrorHandler error) hospitalsError,
     required TResult Function(int departmentId) departmentSelected,
+    required TResult Function() patientProfileLoading,
+    required TResult Function(
+            PatientProfileResponseModel patientProfileResponseModel)
+        patientProfileSuccess,
+    required TResult Function(ErrorHandler error) patientProfileError,
   }) {
     return departmentsError(error);
   }
@@ -805,6 +906,10 @@ class _$DepartmentsErrorImpl implements DepartmentsError {
         hospitalsSuccess,
     TResult? Function(ErrorHandler error)? hospitalsError,
     TResult? Function(int departmentId)? departmentSelected,
+    TResult? Function()? patientProfileLoading,
+    TResult? Function(PatientProfileResponseModel patientProfileResponseModel)?
+        patientProfileSuccess,
+    TResult? Function(ErrorHandler error)? patientProfileError,
   }) {
     return departmentsError?.call(error);
   }
@@ -826,6 +931,10 @@ class _$DepartmentsErrorImpl implements DepartmentsError {
         hospitalsSuccess,
     TResult Function(ErrorHandler error)? hospitalsError,
     TResult Function(int departmentId)? departmentSelected,
+    TResult Function()? patientProfileLoading,
+    TResult Function(PatientProfileResponseModel patientProfileResponseModel)?
+        patientProfileSuccess,
+    TResult Function(ErrorHandler error)? patientProfileError,
     required TResult orElse(),
   }) {
     if (departmentsError != null) {
@@ -848,6 +957,11 @@ class _$DepartmentsErrorImpl implements DepartmentsError {
     required TResult Function(HospitalsSuccess value) hospitalsSuccess,
     required TResult Function(HospitalsError value) hospitalsError,
     required TResult Function(DepartmentSelected value) departmentSelected,
+    required TResult Function(PatientProfileLoading value)
+        patientProfileLoading,
+    required TResult Function(PatientProfileSuccess value)
+        patientProfileSuccess,
+    required TResult Function(PatientProfileError value) patientProfileError,
   }) {
     return departmentsError(this);
   }
@@ -866,6 +980,9 @@ class _$DepartmentsErrorImpl implements DepartmentsError {
     TResult? Function(HospitalsSuccess value)? hospitalsSuccess,
     TResult? Function(HospitalsError value)? hospitalsError,
     TResult? Function(DepartmentSelected value)? departmentSelected,
+    TResult? Function(PatientProfileLoading value)? patientProfileLoading,
+    TResult? Function(PatientProfileSuccess value)? patientProfileSuccess,
+    TResult? Function(PatientProfileError value)? patientProfileError,
   }) {
     return departmentsError?.call(this);
   }
@@ -884,6 +1001,9 @@ class _$DepartmentsErrorImpl implements DepartmentsError {
     TResult Function(HospitalsSuccess value)? hospitalsSuccess,
     TResult Function(HospitalsError value)? hospitalsError,
     TResult Function(DepartmentSelected value)? departmentSelected,
+    TResult Function(PatientProfileLoading value)? patientProfileLoading,
+    TResult Function(PatientProfileSuccess value)? patientProfileSuccess,
+    TResult Function(PatientProfileError value)? patientProfileError,
     required TResult orElse(),
   }) {
     if (departmentsError != null) {
@@ -963,6 +1083,11 @@ class _$DoctorsLoadingImpl implements DoctorsLoading {
         hospitalsSuccess,
     required TResult Function(ErrorHandler error) hospitalsError,
     required TResult Function(int departmentId) departmentSelected,
+    required TResult Function() patientProfileLoading,
+    required TResult Function(
+            PatientProfileResponseModel patientProfileResponseModel)
+        patientProfileSuccess,
+    required TResult Function(ErrorHandler error) patientProfileError,
   }) {
     return doctorsLoading();
   }
@@ -984,6 +1109,10 @@ class _$DoctorsLoadingImpl implements DoctorsLoading {
         hospitalsSuccess,
     TResult? Function(ErrorHandler error)? hospitalsError,
     TResult? Function(int departmentId)? departmentSelected,
+    TResult? Function()? patientProfileLoading,
+    TResult? Function(PatientProfileResponseModel patientProfileResponseModel)?
+        patientProfileSuccess,
+    TResult? Function(ErrorHandler error)? patientProfileError,
   }) {
     return doctorsLoading?.call();
   }
@@ -1005,6 +1134,10 @@ class _$DoctorsLoadingImpl implements DoctorsLoading {
         hospitalsSuccess,
     TResult Function(ErrorHandler error)? hospitalsError,
     TResult Function(int departmentId)? departmentSelected,
+    TResult Function()? patientProfileLoading,
+    TResult Function(PatientProfileResponseModel patientProfileResponseModel)?
+        patientProfileSuccess,
+    TResult Function(ErrorHandler error)? patientProfileError,
     required TResult orElse(),
   }) {
     if (doctorsLoading != null) {
@@ -1027,6 +1160,11 @@ class _$DoctorsLoadingImpl implements DoctorsLoading {
     required TResult Function(HospitalsSuccess value) hospitalsSuccess,
     required TResult Function(HospitalsError value) hospitalsError,
     required TResult Function(DepartmentSelected value) departmentSelected,
+    required TResult Function(PatientProfileLoading value)
+        patientProfileLoading,
+    required TResult Function(PatientProfileSuccess value)
+        patientProfileSuccess,
+    required TResult Function(PatientProfileError value) patientProfileError,
   }) {
     return doctorsLoading(this);
   }
@@ -1045,6 +1183,9 @@ class _$DoctorsLoadingImpl implements DoctorsLoading {
     TResult? Function(HospitalsSuccess value)? hospitalsSuccess,
     TResult? Function(HospitalsError value)? hospitalsError,
     TResult? Function(DepartmentSelected value)? departmentSelected,
+    TResult? Function(PatientProfileLoading value)? patientProfileLoading,
+    TResult? Function(PatientProfileSuccess value)? patientProfileSuccess,
+    TResult? Function(PatientProfileError value)? patientProfileError,
   }) {
     return doctorsLoading?.call(this);
   }
@@ -1063,6 +1204,9 @@ class _$DoctorsLoadingImpl implements DoctorsLoading {
     TResult Function(HospitalsSuccess value)? hospitalsSuccess,
     TResult Function(HospitalsError value)? hospitalsError,
     TResult Function(DepartmentSelected value)? departmentSelected,
+    TResult Function(PatientProfileLoading value)? patientProfileLoading,
+    TResult Function(PatientProfileSuccess value)? patientProfileSuccess,
+    TResult Function(PatientProfileError value)? patientProfileError,
     required TResult orElse(),
   }) {
     if (doctorsLoading != null) {
@@ -1171,6 +1315,11 @@ class _$DoctorsSuccessImpl implements DoctorsSuccess {
         hospitalsSuccess,
     required TResult Function(ErrorHandler error) hospitalsError,
     required TResult Function(int departmentId) departmentSelected,
+    required TResult Function() patientProfileLoading,
+    required TResult Function(
+            PatientProfileResponseModel patientProfileResponseModel)
+        patientProfileSuccess,
+    required TResult Function(ErrorHandler error) patientProfileError,
   }) {
     return doctorsSuccess(doctorsResponseModel);
   }
@@ -1192,6 +1341,10 @@ class _$DoctorsSuccessImpl implements DoctorsSuccess {
         hospitalsSuccess,
     TResult? Function(ErrorHandler error)? hospitalsError,
     TResult? Function(int departmentId)? departmentSelected,
+    TResult? Function()? patientProfileLoading,
+    TResult? Function(PatientProfileResponseModel patientProfileResponseModel)?
+        patientProfileSuccess,
+    TResult? Function(ErrorHandler error)? patientProfileError,
   }) {
     return doctorsSuccess?.call(doctorsResponseModel);
   }
@@ -1213,6 +1366,10 @@ class _$DoctorsSuccessImpl implements DoctorsSuccess {
         hospitalsSuccess,
     TResult Function(ErrorHandler error)? hospitalsError,
     TResult Function(int departmentId)? departmentSelected,
+    TResult Function()? patientProfileLoading,
+    TResult Function(PatientProfileResponseModel patientProfileResponseModel)?
+        patientProfileSuccess,
+    TResult Function(ErrorHandler error)? patientProfileError,
     required TResult orElse(),
   }) {
     if (doctorsSuccess != null) {
@@ -1235,6 +1392,11 @@ class _$DoctorsSuccessImpl implements DoctorsSuccess {
     required TResult Function(HospitalsSuccess value) hospitalsSuccess,
     required TResult Function(HospitalsError value) hospitalsError,
     required TResult Function(DepartmentSelected value) departmentSelected,
+    required TResult Function(PatientProfileLoading value)
+        patientProfileLoading,
+    required TResult Function(PatientProfileSuccess value)
+        patientProfileSuccess,
+    required TResult Function(PatientProfileError value) patientProfileError,
   }) {
     return doctorsSuccess(this);
   }
@@ -1253,6 +1415,9 @@ class _$DoctorsSuccessImpl implements DoctorsSuccess {
     TResult? Function(HospitalsSuccess value)? hospitalsSuccess,
     TResult? Function(HospitalsError value)? hospitalsError,
     TResult? Function(DepartmentSelected value)? departmentSelected,
+    TResult? Function(PatientProfileLoading value)? patientProfileLoading,
+    TResult? Function(PatientProfileSuccess value)? patientProfileSuccess,
+    TResult? Function(PatientProfileError value)? patientProfileError,
   }) {
     return doctorsSuccess?.call(this);
   }
@@ -1271,6 +1436,9 @@ class _$DoctorsSuccessImpl implements DoctorsSuccess {
     TResult Function(HospitalsSuccess value)? hospitalsSuccess,
     TResult Function(HospitalsError value)? hospitalsError,
     TResult Function(DepartmentSelected value)? departmentSelected,
+    TResult Function(PatientProfileLoading value)? patientProfileLoading,
+    TResult Function(PatientProfileSuccess value)? patientProfileSuccess,
+    TResult Function(PatientProfileError value)? patientProfileError,
     required TResult orElse(),
   }) {
     if (doctorsSuccess != null) {
@@ -1378,6 +1546,11 @@ class _$DoctorsErrorImpl implements DoctorsError {
         hospitalsSuccess,
     required TResult Function(ErrorHandler error) hospitalsError,
     required TResult Function(int departmentId) departmentSelected,
+    required TResult Function() patientProfileLoading,
+    required TResult Function(
+            PatientProfileResponseModel patientProfileResponseModel)
+        patientProfileSuccess,
+    required TResult Function(ErrorHandler error) patientProfileError,
   }) {
     return doctorsError(error);
   }
@@ -1399,6 +1572,10 @@ class _$DoctorsErrorImpl implements DoctorsError {
         hospitalsSuccess,
     TResult? Function(ErrorHandler error)? hospitalsError,
     TResult? Function(int departmentId)? departmentSelected,
+    TResult? Function()? patientProfileLoading,
+    TResult? Function(PatientProfileResponseModel patientProfileResponseModel)?
+        patientProfileSuccess,
+    TResult? Function(ErrorHandler error)? patientProfileError,
   }) {
     return doctorsError?.call(error);
   }
@@ -1420,6 +1597,10 @@ class _$DoctorsErrorImpl implements DoctorsError {
         hospitalsSuccess,
     TResult Function(ErrorHandler error)? hospitalsError,
     TResult Function(int departmentId)? departmentSelected,
+    TResult Function()? patientProfileLoading,
+    TResult Function(PatientProfileResponseModel patientProfileResponseModel)?
+        patientProfileSuccess,
+    TResult Function(ErrorHandler error)? patientProfileError,
     required TResult orElse(),
   }) {
     if (doctorsError != null) {
@@ -1442,6 +1623,11 @@ class _$DoctorsErrorImpl implements DoctorsError {
     required TResult Function(HospitalsSuccess value) hospitalsSuccess,
     required TResult Function(HospitalsError value) hospitalsError,
     required TResult Function(DepartmentSelected value) departmentSelected,
+    required TResult Function(PatientProfileLoading value)
+        patientProfileLoading,
+    required TResult Function(PatientProfileSuccess value)
+        patientProfileSuccess,
+    required TResult Function(PatientProfileError value) patientProfileError,
   }) {
     return doctorsError(this);
   }
@@ -1460,6 +1646,9 @@ class _$DoctorsErrorImpl implements DoctorsError {
     TResult? Function(HospitalsSuccess value)? hospitalsSuccess,
     TResult? Function(HospitalsError value)? hospitalsError,
     TResult? Function(DepartmentSelected value)? departmentSelected,
+    TResult? Function(PatientProfileLoading value)? patientProfileLoading,
+    TResult? Function(PatientProfileSuccess value)? patientProfileSuccess,
+    TResult? Function(PatientProfileError value)? patientProfileError,
   }) {
     return doctorsError?.call(this);
   }
@@ -1478,6 +1667,9 @@ class _$DoctorsErrorImpl implements DoctorsError {
     TResult Function(HospitalsSuccess value)? hospitalsSuccess,
     TResult Function(HospitalsError value)? hospitalsError,
     TResult Function(DepartmentSelected value)? departmentSelected,
+    TResult Function(PatientProfileLoading value)? patientProfileLoading,
+    TResult Function(PatientProfileSuccess value)? patientProfileSuccess,
+    TResult Function(PatientProfileError value)? patientProfileError,
     required TResult orElse(),
   }) {
     if (doctorsError != null) {
@@ -1556,6 +1748,11 @@ class _$HospitalsLoadingImpl implements HospitalsLoading {
         hospitalsSuccess,
     required TResult Function(ErrorHandler error) hospitalsError,
     required TResult Function(int departmentId) departmentSelected,
+    required TResult Function() patientProfileLoading,
+    required TResult Function(
+            PatientProfileResponseModel patientProfileResponseModel)
+        patientProfileSuccess,
+    required TResult Function(ErrorHandler error) patientProfileError,
   }) {
     return hospitalsLoading();
   }
@@ -1577,6 +1774,10 @@ class _$HospitalsLoadingImpl implements HospitalsLoading {
         hospitalsSuccess,
     TResult? Function(ErrorHandler error)? hospitalsError,
     TResult? Function(int departmentId)? departmentSelected,
+    TResult? Function()? patientProfileLoading,
+    TResult? Function(PatientProfileResponseModel patientProfileResponseModel)?
+        patientProfileSuccess,
+    TResult? Function(ErrorHandler error)? patientProfileError,
   }) {
     return hospitalsLoading?.call();
   }
@@ -1598,6 +1799,10 @@ class _$HospitalsLoadingImpl implements HospitalsLoading {
         hospitalsSuccess,
     TResult Function(ErrorHandler error)? hospitalsError,
     TResult Function(int departmentId)? departmentSelected,
+    TResult Function()? patientProfileLoading,
+    TResult Function(PatientProfileResponseModel patientProfileResponseModel)?
+        patientProfileSuccess,
+    TResult Function(ErrorHandler error)? patientProfileError,
     required TResult orElse(),
   }) {
     if (hospitalsLoading != null) {
@@ -1620,6 +1825,11 @@ class _$HospitalsLoadingImpl implements HospitalsLoading {
     required TResult Function(HospitalsSuccess value) hospitalsSuccess,
     required TResult Function(HospitalsError value) hospitalsError,
     required TResult Function(DepartmentSelected value) departmentSelected,
+    required TResult Function(PatientProfileLoading value)
+        patientProfileLoading,
+    required TResult Function(PatientProfileSuccess value)
+        patientProfileSuccess,
+    required TResult Function(PatientProfileError value) patientProfileError,
   }) {
     return hospitalsLoading(this);
   }
@@ -1638,6 +1848,9 @@ class _$HospitalsLoadingImpl implements HospitalsLoading {
     TResult? Function(HospitalsSuccess value)? hospitalsSuccess,
     TResult? Function(HospitalsError value)? hospitalsError,
     TResult? Function(DepartmentSelected value)? departmentSelected,
+    TResult? Function(PatientProfileLoading value)? patientProfileLoading,
+    TResult? Function(PatientProfileSuccess value)? patientProfileSuccess,
+    TResult? Function(PatientProfileError value)? patientProfileError,
   }) {
     return hospitalsLoading?.call(this);
   }
@@ -1656,6 +1869,9 @@ class _$HospitalsLoadingImpl implements HospitalsLoading {
     TResult Function(HospitalsSuccess value)? hospitalsSuccess,
     TResult Function(HospitalsError value)? hospitalsError,
     TResult Function(DepartmentSelected value)? departmentSelected,
+    TResult Function(PatientProfileLoading value)? patientProfileLoading,
+    TResult Function(PatientProfileSuccess value)? patientProfileSuccess,
+    TResult Function(PatientProfileError value)? patientProfileError,
     required TResult orElse(),
   }) {
     if (hospitalsLoading != null) {
@@ -1764,6 +1980,11 @@ class _$HospitalsSuccessImpl implements HospitalsSuccess {
         hospitalsSuccess,
     required TResult Function(ErrorHandler error) hospitalsError,
     required TResult Function(int departmentId) departmentSelected,
+    required TResult Function() patientProfileLoading,
+    required TResult Function(
+            PatientProfileResponseModel patientProfileResponseModel)
+        patientProfileSuccess,
+    required TResult Function(ErrorHandler error) patientProfileError,
   }) {
     return hospitalsSuccess(hospitalsResponseModel);
   }
@@ -1785,6 +2006,10 @@ class _$HospitalsSuccessImpl implements HospitalsSuccess {
         hospitalsSuccess,
     TResult? Function(ErrorHandler error)? hospitalsError,
     TResult? Function(int departmentId)? departmentSelected,
+    TResult? Function()? patientProfileLoading,
+    TResult? Function(PatientProfileResponseModel patientProfileResponseModel)?
+        patientProfileSuccess,
+    TResult? Function(ErrorHandler error)? patientProfileError,
   }) {
     return hospitalsSuccess?.call(hospitalsResponseModel);
   }
@@ -1806,6 +2031,10 @@ class _$HospitalsSuccessImpl implements HospitalsSuccess {
         hospitalsSuccess,
     TResult Function(ErrorHandler error)? hospitalsError,
     TResult Function(int departmentId)? departmentSelected,
+    TResult Function()? patientProfileLoading,
+    TResult Function(PatientProfileResponseModel patientProfileResponseModel)?
+        patientProfileSuccess,
+    TResult Function(ErrorHandler error)? patientProfileError,
     required TResult orElse(),
   }) {
     if (hospitalsSuccess != null) {
@@ -1828,6 +2057,11 @@ class _$HospitalsSuccessImpl implements HospitalsSuccess {
     required TResult Function(HospitalsSuccess value) hospitalsSuccess,
     required TResult Function(HospitalsError value) hospitalsError,
     required TResult Function(DepartmentSelected value) departmentSelected,
+    required TResult Function(PatientProfileLoading value)
+        patientProfileLoading,
+    required TResult Function(PatientProfileSuccess value)
+        patientProfileSuccess,
+    required TResult Function(PatientProfileError value) patientProfileError,
   }) {
     return hospitalsSuccess(this);
   }
@@ -1846,6 +2080,9 @@ class _$HospitalsSuccessImpl implements HospitalsSuccess {
     TResult? Function(HospitalsSuccess value)? hospitalsSuccess,
     TResult? Function(HospitalsError value)? hospitalsError,
     TResult? Function(DepartmentSelected value)? departmentSelected,
+    TResult? Function(PatientProfileLoading value)? patientProfileLoading,
+    TResult? Function(PatientProfileSuccess value)? patientProfileSuccess,
+    TResult? Function(PatientProfileError value)? patientProfileError,
   }) {
     return hospitalsSuccess?.call(this);
   }
@@ -1864,6 +2101,9 @@ class _$HospitalsSuccessImpl implements HospitalsSuccess {
     TResult Function(HospitalsSuccess value)? hospitalsSuccess,
     TResult Function(HospitalsError value)? hospitalsError,
     TResult Function(DepartmentSelected value)? departmentSelected,
+    TResult Function(PatientProfileLoading value)? patientProfileLoading,
+    TResult Function(PatientProfileSuccess value)? patientProfileSuccess,
+    TResult Function(PatientProfileError value)? patientProfileError,
     required TResult orElse(),
   }) {
     if (hospitalsSuccess != null) {
@@ -1972,6 +2212,11 @@ class _$HospitalsErrorImpl implements HospitalsError {
         hospitalsSuccess,
     required TResult Function(ErrorHandler error) hospitalsError,
     required TResult Function(int departmentId) departmentSelected,
+    required TResult Function() patientProfileLoading,
+    required TResult Function(
+            PatientProfileResponseModel patientProfileResponseModel)
+        patientProfileSuccess,
+    required TResult Function(ErrorHandler error) patientProfileError,
   }) {
     return hospitalsError(error);
   }
@@ -1993,6 +2238,10 @@ class _$HospitalsErrorImpl implements HospitalsError {
         hospitalsSuccess,
     TResult? Function(ErrorHandler error)? hospitalsError,
     TResult? Function(int departmentId)? departmentSelected,
+    TResult? Function()? patientProfileLoading,
+    TResult? Function(PatientProfileResponseModel patientProfileResponseModel)?
+        patientProfileSuccess,
+    TResult? Function(ErrorHandler error)? patientProfileError,
   }) {
     return hospitalsError?.call(error);
   }
@@ -2014,6 +2263,10 @@ class _$HospitalsErrorImpl implements HospitalsError {
         hospitalsSuccess,
     TResult Function(ErrorHandler error)? hospitalsError,
     TResult Function(int departmentId)? departmentSelected,
+    TResult Function()? patientProfileLoading,
+    TResult Function(PatientProfileResponseModel patientProfileResponseModel)?
+        patientProfileSuccess,
+    TResult Function(ErrorHandler error)? patientProfileError,
     required TResult orElse(),
   }) {
     if (hospitalsError != null) {
@@ -2036,6 +2289,11 @@ class _$HospitalsErrorImpl implements HospitalsError {
     required TResult Function(HospitalsSuccess value) hospitalsSuccess,
     required TResult Function(HospitalsError value) hospitalsError,
     required TResult Function(DepartmentSelected value) departmentSelected,
+    required TResult Function(PatientProfileLoading value)
+        patientProfileLoading,
+    required TResult Function(PatientProfileSuccess value)
+        patientProfileSuccess,
+    required TResult Function(PatientProfileError value) patientProfileError,
   }) {
     return hospitalsError(this);
   }
@@ -2054,6 +2312,9 @@ class _$HospitalsErrorImpl implements HospitalsError {
     TResult? Function(HospitalsSuccess value)? hospitalsSuccess,
     TResult? Function(HospitalsError value)? hospitalsError,
     TResult? Function(DepartmentSelected value)? departmentSelected,
+    TResult? Function(PatientProfileLoading value)? patientProfileLoading,
+    TResult? Function(PatientProfileSuccess value)? patientProfileSuccess,
+    TResult? Function(PatientProfileError value)? patientProfileError,
   }) {
     return hospitalsError?.call(this);
   }
@@ -2072,6 +2333,9 @@ class _$HospitalsErrorImpl implements HospitalsError {
     TResult Function(HospitalsSuccess value)? hospitalsSuccess,
     TResult Function(HospitalsError value)? hospitalsError,
     TResult Function(DepartmentSelected value)? departmentSelected,
+    TResult Function(PatientProfileLoading value)? patientProfileLoading,
+    TResult Function(PatientProfileSuccess value)? patientProfileSuccess,
+    TResult Function(PatientProfileError value)? patientProfileError,
     required TResult orElse(),
   }) {
     if (hospitalsError != null) {
@@ -2179,6 +2443,11 @@ class _$DepartmentSelectedImpl implements DepartmentSelected {
         hospitalsSuccess,
     required TResult Function(ErrorHandler error) hospitalsError,
     required TResult Function(int departmentId) departmentSelected,
+    required TResult Function() patientProfileLoading,
+    required TResult Function(
+            PatientProfileResponseModel patientProfileResponseModel)
+        patientProfileSuccess,
+    required TResult Function(ErrorHandler error) patientProfileError,
   }) {
     return departmentSelected(departmentId);
   }
@@ -2200,6 +2469,10 @@ class _$DepartmentSelectedImpl implements DepartmentSelected {
         hospitalsSuccess,
     TResult? Function(ErrorHandler error)? hospitalsError,
     TResult? Function(int departmentId)? departmentSelected,
+    TResult? Function()? patientProfileLoading,
+    TResult? Function(PatientProfileResponseModel patientProfileResponseModel)?
+        patientProfileSuccess,
+    TResult? Function(ErrorHandler error)? patientProfileError,
   }) {
     return departmentSelected?.call(departmentId);
   }
@@ -2221,6 +2494,10 @@ class _$DepartmentSelectedImpl implements DepartmentSelected {
         hospitalsSuccess,
     TResult Function(ErrorHandler error)? hospitalsError,
     TResult Function(int departmentId)? departmentSelected,
+    TResult Function()? patientProfileLoading,
+    TResult Function(PatientProfileResponseModel patientProfileResponseModel)?
+        patientProfileSuccess,
+    TResult Function(ErrorHandler error)? patientProfileError,
     required TResult orElse(),
   }) {
     if (departmentSelected != null) {
@@ -2243,6 +2520,11 @@ class _$DepartmentSelectedImpl implements DepartmentSelected {
     required TResult Function(HospitalsSuccess value) hospitalsSuccess,
     required TResult Function(HospitalsError value) hospitalsError,
     required TResult Function(DepartmentSelected value) departmentSelected,
+    required TResult Function(PatientProfileLoading value)
+        patientProfileLoading,
+    required TResult Function(PatientProfileSuccess value)
+        patientProfileSuccess,
+    required TResult Function(PatientProfileError value) patientProfileError,
   }) {
     return departmentSelected(this);
   }
@@ -2261,6 +2543,9 @@ class _$DepartmentSelectedImpl implements DepartmentSelected {
     TResult? Function(HospitalsSuccess value)? hospitalsSuccess,
     TResult? Function(HospitalsError value)? hospitalsError,
     TResult? Function(DepartmentSelected value)? departmentSelected,
+    TResult? Function(PatientProfileLoading value)? patientProfileLoading,
+    TResult? Function(PatientProfileSuccess value)? patientProfileSuccess,
+    TResult? Function(PatientProfileError value)? patientProfileError,
   }) {
     return departmentSelected?.call(this);
   }
@@ -2279,6 +2564,9 @@ class _$DepartmentSelectedImpl implements DepartmentSelected {
     TResult Function(HospitalsSuccess value)? hospitalsSuccess,
     TResult Function(HospitalsError value)? hospitalsError,
     TResult Function(DepartmentSelected value)? departmentSelected,
+    TResult Function(PatientProfileLoading value)? patientProfileLoading,
+    TResult Function(PatientProfileSuccess value)? patientProfileSuccess,
+    TResult Function(PatientProfileError value)? patientProfileError,
     required TResult orElse(),
   }) {
     if (departmentSelected != null) {
@@ -2298,5 +2586,668 @@ abstract class DepartmentSelected implements HomeState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DepartmentSelectedImplCopyWith<_$DepartmentSelectedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$PatientProfileLoadingImplCopyWith<$Res> {
+  factory _$$PatientProfileLoadingImplCopyWith(
+          _$PatientProfileLoadingImpl value,
+          $Res Function(_$PatientProfileLoadingImpl) then) =
+      __$$PatientProfileLoadingImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$PatientProfileLoadingImplCopyWithImpl<$Res>
+    extends _$HomeStateCopyWithImpl<$Res, _$PatientProfileLoadingImpl>
+    implements _$$PatientProfileLoadingImplCopyWith<$Res> {
+  __$$PatientProfileLoadingImplCopyWithImpl(_$PatientProfileLoadingImpl _value,
+      $Res Function(_$PatientProfileLoadingImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$PatientProfileLoadingImpl implements PatientProfileLoading {
+  const _$PatientProfileLoadingImpl();
+
+  @override
+  String toString() {
+    return 'HomeState.patientProfileLoading()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$PatientProfileLoadingImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() departmentsLoading,
+    required TResult Function(
+            List<DepartmentsResponseModel> departmentsResponseModel)
+        departmentsSuccess,
+    required TResult Function(ErrorHandler error) departmentsError,
+    required TResult Function() doctorsLoading,
+    required TResult Function(List<DoctorsResponseModel> doctorsResponseModel)
+        doctorsSuccess,
+    required TResult Function(ErrorHandler error) doctorsError,
+    required TResult Function() hospitalsLoading,
+    required TResult Function(
+            List<HospitalsResponseModel> hospitalsResponseModel)
+        hospitalsSuccess,
+    required TResult Function(ErrorHandler error) hospitalsError,
+    required TResult Function(int departmentId) departmentSelected,
+    required TResult Function() patientProfileLoading,
+    required TResult Function(
+            PatientProfileResponseModel patientProfileResponseModel)
+        patientProfileSuccess,
+    required TResult Function(ErrorHandler error) patientProfileError,
+  }) {
+    return patientProfileLoading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? departmentsLoading,
+    TResult? Function(List<DepartmentsResponseModel> departmentsResponseModel)?
+        departmentsSuccess,
+    TResult? Function(ErrorHandler error)? departmentsError,
+    TResult? Function()? doctorsLoading,
+    TResult? Function(List<DoctorsResponseModel> doctorsResponseModel)?
+        doctorsSuccess,
+    TResult? Function(ErrorHandler error)? doctorsError,
+    TResult? Function()? hospitalsLoading,
+    TResult? Function(List<HospitalsResponseModel> hospitalsResponseModel)?
+        hospitalsSuccess,
+    TResult? Function(ErrorHandler error)? hospitalsError,
+    TResult? Function(int departmentId)? departmentSelected,
+    TResult? Function()? patientProfileLoading,
+    TResult? Function(PatientProfileResponseModel patientProfileResponseModel)?
+        patientProfileSuccess,
+    TResult? Function(ErrorHandler error)? patientProfileError,
+  }) {
+    return patientProfileLoading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? departmentsLoading,
+    TResult Function(List<DepartmentsResponseModel> departmentsResponseModel)?
+        departmentsSuccess,
+    TResult Function(ErrorHandler error)? departmentsError,
+    TResult Function()? doctorsLoading,
+    TResult Function(List<DoctorsResponseModel> doctorsResponseModel)?
+        doctorsSuccess,
+    TResult Function(ErrorHandler error)? doctorsError,
+    TResult Function()? hospitalsLoading,
+    TResult Function(List<HospitalsResponseModel> hospitalsResponseModel)?
+        hospitalsSuccess,
+    TResult Function(ErrorHandler error)? hospitalsError,
+    TResult Function(int departmentId)? departmentSelected,
+    TResult Function()? patientProfileLoading,
+    TResult Function(PatientProfileResponseModel patientProfileResponseModel)?
+        patientProfileSuccess,
+    TResult Function(ErrorHandler error)? patientProfileError,
+    required TResult orElse(),
+  }) {
+    if (patientProfileLoading != null) {
+      return patientProfileLoading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(DepartmentsLoading value) departmentsLoading,
+    required TResult Function(DepartmentsSuccess value) departmentsSuccess,
+    required TResult Function(DepartmentsError value) departmentsError,
+    required TResult Function(DoctorsLoading value) doctorsLoading,
+    required TResult Function(DoctorsSuccess value) doctorsSuccess,
+    required TResult Function(DoctorsError value) doctorsError,
+    required TResult Function(HospitalsLoading value) hospitalsLoading,
+    required TResult Function(HospitalsSuccess value) hospitalsSuccess,
+    required TResult Function(HospitalsError value) hospitalsError,
+    required TResult Function(DepartmentSelected value) departmentSelected,
+    required TResult Function(PatientProfileLoading value)
+        patientProfileLoading,
+    required TResult Function(PatientProfileSuccess value)
+        patientProfileSuccess,
+    required TResult Function(PatientProfileError value) patientProfileError,
+  }) {
+    return patientProfileLoading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(DepartmentsLoading value)? departmentsLoading,
+    TResult? Function(DepartmentsSuccess value)? departmentsSuccess,
+    TResult? Function(DepartmentsError value)? departmentsError,
+    TResult? Function(DoctorsLoading value)? doctorsLoading,
+    TResult? Function(DoctorsSuccess value)? doctorsSuccess,
+    TResult? Function(DoctorsError value)? doctorsError,
+    TResult? Function(HospitalsLoading value)? hospitalsLoading,
+    TResult? Function(HospitalsSuccess value)? hospitalsSuccess,
+    TResult? Function(HospitalsError value)? hospitalsError,
+    TResult? Function(DepartmentSelected value)? departmentSelected,
+    TResult? Function(PatientProfileLoading value)? patientProfileLoading,
+    TResult? Function(PatientProfileSuccess value)? patientProfileSuccess,
+    TResult? Function(PatientProfileError value)? patientProfileError,
+  }) {
+    return patientProfileLoading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(DepartmentsLoading value)? departmentsLoading,
+    TResult Function(DepartmentsSuccess value)? departmentsSuccess,
+    TResult Function(DepartmentsError value)? departmentsError,
+    TResult Function(DoctorsLoading value)? doctorsLoading,
+    TResult Function(DoctorsSuccess value)? doctorsSuccess,
+    TResult Function(DoctorsError value)? doctorsError,
+    TResult Function(HospitalsLoading value)? hospitalsLoading,
+    TResult Function(HospitalsSuccess value)? hospitalsSuccess,
+    TResult Function(HospitalsError value)? hospitalsError,
+    TResult Function(DepartmentSelected value)? departmentSelected,
+    TResult Function(PatientProfileLoading value)? patientProfileLoading,
+    TResult Function(PatientProfileSuccess value)? patientProfileSuccess,
+    TResult Function(PatientProfileError value)? patientProfileError,
+    required TResult orElse(),
+  }) {
+    if (patientProfileLoading != null) {
+      return patientProfileLoading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class PatientProfileLoading implements HomeState {
+  const factory PatientProfileLoading() = _$PatientProfileLoadingImpl;
+}
+
+/// @nodoc
+abstract class _$$PatientProfileSuccessImplCopyWith<$Res> {
+  factory _$$PatientProfileSuccessImplCopyWith(
+          _$PatientProfileSuccessImpl value,
+          $Res Function(_$PatientProfileSuccessImpl) then) =
+      __$$PatientProfileSuccessImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({PatientProfileResponseModel patientProfileResponseModel});
+}
+
+/// @nodoc
+class __$$PatientProfileSuccessImplCopyWithImpl<$Res>
+    extends _$HomeStateCopyWithImpl<$Res, _$PatientProfileSuccessImpl>
+    implements _$$PatientProfileSuccessImplCopyWith<$Res> {
+  __$$PatientProfileSuccessImplCopyWithImpl(_$PatientProfileSuccessImpl _value,
+      $Res Function(_$PatientProfileSuccessImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? patientProfileResponseModel = freezed,
+  }) {
+    return _then(_$PatientProfileSuccessImpl(
+      freezed == patientProfileResponseModel
+          ? _value.patientProfileResponseModel
+          : patientProfileResponseModel // ignore: cast_nullable_to_non_nullable
+              as PatientProfileResponseModel,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$PatientProfileSuccessImpl implements PatientProfileSuccess {
+  const _$PatientProfileSuccessImpl(this.patientProfileResponseModel);
+
+  @override
+  final PatientProfileResponseModel patientProfileResponseModel;
+
+  @override
+  String toString() {
+    return 'HomeState.patientProfileSuccess(patientProfileResponseModel: $patientProfileResponseModel)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$PatientProfileSuccessImpl &&
+            const DeepCollectionEquality().equals(
+                other.patientProfileResponseModel,
+                patientProfileResponseModel));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(patientProfileResponseModel));
+
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$PatientProfileSuccessImplCopyWith<_$PatientProfileSuccessImpl>
+      get copyWith => __$$PatientProfileSuccessImplCopyWithImpl<
+          _$PatientProfileSuccessImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() departmentsLoading,
+    required TResult Function(
+            List<DepartmentsResponseModel> departmentsResponseModel)
+        departmentsSuccess,
+    required TResult Function(ErrorHandler error) departmentsError,
+    required TResult Function() doctorsLoading,
+    required TResult Function(List<DoctorsResponseModel> doctorsResponseModel)
+        doctorsSuccess,
+    required TResult Function(ErrorHandler error) doctorsError,
+    required TResult Function() hospitalsLoading,
+    required TResult Function(
+            List<HospitalsResponseModel> hospitalsResponseModel)
+        hospitalsSuccess,
+    required TResult Function(ErrorHandler error) hospitalsError,
+    required TResult Function(int departmentId) departmentSelected,
+    required TResult Function() patientProfileLoading,
+    required TResult Function(
+            PatientProfileResponseModel patientProfileResponseModel)
+        patientProfileSuccess,
+    required TResult Function(ErrorHandler error) patientProfileError,
+  }) {
+    return patientProfileSuccess(patientProfileResponseModel);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? departmentsLoading,
+    TResult? Function(List<DepartmentsResponseModel> departmentsResponseModel)?
+        departmentsSuccess,
+    TResult? Function(ErrorHandler error)? departmentsError,
+    TResult? Function()? doctorsLoading,
+    TResult? Function(List<DoctorsResponseModel> doctorsResponseModel)?
+        doctorsSuccess,
+    TResult? Function(ErrorHandler error)? doctorsError,
+    TResult? Function()? hospitalsLoading,
+    TResult? Function(List<HospitalsResponseModel> hospitalsResponseModel)?
+        hospitalsSuccess,
+    TResult? Function(ErrorHandler error)? hospitalsError,
+    TResult? Function(int departmentId)? departmentSelected,
+    TResult? Function()? patientProfileLoading,
+    TResult? Function(PatientProfileResponseModel patientProfileResponseModel)?
+        patientProfileSuccess,
+    TResult? Function(ErrorHandler error)? patientProfileError,
+  }) {
+    return patientProfileSuccess?.call(patientProfileResponseModel);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? departmentsLoading,
+    TResult Function(List<DepartmentsResponseModel> departmentsResponseModel)?
+        departmentsSuccess,
+    TResult Function(ErrorHandler error)? departmentsError,
+    TResult Function()? doctorsLoading,
+    TResult Function(List<DoctorsResponseModel> doctorsResponseModel)?
+        doctorsSuccess,
+    TResult Function(ErrorHandler error)? doctorsError,
+    TResult Function()? hospitalsLoading,
+    TResult Function(List<HospitalsResponseModel> hospitalsResponseModel)?
+        hospitalsSuccess,
+    TResult Function(ErrorHandler error)? hospitalsError,
+    TResult Function(int departmentId)? departmentSelected,
+    TResult Function()? patientProfileLoading,
+    TResult Function(PatientProfileResponseModel patientProfileResponseModel)?
+        patientProfileSuccess,
+    TResult Function(ErrorHandler error)? patientProfileError,
+    required TResult orElse(),
+  }) {
+    if (patientProfileSuccess != null) {
+      return patientProfileSuccess(patientProfileResponseModel);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(DepartmentsLoading value) departmentsLoading,
+    required TResult Function(DepartmentsSuccess value) departmentsSuccess,
+    required TResult Function(DepartmentsError value) departmentsError,
+    required TResult Function(DoctorsLoading value) doctorsLoading,
+    required TResult Function(DoctorsSuccess value) doctorsSuccess,
+    required TResult Function(DoctorsError value) doctorsError,
+    required TResult Function(HospitalsLoading value) hospitalsLoading,
+    required TResult Function(HospitalsSuccess value) hospitalsSuccess,
+    required TResult Function(HospitalsError value) hospitalsError,
+    required TResult Function(DepartmentSelected value) departmentSelected,
+    required TResult Function(PatientProfileLoading value)
+        patientProfileLoading,
+    required TResult Function(PatientProfileSuccess value)
+        patientProfileSuccess,
+    required TResult Function(PatientProfileError value) patientProfileError,
+  }) {
+    return patientProfileSuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(DepartmentsLoading value)? departmentsLoading,
+    TResult? Function(DepartmentsSuccess value)? departmentsSuccess,
+    TResult? Function(DepartmentsError value)? departmentsError,
+    TResult? Function(DoctorsLoading value)? doctorsLoading,
+    TResult? Function(DoctorsSuccess value)? doctorsSuccess,
+    TResult? Function(DoctorsError value)? doctorsError,
+    TResult? Function(HospitalsLoading value)? hospitalsLoading,
+    TResult? Function(HospitalsSuccess value)? hospitalsSuccess,
+    TResult? Function(HospitalsError value)? hospitalsError,
+    TResult? Function(DepartmentSelected value)? departmentSelected,
+    TResult? Function(PatientProfileLoading value)? patientProfileLoading,
+    TResult? Function(PatientProfileSuccess value)? patientProfileSuccess,
+    TResult? Function(PatientProfileError value)? patientProfileError,
+  }) {
+    return patientProfileSuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(DepartmentsLoading value)? departmentsLoading,
+    TResult Function(DepartmentsSuccess value)? departmentsSuccess,
+    TResult Function(DepartmentsError value)? departmentsError,
+    TResult Function(DoctorsLoading value)? doctorsLoading,
+    TResult Function(DoctorsSuccess value)? doctorsSuccess,
+    TResult Function(DoctorsError value)? doctorsError,
+    TResult Function(HospitalsLoading value)? hospitalsLoading,
+    TResult Function(HospitalsSuccess value)? hospitalsSuccess,
+    TResult Function(HospitalsError value)? hospitalsError,
+    TResult Function(DepartmentSelected value)? departmentSelected,
+    TResult Function(PatientProfileLoading value)? patientProfileLoading,
+    TResult Function(PatientProfileSuccess value)? patientProfileSuccess,
+    TResult Function(PatientProfileError value)? patientProfileError,
+    required TResult orElse(),
+  }) {
+    if (patientProfileSuccess != null) {
+      return patientProfileSuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class PatientProfileSuccess implements HomeState {
+  const factory PatientProfileSuccess(
+          final PatientProfileResponseModel patientProfileResponseModel) =
+      _$PatientProfileSuccessImpl;
+
+  PatientProfileResponseModel get patientProfileResponseModel;
+
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$PatientProfileSuccessImplCopyWith<_$PatientProfileSuccessImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$PatientProfileErrorImplCopyWith<$Res> {
+  factory _$$PatientProfileErrorImplCopyWith(_$PatientProfileErrorImpl value,
+          $Res Function(_$PatientProfileErrorImpl) then) =
+      __$$PatientProfileErrorImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({ErrorHandler error});
+}
+
+/// @nodoc
+class __$$PatientProfileErrorImplCopyWithImpl<$Res>
+    extends _$HomeStateCopyWithImpl<$Res, _$PatientProfileErrorImpl>
+    implements _$$PatientProfileErrorImplCopyWith<$Res> {
+  __$$PatientProfileErrorImplCopyWithImpl(_$PatientProfileErrorImpl _value,
+      $Res Function(_$PatientProfileErrorImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? error = null,
+  }) {
+    return _then(_$PatientProfileErrorImpl(
+      null == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as ErrorHandler,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$PatientProfileErrorImpl implements PatientProfileError {
+  const _$PatientProfileErrorImpl(this.error);
+
+  @override
+  final ErrorHandler error;
+
+  @override
+  String toString() {
+    return 'HomeState.patientProfileError(error: $error)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$PatientProfileErrorImpl &&
+            (identical(other.error, error) || other.error == error));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, error);
+
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$PatientProfileErrorImplCopyWith<_$PatientProfileErrorImpl> get copyWith =>
+      __$$PatientProfileErrorImplCopyWithImpl<_$PatientProfileErrorImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() departmentsLoading,
+    required TResult Function(
+            List<DepartmentsResponseModel> departmentsResponseModel)
+        departmentsSuccess,
+    required TResult Function(ErrorHandler error) departmentsError,
+    required TResult Function() doctorsLoading,
+    required TResult Function(List<DoctorsResponseModel> doctorsResponseModel)
+        doctorsSuccess,
+    required TResult Function(ErrorHandler error) doctorsError,
+    required TResult Function() hospitalsLoading,
+    required TResult Function(
+            List<HospitalsResponseModel> hospitalsResponseModel)
+        hospitalsSuccess,
+    required TResult Function(ErrorHandler error) hospitalsError,
+    required TResult Function(int departmentId) departmentSelected,
+    required TResult Function() patientProfileLoading,
+    required TResult Function(
+            PatientProfileResponseModel patientProfileResponseModel)
+        patientProfileSuccess,
+    required TResult Function(ErrorHandler error) patientProfileError,
+  }) {
+    return patientProfileError(error);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? departmentsLoading,
+    TResult? Function(List<DepartmentsResponseModel> departmentsResponseModel)?
+        departmentsSuccess,
+    TResult? Function(ErrorHandler error)? departmentsError,
+    TResult? Function()? doctorsLoading,
+    TResult? Function(List<DoctorsResponseModel> doctorsResponseModel)?
+        doctorsSuccess,
+    TResult? Function(ErrorHandler error)? doctorsError,
+    TResult? Function()? hospitalsLoading,
+    TResult? Function(List<HospitalsResponseModel> hospitalsResponseModel)?
+        hospitalsSuccess,
+    TResult? Function(ErrorHandler error)? hospitalsError,
+    TResult? Function(int departmentId)? departmentSelected,
+    TResult? Function()? patientProfileLoading,
+    TResult? Function(PatientProfileResponseModel patientProfileResponseModel)?
+        patientProfileSuccess,
+    TResult? Function(ErrorHandler error)? patientProfileError,
+  }) {
+    return patientProfileError?.call(error);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? departmentsLoading,
+    TResult Function(List<DepartmentsResponseModel> departmentsResponseModel)?
+        departmentsSuccess,
+    TResult Function(ErrorHandler error)? departmentsError,
+    TResult Function()? doctorsLoading,
+    TResult Function(List<DoctorsResponseModel> doctorsResponseModel)?
+        doctorsSuccess,
+    TResult Function(ErrorHandler error)? doctorsError,
+    TResult Function()? hospitalsLoading,
+    TResult Function(List<HospitalsResponseModel> hospitalsResponseModel)?
+        hospitalsSuccess,
+    TResult Function(ErrorHandler error)? hospitalsError,
+    TResult Function(int departmentId)? departmentSelected,
+    TResult Function()? patientProfileLoading,
+    TResult Function(PatientProfileResponseModel patientProfileResponseModel)?
+        patientProfileSuccess,
+    TResult Function(ErrorHandler error)? patientProfileError,
+    required TResult orElse(),
+  }) {
+    if (patientProfileError != null) {
+      return patientProfileError(error);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(DepartmentsLoading value) departmentsLoading,
+    required TResult Function(DepartmentsSuccess value) departmentsSuccess,
+    required TResult Function(DepartmentsError value) departmentsError,
+    required TResult Function(DoctorsLoading value) doctorsLoading,
+    required TResult Function(DoctorsSuccess value) doctorsSuccess,
+    required TResult Function(DoctorsError value) doctorsError,
+    required TResult Function(HospitalsLoading value) hospitalsLoading,
+    required TResult Function(HospitalsSuccess value) hospitalsSuccess,
+    required TResult Function(HospitalsError value) hospitalsError,
+    required TResult Function(DepartmentSelected value) departmentSelected,
+    required TResult Function(PatientProfileLoading value)
+        patientProfileLoading,
+    required TResult Function(PatientProfileSuccess value)
+        patientProfileSuccess,
+    required TResult Function(PatientProfileError value) patientProfileError,
+  }) {
+    return patientProfileError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(DepartmentsLoading value)? departmentsLoading,
+    TResult? Function(DepartmentsSuccess value)? departmentsSuccess,
+    TResult? Function(DepartmentsError value)? departmentsError,
+    TResult? Function(DoctorsLoading value)? doctorsLoading,
+    TResult? Function(DoctorsSuccess value)? doctorsSuccess,
+    TResult? Function(DoctorsError value)? doctorsError,
+    TResult? Function(HospitalsLoading value)? hospitalsLoading,
+    TResult? Function(HospitalsSuccess value)? hospitalsSuccess,
+    TResult? Function(HospitalsError value)? hospitalsError,
+    TResult? Function(DepartmentSelected value)? departmentSelected,
+    TResult? Function(PatientProfileLoading value)? patientProfileLoading,
+    TResult? Function(PatientProfileSuccess value)? patientProfileSuccess,
+    TResult? Function(PatientProfileError value)? patientProfileError,
+  }) {
+    return patientProfileError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(DepartmentsLoading value)? departmentsLoading,
+    TResult Function(DepartmentsSuccess value)? departmentsSuccess,
+    TResult Function(DepartmentsError value)? departmentsError,
+    TResult Function(DoctorsLoading value)? doctorsLoading,
+    TResult Function(DoctorsSuccess value)? doctorsSuccess,
+    TResult Function(DoctorsError value)? doctorsError,
+    TResult Function(HospitalsLoading value)? hospitalsLoading,
+    TResult Function(HospitalsSuccess value)? hospitalsSuccess,
+    TResult Function(HospitalsError value)? hospitalsError,
+    TResult Function(DepartmentSelected value)? departmentSelected,
+    TResult Function(PatientProfileLoading value)? patientProfileLoading,
+    TResult Function(PatientProfileSuccess value)? patientProfileSuccess,
+    TResult Function(PatientProfileError value)? patientProfileError,
+    required TResult orElse(),
+  }) {
+    if (patientProfileError != null) {
+      return patientProfileError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class PatientProfileError implements HomeState {
+  const factory PatientProfileError(final ErrorHandler error) =
+      _$PatientProfileErrorImpl;
+
+  ErrorHandler get error;
+
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$PatientProfileErrorImplCopyWith<_$PatientProfileErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
