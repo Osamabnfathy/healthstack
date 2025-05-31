@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:healthstack/core/helpers/extensions.dart';
 import 'package:healthstack/core/routing/routes.dart';
 import 'package:healthstack/core/theming/styles.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:healthstack/features/home/logic/cubit/home_cubit.dart';
 
 
 class MyAppointmentAndMedicalRecords extends StatelessWidget {
@@ -43,12 +45,34 @@ class MyAppointmentAndMedicalRecords extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(12.r),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.stretch, // Make items fill height
+          crossAxisAlignment: CrossAxisAlignment.stretch, 
           children: [
             _buildQuickActionItem(
               context,
               'Appointments',
-              () => context.pushNamed(Routes.appointmentScreen),
+              () {
+                final homeCubit = context.read<HomeCubit>();
+                print('Navigating with doctors: ${homeCubit.doctorsDataList}');
+                print('Navigating with hospitals: ${homeCubit.hospitalsDataList}');
+                print('Navigating with departments: ${homeCubit.departmentsDataList}'); 
+                if (homeCubit.doctorsDataList!.isNotEmpty &&
+                    homeCubit.hospitalsDataList!.isNotEmpty &&
+                    homeCubit.departmentsDataList!.isNotEmpty) {
+                  context.pushNamed(
+                    Routes.appointmentScreen,
+                    arguments: {
+                      'doctors': homeCubit.doctorsDataList,
+                      'hospitals': homeCubit.hospitalsDataList,
+                      'departments': homeCubit.departmentsDataList,
+                    },
+                  );
+                } 
+                else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Please wait, loading data...')),
+                  );
+                }
+              }
             ),
             
             VerticalDivider(

@@ -45,7 +45,7 @@ class BookingInfoCard extends StatelessWidget {
                 icon: Icons.calendar_month_outlined,
                 iconColor: ColorsManager.mainBlue,
                 title: "Date & Time",
-                subtitle: "${bookingInfo['Date']}  ‖  ${bookingInfo['Time']}",
+                subtitle: "${bookingInfo['Date']}   ||   ${bookingInfo['Time']}",
               ),
               
               Divider(height: 1, thickness: 2,indent: 15.w , endIndent: 15.w, color: Colors.grey.shade200),

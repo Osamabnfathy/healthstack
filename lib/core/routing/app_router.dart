@@ -13,7 +13,7 @@ import 'package:healthstack/features/home/logic/cubit/home_cubit.dart';
 import 'package:healthstack/features/onboarding/onboarding_screen.dart';
 import 'package:healthstack/features/login/logic/cubit/login_cubit.dart';
 import 'package:healthstack/features/hospitals/ui/hospitals_screen.dart';
-import 'package:healthstack/features/my_appointment/ui/my_appointment.dart';
+import 'package:healthstack/features/my_appointment/ui/my_appointments_screen.dart';
 import 'package:healthstack/features/medical_record/ui/medical_record_screen.dart';
 import 'package:healthstack/features/change_password/ui/change_password_screen.dart';
 import 'package:healthstack/features/forget_password/ui/forget_password_screen.dart';
@@ -21,6 +21,7 @@ import 'package:healthstack/features/change_password/logic/change_password_cubit
 import 'package:healthstack/features/book_appointment/ui/first_appointment_screen.dart';
 import 'package:healthstack/features/book_appointment/ui/second_appointment_screen.dart';
 import 'package:healthstack/features/book_appointment/logic/book_appointment_cubit.dart';
+import 'package:healthstack/features/my_appointment/logic/cubit/my_appointments_cubit.dart';
 import 'package:healthstack/features/book_appointment/ui/third_booking_confirmation_screen.dart';
 
 class AppRouter {
@@ -168,8 +169,17 @@ class AppRouter {
         
         
       case Routes.appointmentScreen:
+        final args = settings.arguments as Map<String, dynamic>?;
+
         return MaterialPageRoute(
-          builder: (_) => const MyAppointmentScreen(),
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<MyAppointmentsCubit>(),
+            child: MyAppointmentScreen(
+              doctors: args?['doctors'],
+              hospitals: args?['hospitals'],
+              departments: args?['departments'],
+            ),
+          ),
         );
         
       

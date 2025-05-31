@@ -164,9 +164,9 @@ class DoctorDetailsScreen extends StatelessWidget {
                 
                 buildInfoRow('Visiting Hours', getDisplayText(doctorsData?.visitingHour)),
                 
-                buildInfoRow('Consultation Fee', getDisplayText(doctorsData?.consultationFee.toString())),
+                buildInfoRow('Checkup Fee', "${getDisplayText(doctorsData?.consultationFee.toString())} EGP"),
                 
-                buildInfoRow('Report Fee', getDisplayText(doctorsData?.reportFee.toString())),
+                buildInfoRow('Report Fee', "${getDisplayText(doctorsData?.reportFee.toString())} EGP"),
               ],
             ),
           ),

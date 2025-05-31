@@ -101,7 +101,7 @@ class DoctorsDepartmentListViewItem extends StatelessWidget {
                   verticalSpace(5),
                   
                   Text(
-                    'Fees: ${getDisplayText(doctorsData?.reportFee.toString())} - ${getDisplayText(doctorsData?.consultationFee.toString())}',
+                    'Fees: ${getDisplayText(doctorsData?.reportFee.toString())} - ${getDisplayText(doctorsData?.consultationFee.toString())} EGP',
                     style: TextStyles.font12GrayMedium,
                     maxLines: 1, 
                     overflow: TextOverflow.ellipsis, 
