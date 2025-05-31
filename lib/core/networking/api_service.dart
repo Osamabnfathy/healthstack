@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:healthstack/features/my_appointment/data/models/my_appointments_response_model.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:healthstack/core/networking/api_constants.dart';
 import 'package:healthstack/features/login/data/models/login_response.dart';
@@ -42,4 +43,7 @@ abstract class ApiService {
   Future<ChangePasswordResponseBody> changePassword(
     @Body() ChangePasswordRequestBody changePasswordRequestBody,
   );
+  
+  @GET(ApiConstants.appointments)
+  Future<List<MyAppointmentResponseModel>> getMyAppointments();
 }

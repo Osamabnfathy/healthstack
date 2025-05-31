@@ -22,37 +22,39 @@ class MyAppointmentTaps extends StatelessWidget {
       children: [
         _buildTab('Upcoming', 0, context), // Pass context
         horizontalSpace(30),
+        
         _buildTab('Completed', 1, context), // Pass context
         horizontalSpace(30),
+        
         _buildTab('Cancelled', 2, context), // Pass context
       ],
     );
   }
 
   Widget _buildTab(String title, int index, BuildContext context) {
-    // Added context
     final bool isActive = selectedIndex == index;
-
     return GestureDetector(
       onTap: () {
         onTabChanged(index);
       },
+      
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
             title,
             style: isActive
-                ? TextStyles.font14BlueBold
+                ? TextStyles.font15BlueBold
                 : TextStyles.font14GrayRegular.copyWith(
                     fontWeight: FontWeightHelper.semiBold,
                     color: ColorsManager.gray),
           ),
           verticalSpace(8),
+          
           if (isActive)
             Container(
-              width: 65.w,
+              width: 66.w,
               height: 3.h,
               decoration: BoxDecoration(
                 color: ColorsManager.mainBlue,

@@ -2808,10 +2808,10 @@ class __$$PatientProfileSuccessImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? patientProfileResponseModel = freezed,
+    Object? patientProfileResponseModel = null,
   }) {
     return _then(_$PatientProfileSuccessImpl(
-      freezed == patientProfileResponseModel
+      null == patientProfileResponseModel
           ? _value.patientProfileResponseModel
           : patientProfileResponseModel // ignore: cast_nullable_to_non_nullable
               as PatientProfileResponseModel,
@@ -2837,14 +2837,14 @@ class _$PatientProfileSuccessImpl implements PatientProfileSuccess {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PatientProfileSuccessImpl &&
-            const DeepCollectionEquality().equals(
-                other.patientProfileResponseModel,
-                patientProfileResponseModel));
+            (identical(other.patientProfileResponseModel,
+                    patientProfileResponseModel) ||
+                other.patientProfileResponseModel ==
+                    patientProfileResponseModel));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(patientProfileResponseModel));
+  int get hashCode => Object.hash(runtimeType, patientProfileResponseModel);
 
   /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.

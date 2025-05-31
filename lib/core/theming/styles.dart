@@ -105,6 +105,12 @@ class TextStyles {
     fontWeight: FontWeightHelper.bold,
     color: ColorsManager.mainBlue,
   );
+  
+  static TextStyle font15BlueBold = TextStyle(
+    fontSize: 15.sp,
+    fontWeight: FontWeightHelper.bold,
+    color: ColorsManager.mainBlue,
+  );
 
   static TextStyle font14GrayRegular = TextStyle(
     fontSize: 14.sp,

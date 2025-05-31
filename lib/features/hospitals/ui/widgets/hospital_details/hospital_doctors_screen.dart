@@ -147,7 +147,7 @@ class HospitalDoctorsScreen extends StatelessWidget {
                               verticalSpace(5.h),
                               
                               Text(
-                                'Fees: ${getDisplayText(doctor.reportFee.toString())} - ${getDisplayText(doctor.consultationFee.toString())}',
+                                'Fees: ${getDisplayText(doctor.reportFee.toString())} - ${getDisplayText(doctor.consultationFee.toString())} EGP',
                                 style: TextStyles.font12GrayMedium,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,

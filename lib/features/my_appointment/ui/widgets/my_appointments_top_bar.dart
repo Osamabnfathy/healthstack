@@ -21,9 +21,10 @@ class MyAppointmentTopBar extends StatelessWidget {
           ),
         ),
         horizontalSpace(20),
+        
         Expanded(
           child: Text(
-            'My Appointment',
+            'My Appointments',
             style: TextStyles.font18DarkBlueBold,
             textAlign: TextAlign.center,
           ),
