@@ -51,10 +51,7 @@ class MyAppointmentAndMedicalRecords extends StatelessWidget {
               context,
               'Appointments',
               () {
-                final homeCubit = context.read<HomeCubit>();
-                print('Navigating with doctors: ${homeCubit.doctorsDataList}');
-                print('Navigating with hospitals: ${homeCubit.hospitalsDataList}');
-                print('Navigating with departments: ${homeCubit.departmentsDataList}'); 
+                final homeCubit = context.read<HomeCubit>(); 
                 if (homeCubit.doctorsDataList!.isNotEmpty &&
                     homeCubit.hospitalsDataList!.isNotEmpty &&
                     homeCubit.departmentsDataList!.isNotEmpty) {
@@ -78,8 +75,8 @@ class MyAppointmentAndMedicalRecords extends StatelessWidget {
             VerticalDivider(
               color: Colors.grey.shade300,
               thickness: 1,
-              width: 1, // Keep width minimal
-              indent: 10.h, // Optional: Add some vertical padding
+              width: 1, 
+              indent: 10.h, 
               endIndent: 10.h,
             ),
             

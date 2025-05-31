@@ -1,3 +1,5 @@
+import 'package:healthstack/features/home/data/models/patient_profile_response_model.dart';
+
 import 'widgets/bottuns_list.dart';
 import 'package:flutter/material.dart';
 import 'widgets/drawer_top_buttons.dart';
@@ -7,7 +9,9 @@ import 'package:healthstack/core/theming/colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class EndDrawer extends StatelessWidget {
-  const EndDrawer({super.key});
+  final PatientProfileResponseModel? patientProfileData;
+
+  const EndDrawer({super.key, this.patientProfileData});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +23,7 @@ class EndDrawer extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const ProfileInformation(),
+          ProfileInformation(patientProfileData: patientProfileData),
           
           const CircularEdgeItemsDrawer(),
           

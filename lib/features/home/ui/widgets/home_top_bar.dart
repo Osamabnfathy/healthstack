@@ -22,7 +22,7 @@ class HomeTopBar extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Hi, $patientName',
+              'Hi, ${patientName?.split(' ').first ?? patientName} 👋',
               style: TextStyles.font18DarkBlueBold,
             ),
             

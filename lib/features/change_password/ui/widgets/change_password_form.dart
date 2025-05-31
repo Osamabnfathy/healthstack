@@ -105,7 +105,7 @@ class _ChangePasswordFormState extends State<ChangePasswordForm> {
             ),
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'Please enter a new password';
+                return 'Please enter the new password';
               }
             },
           ),
