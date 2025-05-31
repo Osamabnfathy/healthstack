@@ -34,5 +34,5 @@ extension ListExtension<T> on List<T>? {
 }
 
 String getDisplayText(String? value) {
-  return (value == null || value.trim().isEmpty) ? 'N/A' : value;
+  return (value == null || value.trim().isEmpty) ? 'None' : value;
 }

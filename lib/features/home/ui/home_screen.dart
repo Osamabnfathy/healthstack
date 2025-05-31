@@ -24,7 +24,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      endDrawer: const EndDrawer(), 
+      endDrawer: EndDrawer(
+        patientProfileData: context.watch<HomeCubit>().patientProfileData, 
+      ), 
       backgroundColor: Colors.white,
       
       body: SafeArea(

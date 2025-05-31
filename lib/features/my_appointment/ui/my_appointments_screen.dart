@@ -46,9 +46,6 @@ class _UpcomingScreenState extends State<MyAppointmentScreen> {
     doctors = widget.doctors ?? [];
     hospitals = widget.hospitals ?? [];
     departments = widget.departments ?? [];
-    print('Doctors appointments: $doctors');
-    print('Hospitals appointments: $hospitals');
-    print('Departments appointments: $departments');
   }
 
   void _onTabChanged(int index) {
