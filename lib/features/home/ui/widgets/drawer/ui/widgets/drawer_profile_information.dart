@@ -1,11 +1,13 @@
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
-import 'package:healthstack/core/helpers/extensions.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:healthstack/core/routing/routes.dart';
 import 'package:healthstack/core/theming/styles.dart';
 import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/core/helpers/spacing.dart';
+import 'package:healthstack/core/helpers/extensions.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:healthstack/features/home/logic/cubit/home_cubit.dart';
 import 'package:healthstack/features/home/data/models/patient_profile_response_model.dart';
 
 class ProfileInformation extends StatelessWidget {
@@ -15,6 +17,8 @@ class ProfileInformation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final homeCubitInstance = context.read<HomeCubit>();
+    
     return Container(
       color: ColorsManager.lightBlue,
       padding: EdgeInsets.only(top: 40.h, bottom: 20.h, left: 20.w, right: 20.w),
@@ -66,16 +70,18 @@ class ProfileInformation extends StatelessWidget {
               InkWell(
                 onTap: () {
                   context.pushNamed(
-                    Routes.profileScreen,
-                    arguments: patientProfileData,
+                    Routes.editProfileScreen,
+                    arguments: homeCubitInstance,
                   );
                 },
+                
                 child: Container(
                   padding: EdgeInsets.all(4.r),
                   decoration: const BoxDecoration(
                     color: Colors.white,
                     shape: BoxShape.circle,
                   ),
+                  
                   child: Icon(Icons.edit, size: 16.sp, color: ColorsManager.mainBlue),
                 ),
               ),
