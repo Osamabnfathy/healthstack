@@ -13,8 +13,9 @@ import 'package:healthstack/features/home/logic/cubit/home_cubit.dart';
 import 'package:healthstack/features/onboarding/onboarding_screen.dart';
 import 'package:healthstack/features/login/logic/cubit/login_cubit.dart';
 import 'package:healthstack/features/hospitals/ui/hospitals_screen.dart';
-import 'package:healthstack/features/my_appointment/ui/my_appointments_screen.dart';
+import 'package:healthstack/features/prescriptions/ui/prescriptions_screen.dart';
 import 'package:healthstack/features/medical_record/ui/medical_record_screen.dart';
+import 'package:healthstack/features/my_appointment/ui/my_appointments_screen.dart';
 import 'package:healthstack/features/change_password/ui/change_password_screen.dart';
 import 'package:healthstack/features/forget_password/ui/forget_password_screen.dart';
 import 'package:healthstack/features/change_password/logic/change_password_cubit.dart';
@@ -87,7 +88,6 @@ class AppRouter {
           );
         } 
         else {
-          print("ERROR: Incorrect arguments passed to Doctors Screen route.");
           return MaterialPageRoute(
             builder: (_) => const Scaffold(body: Center(child: Text("Error: Missing data for Doctors screen.")))
           );
@@ -183,9 +183,9 @@ class AppRouter {
         );
         
       
-      case Routes.prescriptionsScreen:
+      case Routes.prescriptionScreen:
         return MaterialPageRoute(
-          builder: (_) => const MyAppointmentScreen(), // !! edit it don't forget
+          builder: (_) => const PrescriptionsScreen(), 
         );
       
         

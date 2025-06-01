@@ -77,3 +77,44 @@ class HomeCubit extends Cubit<HomeState> {
     );
   }
 }
+
+/// Uncomment the following code if you want to enrich doctor data with hospital and department information
+// class EnrichedDoctor {
+//   final String? name;
+//   final String? email;
+//   final String? image;
+//   final String? hospitalName;
+//   final String? departmentName;
+
+//   EnrichedDoctor({
+//     this.name,
+//     this.email,
+//     this.image,
+//     this.hospitalName,
+//     this.departmentName,
+//   });
+// }
+
+// List<EnrichedDoctor> getEnrichedDoctors({
+//   required List<DoctorsResponseModel> doctors,
+//   required List<HospitalsResponseModel> hospitals,
+//   required List<DepartmentsResponseModel> departments,
+// }) {
+//   return doctors.map((doctor) {
+//     final hospital = hospitals.firstWhere(
+//       (h) => h.hospitalId == doctor.hospitalName,
+//       orElse: () => HospitalsResponseModel(),
+//     );
+//     final department = departments.firstWhere(
+//       (d) => d.hospitalDepartmentId == doctor.departmentName,
+//       orElse: () => DepartmentsResponseModel(),
+//     );
+//     return EnrichedDoctor(
+//       name: doctor.name,
+//       email: doctor.email,
+//       image: doctor.featuredImage,
+//       hospitalName: hospital.name,
+//       departmentName: department.hospitalDepartmentName,
+//     );
+//   }).toList();
+// }

@@ -14,6 +14,13 @@ class DoctorsBlueContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     final homeCubitInstance = context.read<HomeCubit>();
     
+    /// here i need to pass a matched data of the doctor's hospital and department
+    // final enrichedDoctors = getEnrichedDoctors(
+    //   doctors: homeCubitInstance.doctorsDataList ?? [], 
+    //   hospitals: homeCubitInstance.hospitalsDataList ?? [], 
+    //   departments: homeCubitInstance.departmentsDataList ?? [],
+    // );
+    
     return SizedBox(
       height: 195.h,
       child: Stack(

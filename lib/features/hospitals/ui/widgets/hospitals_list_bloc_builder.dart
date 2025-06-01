@@ -9,10 +9,12 @@ import 'package:healthstack/features/home/data/models/departments_response_model
 
 class HospitalsListBlocBuilder extends StatelessWidget {
   final String searchQuery;
+  final bool isSorted; 
 
   const HospitalsListBlocBuilder({
     super.key, 
     required this.searchQuery,
+    required this.isSorted,
   });
   
   @override
@@ -21,7 +23,7 @@ class HospitalsListBlocBuilder extends StatelessWidget {
       builder: (context, state) {
         final homeCubit = context.read<HomeCubit>();
         final List<DoctorsResponseModel> doctorsDataList = homeCubit.doctorsDataList ?? [];
-        final List<HospitalsResponseModel> hospitalsDataList = homeCubit.hospitalsDataList ?? [];
+        List<HospitalsResponseModel> hospitalsDataList = homeCubit.hospitalsDataList ?? [];
         final List<DepartmentsResponseModel> departmentsDataList = homeCubit.departmentsDataList ?? [];
 
         if (hospitalsDataList.isEmpty && state is! HospitalsError) {
@@ -35,7 +37,11 @@ class HospitalsListBlocBuilder extends StatelessWidget {
         }
 
         if (hospitalsDataList.isNotEmpty) {
-          print("Showing Filtered Hospitals ListView with ${doctorsDataList.length} total doctors.");
+          if (isSorted) {
+            hospitalsDataList = List<HospitalsResponseModel>.from(hospitalsDataList)
+              ..sort((a, b) => (a.name ?? '').compareTo(b.name ?? ''));
+          }
+          
           return HospitalsListView(
             searchQuery: searchQuery,
             doctorsDataList: doctorsDataList,
