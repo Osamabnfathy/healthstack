@@ -5,14 +5,14 @@ import 'package:healthstack/core/routing/routes.dart';
 import 'package:healthstack/features/home/ui/home_screen.dart';
 import 'package:healthstack/core/di/dependency_injection.dart';
 import 'package:healthstack/features/login/ui/login_screen.dart';
-import 'package:healthstack/features/doctors/ui/doctors_screen.dart';
-import 'package:healthstack/features/profile/ui/profile_screen.dart';
 import 'package:healthstack/features/sign_up/ui/sign_up_screen.dart';
+import 'package:healthstack/features/doctors/ui/doctors_screen.dart';
 import 'package:healthstack/features/sign_up/logic/sign_up_cubit.dart';
 import 'package:healthstack/features/home/logic/cubit/home_cubit.dart';
 import 'package:healthstack/features/onboarding/onboarding_screen.dart';
 import 'package:healthstack/features/login/logic/cubit/login_cubit.dart';
 import 'package:healthstack/features/hospitals/ui/hospitals_screen.dart';
+import 'package:healthstack/features/edit_profile/ui/edit_profile_screen.dart';
 import 'package:healthstack/features/prescriptions/ui/prescriptions_screen.dart';
 import 'package:healthstack/features/medical_record/ui/medical_record_screen.dart';
 import 'package:healthstack/features/my_appointment/ui/my_appointments_screen.dart';
@@ -195,10 +195,23 @@ class AppRouter {
         );
       
       
-      case Routes.profileScreen:
-        return MaterialPageRoute(
-          builder: (_) => const ProfileScreen(),
-        );
+      case Routes.editProfileScreen:
+        if (arguments is HomeCubit) {
+          final homeCubitInstance = arguments;
+          return MaterialPageRoute(
+            builder: (context) => BlocProvider.value(
+              value: homeCubitInstance,
+              child: const EditProfileScreen(),
+            ),
+          );
+        } 
+        else {
+          return MaterialPageRoute(
+            builder: (_) => const Scaffold(
+              body: Center(child: Text("Error: Missing data for Edit Profile screen."))
+            ),
+          );
+        }
       
       
       default:

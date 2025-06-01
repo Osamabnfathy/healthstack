@@ -66,6 +66,8 @@ dependencies:
   # shimmer for loading animation
   shimmer: ^3.0.0
   lottie: ^3.1.0
+  # for image picking
+  image_picker: ^1.1.2
 
 
 dev_dependencies:

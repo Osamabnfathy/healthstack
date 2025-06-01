@@ -30,7 +30,7 @@ class Routes {
   static const String medicalRecordScreen = '/medicalRecordScreen';
   
   // screen of profile
-  static const String profileScreen = '/profileScreen';
+  static const String editProfileScreen = '/editProfileScreen';
   
   // screen of doctors
   static const String doctorsScreen = '/doctorsScreen';

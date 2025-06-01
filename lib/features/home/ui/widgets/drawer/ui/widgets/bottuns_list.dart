@@ -45,7 +45,7 @@ class ButtonsList extends StatelessWidget {
         'Personal Information',
         Colors.blue.shade50,
         Colors.blue,
-        () => context.pushNamed(Routes.profileScreen),
+        () => context.pushNamed(Routes.editProfileScreen , arguments: homeCubitInstance),
         image: Image.asset('assets/icons/personalcard.png', height: 22.h, width: 22.w),
       ),
       
@@ -75,10 +75,10 @@ class ButtonsList extends StatelessWidget {
 
     return Container(
       color: ColorsManager.lighterGray, 
-      padding: EdgeInsets.symmetric(horizontal: 10.w).copyWith(top: 10.h), // List horizental padding
+      padding: EdgeInsets.symmetric(horizontal: 10.w).copyWith(top: 10.h), 
        
       child: ListView.separated(
-        physics: const BouncingScrollPhysics(), // Good for lists that might not scroll much
+        physics: const BouncingScrollPhysics(), 
         separatorBuilder: (context, index) => SizedBox(height: 12.h),
         
         itemCount: menuItems.length,
