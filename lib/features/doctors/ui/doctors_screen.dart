@@ -18,6 +18,7 @@ class DoctorsScreen extends StatefulWidget {
 class _DoctorPageState extends State<DoctorsScreen> {
   late TextEditingController searchController;
   String searchQuery = '';
+  bool isSorted = true;
 
   @override
   void initState() {
@@ -29,6 +30,12 @@ class _DoctorPageState extends State<DoctorsScreen> {
   void _onSearchChanged() {
     setState(() {
       searchQuery = searchController.text.trim().toLowerCase();
+    });
+  }
+  
+  void _onFilterPressed() {
+    setState(() {
+      isSorted = !isSorted;
     });
   }
 
@@ -56,13 +63,14 @@ class _DoctorPageState extends State<DoctorsScreen> {
                    
                   SearchAndFilterBar(
                     searchController: searchController,
-                    onFilterPressed: () {},
+                    onFilterPressed: _onFilterPressed,
                   ),
                   verticalSpace(10),
                   
                   Expanded(
                     child: DoctorsListBlocBuilder(
                       searchQuery: searchQuery,
+                      isSorted: isSorted,
                     ),
                   )
                 ],
