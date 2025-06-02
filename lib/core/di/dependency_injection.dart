@@ -11,9 +11,11 @@ import 'package:healthstack/features/sign_up/data/repos/sign_up_repo.dart';
 import 'package:healthstack/features/home/data/apis/home_api_services.dart';
 import 'package:healthstack/features/change_password/logic/change_password_cubit.dart';
 import 'package:healthstack/features/book_appointment/logic/book_appointment_cubit.dart';
+import 'package:healthstack/features/edit_profile/data/repos/edit_profile_data_repo.dart';
 import 'package:healthstack/features/change_password/data/repo/change_password_repo.dart';
 import 'package:healthstack/features/my_appointment/data/repos/my_appointments_repo.dart';
 import 'package:healthstack/features/forget_password/data/repos/forget_password_repo.dart';
+import 'package:healthstack/features/edit_profile/logic/cubit/edit_profile_data_cubit.dart';
 import 'package:healthstack/features/my_appointment/logic/cubit/my_appointments_cubit.dart';
 import 'package:healthstack/features/forget_password/logic/cubit/forget_password_cubit.dart';
 import 'package:healthstack/features/book_appointment/data/repos/book_appointment_repo.dart';
@@ -54,4 +56,8 @@ Future<void> setupGetIt() async {
   // My Appointments
   getIt.registerLazySingleton<MyAppointmentsRepo>(() => MyAppointmentsRepo(getIt()));
   getIt.registerFactory<MyAppointmentsCubit>(() => MyAppointmentsCubit(getIt()));
+
+  // Edit profile Data
+  getIt.registerLazySingleton<EditProfileDataRepo>(() => EditProfileDataRepo(getIt()));
+  getIt.registerFactory<EditProfileDataCubit>(() => EditProfileDataCubit(getIt()));
 }

@@ -40,7 +40,7 @@ class DepartmentsListViewItem extends StatelessWidget {
       'assets/icons/general.png', 
       height: 65.h, 
       width: 65.w,
-      fit: BoxFit.fill, 
+      fit: BoxFit.cover, 
     );
 
     return GestureDetector(

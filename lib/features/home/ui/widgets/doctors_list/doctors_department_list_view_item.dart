@@ -30,7 +30,7 @@ class DoctorsDepartmentListViewItem extends StatelessWidget {
       "assets/icons/doctor.png", 
       width: 110.w, 
       height: 120.h, 
-      fit: BoxFit.fill,
+      fit: BoxFit.cover,
     );
     
   
@@ -74,7 +74,7 @@ class DoctorsDepartmentListViewItem extends StatelessWidget {
                     doctorsData!.featuredImage!, 
                     width: 110.w, 
                     height: 120.h, 
-                    fit: BoxFit.fill,
+                    fit: BoxFit.cover,
                   )
                   : placeholderImage,
             ),

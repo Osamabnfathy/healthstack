@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/core/theming/styles.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,6 +17,9 @@ class ProfileTextFormField extends StatelessWidget {
   final TextEditingController? controller;
   final bool readOnly;
   final VoidCallback? onTap;
+  final String? Function(String?)? validator;
+  final TextInputType? keyboardType;
+  final List<TextInputFormatter>? inputFormatters;
 
   const ProfileTextFormField({
     super.key,
@@ -30,6 +34,9 @@ class ProfileTextFormField extends StatelessWidget {
     this.controller,
     this.readOnly = false,
     this.onTap,
+    this.validator,
+    this.keyboardType,
+    this.inputFormatters,
   });
 
   @override
@@ -54,12 +61,13 @@ class ProfileTextFormField extends StatelessWidget {
       controller: controller,
       readOnly: readOnly,
       onTap: onTap,
+      
       decoration: InputDecoration(
         isDense: true,
         contentPadding: contentPadding ?? EdgeInsets.symmetric(horizontal: 20.w, vertical: 18.h),
         
-        focusedBorder: readOnly ? InputBorder.none : (focusedBorder ?? border),
-        enabledBorder: readOnly ? InputBorder.none : (enabledBorder ?? grayBorder),
+        focusedBorder: readOnly ? grayBorder : (focusedBorder ?? border),
+        enabledBorder: readOnly ? grayBorder : (enabledBorder ?? grayBorder),
         
         hintStyle: hintStyle ?? TextStyles.font14LightGrayRegular,
         hintText: hintText,
@@ -68,7 +76,18 @@ class ProfileTextFormField extends StatelessWidget {
         fillColor: backgroundColor ?? ColorsManager.moreLightGray,
         filled: true,
       ),
+      
       style: inputTextStyle ?? TextStyles.font14DarkBlueMedium,
+      
+      validator: validator,
+      keyboardType: keyboardType ?? TextInputType.text,
+      inputFormatters: inputFormatters ?? <TextInputFormatter>[],
+      
+      cursorColor: ColorsManager.mainBlue,
+      cursorHeight: 20.h,
+      cursorWidth: 1.5.w,
+      
+      maxLength: 50,
     );
   }
 }

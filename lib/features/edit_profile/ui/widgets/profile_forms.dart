@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:healthstack/features/home/data/models/patient_profile_response_model.dart';
 import 'package:healthstack/features/edit_profile/ui/widgets/profile_text_form_field.dart';
@@ -6,24 +7,37 @@ import 'package:healthstack/features/edit_profile/ui/widgets/profile_text_form_f
 
 class ProfileForms extends StatefulWidget {
   final PatientProfileResponseModel? data;
+  final TextEditingController nameController;
+  final TextEditingController usernameController;
+  final TextEditingController emailController;
+  final TextEditingController dobController;
+  final TextEditingController ageController;
+  final TextEditingController bloodController;
+  final TextEditingController phoneController;
+  final TextEditingController addressController;
+  final TextEditingController nidController;
+  final GlobalKey<FormState> formKey;
   
-  const ProfileForms({super.key, this.data});
+  const ProfileForms({
+    super.key, 
+    this.data,
+    required this.nameController,
+    required this.usernameController,
+    required this.emailController,
+    required this.dobController,
+    required this.ageController,
+    required this.bloodController,
+    required this.phoneController,
+    required this.addressController,
+    required this.nidController,
+    required this.formKey,
+  });
 
   @override
   State<ProfileForms> createState() => _ProfileFormsState();
 }
 
 class _ProfileFormsState extends State<ProfileForms> {
-  late TextEditingController _dobController;
-  late TextEditingController _bloodController;
-  late TextEditingController _ageController;
-  late TextEditingController _nameController;
-  late TextEditingController _usernameController;
-  late TextEditingController _emailController;
-  late TextEditingController _phoneController;
-  late TextEditingController _addressController;
-  late TextEditingController _nidController;
-  
   static const List<String> _bloodTypes = [
     'A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'
   ];
@@ -39,28 +53,6 @@ class _ProfileFormsState extends State<ProfileForms> {
   static const Icon _locationIcon = Icon(Icons.location_on);
   static const Icon _badgeIcon = Icon(Icons.badge);
 
-  @override
-void initState() {
-  super.initState();
-  _dobController = TextEditingController(text: widget.data?.dob ?? '');
-  _bloodController = TextEditingController(text: widget.data?.bloodGroup ?? '');
-  _ageController = TextEditingController(text: widget.data?.age?.toString() ?? '',);
-  _nameController = TextEditingController(text: widget.data?.name ?? '');
-  _usernameController = TextEditingController(text: widget.data?.username ?? '');
-  _emailController = TextEditingController(text: widget.data?.email ?? '');
-  _phoneController = TextEditingController(text: widget.data?.phoneNumber?.toString() ?? '');
-  _addressController = TextEditingController(text: widget.data?.address ?? '');
-  _nidController = TextEditingController(text: widget.data?.nid ?? '');
-}
-
-  @override
-  void dispose() {
-    _dobController.dispose();
-    _bloodController.dispose();
-    _ageController.dispose();
-    super.dispose();
-  }
-
   Future<void> _pickDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -71,14 +63,14 @@ void initState() {
       cancelText: 'Cancel',
       confirmText: 'OK',
     );
-    
-    if (picked != null && mounted) { 
+
+    if (picked != null && mounted) {
       final age = _calculateAge(picked);
       final formattedDate = "${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
-      
+
       setState(() {
-        _dobController.text = formattedDate;
-        _ageController.text = age.toString();
+        widget.dobController.text = formattedDate;
+        widget.ageController.text = age.toString();
       });
     }
   }
@@ -106,10 +98,10 @@ void initState() {
             .toList(),
       ),
     );
-    
-    if (selected != null && mounted) { 
+
+    if (selected != null && mounted) {
       setState(() {
-        _bloodController.text = selected;
+        widget.bloodController.text = selected;
       });
     }
   }
@@ -117,78 +109,96 @@ void initState() {
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: widget.formKey,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       child: Column(
         mainAxisSize: MainAxisSize.min, 
         children: [
           ProfileTextFormField(
-            controller: _nameController,
+            controller: widget.nameController,
             hintText: "Name",
             readOnly: false,
             suffixIcon: _personIcon,
+            validator: (value) => value?.isEmpty ?? true ? 'Name is required' : null,
           ),
           verticalSpace(10),
           
           ProfileTextFormField(
-            controller: _usernameController,
+            controller: widget.usernameController,
             hintText: "Username",
             readOnly: true,
             suffixIcon: _accountIcon,
+            validator: (value) => value?.isEmpty ?? true ? 'Username is required' : null,
           ),
           verticalSpace(10),
           
           ProfileTextFormField(
-            controller: _emailController,
+            controller: widget.emailController,
             hintText: "Email",
             readOnly: true,
             suffixIcon: _emailIcon,
+            validator: (value) => value?.isEmpty ?? true ? 'Email is required' : null,
           ),
           verticalSpace(10),
           
           ProfileTextFormField(
-            controller: _dobController,
+            controller: widget.dobController,
             hintText: "Date of Birth",
             readOnly: true,
             onTap: () => _pickDate(context),
-            suffixIcon: _calendarIcon,
+            suffixIcon: _cakeIcon,
+            validator: (value) => value?.isEmpty ?? true ? 'Date of Birth is required' : null,
           ),
           verticalSpace(10),
           
           ProfileTextFormField(
-            controller: _ageController,
+            controller: widget.ageController,
             hintText: "Age",
             readOnly: true,
-            suffixIcon: _cakeIcon,
+            suffixIcon: _calendarIcon, 
+            validator: (value) => value?.isEmpty ?? true ? 'Age is required' : null,
           ),
           verticalSpace(10),
           
           ProfileTextFormField(
-            controller: _bloodController,
+            controller: widget.bloodController,
             hintText: "Blood Group",
             readOnly: true,
             onTap: () => _pickBloodType(context),
             suffixIcon: _bloodIcon,
+            validator: (value) => value?.isEmpty ?? true ? 'Blood Group is required' : null,
           ),
           verticalSpace(10),
           
           ProfileTextFormField(
-            controller: _phoneController,
+            controller: widget.phoneController,
             hintText: "Phone Number",
             suffixIcon: _phoneIcon,
+            validator: (value) => value?.isEmpty ?? true ? 'Phone Number is required' : null,
+            keyboardType: TextInputType.phone,
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp(r'[0-9+\-\s]')),
+            ],
           ),
           verticalSpace(10),
           
           ProfileTextFormField(
-            controller: _addressController,
+            controller: widget.addressController,
             hintText: "Address",
             suffixIcon: _locationIcon,
+            validator: (value) => value?.isEmpty ?? true ? 'Address is required' : null,
           ),
           verticalSpace(10),
           
           ProfileTextFormField(
-            controller: _nidController,
+            controller: widget.nidController,
             hintText: "ID Number",
             suffixIcon: _badgeIcon,
+            validator: (value) => value?.isEmpty ?? true ? 'ID Number is required' : null,
+            keyboardType: TextInputType.number,
+            inputFormatters: [
+              FilteringTextInputFormatter.digitsOnly
+            ]
           ),
         ],
       ),
