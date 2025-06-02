@@ -106,7 +106,7 @@ class DoctorDetailsScreen extends StatelessWidget {
                           doctorsData!.featuredImage!,
                           height: 300.h,
                           width: double.infinity,
-                          fit: BoxFit.fill,
+                          fit: BoxFit.cover,
                           errorBuilder: (context, error, stackTrace) => placeholderImage,
                           )
                         : placeholderImage,

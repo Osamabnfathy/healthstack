@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:healthstack/features/my_appointment/data/models/my_appointments_response_model.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:healthstack/core/networking/api_constants.dart';
 import 'package:healthstack/features/login/data/models/login_response.dart';
@@ -7,8 +6,11 @@ import 'package:healthstack/features/sign_up/data/models/sign_up_response.dart';
 import 'package:healthstack/features/login/data/models/login_request_body.dart';
 import 'package:healthstack/features/sign_up/data/models/sign_up_request_body.dart';
 import 'package:healthstack/features/forget_password/data/models/forget_password_response.dart';
+import 'package:healthstack/features/edit_profile/data/models/edit_profile_data_request_body.dart';
+import 'package:healthstack/features/edit_profile/data/models/edit_profile_data_response_body.dart';
 import 'package:healthstack/features/change_password/data/models/change_password_request_body.dart';
 import 'package:healthstack/features/forget_password/data/models/forget_password_request_body.dart';
+import 'package:healthstack/features/my_appointment/data/models/my_appointments_response_model.dart';
 import 'package:healthstack/features/change_password/data/models/change_password_response_body.dart';
 import 'package:healthstack/features/book_appointment/data/models/book_appointment_request_model.dart';
 import 'package:healthstack/features/book_appointment/data/models/book_appointment_response_model.dart';
@@ -46,4 +48,9 @@ abstract class ApiService {
   
   @GET(ApiConstants.appointments)
   Future<List<MyAppointmentResponseModel>> getMyAppointments();
+  
+  @PUT(ApiConstants.patientProfile)
+  Future<EditProfileDataResponseBody> editProfile(
+    @Body() EditProfileDataRequestBody editProfileDataRequestBody,
+  );
 }

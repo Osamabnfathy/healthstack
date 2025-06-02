@@ -54,13 +54,13 @@ class ProfileInformation extends StatelessWidget {
                   child: patientProfileData?.featuredImage != null && patientProfileData!.featuredImage!.isNotEmpty
                     ? Image.network(
                         patientProfileData!.featuredImage!,
-                        fit: BoxFit.fill,
+                        fit: BoxFit.cover,
                         width: 90.w,
                         height: 90.h,
                       )
                     : SvgPicture.asset(
                         'assets/svgs/general_speciality.svg',
-                        fit: BoxFit.fill,
+                        fit: BoxFit.cover,
                         width: 90.w,
                         height: 90.h,
                       ),

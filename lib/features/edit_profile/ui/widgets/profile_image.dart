@@ -53,9 +53,9 @@ class _ProfileImageState extends State<ProfileImage> {
   @override
   Widget build(BuildContext context) {
     final imageWidget = _pickedImage != null
-      ? Image.file(_pickedImage!, fit: BoxFit.fill, width: 80.w, height: 80.h)
+      ? Image.file(_pickedImage!, fit: BoxFit.cover, width: 80.w, height: 80.h)
       : (widget.data?.featuredImage != null && widget.data!.featuredImage!.isNotEmpty
-          ? Image.network(widget.data!.featuredImage!, fit: BoxFit.fill, width: 80.w, height: 80.h)
+          ? Image.network(widget.data!.featuredImage!, fit: BoxFit.cover, width: 80.w, height: 80.h)
           : SvgPicture.asset('assets/svgs/general_speciality.svg', fit: BoxFit.cover, height: 50.h, width: 50.w));
 
   

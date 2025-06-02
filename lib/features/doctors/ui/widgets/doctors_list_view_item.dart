@@ -40,7 +40,7 @@ class DoctorsListViewItem extends StatelessWidget {
       'assets/icons/doctor.png', 
       height: 110.h, 
       width: 120.w,
-      fit: BoxFit.fill, 
+      fit: BoxFit.cover, 
     );
     
     return InkWell(
@@ -79,7 +79,7 @@ class DoctorsListViewItem extends StatelessWidget {
                     doctorsData!.featuredImage!, 
                     width: 110.w, 
                     height: 120.h, 
-                    fit: BoxFit.fill,
+                    fit: BoxFit.cover,
                     
                     errorBuilder: (context, error, stackTrace) => placeholderImage,
                     loadingBuilder: (context, child, loadingProgress) {

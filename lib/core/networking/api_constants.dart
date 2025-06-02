@@ -10,9 +10,8 @@ class ApiConstants {
   static const String doctors = "doctor/";
   static const String departments = "hospital_department/";
   static const String appointments = "appointment/";
-  static const String prescription = "prescription/";
-  static const String medicalRecords = "report/";
   static const String patientProfile = "patient_profile/";
+  static const String medicalRecords = "report/";
   static const String allPrescriptionData = "all_prescription_data/";
 }
 

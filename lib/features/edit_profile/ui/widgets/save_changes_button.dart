@@ -4,14 +4,13 @@ import 'package:healthstack/core/theming/styles.dart';
 
 
 class SaveChangesButton extends StatelessWidget {
-  const SaveChangesButton({super.key});
+  final VoidCallback? onPressed;
+  const SaveChangesButton({super.key, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () {
-       // context.pushNamed(Routes.); // !! add the photo picker
-      },
+      onPressed: onPressed,
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all(ColorsManager.mainBlue),
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
