@@ -1,42 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:healthstack/core/helpers/spacing.dart';
+import 'package:healthstack/core/helpers/extensions.dart';
 import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/core/theming/styles.dart';
-import 'package:healthstack/features/prescriptions/ui/widgets/prescription_info/data/models/prescription_info_model.dart';
+import 'package:healthstack/core/helpers/spacing.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:healthstack/features/prescriptions/data/models/prescriptions_response_model.dart';
 
-class TestSection extends StatefulWidget {
-  final List<MedicalTest> tests;
+class TestSection extends StatelessWidget {
+  final List<PrescriptionTestModel>? tests;
 
-  const TestSection({
+  TestSection({
     super.key,
     required this.tests,
   });
 
-  @override
-  State<TestSection> createState() => _TestSectionState();
-}
-
-class _TestSectionState extends State<TestSection> {
-  late List<MedicalTest> _testsData;
-
   final TextStyle _labelStyle = TextStyles.font12RegularBlueSemiBold;
   final TextStyle _valueStyle = TextStyles.font12DarkBlueRegular;
-  final TextStyle _buttonTextStyle = TextStyles.font13moreLightGraySemiBold;
-
-  @override
-  void initState() {
-    super.initState();
-    _testsData = List.from(widget.tests);
-  }
 
   @override
   Widget build(BuildContext context) {
+    final List<PrescriptionTestModel> _testsData = List.from(tests ?? []);
+    
     return Container(
       decoration: BoxDecoration(
         color: ColorsManager.moreLightGray,
         borderRadius: BorderRadius.circular(12.r),
-        
         boxShadow: [
           BoxShadow(
             color: ColorsManager.regularBlue.withOpacity(0.07),
@@ -51,6 +39,7 @@ class _TestSectionState extends State<TestSection> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           _buildSectionTitle('Test'),
+          
           if (_testsData.isEmpty)
             Padding(
               padding: EdgeInsets.all(16.r),
@@ -72,8 +61,7 @@ class _TestSectionState extends State<TestSection> {
               separatorBuilder: (context, index) => verticalSpace(12),
             ),
             
-          if (_testsData.isNotEmpty) 
-            verticalSpace(8),
+          if (_testsData.isNotEmpty) verticalSpace(8),
         ],
       ),
     );
@@ -98,14 +86,13 @@ class _TestSectionState extends State<TestSection> {
     );
   }
 
-  Widget _buildTestCard(MedicalTest test, int index) {
+  Widget _buildTestCard(PrescriptionTestModel test, int index) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.h),
       decoration: BoxDecoration(
         color: ColorsManager.moreLightGray,
         borderRadius: BorderRadius.circular(10.r),
         border: Border.all(color: Colors.blue.shade50),
-        
         boxShadow: [
           BoxShadow(
             color: ColorsManager.regularBlue.withOpacity(0.08),
@@ -114,14 +101,12 @@ class _TestSectionState extends State<TestSection> {
           ),
         ],
       ),
-      
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             width: double.infinity,
             padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 16.w),
-            
             decoration: BoxDecoration(
               color: Colors.blue.shade100,
               borderRadius: BorderRadius.only(
@@ -133,13 +118,14 @@ class _TestSectionState extends State<TestSection> {
             child: Text('Test $index', style: TextStyles.font14BlueBold),
           ),
           
-          _buildFieldRow('Test Name', test.name),
+          _buildFieldRow('Test Name', getDisplayText(test.testName)),
           _buildDivider(),
           
-          _buildFieldRow('Description', test.description),
+          _buildFieldRow('Test Price', getDisplayText(test.testInfoPrice)),
           _buildDivider(),
           
-          _buildActionRow(test, index - 1),
+          _buildFieldRow('Description', getDisplayText(test.testDescription)),
+          _buildDivider(),
         ],
       ),
     );
@@ -170,66 +156,13 @@ class _TestSectionState extends State<TestSection> {
     );
   }
 
-  Widget _buildActionRow(MedicalTest test, int index) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 6.h, horizontal: 16.w),
-      child: Row(
-        children: [
-          SizedBox(
-            width: 90.w,
-            child: Text(
-              'Action',
-              style: _labelStyle,
-            ),
-          ),
-          
-          Expanded(
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    _testsData[index] = MedicalTest(
-                      name: test.name,
-                      description: test.description,
-                      isSelected: !test.isSelected,
-                    );
-                  });
-                },
-                
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: test.isSelected
-                      ? ColorsManager.green
-                      : ColorsManager.regularBlue,
-                  
-                  minimumSize: Size(80.w, 32.h),
-                  padding:EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
-                  
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(4.r),
-                  ),
-                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                ),
-                
-                child: Text(
-                  test.isSelected ? 'Selected' : 'Select',
-                  style: _buttonTextStyle,
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget _buildDivider() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Divider(
         color: Colors.blue.shade50,
         thickness: 1,
-        height: 0,
+        height: 0.2,
       ),
     );
   }

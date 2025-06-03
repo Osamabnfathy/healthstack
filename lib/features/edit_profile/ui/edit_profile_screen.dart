@@ -70,7 +70,7 @@ class _EditProfileScreenBody extends StatelessWidget {
                   const ProfileTopBar(),
                   
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
+                    padding: EdgeInsets.fromLTRB(20.w, 0, 20.w, 15.h),
                     child: Column(
                       children: [
                         ProfileImage(

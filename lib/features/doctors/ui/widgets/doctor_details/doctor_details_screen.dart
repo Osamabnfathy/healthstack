@@ -182,11 +182,13 @@ class DoctorDetailsScreen extends StatelessWidget {
           children: [
             Text(
               '• $label: ',
-              style: TextStyles.font14DarkBlueRegular,
+              style: TextStyles.font14DarkBlueMedium,
             ),
+            horizontalSpace(3),
+            
             Text(
               value,
-              style: TextStyles.font14GrayRegular,
+              style: TextStyles.font14DarkBlueRegular,
             ),
           ],
         ),

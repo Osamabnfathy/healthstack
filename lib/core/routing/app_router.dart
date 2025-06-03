@@ -5,6 +5,7 @@ import 'package:healthstack/core/routing/routes.dart';
 import 'package:healthstack/features/home/ui/home_screen.dart';
 import 'package:healthstack/core/di/dependency_injection.dart';
 import 'package:healthstack/features/login/ui/login_screen.dart';
+import 'package:healthstack/features/prescriptions/logic/cubit/prescriptions_cubit.dart';
 import 'package:healthstack/features/sign_up/ui/sign_up_screen.dart';
 import 'package:healthstack/features/doctors/ui/doctors_screen.dart';
 import 'package:healthstack/features/sign_up/logic/sign_up_cubit.dart';
@@ -184,8 +185,18 @@ class AppRouter {
         
       
       case Routes.prescriptionScreen:
+        final args = settings.arguments as Map<String, dynamic>?;
+
         return MaterialPageRoute(
-          builder: (_) => const PrescriptionsScreen(), 
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<PrescriptionsCubit>(),
+            child: PrescriptionsScreen(
+              doctors: args?['doctors'],
+              hospitals: args?['hospitals'],
+              departments: args?['departments'],
+              patientProfileData: args?['patientProfile'],
+            ),
+          ),
         );
       
         
