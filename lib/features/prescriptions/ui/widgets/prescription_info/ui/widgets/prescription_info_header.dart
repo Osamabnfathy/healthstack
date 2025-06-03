@@ -69,7 +69,7 @@ class HeaderWidget extends StatelessWidget {
                   ],
                 ),
               ),
-              horizontalSpace(5),
+              horizontalSpace(2),
               
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
