@@ -12,7 +12,7 @@ class ApiConstants {
   static const String appointments = "appointment/";
   static const String patientProfile = "patient_profile/";
   static const String medicalRecords = "report/";
-  static const String allPrescriptionData = "all_prescription_data/";
+  static const String allPrescriptionsData = "all_prescription_data/";
 }
 
 class ApiErrors {

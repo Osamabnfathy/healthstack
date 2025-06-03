@@ -1,58 +1,101 @@
 import 'package:flutter/material.dart';
-import 'package:healthstack/core/helpers/spacing.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/core/theming/styles.dart';
+import 'package:healthstack/core/helpers/spacing.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:healthstack/features/home/data/models/doctors_response_model.dart';
+import 'package:healthstack/features/home/data/models/hospitals_response_model.dart';
+import 'package:healthstack/features/home/data/models/departments_response_model.dart';
+import 'package:healthstack/features/home/data/models/patient_profile_response_model.dart';
 import 'package:healthstack/features/prescriptions/ui/widgets/prescriptions_card.dart';
-import 'package:healthstack/features/prescriptions/data/models/prescriptions_models.dart';
+import 'package:healthstack/features/prescriptions/logic/cubit/prescriptions_cubit.dart';
+import 'package:healthstack/features/prescriptions/logic/cubit/prescriptions_state.dart';
+import 'package:healthstack/features/prescriptions/data/models/prescriptions_response_model.dart';
 
 class PrescriptionsList extends StatelessWidget {
-  const PrescriptionsList({super.key});
+  final List<DoctorsResponseModel>? doctors;
+  final List<HospitalsResponseModel>? hospitals;
+  final List<DepartmentsResponseModel>? departments;
+  final PatientProfileResponseModel? patientProfileData;
 
-  static final List<Prescription> _prescriptions = [
-    Prescription(
-      id: 36,
-      doctorName: 'Ahmed Khalid',
-      specialization: 'Dentistry',
-      hospital: 'Qena Hospital',
-      avatarUrl: 'assets/images/doctor_avatar.png',
-    ),
-    Prescription(
-      id: 35,
-      doctorName: 'Mahmoud Sayed',
-      specialization: 'surgery',
-      hospital: 'Esna Hospital',
-      avatarUrl: 'assets/images/doctor_avatar.png',
-    ),
-    Prescription(
-      id: 34,
-      doctorName: 'Sara Ibrahim',
-      specialization: 'Cardiology',
-      hospital: 'Central Hospital',
-      avatarUrl: 'assets/images/doctor_avatar_female.png',
-    ),
-  ];
+  const PrescriptionsList({
+    super.key,
+    this.doctors,
+    this.hospitals,
+    this.departments,
+    this.patientProfileData,
+  });
+
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        _buildHeaderRow(),
-        verticalSpace(16),
-        
-        Expanded(
-          child: _prescriptions.isEmpty
-              ? _buildEmptyState()
-              : ListView.builder(
-                  itemCount: _prescriptions.length,
-                  itemBuilder: (context, index) {
-                    return PrescriptionCard(
-                      prescription: _prescriptions[index],
-                    );
-                  },
+    return BlocBuilder<PrescriptionsCubit, PrescriptionsState<PrescriptionsResponseModel>>(
+      builder: (context, state) {
+        return state.when(
+          initial: () => const Center(child: CircularProgressIndicator()),
+          
+          loading: () => const Center(child: CircularProgressIndicator()),
+          
+          success: (prescriptions) {
+            if (prescriptions.prescriptions!.isEmpty) {
+              return _buildEmptyState();
+            }
+            
+            return Column(
+              children: [
+                _buildHeaderRow(),
+                verticalSpace(16),
+            
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: prescriptions.prescriptions!.length,
+                    itemBuilder: (context, index) {
+                      final doctor = doctors?.firstWhere(
+                        (d) => d.doctorId == prescriptions.prescriptions![index].doctor,
+                        orElse: () => DoctorsResponseModel(),
+                      );
+                      
+                      // Find hospital
+                      final hospital = hospitals?.firstWhere(
+                        (h) => h.hospitalId == doctor?.hospitalName,
+                        orElse: () => HospitalsResponseModel(),
+                      );
+                      
+                      // Find department
+                      final department = departments?.firstWhere(
+                        (dep) => dep.hospitalDepartmentId == doctor?.departmentName,
+                        orElse: () => DepartmentsResponseModel(),
+                      );
+                    
+                      return PrescriptionCard(
+                        prescriptionsData: prescriptions,
+                        prescriptions: prescriptions.prescriptions![index],
+                        doctorImage: doctor?.featuredImage ?? "",
+                        doctorName: doctor?.name ?? "",
+                        doctorEmail: doctor?.email ?? "",
+                        hospitalName: hospital?.name ?? "",
+                        departmentName: department?.hospitalDepartmentName ?? "",
+                        patientProfileData: patientProfileData,
+                      );
+                    },
+                  ),
                 ),
-        ),
-      ],
+              ],
+            );
+          },
+          
+          error: (error) {
+            print('Error fetching prescriptions list: $error');
+            return Center(
+              child: Text(
+                'Error fetching prescriptions',
+                style: TextStyles.font15DarkBlueMedium,
+              ),
+            );
+          },
+        );
+      },
     );
   }
 
@@ -97,6 +140,7 @@ class PrescriptionsList extends StatelessWidget {
       ),
     );
   }
+
 
   Widget _buildEmptyState() {
     return Center(

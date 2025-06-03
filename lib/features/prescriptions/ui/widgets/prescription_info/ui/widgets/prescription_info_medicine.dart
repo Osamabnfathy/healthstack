@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:healthstack/core/helpers/spacing.dart';
+import 'package:healthstack/core/helpers/extensions.dart';
 import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/core/theming/styles.dart';
-import 'package:healthstack/features/prescriptions/ui/widgets/prescription_info/data/models/prescription_info_model.dart';
+import 'package:healthstack/core/helpers/spacing.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:healthstack/features/prescriptions/data/models/prescriptions_response_model.dart';
 
 class MedicineSection extends StatelessWidget {
-  final List<Medicine> medicines;
+  final List<PrescriptionMedicineModel>? medicines;
 
   MedicineSection({
     super.key,
@@ -37,7 +38,7 @@ class MedicineSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           _buildSectionTitle('Medicine'),
-          if (medicines.isEmpty)
+          if (medicines!.isEmpty)
             Padding(
               padding: EdgeInsets.all(16.r),
               child: Text(
@@ -51,14 +52,14 @@ class MedicineSection extends StatelessWidget {
             ListView.separated(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              itemCount: medicines.length,
+              itemCount: medicines!.length,
               itemBuilder: (context, index) {
-                return _buildMedicineCard(medicines[index], index + 1);
+                return _buildMedicineCard(medicines![index], index + 1);
               },
               separatorBuilder: (context, index) => SizedBox(height: 12.h),
             ),
           
-          if (medicines.isNotEmpty) 
+          if (medicines!.isNotEmpty) 
             verticalSpace(8),
         ],
       ),
@@ -85,7 +86,7 @@ class MedicineSection extends StatelessWidget {
     );
   }
 
-  Widget _buildMedicineCard(Medicine medicine, int index) {
+  Widget _buildMedicineCard(PrescriptionMedicineModel medicine, int index) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.h),
       decoration: BoxDecoration(
@@ -119,22 +120,29 @@ class MedicineSection extends StatelessWidget {
             child:Text('Medicine $index', style: TextStyles.font14BlueBold),
           ),
           
-          _buildFieldRow('Name', medicine.name),
+          _buildFieldRow('Name', getDisplayText(medicine.medicineName)),
           _buildDivider(),
           
-          _buildFieldRow('Quantity', medicine.quantity),
+          _buildFieldRow('Quantity', getDisplayText(medicine.quantity)),
           _buildDivider(),
           
-          _buildFieldRow('Frequency', medicine.frequency),
+          _buildFieldRow('Frequency', getDisplayText(medicine.frequency)),
           _buildDivider(),
           
-          _buildFieldRow('Duration', medicine.duration),
+          _buildFieldRow('Duration',getDisplayText( medicine.duration)),
           _buildDivider(),
           
-          _buildFieldRow('Meal', medicine.relationWithMeal),
+          _buildFieldRow('Meal', getDisplayText(medicine.relationWithMeal)),
           _buildDivider(),
           
-          _buildFieldRow('Instruction', medicine.instruction),
+          _buildFieldRow(
+            'Instruction',
+            getDisplayText(medicine.instruction)
+                .split('.')
+                .where((s) => s.trim().isNotEmpty)
+                .map((s) => s.trim())
+                .join('\n'),
+          ),
         ],
       ),
     );
@@ -171,7 +179,7 @@ class MedicineSection extends StatelessWidget {
       child: Divider(
         color: Colors.blue.shade50,
         thickness: 1,
-        height: 0,
+        height: 0.2,
       ),
     );
   }

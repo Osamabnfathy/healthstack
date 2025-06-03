@@ -83,7 +83,29 @@ class MyAppointmentAndMedicalRecords extends StatelessWidget {
             _buildQuickActionItem(
               context,
               'Prescriptions',
-              () => context.pushNamed(Routes.prescriptionScreen),
+              () {
+                final homeCubit = context.read<HomeCubit>(); 
+                if (homeCubit.doctorsDataList!.isNotEmpty &&
+                    homeCubit.hospitalsDataList!.isNotEmpty &&
+                    homeCubit.departmentsDataList!.isNotEmpty &&
+                    homeCubit.patientProfileData != null
+                ) {
+                  context.pushNamed(
+                    Routes.prescriptionScreen,
+                    arguments: {
+                      'doctors': homeCubit.doctorsDataList,
+                      'hospitals': homeCubit.hospitalsDataList,
+                      'departments': homeCubit.departmentsDataList,
+                      'patientProfile': homeCubit.patientProfileData,
+                    },
+                  );
+                } 
+                else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Please wait, loading data...')),
+                  );
+                }
+              } 
             ),
           ],
         ),

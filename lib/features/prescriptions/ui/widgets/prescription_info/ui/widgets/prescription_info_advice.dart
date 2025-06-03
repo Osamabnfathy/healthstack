@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:healthstack/core/helpers/extensions.dart';
 import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/core/theming/styles.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
 class AdviceSection extends StatelessWidget {
-  final String advice;
+  final String? advice;
 
   const AdviceSection({
     super.key,
@@ -37,7 +38,7 @@ class AdviceSection extends StatelessWidget {
           Padding(
             padding: EdgeInsets.all(16.r),
             child: Text(
-              advice,
+              getDisplayText(advice),
               style: TextStyles.font12DarkBlueRegular,
             ),
           ),

@@ -2,20 +2,37 @@ import 'package:flutter/material.dart';
 import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/core/theming/styles.dart';
 import 'package:healthstack/core/helpers/spacing.dart';
+import 'package:healthstack/core/helpers/extensions.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:healthstack/features/prescriptions/data/models/prescriptions_models.dart';
+import 'package:healthstack/features/home/data/models/patient_profile_response_model.dart';
+import 'package:healthstack/features/prescriptions/data/models/prescriptions_response_model.dart';
 import 'package:healthstack/features/prescriptions/ui/widgets/prescription_info/ui/prescription_info_screen.dart';
 
 class PrescriptionCard extends StatelessWidget {
-  final Prescription prescription;
+  final PatientProfileResponseModel? patientProfileData;
+  final PrescriptionsResponseModel prescriptionsData;
+  final PrescriptionModel prescriptions;
+  final String? doctorName;
+  final String? doctorImage;
+  final String? doctorEmail;
+  final String? hospitalName;
+  final String? departmentName;
+  
 
   const PrescriptionCard({
     super.key,
-    required this.prescription,
+    required this.prescriptions,
+    required this.prescriptionsData,
+    this.patientProfileData,
+    this.doctorName,
+    this.doctorImage,
+    this.doctorEmail,
+    this.hospitalName,
+    this.departmentName
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {    
     return Container(
       margin: EdgeInsets.only(bottom: 8.h),
       padding: EdgeInsets.all(12.w),
@@ -46,6 +63,7 @@ class PrescriptionCard extends StatelessWidget {
           Expanded(
             child: _buildDoctorInfo(),
           ),
+          
           _buildActionButton(context),
         ],
       ),
@@ -63,7 +81,7 @@ class PrescriptionCard extends StatelessWidget {
       
       child: Center(
         child: Text(
-          '${prescription.id}',
+          '${prescriptions.prescriptionId}',
           style: TextStyles.font14BlueSemiBold,
         ),
       ),
@@ -73,17 +91,18 @@ class PrescriptionCard extends StatelessWidget {
   Widget _buildAvatar() {
     return CircleAvatar(
       radius: 30.r,
-      backgroundImage: AssetImage(prescription.avatarUrl),
       backgroundColor: ColorsManager.lightGray,
-      onBackgroundImageError: (_, __) {},
       
-      child: prescription.avatarUrl.isEmpty
-          ? Icon(
-              Icons.person,
-              color: ColorsManager.gray,
-              size: 20.sp,
-            )
-          : null,
+      backgroundImage: doctorImage != null && doctorImage!.isNotEmpty
+                    ? NetworkImage(doctorImage!)
+                    : Image.asset(
+                        "assets/icons/doctor.png",
+                        width: 70.w,
+                        height: 70.h,
+                        fit: BoxFit.fill,
+                      ).image,
+                      
+      onBackgroundImageError: (_, __) {},
     );
   }
 
@@ -92,7 +111,7 @@ class PrescriptionCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          prescription.doctorName,
+          getDisplayText(doctorName),
           style: TextStyles.font14DarkBlueBold,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
@@ -100,7 +119,7 @@ class PrescriptionCard extends StatelessWidget {
         verticalSpace(2),
         
         Text(
-          '${prescription.specialization} | ${prescription.hospital}',
+          '${getDisplayText(departmentName)} | ${getDisplayText(hospitalName)}',
           style: TextStyles.font12GrayMedium,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
@@ -115,7 +134,15 @@ class PrescriptionCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => PrescriptionInfoScreen(),
+            builder: (context) => PrescriptionInfoScreen(
+              prescription: prescriptions,
+              prescriptionsData: prescriptionsData,
+              patientProfileData: patientProfileData,
+              doctorName: doctorName,
+              doctorEmail: doctorEmail,
+              hospitalName: hospitalName,
+              departmentName: departmentName,
+            ),
           ),
         );
       },

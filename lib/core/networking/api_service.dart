@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:healthstack/features/prescriptions/data/models/prescriptions_response_model.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:healthstack/core/networking/api_constants.dart';
 import 'package:healthstack/features/login/data/models/login_response.dart';
@@ -53,4 +54,7 @@ abstract class ApiService {
   Future<EditProfileDataResponseBody> editProfile(
     @Body() EditProfileDataRequestBody editProfileDataRequestBody,
   );
+  
+  @GET(ApiConstants.allPrescriptionsData)
+  Future<PrescriptionsResponseModel> getMyPrescriptions();
 }
