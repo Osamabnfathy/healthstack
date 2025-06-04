@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:healthstack/features/change_password/ui/widgets/change_password_bloc_listener.dart';
 import 'widgets/change_password_form.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:healthstack/core/theming/styles.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:healthstack/core/widgets/app_text_button.dart';
-import 'package:healthstack/core/widgets/custom_app_bar.dart';
 import 'package:healthstack/features/change_password/logic/change_password_cubit.dart';
+import 'package:healthstack/features/change_password/ui/widgets/change_password_app_bar.dart';
+import 'package:healthstack/features/change_password/ui/widgets/change_password_bloc_listener.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
   const ChangePasswordScreen({super.key});
@@ -25,7 +25,7 @@ class ChangePasswordScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CustomAppBar(title: "Change Password"),
+                ChangePasswordAppBar(),
                 verticalSpace(15),
                 
                 Padding(

@@ -25,7 +25,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         onTap: () => Navigator.pop(context),
         child: Icon(
           Icons.arrow_back_ios_new_outlined,
-          color: ColorsManager.darkBlue,
+          color: ColorsManager.mainBlue,
           size: 20.sp,
         ),
       ),

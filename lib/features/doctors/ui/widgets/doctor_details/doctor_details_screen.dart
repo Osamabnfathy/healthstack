@@ -58,7 +58,7 @@ class DoctorDetailsScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_new_outlined, color: ColorsManager.darkBlue),
+          icon: Icon(Icons.arrow_back_ios_new_outlined, color: ColorsManager.mainBlue),
           onPressed: () => Navigator.pop(context),
         ),
       ),
