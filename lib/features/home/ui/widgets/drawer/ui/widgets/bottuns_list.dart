@@ -18,10 +18,32 @@ class ButtonsList extends StatelessWidget {
     
     final menuItems = [
       MenuItemData(
-        'Medical Records',
+        'Medical Reports',
         Colors.green.shade50,
         Colors.green,
-        () {/* navigation  */},
+        () {
+          final homeCubit = context.read<HomeCubit>(); 
+          if (homeCubit.doctorsDataList!.isNotEmpty &&
+              homeCubit.hospitalsDataList!.isNotEmpty &&
+              homeCubit.departmentsDataList!.isNotEmpty &&
+              homeCubit.patientProfileData != null
+          ) {
+            context.pushNamed(
+              Routes.medicalReportsScreen,
+              arguments: {
+                'doctors': homeCubit.doctorsDataList,
+                'hospitals': homeCubit.hospitalsDataList,
+                'departments': homeCubit.departmentsDataList,
+                'patientProfile': homeCubit.patientProfileData,
+              },
+            );
+          } 
+          else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('Please wait, loading data...')),
+            );
+          }
+        },
         icon: Icons.medical_information_outlined,
       ),
       

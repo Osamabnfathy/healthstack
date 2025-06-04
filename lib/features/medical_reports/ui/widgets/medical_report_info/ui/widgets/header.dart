@@ -1,26 +1,26 @@
 import 'dart:core';
 import 'package:healthstack/core/helpers/extensions.dart';
-import 'package:healthstack/features/home/data/models/patient_profile_response_model.dart';
-import 'package:healthstack/features/prescriptions/data/models/prescriptions_response_model.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/core/theming/styles.dart';
 import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:healthstack/features/home/data/models/patient_profile_response_model.dart';
+import 'package:healthstack/features/medical_reports/data/models/medical_reports_response_model.dart';
 
-class HeaderWidget extends StatelessWidget {
+class Header extends StatelessWidget {
   final PatientProfileResponseModel? patientProfileData;
-  final PrescriptionModel prescription;
+  final ReportModel medicalReport;
   final String? doctorName;
   final String? doctorEmail;
   final String? hospitalName;
   final String? departmentName;
 
-  const HeaderWidget({
+  const Header({
     super.key,
     this.patientProfileData,
-    required this.prescription,
+    required this.medicalReport,
     this.doctorName,
     this.doctorEmail,
     this.hospitalName,
@@ -29,7 +29,7 @@ class HeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String formatPrescriptionDate(String? date) {
+    String formatReportDate(String? date) {
       if (date == null) return '';
       try {
         final parsed = DateTime.parse(date);
@@ -56,7 +56,7 @@ class HeaderWidget extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Prescription To', style: TextStyles.font14DarkBlueBold),
+                    Text('Report To', style: TextStyles.font14DarkBlueBold),
                     verticalSpace(4),
                     
                     Text('Name: ${getDisplayText(patientProfileData!.name)}', style: TextStyles.font12DarkBluMedium),
@@ -74,13 +74,13 @@ class HeaderWidget extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Patient ID: ${getDisplayText(prescription.patient.toString())}', style: TextStyles.font12GrayRegular),
+                  Text('Patient ID: ${getDisplayText(medicalReport.patient.toString())}', style: TextStyles.font12GrayRegular),
                   verticalSpace(4),
                   
-                  Text('Prescription ID: ${getDisplayText(prescription.prescriptionId.toString())}', style: TextStyles.font12GrayRegular),
+                  Text('Report ID: ${getDisplayText(medicalReport.reportId.toString())}', style: TextStyles.font12GrayRegular),
                   verticalSpace(4),
                   
-                  Text('Date: ${getDisplayText(formatPrescriptionDate(prescription.createDate))}', style: TextStyles.font12GrayRegular),
+                  Text('Date: ${getDisplayText(formatReportDate(medicalReport.deliveryDate))}', style: TextStyles.font12GrayRegular),
                 ],
               ),
             ],
@@ -90,7 +90,6 @@ class HeaderWidget extends StatelessWidget {
           verticalSpace(12),
           
           Text('Doctor Information', style: TextStyles.font14DarkBlueBold),
-          
           verticalSpace(4),
           Text('Name: ${getDisplayText(doctorName)}', style: TextStyles.font12DarkBluMedium),
           

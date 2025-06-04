@@ -1,47 +1,44 @@
 import 'package:flutter/material.dart';
-import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/core/theming/styles.dart';
+import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:healthstack/core/helpers/extensions.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:healthstack/features/home/data/models/patient_profile_response_model.dart';
-import 'package:healthstack/features/prescriptions/data/models/prescriptions_response_model.dart';
-import 'package:healthstack/features/prescriptions/ui/widgets/prescription_info/ui/prescription_info_screen.dart';
+import 'package:healthstack/features/medical_reports/data/models/medical_reports_response_model.dart';
+import 'package:healthstack/features/medical_reports/ui/widgets/medical_report_info/ui/medical_report_info_screen.dart';
 
-class PrescriptionCard extends StatelessWidget {
+class MedicalReportCard extends StatelessWidget {
   final PatientProfileResponseModel? patientProfileData;
-  final PrescriptionsResponseModel prescriptionsData;
-  final PrescriptionModel prescription;
+  final MedicalReportsResponseModel medicalReportsData;
+  final ReportModel medicalReport;
   final String? doctorName;
   final String? doctorImage;
   final String? doctorEmail;
   final String? hospitalName;
   final String? departmentName;
-  
 
-  const PrescriptionCard({
+  const MedicalReportCard({
     super.key,
-    required this.prescription,
-    required this.prescriptionsData,
-    this.patientProfileData,
-    this.doctorName,
-    this.doctorImage,
-    this.doctorEmail,
-    this.hospitalName,
-    this.departmentName
+    required this.medicalReport,
+    required this.medicalReportsData,
+    required this.patientProfileData,
+    required this.doctorName,
+    required this.doctorImage,    
+    required this.doctorEmail,
+    required this.hospitalName,
+    required this.departmentName,
   });
 
   @override
-  Widget build(BuildContext context) {    
+  Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(bottom: 8.h),
       padding: EdgeInsets.all(12.w),
-      
       decoration: BoxDecoration(
         color: ColorsManager.moreLightGray,
         borderRadius: BorderRadius.circular(8.r),
         border: Border.all(color: ColorsManager.lightGray),
-        
         boxShadow: [
           BoxShadow(
             color: ColorsManager.darkBlue.withOpacity(0.1),
@@ -51,19 +48,15 @@ class PrescriptionCard extends StatelessWidget {
           ),
         ],
       ),
-      
       child: Row(
         children: [
           _buildIdBadge(),
           horizontalSpace(12),
-        
           _buildAvatar(),
           horizontalSpace(12),
-        
           Expanded(
             child: _buildDoctorInfo(),
           ),
-          
           _buildActionButton(context),
         ],
       ),
@@ -78,10 +71,9 @@ class PrescriptionCard extends StatelessWidget {
         color: ColorsManager.mainBlue.withOpacity(0.1),
         borderRadius: BorderRadius.circular(6.r),
       ),
-      
       child: Center(
         child: Text(
-          '${prescription.prescriptionId}',
+          '${medicalReport.reportId}',
           style: TextStyles.font14BlueSemiBold,
         ),
       ),
@@ -119,7 +111,7 @@ class PrescriptionCard extends StatelessWidget {
         verticalSpace(2),
         
         Text(
-          '${getDisplayText(departmentName)} | ${getDisplayText(hospitalName)}',
+          '${getDisplayText(departmentName)} - ${getDisplayText(hospitalName)}',
           style: TextStyles.font12GrayMedium,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
@@ -129,31 +121,36 @@ class PrescriptionCard extends StatelessWidget {
   }
 
   Widget _buildActionButton(BuildContext context) {
-    return IconButton(
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => PrescriptionInfoScreen(
-              prescription: prescription,
-              prescriptionsData: prescriptionsData,
-              patientProfileData: patientProfileData,
-              doctorName: doctorName,
-              doctorEmail: doctorEmail,
-              hospitalName: hospitalName,
-              departmentName: departmentName,
-            ),
+    return Row(
+      children: [
+        IconButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => MedicalReportInfoScreen(
+                  medicalReport: medicalReport,
+                  medicalReportsData: medicalReportsData,
+                  patientProfileData: patientProfileData,
+                  doctorName: doctorName,
+                  doctorEmail: doctorEmail,
+                  hospitalName: hospitalName,
+                  departmentName: departmentName,
+                ),
+              ),
+            );
+          },
+          
+          icon: Icon(
+            Icons.visibility,
+            color: ColorsManager.green,
+            size: 20.sp,
           ),
-        );
-      },
-      
-      icon: Icon(
-        Icons.visibility,
-        color: ColorsManager.green,
-        size: 20.sp,
-      ),
-      constraints: BoxConstraints(minWidth: 40.w, minHeight: 40.h),
-      padding: EdgeInsets.zero,
+          constraints: BoxConstraints(minWidth: 40.w, minHeight: 40.h),
+          padding: EdgeInsets.zero,
+        ),
+      ],
     );
   }
+
 }

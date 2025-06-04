@@ -5,8 +5,8 @@ import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
-class PrescriptionsInfoTopBar extends StatelessWidget {
-  const PrescriptionsInfoTopBar({super.key});
+class MedicalReportTopBar extends StatelessWidget {
+  const MedicalReportTopBar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,11 +21,11 @@ class PrescriptionsInfoTopBar extends StatelessWidget {
               size: 20.sp,
               color: ColorsManager.darkBlue),
           ),
-          
           horizontalSpace(20), 
+          
           Expanded(
             child: Text(
-              'Prescription Information',
+              'Medical Report',
               style: TextStyles.font18DarkBlueBold, 
               textAlign: TextAlign.center,
             ),

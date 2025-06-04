@@ -32,7 +32,6 @@ class PrescriptionInfoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Filter medicines for this prescription
     final matchedMedicines = prescriptionsData.prescriptionsMedicine
       ?.where((m) => m.prescription == prescription.prescriptionId)
       .toList();
@@ -45,7 +44,7 @@ class PrescriptionInfoScreen extends StatelessWidget {
       backgroundColor: ColorsManager.white,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
+          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 15.h),
           child: Column(
             children: [
               const PrescriptionsInfoTopBar(),

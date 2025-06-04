@@ -5,7 +5,6 @@ import 'package:healthstack/core/routing/routes.dart';
 import 'package:healthstack/features/home/ui/home_screen.dart';
 import 'package:healthstack/core/di/dependency_injection.dart';
 import 'package:healthstack/features/login/ui/login_screen.dart';
-import 'package:healthstack/features/prescriptions/logic/cubit/prescriptions_cubit.dart';
 import 'package:healthstack/features/sign_up/ui/sign_up_screen.dart';
 import 'package:healthstack/features/doctors/ui/doctors_screen.dart';
 import 'package:healthstack/features/sign_up/logic/sign_up_cubit.dart';
@@ -15,15 +14,17 @@ import 'package:healthstack/features/login/logic/cubit/login_cubit.dart';
 import 'package:healthstack/features/hospitals/ui/hospitals_screen.dart';
 import 'package:healthstack/features/edit_profile/ui/edit_profile_screen.dart';
 import 'package:healthstack/features/prescriptions/ui/prescriptions_screen.dart';
-import 'package:healthstack/features/medical_record/ui/medical_record_screen.dart';
 import 'package:healthstack/features/my_appointment/ui/my_appointments_screen.dart';
+import 'package:healthstack/features/medical_reports/ui/medical_report_screen.dart';
 import 'package:healthstack/features/change_password/ui/change_password_screen.dart';
 import 'package:healthstack/features/forget_password/ui/forget_password_screen.dart';
 import 'package:healthstack/features/change_password/logic/change_password_cubit.dart';
 import 'package:healthstack/features/book_appointment/ui/first_appointment_screen.dart';
+import 'package:healthstack/features/prescriptions/logic/cubit/prescriptions_cubit.dart';
 import 'package:healthstack/features/book_appointment/ui/second_appointment_screen.dart';
 import 'package:healthstack/features/book_appointment/logic/book_appointment_cubit.dart';
 import 'package:healthstack/features/my_appointment/logic/cubit/my_appointments_cubit.dart';
+import 'package:healthstack/features/medical_reports/logic/cubit/medical_reports_cubit.dart';
 import 'package:healthstack/features/book_appointment/ui/third_booking_confirmation_screen.dart';
 
 class AppRouter {
@@ -200,9 +201,19 @@ class AppRouter {
         );
       
         
-      case Routes.medicalRecordScreen:
+      case Routes.medicalReportsScreen:
+        final args = settings.arguments as Map<String, dynamic>?;
+
         return MaterialPageRoute(
-          builder: (_) => const MedicalRecordScreen(),
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<MedicalReportsCubit>(),
+            child: MedicalReportScreen(
+              doctors: args?['doctors'],
+              hospitals: args?['hospitals'],
+              departments: args?['departments'],
+              patientProfileData: args?['patientProfile'],
+            ),
+          ),
         );
       
       
