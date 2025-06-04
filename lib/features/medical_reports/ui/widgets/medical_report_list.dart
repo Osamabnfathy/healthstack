@@ -7,19 +7,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:healthstack/features/home/data/models/doctors_response_model.dart';
 import 'package:healthstack/features/home/data/models/hospitals_response_model.dart';
 import 'package:healthstack/features/home/data/models/departments_response_model.dart';
+import 'package:healthstack/features/medical_reports/ui/widgets/medical_report_card.dart';
 import 'package:healthstack/features/home/data/models/patient_profile_response_model.dart';
-import 'package:healthstack/features/prescriptions/ui/widgets/prescriptions_card.dart';
-import 'package:healthstack/features/prescriptions/logic/cubit/prescriptions_cubit.dart';
-import 'package:healthstack/features/prescriptions/logic/cubit/prescriptions_state.dart';
-import 'package:healthstack/features/prescriptions/data/models/prescriptions_response_model.dart';
+import 'package:healthstack/features/medical_reports/logic/cubit/medical_reports_cubit.dart';
+import 'package:healthstack/features/medical_reports/logic/cubit/medical_reports_state.dart';
+import 'package:healthstack/features/medical_reports/data/models/medical_reports_response_model.dart';
 
-class PrescriptionsList extends StatelessWidget {
+class MedicalReportList extends StatelessWidget {
   final List<DoctorsResponseModel>? doctors;
   final List<HospitalsResponseModel>? hospitals;
   final List<DepartmentsResponseModel>? departments;
   final PatientProfileResponseModel? patientProfileData;
-
-  const PrescriptionsList({
+  
+  const MedicalReportList({
     super.key,
     this.doctors,
     this.hospitals,
@@ -27,50 +27,49 @@ class PrescriptionsList extends StatelessWidget {
     this.patientProfileData,
   });
 
-
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PrescriptionsCubit, PrescriptionsState<PrescriptionsResponseModel>>(
+    return BlocBuilder<MedicalReportsCubit, MedicalReportsState<MedicalReportsResponseModel>>(
       builder: (context, state) {
         return state.when(
           initial: () => const Center(child: CircularProgressIndicator()),
-          
+        
           loading: () => const Center(child: CircularProgressIndicator()),
-          
-          success: (prescriptions) {
-            if (prescriptions.prescriptions!.isEmpty) {
+        
+          success: (medicalReports) {
+            if (medicalReports.report!.isEmpty) {
               return _buildEmptyState();
             }
-            
+
             return Column(
               children: [
                 _buildHeaderRow(),
                 verticalSpace(16),
-            
+                
                 Expanded(
                   child: ListView.builder(
-                    itemCount: prescriptions.prescriptions!.length,
+                    itemCount: medicalReports.report!.length,
                     itemBuilder: (context, index) {
                       final doctor = doctors?.firstWhere(
-                        (d) => d.doctorId == prescriptions.prescriptions![index].doctor,
+                        (d) => d.doctorId == medicalReports.report![index].doctor,
                         orElse: () => DoctorsResponseModel(),
                       );
-                      
+
                       // Find hospital
                       final hospital = hospitals?.firstWhere(
                         (h) => h.hospitalId == doctor?.hospitalName,
                         orElse: () => HospitalsResponseModel(),
                       );
-                      
+
                       // Find department
                       final department = departments?.firstWhere(
-                        (dep) => dep.hospitalDepartmentId == doctor?.departmentName,
+                        (d) => d.hospitalDepartmentId == doctor?.departmentName,
                         orElse: () => DepartmentsResponseModel(),
                       );
-                    
-                      return PrescriptionCard(
-                        prescriptionsData: prescriptions,
-                        prescription: prescriptions.prescriptions![index],
+
+                      return MedicalReportCard(
+                        medicalReportsData: medicalReports,
+                        medicalReport: medicalReports.report![index],
                         doctorImage: doctor?.featuredImage ?? "",
                         doctorName: doctor?.name ?? "",
                         doctorEmail: doctor?.email ?? "",
@@ -95,9 +94,10 @@ class PrescriptionsList extends StatelessWidget {
             );
           },
         );
-      },
+      },    
     );
   }
+
 
   Widget _buildHeaderRow() {
     return Container(
@@ -106,7 +106,6 @@ class PrescriptionsList extends StatelessWidget {
         color: ColorsManager.lighterGray,
         borderRadius: BorderRadius.circular(8.r),
         border: Border.all(color: ColorsManager.gray.withOpacity(0.2)),
-        
         boxShadow: [
           BoxShadow(
             color: ColorsManager.darkBlue.withOpacity(0.1),
@@ -141,7 +140,6 @@ class PrescriptionsList extends StatelessWidget {
     );
   }
 
-
   Widget _buildEmptyState() {
     return Center(
       child: Column(
@@ -153,8 +151,9 @@ class PrescriptionsList extends StatelessWidget {
             color: ColorsManager.lightGray,
           ),
           verticalSpace(16),
+          
           Text(
-            'No prescriptions found',
+            'No medical reports found',
             style: TextStyles.font15DarkBlueMedium,
           ),
         ],

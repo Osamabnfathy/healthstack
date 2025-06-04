@@ -36,7 +36,7 @@ class PrescriptionsScreen extends StatelessWidget {
       backgroundColor: ColorsManager.lightBlue,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 30.h),
+          padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 20.h),
           child: Column(
             children: [
               const PrescriptionsTopBar(),

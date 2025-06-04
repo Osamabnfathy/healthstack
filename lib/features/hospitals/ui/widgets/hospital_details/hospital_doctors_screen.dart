@@ -131,7 +131,7 @@ class HospitalDoctorsScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                doctor.name ?? 'Doctor',
+                                "Dr. ${getDisplayText(doctor.name)}",
                                 style: TextStyles.font18DarkBlueBold,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,

@@ -161,7 +161,7 @@ class TestSection extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Divider(
         color: Colors.blue.shade50,
-        thickness: 1,
+        thickness: 1.2,
         height: 0.2,
       ),
     );

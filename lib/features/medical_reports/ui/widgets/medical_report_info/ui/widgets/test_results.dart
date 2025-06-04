@@ -1,32 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:healthstack/core/helpers/extensions.dart';
+import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/core/theming/styles.dart';
-import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:healthstack/features/prescriptions/data/models/prescriptions_response_model.dart';
+import 'package:healthstack/features/medical_reports/data/models/medical_reports_response_model.dart';
 
-class MedicineSection extends StatelessWidget {
-  final List<PrescriptionMedicineModel>? medicines;
+class TestResultsSection extends StatelessWidget {
+  final List<TestModel>? tests;
 
-  MedicineSection({
+  TestResultsSection({
     super.key,
-    required this.medicines,
+    required this.tests,
   });
+
+
 
   final TextStyle _labelStyle = TextStyles.font12RegularBlueSemiBold;
   final TextStyle _valueStyle = TextStyles.font12DarkBlueRegular;
 
   @override
   Widget build(BuildContext context) {
+    final List<TestModel> _testsData = List.from(tests ?? []);
+    
     return Container(
       decoration: BoxDecoration(
         color: ColorsManager.moreLightGray,
         borderRadius: BorderRadius.circular(12.r),
-        
         boxShadow: [
           BoxShadow(
-            color: Colors.blue.withOpacity(0.07),
+            color: ColorsManager.regularBlue.withOpacity(0.07),
             spreadRadius: 1,
             blurRadius: 8,
             offset: const Offset(0, 2),
@@ -37,12 +40,12 @@ class MedicineSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          _buildSectionTitle('Medicine'),
-          if (medicines!.isEmpty)
+          _buildSectionTitle('Test Results'),
+          if (_testsData.isEmpty)
             Padding(
               padding: EdgeInsets.all(16.r),
               child: Text(
-                "No medicines prescribed.",
+                "No test Results Received.",
                 style: _valueStyle,
                 textAlign: TextAlign.center,
               ),
@@ -52,14 +55,14 @@ class MedicineSection extends StatelessWidget {
             ListView.separated(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              itemCount: medicines!.length,
+              itemCount: _testsData.length,
               itemBuilder: (context, index) {
-                return _buildMedicineCard(medicines![index], index + 1);
+                return _buildTestCard(_testsData[index], index + 1);
               },
-              separatorBuilder: (context, index) => SizedBox(height: 12.h),
+              separatorBuilder: (context, index) => verticalSpace(12),
             ),
-          
-          if (medicines!.isNotEmpty) 
+            
+          if (_testsData.isNotEmpty) 
             verticalSpace(8),
         ],
       ),
@@ -70,7 +73,6 @@ class MedicineSection extends StatelessWidget {
     return Container(
       width: double.infinity,
       padding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 16.w),
-      
       decoration: BoxDecoration(
         color: ColorsManager.regularBlue,
         borderRadius: BorderRadius.only(
@@ -86,7 +88,7 @@ class MedicineSection extends StatelessWidget {
     );
   }
 
-  Widget _buildMedicineCard(PrescriptionMedicineModel medicine, int index) {
+  Widget _buildTestCard(TestModel test, int index) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.h),
       decoration: BoxDecoration(
@@ -106,6 +108,7 @@ class MedicineSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Blue title bar
           Container(
             width: double.infinity,
             padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 16.w),
@@ -116,33 +119,19 @@ class MedicineSection extends StatelessWidget {
                 topRight: Radius.circular(10.r),
               ),
             ),
-            
-            child:Text('Medicine $index', style: TextStyles.font14BlueBold),
+            child: Text('Test $index', style: TextStyles.font14BlueBold),
           ),
           
-          _buildFieldRow('Name', getDisplayText(medicine.medicineName)),
+          _buildFieldRow('Test Name', getDisplayText(test.testName)),
           _buildDivider(),
           
-          _buildFieldRow('Quantity', getDisplayText(medicine.quantity)),
+          _buildFieldRow('Result', getDisplayText(test.result)),
           _buildDivider(),
           
-          _buildFieldRow('Frequency', getDisplayText(medicine.frequency)),
+          _buildFieldRow('Unit', getDisplayText(test.unit)),
           _buildDivider(),
           
-          _buildFieldRow('Duration',getDisplayText( medicine.duration)),
-          _buildDivider(),
-          
-          _buildFieldRow('Meal', getDisplayText(medicine.relationWithMeal)),
-          _buildDivider(),
-          
-          _buildFieldRow(
-            'Instruction',
-            getDisplayText(medicine.instruction)
-                .split('.')
-                .where((s) => s.trim().isNotEmpty)
-                .map((s) => s.trim())
-                .join('\n'),
-          ),
+          _buildFieldRow('Referred value', getDisplayText(test.referredValue)),
         ],
       ),
     );
@@ -155,7 +144,7 @@ class MedicineSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            width: 90.w,
+            width: 95.w,
             child: Text(
               label,
               style: _labelStyle,

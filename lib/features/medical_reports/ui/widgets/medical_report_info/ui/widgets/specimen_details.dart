@@ -1,17 +1,18 @@
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
-import 'package:healthstack/core/helpers/extensions.dart';
 import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/core/theming/styles.dart';
 import 'package:healthstack/core/helpers/spacing.dart';
+import 'package:healthstack/core/helpers/extensions.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:healthstack/features/prescriptions/data/models/prescriptions_response_model.dart';
+import 'package:healthstack/features/medical_reports/data/models/medical_reports_response_model.dart';
 
-class MedicineSection extends StatelessWidget {
-  final List<PrescriptionMedicineModel>? medicines;
+class SpecimenDetailsSection extends StatelessWidget {
+  final List<SpecimenModel>? specimenDetails;
 
-  MedicineSection({
+  SpecimenDetailsSection({
     super.key,
-    required this.medicines,
+    required this.specimenDetails,
   });
 
   final TextStyle _labelStyle = TextStyles.font12RegularBlueSemiBold;
@@ -37,12 +38,12 @@ class MedicineSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          _buildSectionTitle('Medicine'),
-          if (medicines!.isEmpty)
+          _buildSectionTitle('Specimen Details'),
+          if (specimenDetails!.isEmpty)
             Padding(
               padding: EdgeInsets.all(16.r),
               child: Text(
-                "No medicines prescribed.",
+                "No Specimen Details Received.",
                 style: _valueStyle,
                 textAlign: TextAlign.center,
               ),
@@ -52,14 +53,14 @@ class MedicineSection extends StatelessWidget {
             ListView.separated(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              itemCount: medicines!.length,
+              itemCount: specimenDetails!.length,
               itemBuilder: (context, index) {
-                return _buildMedicineCard(medicines![index], index + 1);
+                return _buildMedicineCard(specimenDetails![index], index + 1);
               },
-              separatorBuilder: (context, index) => SizedBox(height: 12.h),
+              separatorBuilder: (context, index) => verticalSpace(12),
             ),
-          
-          if (medicines!.isNotEmpty) 
+            
+          if (specimenDetails!.isNotEmpty) 
             verticalSpace(8),
         ],
       ),
@@ -86,7 +87,17 @@ class MedicineSection extends StatelessWidget {
     );
   }
 
-  Widget _buildMedicineCard(PrescriptionMedicineModel medicine, int index) {
+  Widget _buildMedicineCard(SpecimenModel specimen, int index) {
+    String formatReportDate(String? date) {
+      if (date == null) return '';
+      try {
+        final parsed = DateTime.parse(date);
+        return DateFormat('MMM d, yyyy').format(parsed); 
+      } catch (_) {
+        return date;
+      }
+    }
+
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.h),
       decoration: BoxDecoration(
@@ -106,6 +117,7 @@ class MedicineSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Blue title bar
           Container(
             width: double.infinity,
             padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 16.w),
@@ -117,32 +129,18 @@ class MedicineSection extends StatelessWidget {
               ),
             ),
             
-            child:Text('Medicine $index', style: TextStyles.font14BlueBold),
+            child: Text('Specimen $index', style: TextStyles.font14BlueBold),
           ),
-          
-          _buildFieldRow('Name', getDisplayText(medicine.medicineName)),
+          _buildFieldRow('Specimen Information', getDisplayText(specimen.specimenType)),
           _buildDivider(),
           
-          _buildFieldRow('Quantity', getDisplayText(medicine.quantity)),
+          _buildFieldRow('Specimen ID', getDisplayText(specimen.specimenId.toString())),
           _buildDivider(),
           
-          _buildFieldRow('Frequency', getDisplayText(medicine.frequency)),
+          _buildFieldRow('collection Date/time', getDisplayText(formatReportDate(specimen.collectionDate))),
           _buildDivider(),
           
-          _buildFieldRow('Duration',getDisplayText( medicine.duration)),
-          _buildDivider(),
-          
-          _buildFieldRow('Meal', getDisplayText(medicine.relationWithMeal)),
-          _buildDivider(),
-          
-          _buildFieldRow(
-            'Instruction',
-            getDisplayText(medicine.instruction)
-                .split('.')
-                .where((s) => s.trim().isNotEmpty)
-                .map((s) => s.trim())
-                .join('\n'),
-          ),
+          _buildFieldRow('Receiving Date/time', getDisplayText(formatReportDate(specimen.receivingDate))),
         ],
       ),
     );
@@ -155,7 +153,7 @@ class MedicineSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            width: 90.w,
+            width: 135.w,
             child: Text(
               label,
               style: _labelStyle,

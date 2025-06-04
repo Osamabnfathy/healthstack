@@ -11,7 +11,7 @@ class ApiConstants {
   static const String departments = "hospital_department/";
   static const String appointments = "appointment/";
   static const String patientProfile = "patient_profile/";
-  static const String medicalRecords = "report/";
+  static const String medicalReports = "report/";
   static const String allPrescriptionsData = "all_prescription_data/";
 }
 

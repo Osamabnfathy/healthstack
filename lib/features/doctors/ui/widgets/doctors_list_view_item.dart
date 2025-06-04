@@ -102,7 +102,7 @@ class DoctorsListViewItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    doctorsData?.name ?? 'Doctor',
+                    "Dr. ${getDisplayText(doctorsData?.name)}",
                     style: TextStyles.font18DarkBlueBold,
                     maxLines: 1, 
                     overflow: TextOverflow.ellipsis, 
