@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/core/theming/styles.dart';
 
 
-class ProfileTopBar extends StatelessWidget {
-  const ProfileTopBar({super.key});
+class ChangePasswordAppBar extends StatelessWidget {
+  const ChangePasswordAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 30.h),
+      padding: EdgeInsets.symmetric(horizontal: 10.w,),
       child: Row(
         children: [
           GestureDetector(
@@ -21,10 +22,11 @@ class ProfileTopBar extends StatelessWidget {
               color: ColorsManager.mainBlue,
             ),
           ),
+          horizontalSpace(20),
           
           Expanded(
             child: Text(
-              'Edit Profile',
+              'Change Password',
               style: TextStyles.font18DarkBlueBold,
               textAlign: TextAlign.center,
             ),

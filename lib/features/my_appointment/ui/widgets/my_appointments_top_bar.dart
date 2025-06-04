@@ -17,7 +17,7 @@ class MyAppointmentTopBar extends StatelessWidget {
           child: Icon(
             Icons.arrow_back_ios,
             size: 20.sp,
-            color: ColorsManager.darkBlue,
+            color: ColorsManager.mainBlue,
           ),
         ),
         horizontalSpace(20),
