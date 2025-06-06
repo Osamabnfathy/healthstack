@@ -68,6 +68,10 @@ dependencies:
   lottie: ^3.1.0
   # for image picking
   image_picker: ^1.1.2
+  # for Notifications
+  flutter_local_notifications: ^17.1.0
+  timezone: ^0.9.2
+  permission_handler: ^11.3.1
 
 
 dev_dependencies:

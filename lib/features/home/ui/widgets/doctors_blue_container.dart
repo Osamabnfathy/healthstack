@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:healthstack/features/home/logic/cubit/home_cubit.dart';
 import '../../../../core/theming/styles.dart';
 import 'package:healthstack/core/routing/routes.dart';
 import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:healthstack/core/helpers/extensions.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:healthstack/features/home/logic/cubit/home_cubit.dart';
 
 class DoctorsBlueContainer extends StatelessWidget {
   const DoctorsBlueContainer({super.key});
@@ -13,14 +13,6 @@ class DoctorsBlueContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final homeCubitInstance = context.read<HomeCubit>();
-    
-    /// here i need to pass a matched data of the doctor's hospital and department
-    // final enrichedDoctors = getEnrichedDoctors(
-    //   doctors: homeCubitInstance.doctorsDataList ?? [], 
-    //   hospitals: homeCubitInstance.hospitalsDataList ?? [], 
-    //   departments: homeCubitInstance.departmentsDataList ?? [],
-    // );
-    
     return SizedBox(
       height: 195.h,
       child: Stack(

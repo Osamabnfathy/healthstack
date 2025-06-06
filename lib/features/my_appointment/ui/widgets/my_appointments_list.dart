@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:healthstack/core/theming/colors.dart';
+import 'package:healthstack/core/helpers/spacing.dart';
+import 'package:healthstack/core/networking/notification_service.dart';
 import 'package:healthstack/features/home/data/models/doctors_response_model.dart';
 import 'package:healthstack/features/home/data/models/hospitals_response_model.dart';
 import 'package:healthstack/features/home/data/models/departments_response_model.dart';
@@ -10,7 +11,7 @@ import 'package:healthstack/features/my_appointment/logic/cubit/my_appointments_
 import 'package:healthstack/features/my_appointment/logic/cubit/my_appointments_state.dart';
 import 'package:healthstack/features/my_appointment/data/models/my_appointments_response_model.dart';
 
-class MyAppointmentList extends StatelessWidget {
+class MyAppointmentList extends StatefulWidget {
   final int selectedTab; // 0: Upcoming, 1: Completed, 2: Cancelled
   final List<DoctorsResponseModel>? doctors;
   final List<HospitalsResponseModel>? hospitals;
@@ -25,6 +26,46 @@ class MyAppointmentList extends StatelessWidget {
   });
 
   @override
+  State<MyAppointmentList> createState() => _MyAppointmentListState();
+}
+
+class _MyAppointmentListState extends State<MyAppointmentList> {
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final cubit = context.read<MyAppointmentsCubit>();
+      final appointments = cubit.state is MyAppointmentsSuccess<List<MyAppointmentResponseModel>>
+          ? (cubit.state as MyAppointmentsSuccess<List<MyAppointmentResponseModel>>).data
+          : [];
+
+      final upcomingAppointments = _getFilteredAppointments(appointments.cast<MyAppointmentResponseModel>(), 0);
+
+      for (final appointment in upcomingAppointments) {
+        if (appointment.date != null && appointment.time != null) {
+          final appointmentDateTime = _parseDateTime(appointment.date, appointment.time);
+          final notificationTime = appointmentDateTime.subtract(const Duration(hours: 1));
+
+          if (notificationTime.isAfter(DateTime.now())) {
+            final id = appointment.id ?? appointment.hashCode;
+
+            NotificationService.scheduleNotification(
+              id: id,
+              title: 'Upcoming Appointment',
+              body: 'You have an appointment at ${appointmentDateTime.hour}:${appointmentDateTime.minute.toString().padLeft(2, '0')}',
+              scheduledTime: notificationTime,
+            );
+
+            debugPrint('📅 Notification set for appointment at $appointmentDateTime, scheduled at $notificationTime');
+          }
+        }
+      }
+    });
+  }
+  
+  @override
   Widget build(BuildContext context) {
     return BlocBuilder<MyAppointmentsCubit, MyAppointmentsState<List<MyAppointmentResponseModel>>>(
       builder: (context, state) {
@@ -34,7 +75,8 @@ class MyAppointmentList extends StatelessWidget {
           loading: () => const Center(child: CircularProgressIndicator()),
           
           success: (appointments) {
-            final filtered = _getFilteredAppointments(appointments, selectedTab);
+            final filtered = _getFilteredAppointments(appointments, widget.selectedTab);
+  
             if (filtered.isEmpty) {
               return Center(
                 child: Column(
@@ -60,24 +102,24 @@ class MyAppointmentList extends StatelessWidget {
             }
             
             return ListView.builder(
-              key: ValueKey(selectedTab),
+              key: ValueKey(widget.selectedTab),
               itemCount: filtered.length,
               physics: const BouncingScrollPhysics(),
               
               itemBuilder: (context, index) {
                 final appointment = filtered[index];
                 
-                final doctor = doctors?.firstWhere(
+                final doctor = widget.doctors?.firstWhere(
                   (d) => d.doctorId == appointment.doctor,
                   orElse: () => DoctorsResponseModel(), 
                 );
                 
-                final hospital = hospitals?.firstWhere(
+                final hospital = widget.hospitals?.firstWhere(
                   (h) => h.hospitalId == doctor?.hospitalName,
                   orElse: () => HospitalsResponseModel(),
                 );
                 
-                final department = departments?.firstWhere(
+                final department = widget.departments?.firstWhere(
                   (dep) => dep.hospitalDepartmentId == doctor?.departmentName,
                   orElse: () => DepartmentsResponseModel(),
                 );
@@ -116,7 +158,7 @@ class MyAppointmentList extends StatelessWidget {
   }
 
   String _getEmptyListMessage() {
-    switch (selectedTab) {
+    switch (widget.selectedTab) {
       case 0:
         return 'No pending appointments found';
       case 1:
@@ -135,15 +177,15 @@ class MyAppointmentList extends StatelessWidget {
       case 0:
         filteredAppointments = allAppointments.where((apt) =>
           (apt.appointmentStatus?.toLowerCase() == 'pending') &&
-          (apt.date != null && apt.date!.compareTo(DateTime.now().toString().substring(0, 10)) >= 0)
+          (_parseDateTime(apt.date, apt.time).isAfter(DateTime.now()))
         ).toList();
         break;
   
       case 1:
       filteredAppointments = allAppointments.where((apt) =>
-          (apt.paymentStatus?.toLowerCase() == 'confirmed') ||
-          (apt.appointmentStatus?.toLowerCase() == 'confirmed') &&
-          (apt.date != null && apt.date!.compareTo(DateTime.now().toString().substring(0, 10)) < 0)
+          ((apt.paymentStatus?.toLowerCase() == 'confirmed') ||
+          (apt.appointmentStatus?.toLowerCase() == 'confirmed')) &&
+          (_parseDateTime(apt.date, apt.time).isBefore(DateTime.now()))
         ).toList();
         break;
   
@@ -151,7 +193,7 @@ class MyAppointmentList extends StatelessWidget {
         filteredAppointments = allAppointments.where((apt) =>
           (apt.appointmentStatus?.toLowerCase() == 'cancelled') ||
           (apt.appointmentStatus?.toLowerCase() == 'pending') &&
-          (apt.date != null && apt.date!.compareTo(DateTime.now().toString().substring(0, 10)) < 0)
+          (_parseDateTime(apt.date, apt.time).isBefore(DateTime.now()))
         ).toList();
         break;
         
@@ -167,7 +209,7 @@ class MyAppointmentList extends StatelessWidget {
     
     return filteredAppointments;
   }
-  
+
   DateTime _parseDateTime(String? date, String? time) {
     try {
       return DateTime.parse('${date ?? ''}T${time ?? ''}');

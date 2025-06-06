@@ -33,7 +33,6 @@ class DepartmentsListViewItem extends StatelessWidget {
         orElse: () => HospitalsResponseModel(hospitalId: null, name: 'Unknown Hospital'),
       );
       hospitalName = matchingHospital.name;
-      print('matching hospital: ${matchingHospital.name}');
     }
   
     final Widget placeholderImage = Image.asset(
