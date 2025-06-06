@@ -1,11 +1,11 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:healthstack/core/helpers/extensions.dart';
-import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:healthstack/core/theming/colors.dart';
-import 'package:healthstack/core/theming/font_weight_helper.dart';
 import 'package:healthstack/core/theming/styles.dart';
+import 'package:healthstack/core/helpers/spacing.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:healthstack/core/helpers/extensions.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:healthstack/core/theming/font_weight_helper.dart';
 
 
 class AppointmentData {

@@ -1,5 +1,5 @@
 class ApiConstants {
-  static const String apiBaseUrl = "http://10.0.2.2:8000/api/";
+  static const String apiBaseUrl = "https://medicare.pythonanywhere.com/api/";
 
   static const String login = "login/";
   static const String signup = "patient_register/";
