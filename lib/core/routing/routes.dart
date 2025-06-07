@@ -45,5 +45,6 @@ class Routes {
   
   // change password screen
   static const String changePasswordScreen = '/changePasswordScreen';
-
+  
+  static const String aboutUs = "/aboutUs";
 }

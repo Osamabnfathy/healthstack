@@ -33,9 +33,9 @@ class PrescriptionsList extends StatelessWidget {
     return BlocBuilder<PrescriptionsCubit, PrescriptionsState<PrescriptionsResponseModel>>(
       builder: (context, state) {
         return state.when(
-          initial: () => const Center(child: CircularProgressIndicator()),
+          initial: () => const Center(child: CircularProgressIndicator(color: ColorsManager.mainBlue,)),
           
-          loading: () => const Center(child: CircularProgressIndicator()),
+          loading: () => const Center(child: CircularProgressIndicator(color: ColorsManager.mainBlue,)),
           
           success: (prescriptions) {
             if (prescriptions.prescriptions!.isEmpty) {
