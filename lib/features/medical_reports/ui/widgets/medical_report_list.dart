@@ -32,9 +32,9 @@ class MedicalReportList extends StatelessWidget {
     return BlocBuilder<MedicalReportsCubit, MedicalReportsState<MedicalReportsResponseModel>>(
       builder: (context, state) {
         return state.when(
-          initial: () => const Center(child: CircularProgressIndicator()),
+          initial: () => const Center(child: CircularProgressIndicator(color: ColorsManager.mainBlue,)),
         
-          loading: () => const Center(child: CircularProgressIndicator()),
+          loading: () => const Center(child: CircularProgressIndicator(color: ColorsManager.mainBlue,)),
         
           success: (medicalReports) {
             if (medicalReports.report!.isEmpty) {

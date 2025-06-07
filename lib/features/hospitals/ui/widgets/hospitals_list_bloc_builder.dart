@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/features/home/logic/cubit/home_cubit.dart';
 import 'package:healthstack/features/home/logic/cubit/home_state.dart';
 import 'package:healthstack/features/home/data/models/doctors_response_model.dart';
@@ -28,7 +29,7 @@ class HospitalsListBlocBuilder extends StatelessWidget {
 
         if (hospitalsDataList.isEmpty && state is! HospitalsError) {
           print("Showing Loading (Hospitals empty, not error, fetch incomplete)");
-          return const Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator(color: ColorsManager.mainBlue,));
         }
 
         if (state is HospitalsError) {

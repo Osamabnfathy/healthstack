@@ -90,7 +90,7 @@ class ButtonsList extends StatelessWidget {
         'About Us',
         Colors.amber.shade50,
         Colors.amber.shade700,
-        () {/*navigation */},
+        () => context.pushNamed(Routes.aboutUs),
         icon: Icons.call,
       ),
     ];

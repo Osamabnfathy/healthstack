@@ -30,49 +30,32 @@ class MyAppointmentList extends StatefulWidget {
 }
 
 class _MyAppointmentListState extends State<MyAppointmentList> {
-
-  @override
-  void initState() {
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final cubit = context.read<MyAppointmentsCubit>();
-      final appointments = cubit.state is MyAppointmentsSuccess<List<MyAppointmentResponseModel>>
-          ? (cubit.state as MyAppointmentsSuccess<List<MyAppointmentResponseModel>>).data
-          : [];
-
-      final upcomingAppointments = _getFilteredAppointments(appointments.cast<MyAppointmentResponseModel>(), 0);
-
-      for (final appointment in upcomingAppointments) {
-        if (appointment.date != null && appointment.time != null) {
-          final appointmentDateTime = _parseDateTime(appointment.date, appointment.time);
-          final notificationTime = appointmentDateTime.subtract(const Duration(hours: 1));
-
-          if (notificationTime.isAfter(DateTime.now())) {
-            final id = appointment.id ?? appointment.hashCode;
-
-            NotificationService.scheduleNotification(
-              id: id,
-              title: 'Upcoming Appointment',
-              body: 'You have an appointment at ${appointmentDateTime.hour}:${appointmentDateTime.minute.toString().padLeft(2, '0')}',
-              scheduledTime: notificationTime,
-            );
-
-            debugPrint('📅 Notification set for appointment at $appointmentDateTime, scheduled at $notificationTime');
-          }
-        }
-      }
-    });
-  }
+  bool _hasScheduledNotifications = false;
   
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MyAppointmentsCubit, MyAppointmentsState<List<MyAppointmentResponseModel>>>(
       builder: (context, state) {
+        List<MyAppointmentResponseModel>? _successAppointments;
+        state.whenOrNull(
+          success: (appointments) {
+            _successAppointments = appointments;
+          },
+        );
+
+        if (_successAppointments != null && widget.selectedTab == 0 && !_hasScheduledNotifications) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            for (final appointment in _successAppointments!) {
+              _scheduleAppointmentNotification(appointment);
+            }
+            _hasScheduledNotifications = true;
+          });
+        }
+      
         return state.when(
-          initial: () => const Center(child: CircularProgressIndicator()),
+          initial: () => const Center(child: CircularProgressIndicator(color: ColorsManager.mainBlue,)),
           
-          loading: () => const Center(child: CircularProgressIndicator()),
+          loading: () => const Center(child: CircularProgressIndicator(color: ColorsManager.mainBlue,)),
           
           success: (appointments) {
             final filtered = _getFilteredAppointments(appointments, widget.selectedTab);
@@ -170,51 +153,101 @@ class _MyAppointmentListState extends State<MyAppointmentList> {
     }
   }
 
-  List<MyAppointmentResponseModel> _getFilteredAppointments(List<MyAppointmentResponseModel> allAppointments, int selectedTab) {
-    List<MyAppointmentResponseModel> filteredAppointments;
+   // NEW: SCHEDULE NOTIFICATIONS METHOD
+  Future<void> _scheduleAppointmentNotification(MyAppointmentResponseModel appointment) async {
+  try {
+    final aptDateTime = _parseDateTime(appointment.date, appointment.time);
+    final notificationTime = aptDateTime.subtract(const Duration(minutes: 60));
     
-    switch (selectedTab) {
-      case 0:
-        filteredAppointments = allAppointments.where((apt) =>
-          (apt.appointmentStatus?.toLowerCase() == 'pending') &&
-          (_parseDateTime(apt.date, apt.time).isAfter(DateTime.now()))
-        ).toList();
-        break;
-  
-      case 1:
-      filteredAppointments = allAppointments.where((apt) =>
-          ((apt.paymentStatus?.toLowerCase() == 'confirmed') ||
-          (apt.appointmentStatus?.toLowerCase() == 'confirmed')) &&
-          (_parseDateTime(apt.date, apt.time).isBefore(DateTime.now()))
-        ).toList();
-        break;
-  
-      case 2:
-        filteredAppointments = allAppointments.where((apt) =>
-          (apt.appointmentStatus?.toLowerCase() == 'cancelled') ||
-          (apt.appointmentStatus?.toLowerCase() == 'pending') &&
-          (_parseDateTime(apt.date, apt.time).isBefore(DateTime.now()))
-        ).toList();
-        break;
-        
-      default:
-        filteredAppointments = [];
-    }
-    
-    filteredAppointments.sort((a, b) {
-      DateTime dateTimeA = _parseDateTime(a.date, a.time);
-      DateTime dateTimeB = _parseDateTime(b.date, b.time);
-      return dateTimeA.compareTo(dateTimeB);
-    });
-    
-    return filteredAppointments;
-  }
+    if (notificationTime.isAfter(DateTime.now())) {
+      final doctor = widget.doctors?.firstWhere(
+        (d) => d.doctorId == appointment.doctor,
+        orElse: () => DoctorsResponseModel(),
+      );
 
+      await NotificationService.scheduleNotification(
+        id: appointment.id ?? appointment.hashCode,
+        title: 'Upcoming Appointment',
+        body: 'With Dr. ${doctor?.name} at ${_formatTime(aptDateTime)}',
+        scheduledTime: notificationTime,
+      );
+      
+      await NotificationService.scheduleAppointmentNotification(
+        appointment: appointment, 
+        doctor: doctor
+      );
+    }
+  } catch (e) {
+    debugPrint('⚠️ Notification scheduling failed: $e');
+  }
+}
+
+  // NEW: TIME FORMATTER
+  String _formatTime(DateTime dt) {
+  final hour = dt.hour > 12 ? dt.hour - 12 : dt.hour;
+  final period = dt.hour >= 12 ? 'PM' : 'AM';
+  return '$hour:${dt.minute.toString().padLeft(2, '0')} $period';
+}
+
+  // UPDATED: ROBUST DATE PARSING
   DateTime _parseDateTime(String? date, String? time) {
     try {
-      return DateTime.parse('${date ?? ''}T${time ?? ''}');
-    } catch (_) {
-      return DateTime(2100);
+      if (date == null || time == null) throw 'Missing date/time';
+      
+      final dateParts = date.split('-');
+      final timeParts = time.split(':');
+      
+      return DateTime(
+        int.parse(dateParts[0]),
+        int.parse(dateParts[1]),
+        int.parse(dateParts[2]),
+        int.parse(timeParts[0]),
+        int.parse(timeParts[1]),
+      );
+    } catch (e) {
+      return DateTime.now().add(Duration(days: 1)); 
     }
+  }
+
+  // UPDATED FILTERING WITH ERROR HANDLING
+  List<MyAppointmentResponseModel> _getFilteredAppointments(List<MyAppointmentResponseModel> allAppointments, int selectedTab) {
+    final now = DateTime.now();
+    
+    return allAppointments.where((apt) {
+      // Skip if no valid date/time
+      if (apt.date == null || apt.time == null) return false;
+      
+      try {
+        final aptTime = _parseDateTime(apt.date, apt.time);
+        
+        switch (selectedTab) {
+          case 0: // Upcoming
+            return apt.appointmentStatus?.toLowerCase() == 'pending' && 
+                   aptTime.isAfter(now);
+            
+          case 1: // Completed
+            return (apt.appointmentStatus?.toLowerCase() == 'confirmed' || 
+                    apt.paymentStatus?.toLowerCase() == 'confirmed') &&
+                   aptTime.isBefore(now);
+                    
+          case 2: // Cancelled
+            return apt.appointmentStatus?.toLowerCase() == 'cancelled' || 
+                   (apt.appointmentStatus?.toLowerCase() == 'pending' && 
+                    aptTime.isBefore(now));
+                    
+          default: return false;
+        }
+      } catch (e) {
+        return false;
+      }
+    }).toList()
+    ..sort((a, b) {
+      try {
+        return _parseDateTime(a.date, a.time)
+            .compareTo(_parseDateTime(b.date, b.time));
+      } catch (_) {
+        return 0;
+      }
+    });
   }
 }

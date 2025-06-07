@@ -10,34 +10,39 @@ import 'package:healthstack/core/di/dependency_injection.dart';
 import 'package:healthstack/core/helpers/shared_pref_helper.dart';
 import 'package:healthstack/core/networking/notification_service.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
-  await setupGetIt();
-  await ScreenUtil.ensureScreenSize();
-  await checkIfLogedInUser();
-  await NotificationService.init();
-  await requestNotificationPermission();
-  runApp(
-    HealthStackApp(appRouter: AppRouter(),)
-  );
+
+  await _initializeApp();
+
+  runApp(HealthStackApp(appRouter: AppRouter()));
 }
 
-checkIfLogedInUser() async{
+Future<void> _initializeApp() async {
+  await setupGetIt();
+  await ScreenUtil.ensureScreenSize();
+  await _checkIfLoggedInUser();
+  await _requestNotificationPermission(); 
+  await NotificationService.init(); 
+}
+
+Future<void> _checkIfLoggedInUser() async {
   String? userToken = await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken);
   if(userToken.isNullOrEmpty()){
     isLoggedInUser = false;
   } 
   else {
-    isLoggedInUser = true;
-  } 
+    isLoggedInUser = true;  
+  }
 }
 
-Future<void> requestNotificationPermission() async {
+Future<void> _requestNotificationPermission() async {
   if (Platform.isAndroid) {
-    final status = await Permission.notification.status;
-    if (!status.isGranted) {
-      await Permission.notification.request();
+    await Permission.notification.request();
+    try {
+    await Permission.scheduleExactAlarm.request();
+    } catch (e) {
+      print("⚠️ Exact alarm permission error: $e");
     }
   }
 }
