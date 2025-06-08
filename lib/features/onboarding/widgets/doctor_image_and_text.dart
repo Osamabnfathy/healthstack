@@ -12,7 +12,7 @@ class DoctorImageAndText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Image.asset('assets/images/healthstack_logo_lowopacity.png',),
+        // Image.asset('assets/images/healthstack_logo_lowopacity.png',),
         verticalSpace(50),
         
         Container(
