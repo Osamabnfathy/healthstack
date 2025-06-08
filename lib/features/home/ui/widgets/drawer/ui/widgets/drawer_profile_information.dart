@@ -24,6 +24,7 @@ class ProfileInformation extends StatelessWidget {
       padding: EdgeInsets.only(top: 40.h, bottom: 20.h, left: 20.w, right: 20.w),
       
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -89,8 +90,13 @@ class ProfileInformation extends StatelessWidget {
           ),
           verticalSpace(10),
           
-          Text(getDisplayText(patientProfileData?.name), style: TextStyles.font18DarkBlueBold),
-          verticalSpace(4),
+            Text(
+            getDisplayText(
+              patientProfileData?.name?.split(' ').take(2).join(' ')
+            ),
+            style: TextStyles.font18DarkBlueBold,
+            ),
+            verticalSpace(4),
           
           Text(getDisplayText(patientProfileData?.email), style: TextStyles.font13GrayRegular),
         ],
