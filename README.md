@@ -63,9 +63,9 @@ A complete healthcare mobile application developed using **Flutter** for Android
 | ------------------------------------ | ---------------------------------- |
 | ![023 medical reports screen](https://github.com/user-attachments/assets/3b037848-91bb-47c7-9108-d72459be7c0e) | ![024 medical reports info screen](https://github.com/user-attachments/assets/bc6cfc94-5046-4873-af27-bfcf88222625) | ![](screenshots/change_password.png) |
 
-|Change Password                       |
-|------------------------------------- |
-|![025 change password screen](https://github.com/user-attachments/assets/f6b4bf0a-2511-483e-9681-8d03bd5ec2ed)|
+|Change Password                       | About us                         |
+|------------------------------------- |--------------------------------- |
+|![025 change password screen](https://github.com/user-attachments/assets/f6b4bf0a-2511-483e-9681-8d03bd5ec2ed)| ![Screenshot_1749416152](https://github.com/user-attachments/assets/2079dde7-ba7f-4997-97a8-a633d1cde707) | 
 
 <p>&nbsp;</p>
 <p>&nbsp;</p>
