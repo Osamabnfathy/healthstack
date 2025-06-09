@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "91369414462",
+    "project_id": "healthstack-5ea6c",
+    "storage_bucket": "healthstack-5ea6c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:91369414462:android:1b329580bf951c78eb966f",
+        "android_client_info": {
+          "package_name": "com.health.medicare"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAnjaVdWaJ0quvY0qpg5MgwsiPtAcWgoM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
