@@ -187,7 +187,7 @@ class _FirstAppointmentScreenState extends State<FirstAppointmentScreen> {
       ),
       
       bottomNavigationBar: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [

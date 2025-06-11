@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:healthstack/core/routing/routes.dart';
 import 'package:healthstack/features/home/data/models/doctors_response_model.dart';
 import 'package:healthstack/features/home/data/models/hospitals_response_model.dart';
 import 'package:healthstack/features/home/data/models/departments_response_model.dart';
@@ -8,26 +9,59 @@ class DoctorsDepartmentListView extends StatelessWidget {
   final List<DoctorsResponseModel>? doctorsDataList; 
   final List<HospitalsResponseModel>? hospitalsDataList;
   final List<DepartmentsResponseModel>? departmentsDataList;
-  
+  final int? departmentId; // Pass this to the "See All" screen
+
   const DoctorsDepartmentListView({
     super.key, 
     this.doctorsDataList,
     this.hospitalsDataList,
-    this.departmentsDataList,  
+    this.departmentsDataList,
+    this.departmentId,
   });
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: doctorsDataList?.length, 
-      itemBuilder: (context, index) {
-        return DoctorsDepartmentListViewItem(
-          itemIndex: index,
-          doctorsData: doctorsDataList?[index],
-          hospitalsDataList: hospitalsDataList,
-          departmentsDataList: departmentsDataList, 
-        );
-      },
+    final doctors = doctorsDataList ?? [];
+    final showSeeAll = doctors.length > 3;
+    final displayDoctors = showSeeAll ? doctors.take(3).toList() : doctors;
+
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          ListView.builder(
+            shrinkWrap: true,
+            physics: ScrollPhysics(),
+            itemCount: displayDoctors.length,
+            itemBuilder: (context, index) {
+              return DoctorsDepartmentListViewItem(
+                itemIndex: index,
+                doctorsData: displayDoctors[index],
+                hospitalsDataList: hospitalsDataList,
+                departmentsDataList: departmentsDataList,
+              );
+            },
+          ),
+          if (showSeeAll)
+            Align(
+              alignment: Alignment.centerRight,
+              child: TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(
+                    context,
+                    Routes.departmentScreen,
+                    arguments: {
+                      'departmentId': departmentId,
+                      'hospitalsDataList': hospitalsDataList,
+                      'departmentsDataList': departmentsDataList,
+                      'doctorsDataList': doctorsDataList,
+                    },
+                  );
+                },
+                child: Text('See All'),
+              ),
+            ),
+        ],
+      ),
     );
   }
 }

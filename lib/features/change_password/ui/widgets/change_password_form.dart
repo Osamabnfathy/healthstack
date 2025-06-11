@@ -115,6 +115,16 @@ class _ChangePasswordFormState extends State<ChangePasswordForm> {
             controller: confirmPasswordController,
             hintText: 'Confirm New Password',
             isObscureText: _obscureText2,
+            suffixIcon: GestureDetector(
+              onTap: () {
+                setState(() {
+                  _obscureText2 = !_obscureText2;
+                });
+              },
+              child: Icon(
+                _obscureText2 ? Icons.visibility_off : Icons.visibility,
+              ),
+            ),
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Please enter the Confirmation password';

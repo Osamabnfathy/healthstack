@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:healthstack/core/routing/routes.dart';
+import 'package:healthstack/features/department_doctors/department_doctors_screen.dart';
 import 'package:healthstack/features/home/ui/home_screen.dart';
 import 'package:healthstack/core/di/dependency_injection.dart';
 import 'package:healthstack/features/login/ui/login_screen.dart';
@@ -79,7 +80,19 @@ class AppRouter {
           ),
         );
       
-    
+      
+      case Routes.departmentScreen:
+        final args = arguments as Map<String, dynamic>?;
+        return MaterialPageRoute(
+          builder: (_) => DepartmentDoctorsScreen(
+            departmentId: args?['departmentId'],
+            hospitalsDataList: args?['hospitalsDataList'],
+            departmentsDataList: args?['departmentsDataList'],
+            doctorsDataList: args?['doctorsDataList'],
+          ),
+        );
+      
+      
       case Routes.doctorsScreen:
         if (arguments is HomeCubit) {
           final homeCubitInstance = arguments;
