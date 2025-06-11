@@ -37,8 +37,8 @@ class DepartmentsListViewItem extends StatelessWidget {
   
     final Widget placeholderImage = Image.asset(
       'assets/icons/general.png', 
-      height: 65.h, 
-      width: 65.w,
+      height: 75.h, 
+      width: 75.w,
       fit: BoxFit.cover, 
     );
 
@@ -50,7 +50,9 @@ class DepartmentsListViewItem extends StatelessWidget {
       },
     
       child: Container(
-        padding: EdgeInsetsDirectional.only(start: itemIndex == 0 ? 0 : 20.w),
+        width: 105.w,
+        
+        padding: EdgeInsetsDirectional.only(start: itemIndex == 0 ? 0 : 5.w),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -65,15 +67,15 @@ class DepartmentsListViewItem extends StatelessWidget {
               ): null,
               
               child: CircleAvatar(
-                radius: 35.r, 
+                radius: 40.r, 
                 backgroundColor: ColorsManager.lightBlue,
                 
                 child: ClipOval( 
                   child: departmentsData?.featuredImage != null && departmentsData!.featuredImage!.isNotEmpty
                     ? Image.network(
                         departmentsData!.featuredImage!, 
-                        height: 65.h, 
-                        width: 65.w, 
+                        height: 75.h, 
+                        width: 75.w, 
                         fit: BoxFit.fill,
                         errorBuilder: (context, error, stackTrace) => placeholderImage,
                     )
@@ -87,8 +89,8 @@ class DepartmentsListViewItem extends StatelessWidget {
             Text(
               departmentsData?.hospitalDepartmentName ?? 'Specialization',
               style: selectedIndex == itemIndex
-                  ? TextStyles.font12DarkBlueBold 
-                  : TextStyles.font12DarkBlueRegular,
+                  ? TextStyles.font13DarkBlueBold 
+                  : TextStyles.font13DarkBlueRegular,
               maxLines: 1,
               overflow: TextOverflow.ellipsis, 
             ),
@@ -96,8 +98,8 @@ class DepartmentsListViewItem extends StatelessWidget {
             Text(
               getDisplayText(hospitalName),
               style: selectedIndex == itemIndex
-                  ? TextStyles.font12GrayBold 
-                  : TextStyles.font12GrayRegular,
+                  ? TextStyles.font13GrayBold 
+                  : TextStyles.font13GrayRegular,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),

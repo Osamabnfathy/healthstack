@@ -35,10 +35,11 @@ class DoctorsListBlocBuilder extends StatelessWidget {
         }
 
         if (doctorsDataList.isNotEmpty) {
-          if (isSorted) {
             doctorsDataList = List<DoctorsResponseModel>.from(doctorsDataList)
-              ..sort((a, b) => (a.name ?? '').compareTo(b.name ?? ''));
-          }
+              ..sort((a, b) => isSorted
+                  ? (a.name ?? '').compareTo(b.name ?? '')
+                  : (b.name ?? '').compareTo(a.name ?? ''));
+                
           return DoctorsListView(
             searchQuery: searchQuery,
             doctorsDataList: doctorsDataList,

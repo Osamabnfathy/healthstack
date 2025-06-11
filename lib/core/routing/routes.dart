@@ -10,6 +10,9 @@ class Routes {
   // screen of home
   static const String homeScreen = '/homeScreen';
   
+  // screen of department's doctors
+  static const String departmentScreen = '/departmentScreen';
+  
   // screen of login
   static const String loginScreen = '/logintScreen';
   

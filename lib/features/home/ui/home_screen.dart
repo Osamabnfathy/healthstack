@@ -1,5 +1,3 @@
-import 'package:healthstack/core/theming/colors.dart';
-
 import 'widgets/home_top_bar.dart';
 import 'package:flutter/material.dart';
 import 'widgets/doctors_blue_container.dart';
@@ -72,10 +70,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   verticalSpace(10),
                   
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
-                    child: Divider(height: 1.5.h, thickness: 1.5.h, color: ColorsManager.lightGray,),
-                  ),
+                  // Padding(
+                  //   padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
+                  //   child: Divider(height: 1.5.h, thickness: 1.5.h, color: ColorsManager.lightGray,),
+                  // ),
                   
                   DoctorsDepartmentBlocBuilder(
                     selectedDepartmentId: selectedDepartmentId,

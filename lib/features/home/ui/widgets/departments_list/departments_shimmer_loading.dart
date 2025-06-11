@@ -24,11 +24,12 @@ class DepartmentsShimmerLoading extends StatelessWidget {
                   baseColor: ColorsManager.lightGray,
                   highlightColor: Colors.white,
                   child: CircleAvatar(
-                    radius: 35.r,
+                    radius: 40.r,
                     backgroundColor: Colors.white,
                   ),
                 ),
                 verticalSpace(14),
+                
                 Shimmer.fromColors(
                   baseColor: ColorsManager.lightGray,
                   highlightColor: Colors.white,

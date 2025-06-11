@@ -78,10 +78,9 @@ class NotificationService {
         title,
         body,
         tzScheduledTime,
-        NotificationDetails(android: androidDetails),
+        const NotificationDetails(android: androidDetails),
         androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-        uiLocalNotificationDateInterpretation: 
-            UILocalNotificationDateInterpretation.absoluteTime,
+        // Removed the deprecated parameter
         matchDateTimeComponents: DateTimeComponents.time,
       );
     } catch (e) {
@@ -102,7 +101,7 @@ class NotificationService {
       999,
       'MediCare Test',
       'Notification service is working! ${DateTime.now().toLocal()}',
-      NotificationDetails(android: androidDetails),
+      const NotificationDetails(android: androidDetails),
     );
   }
   
@@ -124,7 +123,7 @@ class NotificationService {
       await scheduleNotification(
         id: appointment.id ?? appointment.hashCode,
         title: 'Upcoming Appointment',
-        body: 'With Dr. ${doctor?.name} at ${_formatTime(scheduledTime.add(Duration(minutes: 60)))}',
+        body: 'With Dr. ${doctor?.name} at ${_formatTime(scheduledTime.add(const Duration(minutes: 60)))}',
         scheduledTime: scheduledTime,
       );
     } catch (e) {
@@ -159,7 +158,7 @@ class NotificationService {
         int.parse(timeParts[1]),
       );
     } catch (e) {
-      return DateTime.now().add(Duration(days: 1)); 
+      return DateTime.now().add(const Duration(days: 1)); 
     }
   }
 }

@@ -38,10 +38,10 @@ class HospitalsListBlocBuilder extends StatelessWidget {
         }
 
         if (hospitalsDataList.isNotEmpty) {
-          if (isSorted) {
-            hospitalsDataList = List<HospitalsResponseModel>.from(hospitalsDataList)
-              ..sort((a, b) => (a.name ?? '').compareTo(b.name ?? ''));
-          }
+          hospitalsDataList = List<HospitalsResponseModel>.from(hospitalsDataList)
+            ..sort((a, b) => isSorted
+                ? (a.name ?? '').compareTo(b.name ?? '')
+                : (b.name ?? '').compareTo(a.name ?? ''));
           
           return HospitalsListView(
             searchQuery: searchQuery,

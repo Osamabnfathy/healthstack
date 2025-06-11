@@ -13,6 +13,11 @@ class OnBoardingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 0,
+        backgroundColor: Colors.white,
+      ),
+      
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
