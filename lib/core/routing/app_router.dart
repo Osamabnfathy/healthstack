@@ -81,7 +81,7 @@ class AppRouter {
         );
       
       
-      case Routes.departmentScreen:
+      case Routes.departmentDoctorsScreen:
         final args = arguments as Map<String, dynamic>?;
         return MaterialPageRoute(
           builder: (_) => DepartmentDoctorsScreen(
