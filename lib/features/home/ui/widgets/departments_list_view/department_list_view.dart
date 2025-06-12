@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:healthstack/features/home/data/models/hospitals_response_model.dart';
 import 'package:healthstack/features/home/data/models/departments_response_model.dart';
-import 'package:healthstack/features/home/ui/widgets/departments_list/department_list_view_item.dart';
+import 'package:healthstack/features/home/ui/widgets/departments_list_view/department_list_view_item.dart';
 
 class DepartmentsListView extends StatelessWidget {
   final int? selectedIndex;
