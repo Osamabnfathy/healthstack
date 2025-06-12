@@ -1,5 +1,5 @@
 import 'package:healthstack/core/theming/colors.dart';
-import 'package:healthstack/features/home/ui/widgets/department_doctors_and_seeAll.dart';
+import 'package:healthstack/features/home/ui/widgets/department_doctors_and_see_all.dart';
 import 'widgets/home_top_bar.dart';
 import 'package:flutter/material.dart';
 import 'widgets/doctors_blue_container.dart';
