@@ -17,13 +17,11 @@ class DoctorsBlueContainer extends StatelessWidget {
       height: 195.h,
       child: Stack(
         alignment: Alignment.bottomCenter,
-        
         children: [
           Container(
             height: 165.h,
             width: double.infinity,
             padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
-            
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(24.0),
               image: const DecorationImage(
@@ -31,7 +29,6 @@ class DoctorsBlueContainer extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -41,7 +38,6 @@ class DoctorsBlueContainer extends StatelessWidget {
                   textAlign: TextAlign.start,
                 ),
                 verticalSpace(16),
-                
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () {
@@ -50,12 +46,12 @@ class DoctorsBlueContainer extends StatelessWidget {
                         arguments: homeCubitInstance,
                       );
                     },
-                    
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0),),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12.0),
+                      ),
                     ),
-                    
                     child: Text(
                       'Doctors List',
                       style: TextStyles.font14BlueSemiBold,
@@ -65,12 +61,11 @@ class DoctorsBlueContainer extends StatelessWidget {
               ],
             ),
           ),
-          
           Positioned(
             right: 8.w,
             child: Image.asset(
               'assets/images/doctor-book.png',
-              fit: BoxFit.cover, 
+              fit: BoxFit.cover,
               height: 200.h,
               width: 160.w,
             ),

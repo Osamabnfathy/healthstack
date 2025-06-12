@@ -7,6 +7,7 @@ import 'package:healthstack/features/home/ui/home_screen.dart';
 import 'package:healthstack/core/di/dependency_injection.dart';
 import 'package:healthstack/features/login/ui/login_screen.dart';
 import 'package:healthstack/features/about_us/aboutus_screen.dart';
+import 'package:healthstack/features/medical_departments/ui/medical_departments_screen.dart';
 import 'package:healthstack/features/sign_up/ui/sign_up_screen.dart';
 import 'package:healthstack/features/doctors/ui/doctors_screen.dart';
 import 'package:healthstack/features/sign_up/logic/sign_up_cubit.dart';
@@ -253,6 +254,11 @@ class AppRouter {
       case Routes.aboutUs:
         return MaterialPageRoute(
           builder: (_) => const AboutUsScreen(),
+        );
+
+        case Routes.medicalDepartmentsScreen:
+        return MaterialPageRoute(
+          builder: (_) => const MedicalDepartmentsScreen(),
         );
       default:
         return null;
