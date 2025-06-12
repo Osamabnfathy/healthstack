@@ -65,7 +65,7 @@ class DepartmentsBlocBuilder extends StatelessWidget {
       child: Column(
         children: [
           DepartmentsShimmerLoading(),
-          verticalSpace(10),
+          verticalSpace(20),
           DoctorsShimmerLoading(),
         ]
       )      

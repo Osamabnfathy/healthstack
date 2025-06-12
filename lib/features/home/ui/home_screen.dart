@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'widgets/doctors_blue_container.dart';
 import 'widgets/departments_and_see_all.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:healthstack/core/theming/styles.dart';
 import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:healthstack/features/home/logic/cubit/home_cubit.dart';
@@ -33,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
           builder: (BuildContext context) {
             return Container(
               width: double.infinity,
-              margin: EdgeInsets.symmetric(horizontal:20.w, vertical:16.h),
+              margin: EdgeInsets.fromLTRB(20.w, 16.h, 20.w, 10.h), 
               
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   
                   const DoctorsBlueContainer(),
-                  verticalSpace(24),
+                  verticalSpace(16),
                   
                   const DepartmentsAndSeeAll(),
                   verticalSpace(16),   
@@ -70,10 +71,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   verticalSpace(10),
                   
-                  // Padding(
-                  //   padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
-                  //   child: Divider(height: 1.5.h, thickness: 1.5.h, color: ColorsManager.lightGray,),
-                  // ),
+                  Text(
+                    'Department Doctors',
+                    style: TextStyles.font18DarkBlueSemiBold,
+                  ),
+                  verticalSpace(10),
                   
                   DoctorsDepartmentBlocBuilder(
                     selectedDepartmentId: selectedDepartmentId,

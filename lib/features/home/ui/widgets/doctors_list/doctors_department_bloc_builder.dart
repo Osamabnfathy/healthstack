@@ -6,7 +6,6 @@ import 'package:healthstack/features/home/logic/cubit/home_cubit.dart';
 import 'package:healthstack/features/home/logic/cubit/home_state.dart';
 import 'package:healthstack/features/home/data/models/hospitals_response_model.dart';
 import 'package:healthstack/features/home/data/models/departments_response_model.dart';
-import 'package:healthstack/features/home/ui/widgets/doctors_list/doctors_shimmer_loading.dart';
 import 'package:healthstack/features/home/ui/widgets/doctors_list/doctors_department_list_view.dart';
 
 class DoctorsDepartmentBlocBuilder extends StatelessWidget {
@@ -61,6 +60,7 @@ class DoctorsDepartmentBlocBuilder extends StatelessWidget {
                 doctorsDataList: filteredDoctors,
                 hospitalsDataList: hospitalsDataList,
                 departmentsDataList: departmentsDataList,
+                departmentId: selectedDepartmentId,
               )
             );
           },
@@ -78,8 +78,6 @@ class DoctorsDepartmentBlocBuilder extends StatelessWidget {
   }
   
   Widget setupLoading() {
-    return Expanded(
-      child: const DoctorsShimmerLoading(),
-    );
+    return const SizedBox.shrink();
   }
 }
