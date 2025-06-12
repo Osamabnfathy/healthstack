@@ -48,7 +48,7 @@ class DoctorsDepartmentListView extends StatelessWidget {
                 onPressed: () {
                   Navigator.pushNamed(
                     context,
-                    Routes.departmentScreen,
+                    Routes.departmentDoctorsScreen,
                     arguments: {
                       'departmentId': departmentId,
                       'hospitalsDataList': hospitalsDataList,
