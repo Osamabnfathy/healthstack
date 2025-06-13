@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:healthstack/core/widgets/custom_top_bar.dart';
+import 'package:healthstack/core/widgets/search_bar.dart';
 import 'package:healthstack/features/home/data/models/doctors_response_model.dart';
 import 'package:healthstack/features/home/data/models/hospitals_response_model.dart';
 import 'package:healthstack/features/home/data/models/departments_response_model.dart';
