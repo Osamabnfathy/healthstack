@@ -51,7 +51,7 @@ class DepartmentsListViewItem extends StatelessWidget {
     
       child: Container(
         width: 105.w,
-        
+        margin: EdgeInsets.symmetric(horizontal: 3.w),
         padding: EdgeInsetsDirectional.only(start: itemIndex == 0 ? 0 : 5.w),
         child: Column(
           mainAxisSize: MainAxisSize.min,

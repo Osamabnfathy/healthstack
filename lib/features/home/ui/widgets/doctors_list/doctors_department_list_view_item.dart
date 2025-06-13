@@ -29,7 +29,7 @@ class DoctorsDepartmentListViewItem extends StatelessWidget {
     final Widget placeholderImage = Image.asset(
       "assets/icons/doctor.png", 
       width: 110.w, 
-      height: 120.h, 
+      height: 115.h, 
       fit: BoxFit.cover,
     );
     
@@ -51,8 +51,8 @@ class DoctorsDepartmentListViewItem extends StatelessWidget {
       },
     
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 12.h),
-        padding: EdgeInsetsDirectional.symmetric(horizontal: 10.w, vertical: 10.h),
+        margin: EdgeInsets.symmetric(vertical: 4.h),
+        padding: EdgeInsets.fromLTRB(4.w, 4.h, 10.w, 4.h),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16.r),
           color: ColorsManager.lightBlue,
@@ -73,7 +73,7 @@ class DoctorsDepartmentListViewItem extends StatelessWidget {
                   ? Image.network(
                     doctorsData!.featuredImage!, 
                     width: 110.w, 
-                    height: 120.h, 
+                    height: 115.h, 
                     fit: BoxFit.cover,
                   )
                   : placeholderImage,

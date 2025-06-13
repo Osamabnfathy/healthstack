@@ -56,8 +56,8 @@ class DoctorsListViewItem extends StatelessWidget {
       },
     
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
-        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+        margin: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 6.h),
         decoration: BoxDecoration(
           color: ColorsManager.lightBlue,
           borderRadius: BorderRadius.circular(16.r),

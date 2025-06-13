@@ -83,7 +83,7 @@ class AppRouter {
       
       
       case Routes.departmentDoctorsScreen:
-        final args = arguments as Map<String, dynamic>?;
+        final args = settings.arguments as Map<String, dynamic>?;
         return MaterialPageRoute(
           builder: (_) => DepartmentDoctorsScreen(
             departmentId: args?['departmentId'],
@@ -256,12 +256,20 @@ class AppRouter {
           builder: (_) => const AboutUsScreen(),
         );
 
-        case Routes.medicalDepartmentsScreen:
-        return MaterialPageRoute(
-          builder: (_) => const MedicalDepartmentsScreen(),
-        );
+      case Routes.medicalDepartmentsScreen:
+        final arguments = settings.arguments as Map<String, dynamic>?;
+        if (arguments != null) {
+          return MaterialPageRoute(
+            builder: (_) => MedicalDepartmentsScreen(
+              departmentsDataList: arguments['departmentsDataList'],
+              doctorsDataList: arguments['doctorsDataList'],
+              hospitalsDataList: arguments['hospitalsDataList'],
+            ),
+          );
+        }
       default:
         return null;
     }
+    return null;
   }
 }
