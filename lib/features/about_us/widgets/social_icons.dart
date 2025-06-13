@@ -10,9 +10,20 @@ class SocialIcons extends StatelessWidget {
   const SocialIcons({super.key});
 
   void _launchUrl(String url) async {
-    final uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    try {
+      final uri = Uri.parse(url);
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(
+          uri,
+          mode: LaunchMode.externalApplication,
+        );
+      } else {
+        // Handle case where URL can't be launched
+        debugPrint('Could not launch $url');
+      }
+    } catch (e) {
+      // Handle any errors that occur
+      debugPrint('Error launching URL: $e');
     }
   }
 
@@ -31,25 +42,41 @@ class SocialIcons extends StatelessWidget {
           children: [
             InkWell(
               onTap: () => _launchUrl('https://www.facebook.com/profile.php?id=61577376324582'),
-              child: Icon(FontAwesomeIcons.facebook, color: ColorsManager.mainBlue, size: 35.sp),
+              child: Icon(
+                FontAwesomeIcons.facebook,
+                color: ColorsManager.mainBlue,
+                size: 35.sp,
+              ),
             ),
             horizontalSpace(15),
             
             InkWell(
               onTap: () => _launchUrl('https://www.instagram.com/medicaresvu/'),
-              child: Icon(FontAwesomeIcons.instagram, color: ColorsManager.mainBlue, size: 35.sp),
+              child: Icon(
+                FontAwesomeIcons.instagram,
+                color: ColorsManager.mainBlue,
+                size: 35.sp,
+              ),
             ),
             horizontalSpace(15),
             
             InkWell(
               onTap: () => _launchUrl('https://x.com/CareMedi1021'),
-              child: Icon(FontAwesomeIcons.twitter, color: ColorsManager.mainBlue, size: 35.sp),
+              child: Icon(
+                FontAwesomeIcons.twitter,
+                color: ColorsManager.mainBlue,
+                size: 35.sp,
+              ),
             ),
             horizontalSpace(15),
             
             InkWell(
               onTap: () => _launchUrl('https://www.linkedin.com/in/medi-care-90124936b/'),
-              child: Icon(FontAwesomeIcons.linkedin, color: ColorsManager.mainBlue, size: 35.sp),
+              child: Icon(
+                FontAwesomeIcons.linkedin,
+                color: ColorsManager.mainBlue,
+                size: 35.sp,
+              ),
             ),
           ],
         ),

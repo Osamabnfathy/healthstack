@@ -31,7 +31,7 @@ class ProfileInformation extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () => Navigator.pop(context), 
-                child: Icon(Icons.arrow_back_ios_new_outlined, color: ColorsManager.mainBlue, size: 20.sp,),
+                child: Icon(Icons.arrow_back, color: ColorsManager.darkBlue, size: 20.sp,),
               ),
             ],
           ),

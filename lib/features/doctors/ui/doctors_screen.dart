@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/core/helpers/spacing.dart';
+import 'package:healthstack/core/widgets/custom_top_bar.dart';
 import 'package:healthstack/core/widgets/search_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:healthstack/core/widgets/custom_app_bar.dart';
 import 'package:healthstack/features/doctors/ui/widgets/doctors_list_bloc_builder.dart';
-
 
 class DoctorsScreen extends StatefulWidget {
   const DoctorsScreen({super.key});
 
   @override
-  State<DoctorsScreen> createState() =>
-    _DoctorPageState();
+  State<DoctorsScreen> createState() => _DoctorPageState();
 }
 
 class _DoctorPageState extends State<DoctorsScreen> {
@@ -32,7 +30,7 @@ class _DoctorPageState extends State<DoctorsScreen> {
       searchQuery = searchController.text.trim().toLowerCase();
     });
   }
-  
+
   void _onFilterPressed() {
     setState(() {
       isSorted = !isSorted;
@@ -48,36 +46,29 @@ class _DoctorPageState extends State<DoctorsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsManager.moreLightGray,
+      backgroundColor: ColorsManager.white,
       body: SafeArea(
-        child: Builder(
-          builder: (BuildContext context) {
-            return Container(
-              width: double.infinity,
-              color: Colors.white,
-              margin: EdgeInsets.fromLTRB(12.w, 5.h, 12.w, 15.h),
-              
-              child: Column(
-                children: [
-                  const CustomAppBar(title: 'Find Doctor'), 
-                   
-                  SearchAndFilterBar(
-                    searchController: searchController,
-                    onFilterPressed: _onFilterPressed,
-                  ),
-                  verticalSpace(10),
-                  
-                  Expanded(
-                    child: DoctorsListBlocBuilder(
-                      searchQuery: searchQuery,
-                      isSorted: isSorted,
-                    ),
-                  )
-                ],
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 16.w),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const CustomTopBar(title: 'Doctor Information'),
+              verticalSpace(30),
+              SearchAndFilterBar(
+                searchController: searchController,
+                onFilterPressed: _onFilterPressed,
               ),
-            );
-          }
-        ),
+              verticalSpace(10),
+              Expanded(
+                child: DoctorsListBlocBuilder(
+                  searchQuery: searchQuery,
+                  isSorted: isSorted,
+                ),
+              )
+            ],
+          ),
+        ),      
       ),
     );
   }
