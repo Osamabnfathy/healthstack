@@ -19,19 +19,15 @@ class EndDrawer extends StatelessWidget {
       backgroundColor: ColorsManager.lighterGray,
       shadowColor: Colors.grey.withOpacity(0.3),
       elevation: 10,
-      
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           ProfileInformation(patientProfileData: patientProfileData),
-          
           const CircularEdgeItemsDrawer(),
-          
           Padding(
             padding: EdgeInsets.only(top: 10.h, left: 15.w, right: 15.w),
             child: const MyAppointmentAndMedicalRecords(),
           ),
-          
           const Expanded(child: ButtonsList()),
         ],
       ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:healthstack/core/helpers/extensions.dart';
 import 'package:healthstack/core/routing/routes.dart';
+import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/core/theming/styles.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:healthstack/features/home/logic/cubit/home_cubit.dart';
@@ -29,7 +30,7 @@ class MyAppointmentAndMedicalRecords extends StatelessWidget {
     return Container(
       height: 55.h,
       decoration: BoxDecoration(
-        color: Colors.white, // Top buttons color
+        color: ColorsManager.white, // Top buttons color
         borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
           BoxShadow(

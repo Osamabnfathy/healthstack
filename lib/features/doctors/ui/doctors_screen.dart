@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/core/helpers/spacing.dart';
+import 'package:healthstack/core/widgets/custom_top_bar.dart';
 import 'package:healthstack/core/widgets/search_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:healthstack/core/widgets/custom_top_bar.dart';
 import 'package:healthstack/features/doctors/ui/widgets/doctors_list_bloc_builder.dart';
 
-
 class DoctorsScreen extends StatefulWidget {
   const DoctorsScreen({super.key});
 
   @override
-  State<DoctorsScreen> createState() =>
-    _DoctorPageState();
+  State<DoctorsScreen> createState() => _DoctorPageState();
 }
 
 class _DoctorPageState extends State<DoctorsScreen> {
@@ -32,7 +31,7 @@ class _DoctorPageState extends State<DoctorsScreen> {
       searchQuery = searchController.text.trim().toLowerCase();
     });
   }
-  
+
   void _onFilterPressed() {
     setState(() {
       isSorted = !isSorted;
@@ -76,9 +75,16 @@ class _DoctorPageState extends State<DoctorsScreen> {
                   )
                 ],
               ),
-            );
-          }
-        ),
+              verticalSpace(10),
+              Expanded(
+                child: DoctorsListBlocBuilder(
+                  searchQuery: searchQuery,
+                  isSorted: isSorted,
+                ),
+              )
+            ],
+          ),
+        ),      
       ),
     );
   }

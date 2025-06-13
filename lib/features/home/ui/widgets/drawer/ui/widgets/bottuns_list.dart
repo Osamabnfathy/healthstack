@@ -72,6 +72,14 @@ class ButtonsList extends StatelessWidget {
       ),
       
       MenuItemData(
+        'About Us',
+        Colors.amber.shade50,
+        Colors.amber.shade700,
+        () => context.pushNamed(Routes.aboutUs),
+        icon: Icons.call,
+      ),
+
+      MenuItemData(
         'Sign Out',
       Colors.red.shade50,
       Colors.red,
@@ -84,14 +92,6 @@ class ButtonsList extends StatelessWidget {
         );
       },
         icon: Icons.exit_to_app,
-      ),
-      
-      MenuItemData(
-        'About Us',
-        Colors.amber.shade50,
-        Colors.amber.shade700,
-        () => context.pushNamed(Routes.aboutUs),
-        icon: Icons.call,
       ),
     ];
 
