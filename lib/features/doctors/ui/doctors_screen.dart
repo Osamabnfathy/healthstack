@@ -4,7 +4,6 @@ import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:healthstack/core/widgets/custom_top_bar.dart';
 import 'package:healthstack/core/widgets/search_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:healthstack/core/widgets/custom_top_bar.dart';
 import 'package:healthstack/features/doctors/ui/widgets/doctors_list_bloc_builder.dart';
 
 class DoctorsScreen extends StatefulWidget {
@@ -47,45 +46,33 @@ class _DoctorPageState extends State<DoctorsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsManager.white,
+      backgroundColor: ColorsManager.lightBlue,
       body: SafeArea(
-        child: Builder(
-          builder: (BuildContext context) {
-            return Container(
-              width: double.infinity,
-              color: Colors.white,
-              margin: EdgeInsets.fromLTRB(12.w, 5.h, 12.w, 15.h),
-              
-              child: Column(
-                children: [
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 16.w),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
                   const CustomTopBar(title: 'Find Doctor'), 
-                   
+                  verticalSpace(30),
                   SearchAndFilterBar(
                     searchController: searchController,
                     onFilterPressed: _onFilterPressed,
                     hintText: "Search Doctors ....",
                   ),
                   verticalSpace(10),
-                  
                   Expanded(
                     child: DoctorsListBlocBuilder(
                       searchQuery: searchQuery,
                       isSorted: isSorted,
                     ),
-                  )
+                  ),
                 ],
               ),
-              verticalSpace(10),
-              Expanded(
-                child: DoctorsListBlocBuilder(
-                  searchQuery: searchQuery,
-                  isSorted: isSorted,
-                ),
-              )
-            ],
+            )
           ),
         ),      
-      ),
     );
   }
 }

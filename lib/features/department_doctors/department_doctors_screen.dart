@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:healthstack/core/widgets/custom_top_bar.dart';
+import 'package:healthstack/core/widgets/search_bar.dart';
 import 'package:healthstack/features/home/data/models/doctors_response_model.dart';
 import 'package:healthstack/features/home/data/models/hospitals_response_model.dart';
 import 'package:healthstack/features/home/data/models/departments_response_model.dart';
@@ -103,7 +104,7 @@ class _DepartmentDoctorsScreenState extends State<DepartmentDoctorsScreen> {
                   itemCount: filteredDoctors.length,
                   itemBuilder: (context, index) {
                     return Padding(
-                      padding: EdgeInsets.only(bottom: 16.h),
+                      padding: EdgeInsets.only(bottom: 16),
                       child: DoctorsDepartmentListViewItem(
                         itemIndex: index,
                         doctorsData: filteredDoctors[index],

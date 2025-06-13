@@ -4,7 +4,6 @@ import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/core/widgets/custom_top_bar.dart';
 import 'package:healthstack/core/widgets/search_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:healthstack/core/widgets/custom_top_bar.dart';
 import 'package:healthstack/features/hospitals/ui/widgets/hospitals_list_bloc_builder.dart';
 
 class HospitalsScreen extends StatefulWidget {
@@ -47,7 +46,7 @@ class _HospitalsScreenState extends State<HospitalsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsManager.white,
+      backgroundColor: ColorsManager.lightBlue,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 16.w),
