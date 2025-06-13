@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:healthstack/core/widgets/custom_top_bar.dart';
 import 'package:healthstack/core/widgets/search_bar.dart';
