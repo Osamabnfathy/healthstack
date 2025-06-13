@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:healthstack/core/helpers/spacing.dart';
+import 'package:healthstack/core/widgets/custom_top_bar.dart';
 import 'package:healthstack/features/home/data/models/doctors_response_model.dart';
 import 'package:healthstack/features/home/data/models/hospitals_response_model.dart';
 import 'package:healthstack/features/home/data/models/departments_response_model.dart';
@@ -20,23 +22,37 @@ class DepartmentDoctorsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // You should fetch or receive the doctors list for this department
     final filteredDoctors = (doctorsDataList ?? [])
         .where((doc) => doc.departmentName == departmentId)
         .toList();
         
     return Scaffold(
-      appBar: AppBar(title: Text('Doctors')),
-      body: ListView.builder(
-        itemCount: filteredDoctors.length,
-        itemBuilder: (context, index) {
-          return DoctorsDepartmentListViewItem(
-            itemIndex: index,
-            doctorsData: filteredDoctors[index],
-            hospitalsDataList: hospitalsDataList,
-            departmentsDataList: departmentsDataList,
-          );
-        },
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+          child: Column(
+            children: [
+              const CustomTopBar(title: 'Doctors'),
+              verticalSpace(30),
+              if (filteredDoctors.isEmpty)
+                const Text('No doctors available for this department.'),
+              if (filteredDoctors.isNotEmpty)
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: filteredDoctors.length,
+                    itemBuilder: (context, index) {
+                      return DoctorsDepartmentListViewItem(
+                        itemIndex: index,
+                        doctorsData: filteredDoctors[index],
+                        hospitalsDataList: hospitalsDataList,
+                        departmentsDataList: departmentsDataList,
+                      );
+                    },
+                  ),
+                ),
+            ],
+          ),
+        ),
       ),
     );
   }

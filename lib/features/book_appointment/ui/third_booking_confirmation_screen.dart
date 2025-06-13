@@ -49,23 +49,21 @@ class SummaryScreen extends StatelessWidget {
           textStyle: TextStyles.font18WhiteMedium,
           backgroundColor: ColorsManager.mainBlue,
           borderRadius: 12.0.r,
-          buttonHeight: 55.0.h,
+          buttonHeight: 52.0.h,
         ),
       ),
     
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(16.w),
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 BookingSuccessWidget(),
                 verticalSpace(30),
-                
                 ConfirmationBookingInfoCard(bookingInfo: bookingInfo),
-                verticalSpace(20),
-                
+                verticalSpace(20),  
                 ConfirmationDoctorInfoCard(doctorInfo: doctorInfo),
                 verticalSpace(20),
               ],

@@ -16,9 +16,9 @@ class ProfileTopBar extends StatelessWidget {
           GestureDetector(
             onTap: () => Navigator.pop(context),
             child: Icon(
-              Icons.arrow_back_ios,
+              Icons.arrow_back,
               size: 20.sp,
-              color: ColorsManager.mainBlue,
+              color: ColorsManager.darkBlue,
             ),
           ),
           

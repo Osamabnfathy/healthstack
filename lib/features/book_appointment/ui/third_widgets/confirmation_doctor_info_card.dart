@@ -4,12 +4,11 @@ import 'package:healthstack/core/helpers/extensions.dart';
 import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:healthstack/core/theming/styles.dart';
 
-
 class ConfirmationDoctorInfoCard extends StatelessWidget {
   final Map<dynamic, dynamic> doctorInfo;
-  
+
   const ConfirmationDoctorInfoCard({
-    super.key, 
+    super.key,
     required this.doctorInfo,
   });
 
@@ -23,7 +22,6 @@ class ConfirmationDoctorInfoCard extends StatelessWidget {
           style: TextStyles.font16DarkBlueBold,
         ),
         verticalSpace(15),
-        
         Container(
           padding: EdgeInsets.all(16.w),
           decoration: BoxDecoration(
@@ -38,7 +36,6 @@ class ConfirmationDoctorInfoCard extends StatelessWidget {
               ),
             ],
           ),
-          
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -49,7 +46,6 @@ class ConfirmationDoctorInfoCard extends StatelessWidget {
                   height: 100.h,
                   doctorInfo['Doctor Image'] ?? "",
                   fit: BoxFit.cover,
-                  
                   errorBuilder: (context, error, stackTrace) => Image.asset(
                     "assets/icons/doctor.png",
                     width: 90.w,
@@ -59,7 +55,6 @@ class ConfirmationDoctorInfoCard extends StatelessWidget {
                 ),
               ),
               horizontalSpace(12),
-              
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,7 +64,6 @@ class ConfirmationDoctorInfoCard extends StatelessWidget {
                       style: TextStyles.font16DarkBlueBold,
                     ),
                     verticalSpace(5),
-                    
                     Text(
                       getDisplayText(doctorInfo['Department Name']),
                       style: TextStyles.font13GrayRegular,
@@ -77,7 +71,6 @@ class ConfirmationDoctorInfoCard extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                     verticalSpace(4),
-                    
                     Text(
                       getDisplayText(doctorInfo['Hospital Name']),
                       style: TextStyles.font13GrayRegular,

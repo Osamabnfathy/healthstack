@@ -3,14 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:healthstack/core/widgets/custom_top_bar.dart';
 import 'package:healthstack/features/home/data/models/doctors_response_model.dart';
 import 'package:healthstack/features/home/data/models/hospitals_response_model.dart';
 import 'package:healthstack/features/home/data/models/departments_response_model.dart';
 import 'package:healthstack/features/my_appointment/ui/widgets/my_appointments_list.dart';
 import 'package:healthstack/features/my_appointment/ui/widgets/my_appointments_taps.dart';
 import 'package:healthstack/features/my_appointment/logic/cubit/my_appointments_cubit.dart';
-import 'package:healthstack/features/my_appointment/ui/widgets/my_appointments_top_bar.dart';
-
 class MyAppointmentScreen extends StatefulWidget {
   final List<DoctorsResponseModel>? doctors;
   final List<HospitalsResponseModel>? hospitals;
@@ -62,13 +61,12 @@ class _UpcomingScreenState extends State<MyAppointmentScreen> {
       backgroundColor: ColorsManager.lightBlue,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
           child: Column(
             children: [
               verticalSpace(10),
-              const MyAppointmentTopBar(),
-              verticalSpace(24),
-              
+              const CustomTopBar(title: 'My Appointments',),
+              verticalSpace(30),
               MyAppointmentTaps(
                 selectedIndex: selectedTabIndex,
                 onTabChanged: _onTabChanged,

@@ -7,6 +7,7 @@ import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:healthstack/core/widgets/app_text_button.dart';
+import 'package:healthstack/core/widgets/custom_top_bar.dart';
 import 'package:healthstack/features/book_appointment/logic/book_appointment_cubit.dart';
 import 'package:healthstack/features/book_appointment/ui/first_widgets/steps_numbers.dart';
 import 'package:healthstack/features/book_appointment/ui/first_widgets/time_selection.dart';
@@ -177,97 +178,76 @@ class _FirstAppointmentScreenState extends State<FirstAppointmentScreen> {
     final List<String> displayTimes = availableTimes.map((time) => time.format(context)).toList();
     
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_new_outlined, color: ColorsManager.mainBlue),
-          onPressed: () => Navigator.pop(context),
-        ),
-      ),
-      
-      bottomNavigationBar: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (selectedTimeIndex == -1) 
-              Padding(
-                padding: EdgeInsets.only(bottom: 10.h),
-                child: Text(
-                  "Please select a Time",
-                  style: TextStyles.font14RedRegular.copyWith(fontSize: 18.sp),
-                ),
-              ),
-          
-            AppTextButton(
-              onPressed: selectedTimeIndex == -1 
-              ? () {} 
-              : () {
-                final String selectedDate = availableDates[selectedDateIndex].toString();
-                final String selectedTime = availableTimes[selectedTimeIndex].format(context);
-                final String selectedappointmentType = appointmentTypes[selectedAppointmentType];
-              
-                Navigator.pushNamed(
-                  context,
-                  Routes.secondAppointmentScreen,
-                  arguments: {
-                    'selectedDate': selectedDate,
-                    'selectedTime': selectedTime,
-                    'selectedAppointmentType': selectedappointmentType,
-                    'doctorId': widget.doctorId,
-                    'doctorName': widget.doctorName,
-                    'doctorImage': widget.doctorImage,
-                    'hospitalName': widget.hospitalName,
-                    'departmentName': widget.departmentName,
-                    'cubit': context.read<BookAppointmentCubit>(),
-                  },
-                );              
-              },
-              
-              
-              
-              buttonText: "Continue",
-              textStyle: TextStyles.font18WhiteMedium,
-              backgroundColor: selectedTimeIndex == -1
-              ? ColorsManager.mainBlue.withOpacity(0.6)
-              :ColorsManager.mainBlue,
-              borderRadius: 12.0.r,
-              buttonHeight: 52.0.h,
-            ),
-          ],
-        ),
-      ),
-    
+      backgroundColor: ColorsManager.lightBlue,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 16.w),
+          padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 16.w),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                CustomTopBar(title: 'Book Appointment'), 
+                verticalSpace(30),
                 StepsNumbers(),
                 verticalSpace(30),
-                
                 DateSelection(
                   dates: displayDates,
                   selectedDateIndex: selectedDateIndex,
                   onDateSelected: updateSelectedDate,
                 ),
                 verticalSpace(30),
-                
                 TimeSelection(
                   times: displayTimes,
                   selectedTimeIndex: selectedTimeIndex,
                   onTimeSelected: updateSelectedTime,
                 ),
                 verticalSpace(30),
-                
                 AppointmentType(
                   appointmentTypes: appointmentTypes,
                   appointmentIcons: appointmentIcons,
                   selectedAppointmentType: selectedAppointmentType,
                   onAppointmentTypeSelected: updateAppointmentType,
+                ),
+                verticalSpace(30),
+                if (selectedTimeIndex == -1) 
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 10.h),
+                    child: Text(
+                      "Please select a Time",
+                      style: TextStyles.font14RedRegular.copyWith(fontSize: 18.sp),
+                    ),
+                  ),
+                AppTextButton(
+                  onPressed: selectedTimeIndex == -1 
+                    ? () {} 
+                    : () {
+                        final String selectedDate = availableDates[selectedDateIndex].toString();
+                        final String selectedTime = availableTimes[selectedTimeIndex].format(context);
+                        final String selectedappointmentType = appointmentTypes[selectedAppointmentType];
+                      
+                        Navigator.pushNamed(
+                          context,
+                          Routes.secondAppointmentScreen,
+                          arguments: {
+                            'selectedDate': selectedDate,
+                            'selectedTime': selectedTime,
+                            'selectedAppointmentType': selectedappointmentType,
+                            'doctorId': widget.doctorId,
+                            'doctorName': widget.doctorName,
+                            'doctorImage': widget.doctorImage,
+                            'hospitalName': widget.hospitalName,
+                            'departmentName': widget.departmentName,
+                            'cubit': context.read<BookAppointmentCubit>(),
+                          },
+                        );              
+                      },
+                  buttonText: "Continue",
+                  textStyle: TextStyles.font18WhiteMedium,
+                  backgroundColor: selectedTimeIndex == -1
+                    ? ColorsManager.mainBlue.withOpacity(0.6)
+                    : ColorsManager.mainBlue,
+                  borderRadius: 12.0.r,
+                  buttonHeight: 52.0.h,
                 ),
               ],
             ),
@@ -276,4 +256,4 @@ class _FirstAppointmentScreenState extends State<FirstAppointmentScreen> {
       ),
     );
   }
-}
+}    
