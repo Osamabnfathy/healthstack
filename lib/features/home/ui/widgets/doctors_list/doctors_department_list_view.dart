@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:healthstack/core/routing/routes.dart';
 import 'package:healthstack/features/home/data/models/doctors_response_model.dart';
 import 'package:healthstack/features/home/data/models/hospitals_response_model.dart';
 import 'package:healthstack/features/home/data/models/departments_response_model.dart';
@@ -22,15 +21,15 @@ class DoctorsDepartmentListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final doctors = doctorsDataList ?? [];
-    final showSeeAll = doctors.length > 3;
-    final displayDoctors = showSeeAll ? doctors.take(3).toList() : doctors;
+    final showSeeAll = doctors.length > 2;
+    final displayDoctors = showSeeAll ? doctors.take(2).toList() : doctors;
 
     return SingleChildScrollView(
       child: Column(
         children: [
           ListView.builder(
             shrinkWrap: true,
-            physics: ScrollPhysics(),
+            physics: NeverScrollableScrollPhysics(),
             itemCount: displayDoctors.length,
             itemBuilder: (context, index) {
               return DoctorsDepartmentListViewItem(
@@ -41,25 +40,6 @@ class DoctorsDepartmentListView extends StatelessWidget {
               );
             },
           ),
-          if (showSeeAll)
-            Align(
-              alignment: Alignment.centerRight,
-              child: TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(
-                    context,
-                    Routes.departmentDoctorsScreen,
-                    arguments: {
-                      'departmentId': departmentId,
-                      'hospitalsDataList': hospitalsDataList,
-                      'departmentsDataList': departmentsDataList,
-                      'doctorsDataList': doctorsDataList,
-                    },
-                  );
-                },
-                child: Text('See All'),
-              ),
-            ),
         ],
       ),
     );

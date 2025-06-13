@@ -64,6 +64,7 @@ class _DoctorPageState extends State<DoctorsScreen> {
                   SearchAndFilterBar(
                     searchController: searchController,
                     onFilterPressed: _onFilterPressed,
+                    hintText: "Search Doctors ....",
                   ),
                   verticalSpace(10),
                   

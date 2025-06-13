@@ -1,27 +1,49 @@
-// lib/features/doctor_speciality/ui/widgets/speciality_grid_view.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:healthstack/core/helpers/extensions.dart';
+import 'package:healthstack/core/helpers/spacing.dart';
+import 'package:healthstack/core/routing/routes.dart';
+import 'package:healthstack/features/home/data/models/departments_response_model.dart';
+import 'package:healthstack/features/home/data/models/doctors_response_model.dart';
+import 'package:healthstack/features/home/data/models/hospitals_response_model.dart';
 import 'package:healthstack/features/medical_departments/ui/widgets/medical_departments_item.dart';
 
 class MedicalDepartmentsGridView extends StatelessWidget {
-  const MedicalDepartmentsGridView({super.key});
+  final List<DepartmentsResponseModel>? departmentsDataList;
+  final List<DoctorsResponseModel>? doctorsDataList;
+  final List<HospitalsResponseModel>? hospitalsDataList;
+
+  const MedicalDepartmentsGridView({
+    super.key,
+    this.departmentsDataList,
+    this.doctorsDataList,
+    this.hospitalsDataList,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final specialities = [
-      {'name': 'General', 'icon': 'assets/icons/Man_Doctor_Europe.png'},
-      {'name': 'ENT', 'icon': 'assets/icons/Ent.png'},
-      {'name': 'Pediatric', 'icon': 'assets/icons/Baby.png'},
-      {'name': 'Urologist', 'icon': 'assets/icons/Kidneys.png'},
-      {'name': 'Dentistry', 'icon': 'assets/icons/Dent.png'},
-      {'name': 'Intestine', 'icon': 'assets/icons/Intestine.png'},
-      {'name': 'Histologist', 'icon': 'assets/icons/Histology.png'},
-      {'name': 'Hepatology', 'icon': 'assets/icons/Hepatology.png'},
-      {'name': 'Cardiologist', 'icon': 'assets/icons/Heart.png'},
-      {'name': 'Neurologic', 'icon': 'assets/icons/Brain.png'},
-      {'name': 'Pulmonary', 'icon': 'assets/icons/Pulmonary.png'},
-      {'name': 'Optometry', 'icon': 'assets/icons/Eye.png'},
-    ];
+    if (departmentsDataList == null || departmentsDataList!.isEmpty) {
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.local_hospital_outlined,
+              size: 64.sp,
+              color: Colors.grey[400],
+            ),
+            verticalSpace(20),
+            Text(
+              'No departments available',
+              style: TextStyle(
+                fontSize: 16.sp,
+                color: Colors.grey[600],
+              ),
+            ),
+          ],
+        ),
+      );
+    }
 
     return GridView.builder(
       shrinkWrap: true,
@@ -29,19 +51,36 @@ class MedicalDepartmentsGridView extends StatelessWidget {
       padding: EdgeInsets.zero,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
-        crossAxisSpacing: 16.w,
-        mainAxisSpacing: 24.h,
-        childAspectRatio: 0.85,
+        crossAxisSpacing: 10.w,
+        mainAxisSpacing: 10.h,
+        childAspectRatio: 0.61.h,
       ),
-      itemCount: specialities.length,
+      itemCount: departmentsDataList!.length,
       itemBuilder: (context, index) {
-        final speciality = specialities[index];
+        final department = departmentsDataList![index];
+        
+        final doctorsCount = (doctorsDataList ?? [])
+            .where((doc) => doc.departmentName == department.hospitalDepartmentId)
+            .length;
+            
+        final hospitalName = (hospitalsDataList ?? [])
+            .where((h) => h.hospitalId == department.hospital)
+            .firstOrNull?.name ?? 'Unknown Hospital';
         return MedicalDepartmentsItem(
-          iconAsset: speciality['icon']!,
-          name: speciality['name']!,
+          iconAsset: department.featuredImage ?? '', 
+          name: department.hospitalDepartmentName ?? 'Unknown Department',
+          hospitalName: hospitalName,
+          doctorsCount: doctorsCount, 
           onTap: () {
-            print('Tapped on ${speciality['name']}');
-            // Navigator.push(context, MaterialPageRoute(builder: (context) => DoctorsListPage(speciality: speciality['name']!)));
+            context.pushNamed(
+              Routes.departmentDoctorsScreen,
+              arguments: {
+                'departmentId': department.hospitalDepartmentId,
+                'doctorsDataList': doctorsDataList,
+                'hospitalsDataList': hospitalsDataList,
+                'departmentsDataList': departmentsDataList,
+              },
+            );
           },
         );
       },

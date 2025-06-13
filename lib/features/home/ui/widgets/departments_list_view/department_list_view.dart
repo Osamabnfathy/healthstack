@@ -26,7 +26,7 @@ class DepartmentsListView extends StatelessWidget {
       
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: departmentsDataList?.length, 
+        itemCount: departmentsDataList!.length > 20 ? 20 : departmentsDataList!.length, 
         itemBuilder: (context, index) {
           return DepartmentsListViewItem(
             itemIndex: index,

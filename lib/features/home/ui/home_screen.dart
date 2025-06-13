@@ -40,14 +40,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   HomeTopBar(
                     onMenuPressed: () => Scaffold.of(context).openEndDrawer(),
-                    patientName:
-                        context.watch<HomeCubit>().patientProfileData?.name ??
-                            'Patient',
+                    patientName: context.watch<HomeCubit>().patientProfileData?.name ?? 'Patient',
                   ),
                   const DoctorsBlueContainer(),
                   verticalSpace(24),
-                  const DepartmentsAndSeeAll(),
-                  verticalSpace(18),
+                  DepartmentsAndSeeAll(
+                    departmentsDataList: context.watch<HomeCubit>().departmentsDataList,
+                    doctorsDataList: context.watch<HomeCubit>().doctorsDataList,
+                    hospitalsDataList: context.watch<HomeCubit>().hospitalsDataList,
+                  ),
+                  verticalSpace(14),
                   DepartmentsBlocBuilder(
                     selectedIndex: _getSelectedIndex(context),
                     onDepartmentSelected: (departmentId) {
@@ -56,7 +58,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       });
                     },
                     onDepartmentsLoaded: (departments) {
-                      // Set the first department as default
                       if (selectedDepartmentId == null &&
                           departments.isNotEmpty) {
                         WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -68,9 +69,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       }
                     },
                   ),
-                  verticalSpace(24),
-                  const DepartmentDoctorsAndSeeall(),
-                  verticalSpace(18),
+                  verticalSpace(20),
+                  DepartmentDoctorsAndSeeall(
+                    departmentId: selectedDepartmentId,
+                    doctorsDataList: context.watch<HomeCubit>().doctorsDataList,
+                    hospitalsDataList: context.watch<HomeCubit>().hospitalsDataList,
+                    departmentsDataList: context.watch<HomeCubit>().departmentsDataList,
+                  ),
+                  verticalSpace(12),
                   DoctorsDepartmentBlocBuilder(
                     selectedDepartmentId: selectedDepartmentId,
                   ),

@@ -8,11 +8,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class SearchAndFilterBar extends StatelessWidget {
   final TextEditingController searchController;
   final VoidCallback onFilterPressed;
+  final VoidCallback? onSearchChanged;
+  final String? hintText;
 
   const SearchAndFilterBar({
     super.key,
     required this.searchController,
     required this.onFilterPressed,
+    this.onSearchChanged,
+    this.hintText,
   });
 
   @override
@@ -23,7 +27,7 @@ class SearchAndFilterBar extends StatelessWidget {
           child: TextField(
             controller: searchController,
             decoration: InputDecoration(
-              hintText: 'Search...',
+              hintText: hintText ?? 'Search...',
               hintStyle: TextStyles.font15LightGrayMedium,
               prefixIcon: const Icon(
                 Icons.search_rounded,
