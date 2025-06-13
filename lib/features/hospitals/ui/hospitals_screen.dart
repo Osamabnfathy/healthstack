@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:healthstack/core/widgets/search_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:healthstack/core/widgets/custom_app_bar.dart';
+import 'package:healthstack/core/widgets/custom_top_bar.dart';
 import 'package:healthstack/features/hospitals/ui/widgets/hospitals_list_bloc_builder.dart';
 
 class HospitalsScreen extends StatefulWidget {
@@ -57,7 +57,7 @@ class _HospitalsScreenState extends State<HospitalsScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 
                 children: [ 
-                  const CustomAppBar(title: 'Find Hospitals'),   
+                  const CustomTopBar(title: 'Find Hospitals'),   
                                 
                   SearchAndFilterBar(
                     searchController: searchController, 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:healthstack/core/theming/colors.dart';
+import 'package:healthstack/core/helpers/spacing.dart';
+import 'package:healthstack/core/widgets/custom_top_bar.dart';
 import 'package:healthstack/core/widgets/search_bar.dart';
 import 'package:healthstack/features/home/data/models/doctors_response_model.dart';
 import 'package:healthstack/features/home/data/models/hospitals_response_model.dart';
@@ -33,7 +34,6 @@ class _DepartmentDoctorsScreenState extends State<DepartmentDoctorsScreen> {
   @override
   void initState() {
     super.initState();
-    // Initialize with sorted doctors (A-Z by default)
     filteredDoctors = _getSortedDoctors(_filterDoctorsByDepartment(), isAscending);
     searchController.addListener(_onSearchChanged);
   }
@@ -86,37 +86,38 @@ class _DepartmentDoctorsScreenState extends State<DepartmentDoctorsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('All Doctors'),
-      ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
-        child: Column(
-          children: [
-            SearchAndFilterBar(
-              searchController: searchController,
-              onFilterPressed: _toggleSortOrder,
-            ),
-            SizedBox(height: 16.h),
-            Expanded(
-              child: ListView.builder(
-                itemCount: filteredDoctors.length,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: EdgeInsets.only(bottom: 16.h),
-                    child: DoctorsDepartmentListViewItem(
-                      itemIndex: index,
-                      doctorsData: filteredDoctors[index],
-                      hospitalsDataList: widget.hospitalsDataList,
-                      departmentsDataList: widget.departmentsDataList,
-                    ),
-                  );
-                },
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+          child: Column(
+            children: [
+              const CustomTopBar(title: 'Doctors'),
+              verticalSpace(30),
+              SearchAndFilterBar(
+                searchController: searchController,
+                onFilterPressed: _toggleSortOrder,
               ),
-            ),
-          ],
+              verticalSpace(16),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: filteredDoctors.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: EdgeInsets.only(bottom: 16.h),
+                      child: DoctorsDepartmentListViewItem(
+                        itemIndex: index,
+                        doctorsData: filteredDoctors[index],
+                        hospitalsDataList: widget.hospitalsDataList,
+                        departmentsDataList: widget.departmentsDataList,
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
-      ),
+      )
     );
   }
 }

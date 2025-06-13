@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:healthstack/core/theming/colors.dart';
+import 'package:healthstack/core/widgets/custom_top_bar.dart';
 import 'package:healthstack/core/widgets/search_bar.dart';
 import 'package:healthstack/features/home/data/models/departments_response_model.dart';
 import 'package:healthstack/features/home/data/models/doctors_response_model.dart';
 import 'package:healthstack/features/home/data/models/hospitals_response_model.dart';
 import 'package:healthstack/features/medical_departments/ui/widgets/medical_departments_grid_view.dart';
-import 'package:healthstack/features/medical_departments/ui/widgets/medical_departments_top_bar.dart';
 
 class MedicalDepartmentsScreen extends StatefulWidget {
   final List<DepartmentsResponseModel>? departmentsDataList;
@@ -104,7 +104,7 @@ class _MedicalDepartmentsScreenState extends State<MedicalDepartmentsScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const MedicalDepartmentsTopBar(),
+                const CustomTopBar(title: "Medical Departments",),
                 verticalSpace(20),
                 SearchAndFilterBar(
                   searchController: searchController,

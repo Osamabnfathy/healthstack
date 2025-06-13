@@ -3,7 +3,7 @@ import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:healthstack/core/widgets/search_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:healthstack/core/widgets/custom_app_bar.dart';
+import 'package:healthstack/core/widgets/custom_top_bar.dart';
 import 'package:healthstack/features/doctors/ui/widgets/doctors_list_bloc_builder.dart';
 
 
@@ -48,7 +48,7 @@ class _DoctorPageState extends State<DoctorsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsManager.moreLightGray,
+      backgroundColor: ColorsManager.white,
       body: SafeArea(
         child: Builder(
           builder: (BuildContext context) {
@@ -59,7 +59,7 @@ class _DoctorPageState extends State<DoctorsScreen> {
               
               child: Column(
                 children: [
-                  const CustomAppBar(title: 'Find Doctor'), 
+                  const CustomTopBar(title: 'Find Doctor'), 
                    
                   SearchAndFilterBar(
                     searchController: searchController,
