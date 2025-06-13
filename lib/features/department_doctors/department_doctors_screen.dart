@@ -105,7 +105,7 @@ class _DepartmentDoctorsScreenState extends State<DepartmentDoctorsScreen> {
                   itemCount: filteredDoctors.length,
                   itemBuilder: (context, index) {
                     return Padding(
-                      padding: EdgeInsets.only(bottom: 16.h),
+                      padding: EdgeInsets.only(bottom: 16),
                       child: DoctorsDepartmentListViewItem(
                         itemIndex: index,
                         doctorsData: filteredDoctors[index],

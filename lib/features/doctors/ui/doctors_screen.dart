@@ -46,8 +46,18 @@ class _DoctorPageState extends State<DoctorsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsManager.white,
+      backgroundColor: ColorsManager.lightBlue,
       body: SafeArea(
+<<<<<<< edits/hot-edit-13
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 16.w),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                  const CustomTopBar(title: 'Find Doctor'), 
+                  verticalSpace(30),
+=======
         child: Builder(
           builder: (BuildContext context) {
             return Container(
@@ -58,6 +68,7 @@ class _DoctorPageState extends State<DoctorsScreen> {
                 children: [
                   const CustomTopBar(title: 'Find Doctor'), 
                   verticalSpace(10),
+>>>>>>> development
                   SearchAndFilterBar(
                     searchController: searchController,
                     onFilterPressed: _onFilterPressed,
@@ -72,10 +83,16 @@ class _DoctorPageState extends State<DoctorsScreen> {
                   ),
                 ],
               ),
+<<<<<<< edits/hot-edit-13
+            )
+          ),
+        ),      
+=======
             );
           },      
         ),
       )
+>>>>>>> development
     );
   }
 }

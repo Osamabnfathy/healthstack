@@ -36,23 +36,7 @@ class SummaryScreen extends StatelessWidget {
     };
 
     return Scaffold(
-      backgroundColor: Colors.white,
-      bottomNavigationBar: Padding(
-        padding: EdgeInsets.all(15.w),
-        child: AppTextButton(
-          onPressed: () {
-            context.pushNamedAndRemoveUntil(
-              Routes.homeScreen, (route) => false,
-              predicate: (Route<dynamic> route) { return false; });
-          },
-          buttonText: "Done",
-          textStyle: TextStyles.font18WhiteMedium,
-          backgroundColor: ColorsManager.mainBlue,
-          borderRadius: 12.0.r,
-          buttonHeight: 52.0.h,
-        ),
-      ),
-    
+      backgroundColor: ColorsManager.lightBlue,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
@@ -65,7 +49,23 @@ class SummaryScreen extends StatelessWidget {
                 ConfirmationBookingInfoCard(bookingInfo: bookingInfo),
                 verticalSpace(20),  
                 ConfirmationDoctorInfoCard(doctorInfo: doctorInfo),
-                verticalSpace(20),
+                verticalSpace(30),
+                Padding(
+                  padding: EdgeInsets.all(15.w),
+                  child: AppTextButton(
+                    onPressed: () {
+                      context.pushNamedAndRemoveUntil(
+                        Routes.homeScreen, (route) => false,
+                        predicate: (Route<dynamic> route) { return false; });
+                    },
+                    buttonText: "Done",
+                    textStyle: TextStyles.font18WhiteMedium,
+                    backgroundColor: ColorsManager.mainBlue,
+                    borderRadius: 12.0.r,
+                    buttonHeight: 52.0.h,
+                  ),
+                ),
+                verticalSpace(20), // Add some bottom spacing
               ],
             ),
           ),

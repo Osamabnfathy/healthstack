@@ -5,6 +5,7 @@ import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:healthstack/core/helpers/extensions.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:healthstack/core/widgets/app_text_button.dart';
+import 'package:healthstack/core/widgets/custom_top_bar.dart';
 import 'package:healthstack/features/home/data/models/doctors_response_model.dart';
 import 'package:healthstack/features/home/data/models/hospitals_response_model.dart';
 import 'package:healthstack/features/home/data/models/departments_response_model.dart';
@@ -33,51 +34,14 @@ class HospitalDetailsScreen extends StatelessWidget {
     );
 
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_new_outlined, color: ColorsManager.darkBlue),
-          onPressed: () => Navigator.pop(context),
-        ),
-      ),
-      
-      bottomNavigationBar: Padding(
-        padding: EdgeInsets.all(15.w),
-        child: AppTextButton(
-          onPressed: () {
-            if (hospitalsData?.hospitalId != null && doctorsData != null) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => HospitalDoctorsScreen(
-                    doctorsData: doctorsData!, 
-                    hospitalId: hospitalsData!.hospitalId!, 
-                    hospitalsDataList: [hospitalsData!], 
-                    departmentsDataList: departmentsData,
-                  ),
-                ),
-              );
-            } else {
-              // Handle case where hospitalId or doctorsData is null
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Unable to load doctors for this hospital.')),
-              );
-            }
-          },
-          buttonText: "See Hospital Doctors",
-          textStyle: TextStyles.font18WhiteMedium,
-          backgroundColor: ColorsManager.mainBlue,
-          borderRadius: 12.0.r,
-          buttonHeight: 55.0.h,
-        ),
-      ),
-      
+      backgroundColor: ColorsManager.lightBlue,
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const CustomTopBar(title: 'Hospital Details'),
+            verticalSpace(30),
             Center(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(12.r),
@@ -144,6 +108,41 @@ class HospitalDetailsScreen extends StatelessWidget {
             buildInfoRow('Regular Beds', getDisplayText(hospitalsData?.regularCabinNo.toString())),
             
             buildInfoRow('VIP Beds', getDisplayText(hospitalsData?.vipCabinNo.toString())),
+            
+            verticalSpace(30.h),
+            
+            Padding(
+              padding: EdgeInsets.all(15.w),
+              child: AppTextButton(
+                onPressed: () {
+                  if (hospitalsData?.hospitalId != null && doctorsData != null) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => HospitalDoctorsScreen(
+                          doctorsData: doctorsData!, 
+                          hospitalId: hospitalsData!.hospitalId!, 
+                          hospitalsDataList: [hospitalsData!], 
+                          departmentsDataList: departmentsData,
+                        ),
+                      ),
+                    );
+                  } else {
+                    // Handle case where hospitalId or doctorsData is null
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Unable to load doctors for this hospital.')),
+                    );
+                  }
+                },
+                buttonText: "See Hospital Doctors",
+                textStyle: TextStyles.font18WhiteMedium,
+                backgroundColor: ColorsManager.mainBlue,
+                borderRadius: 12.0.r,
+                buttonHeight: 55.0.h,
+              ),
+            ),
+            
+            verticalSpace(20.h), // Add some bottom spacing
           ],
         ),
       ),

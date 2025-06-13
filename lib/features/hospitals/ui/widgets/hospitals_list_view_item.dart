@@ -49,7 +49,7 @@ class HospitalsListViewItem extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
-          color: ColorsManager.lightBlue,
+          color: ColorsManager.moreLightGray,
           boxShadow: [
             BoxShadow(
               color: ColorsManager.gray.withOpacity(0.2),
