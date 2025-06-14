@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:healthstack/core/routing/routes.dart';
+import 'package:healthstack/features/contact_us/contact_us_screen.dart';
 import 'package:healthstack/features/department_doctors/department_doctors_screen.dart';
 import 'package:healthstack/features/home/ui/home_screen.dart';
 import 'package:healthstack/core/di/dependency_injection.dart';
@@ -254,6 +255,11 @@ class AppRouter {
       case Routes.aboutUs:
         return MaterialPageRoute(
           builder: (_) => const AboutUsScreen(),
+        );
+        
+      case Routes.contactUs:
+        return MaterialPageRoute(
+          builder: (_) => const ContactUsScreen(),
         );
 
       case Routes.medicalDepartmentsScreen:
