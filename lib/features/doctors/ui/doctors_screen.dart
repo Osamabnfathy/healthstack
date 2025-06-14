@@ -49,29 +49,28 @@ class _DoctorPageState extends State<DoctorsScreen> {
       backgroundColor: ColorsManager.lightBlue,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 16.w),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const CustomTopBar(title: 'Find Doctor'),
-                verticalSpace(30),
-                SearchAndFilterBar(
-                  searchController: searchController,
-                  onFilterPressed: _onFilterPressed,
-                  hintText: "Search Doctors ....",
-                ),
-                verticalSpace(10),
-                Expanded(
-                  child: DoctorsListBlocBuilder(
-                    searchQuery: searchQuery,
-                    isSorted: isSorted,
+            padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 16.w),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const CustomTopBar(title: 'Find Doctor'),
+                  verticalSpace(30),
+                  SearchAndFilterBar(
+                    searchController: searchController,
+                    onFilterPressed: _onFilterPressed,
+                    hintText: "Search Doctors ....",
                   ),
-                ),
-              ],
-            ),
-          ),
-        ),
+                  verticalSpace(10),
+                  Expanded(
+                    child: DoctorsListBlocBuilder(
+                      searchQuery: searchQuery,
+                      isSorted: isSorted,
+                    ),
+                  ),
+                ],
+              ),
+            )),
       ),
     );
   }
