@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:healthstack/core/theming/colors.dart';
-import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:healthstack/core/widgets/custom_top_bar.dart';
-import 'package:healthstack/features/about_us/widgets/about_text.dart';
-import 'package:healthstack/features/about_us/widgets/contact_info.dart';
-import 'package:healthstack/features/about_us/widgets/social_icons.dart';
 import 'package:healthstack/features/about_us/widgets/about_us_animation.dart';
+import 'package:healthstack/features/about_us/widgets/about_us_content.dart';
+import 'package:healthstack/features/about_us/widgets/about_us_stats.dart';
+import 'package:healthstack/features/about_us/widgets/about_us_values.dart';
+import 'package:healthstack/features/about_us/widgets/about_us_team.dart';
 
 class AboutUsScreen extends StatelessWidget {
   const AboutUsScreen({super.key});
@@ -14,23 +14,28 @@ class AboutUsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsManager.lightBlue,
+      backgroundColor: Colors.white,
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 16.w),
-          child: SingleChildScrollView(
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              CustomTopBar(title: 'About Us'),
-              verticalSpace(30),    
-              AboutUsAnimation(),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.w),
+                child: const CustomTopBar(title: 'About Us'),
+              ),
               verticalSpace(20),
-              AboutText(),
-              verticalSpace(20),
-              ContactInfo(),
-              verticalSpace(20),
-              SocialIcons(),
-            ]),
+              const AboutUsHero(),
+              verticalSpace(30),
+              const AboutUsContent(),
+              verticalSpace(30),
+              const AboutUsStats(),
+              verticalSpace(30),
+              const AboutUsValues(),
+              verticalSpace(30),
+              const AboutUsTeam(),
+              verticalSpace(30),
+            ],
           ),
         ),
       ),

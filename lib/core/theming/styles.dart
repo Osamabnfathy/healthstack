@@ -298,6 +298,16 @@ class TextStyles {
     color: ColorsManager.mainBlue,
   );
 
-  // ignore: prefer_typing_uninitialized_variables, non_constant_identifier_names
-  static var BlueLogo;
+  static TextStyle font16DarkBlueMedium = TextStyle(
+  fontSize: 16.sp,
+  fontWeight: FontWeightHelper.medium,
+  color: ColorsManager.darkBlue,
+);
+
+static TextStyle font24WhiteBold = TextStyle(
+  fontSize: 24.sp,
+  fontWeight: FontWeightHelper.bold,
+  color: Colors.white,
+);
+
 }

@@ -50,5 +50,6 @@ class Routes {
   static const String changePasswordScreen = '/changePasswordScreen';
   
   static const String aboutUs = "/aboutUs";
+  static const String contactUs = "/contactUs";
   static const String medicalDepartmentsScreen = "/medicalDepartmentsScreen";
 }
