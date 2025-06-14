@@ -24,21 +24,19 @@ class OnBoardingScreen extends StatelessWidget {
           child: Column(
             children: [
               const HealthstackLogoAndName(),
-              verticalSpace(30.h),
+              verticalSpace(35),
               const DoctorImageAndText(),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 30.w),
                 child: Column(
                   children: [
-                    SizedBox(
-                      height: 20.h,
-                    ),
+                    verticalSpace(20),
                     Text(
                       'Manage and schedule all of your medical appointments easily with Us.\nWe\'ll help you to get a new experience.',
                       style: TextStyles.font13GrayRegular,
                       textAlign: TextAlign.center,
                     ),
-                    verticalSpace(30.h),
+                    verticalSpace(40),
                     const GetStartedButton(),
                   ],
                 ),

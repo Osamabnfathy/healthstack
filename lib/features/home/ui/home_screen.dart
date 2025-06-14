@@ -1,14 +1,14 @@
-import 'package:healthstack/core/theming/colors.dart';
-import 'package:healthstack/features/home/ui/widgets/department_doctors_and_see_all.dart';
 import 'widgets/home_top_bar.dart';
 import 'package:flutter/material.dart';
 import 'widgets/doctors_blue_container.dart';
 import 'widgets/departments_and_see_all.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:healthstack/features/home/logic/cubit/home_cubit.dart';
 import 'package:healthstack/features/home/ui/widgets/drawer/ui/drawer_screen.dart';
+import 'package:healthstack/features/home/ui/widgets/department_doctors_and_see_all.dart';
 import 'package:healthstack/features/home/ui/widgets/departments_list_view/departments_bloc_builder.dart';
 import 'package:healthstack/features/home/ui/widgets/doctors_list/doctors_department_bloc_builder.dart';
 
