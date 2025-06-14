@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:healthstack/core/helpers/extensions.dart';
 import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/core/theming/styles.dart';
 import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:healthstack/core/widgets/custom_top_bar.dart';
+import 'package:healthstack/core/widgets/search_bar.dart';
 import 'package:healthstack/features/home/data/models/doctors_response_model.dart';
 import 'package:healthstack/features/home/data/models/hospitals_response_model.dart';
 import 'package:healthstack/features/home/data/models/departments_response_model.dart';
@@ -29,6 +31,8 @@ class HospitalDoctorsScreen extends StatefulWidget {
 
 class _HospitalDoctorsScreenState extends State<HospitalDoctorsScreen> {
   String _searchQuery = '';
+  late TextEditingController _searchController;
+  bool _isSorted = true;
   String _selectedDepartment = 'All';
   List<String> _departments = ['All'];
 
@@ -36,6 +40,26 @@ class _HospitalDoctorsScreenState extends State<HospitalDoctorsScreen> {
   void initState() {
     super.initState();
     _initializeDepartments();
+    _searchController = TextEditingController();
+    _searchController.addListener(_onSearchChanged);
+  }
+  
+  void _onSearchChanged() {
+    setState(() {
+      _searchQuery = _searchController.text.trim().toLowerCase();
+    });
+  }
+  
+  void _onFilterPressed() {
+    setState(() {
+      _isSorted = !_isSorted;
+    });
+  }
+  
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
   }
 
   void _initializeDepartments() {
@@ -50,10 +74,6 @@ class _HospitalDoctorsScreenState extends State<HospitalDoctorsScreen> {
         _departments = ['All', ...departmentNames];
       });
     }
-  }
-
-  String getDisplayText(String? text) {
-    return text?.isNotEmpty == true ? text! : 'N/A';
   }
 
   String? _getDepartmentName(int? departmentId) {
@@ -93,11 +113,15 @@ class _HospitalDoctorsScreenState extends State<HospitalDoctorsScreen> {
     String hospitalName = 'Hospital Doctors';
     if (widget.hospitalsDataList != null) {
       final hospital = widget.hospitalsDataList!.firstWhere(
-        (h) => h.hospitalId == widget.hospitalId,
-        orElse: () => HospitalsResponseModel(hospitalId: null, name: null),
+      (h) => h.hospitalId == widget.hospitalId,
+      orElse: () => HospitalsResponseModel(hospitalId: null, name: null),
       );
       if (hospital.name != null) {
-        hospitalName = '${hospital.name} - Doctors';
+      final words = hospital.name!.split(' ');
+      final firstTwoWords = words.length >= 2
+        ? '${words[0]} ${words[1]}'
+        : hospital.name!;
+      hospitalName = '$firstTwoWords Doctors';
       }
     }
 
@@ -110,41 +134,16 @@ class _HospitalDoctorsScreenState extends State<HospitalDoctorsScreen> {
           children: [
             // Header
              CustomTopBar(title: hospitalName),
-             verticalSpace(30),
+             verticalSpace(15),
             // Search and Filter Section
             Container(
               color: ColorsManager.lightBlue,
               padding: EdgeInsets.all(16.w),
               child: Column(
                 children: [
-                  // Search Bar
-                  Container(
-                    decoration: BoxDecoration(
-                      color: ColorsManager.moreLightGray,
-                      borderRadius: BorderRadius.circular(12.r),
-                      border: Border.all(color: ColorsManager.lightGray),
-                    ),
-                    child: TextField(
-                      onChanged: (value) {
-                        setState(() {
-                          _searchQuery = value;
-                        });
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Search doctors...',
-                        hintStyle: TextStyles.font14GrayRegular,
-                        prefixIcon: Icon(
-                          Icons.search,
-                          color: ColorsManager.gray,
-                          size: 20.sp,
-                        ),
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(
-                          horizontal: 16.w,
-                          vertical: 12.h,
-                        ),
-                      ),
-                    ),
+                  SearchAndFilterBar(
+                    searchController: _searchController, 
+                    onFilterPressed: _onFilterPressed,
                   ),
                   
                   verticalSpace(12),
@@ -152,15 +151,9 @@ class _HospitalDoctorsScreenState extends State<HospitalDoctorsScreen> {
                   // Department Filter
                   Row(
                     children: [
-                      Icon(
-                        Icons.filter_list,
-                        color: ColorsManager.mainBlue,
-                        size: 20.sp,
-                      ),
-                      horizontalSpace(8),
                       Text(
                         'Department:',
-                        style: TextStyles.font14DarkBlueMedium,
+                        style: TextStyles.font18DarkBlueBold,
                       ),
                       horizontalSpace(12),
                       Expanded(
@@ -200,7 +193,7 @@ class _HospitalDoctorsScreenState extends State<HospitalDoctorsScreen> {
             // Results Summary
             Container(
               color: ColorsManager.lightBlue,
-              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 4.h),
               child: Row(
                 children: [
                   Text(
@@ -218,7 +211,7 @@ class _HospitalDoctorsScreenState extends State<HospitalDoctorsScreen> {
                       },
                       child: Text(
                         'Clear Filters',
-                        style: TextStyles.font15DarkBlueMedium,
+                        style: TextStyles.font13DarkBlueMedium,
                       ),
                     ),
                 ],
@@ -230,7 +223,7 @@ class _HospitalDoctorsScreenState extends State<HospitalDoctorsScreen> {
               child: filteredDoctors.isEmpty
                   ? _buildEmptyState()
                   : ListView.builder(
-                      padding: EdgeInsets.all(16.w),
+                      padding: EdgeInsets.symmetric(horizontal:16.w, vertical: 8.h),
                       itemCount: filteredDoctors.length,
                       itemBuilder: (context, index) {
                         final doctor = filteredDoctors[index];
@@ -274,7 +267,7 @@ class _HospitalDoctorsScreenState extends State<HospitalDoctorsScreen> {
               },
               child: Text(
                 'Clear Filters',
-                style: TextStyles.font14DarkBlueMedium,
+                style: TextStyles.font13DarkBlueMedium,
               ),
             ),
         ],

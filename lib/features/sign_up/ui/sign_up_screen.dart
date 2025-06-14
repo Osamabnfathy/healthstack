@@ -18,18 +18,6 @@ class SignupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(30.h),
-        child: AppBar(
-          backgroundColor: Colors.white,
-          leading: BackButton(
-            onPressed: () => Navigator.of(context).pop(), 
-            color: ColorsManager.mainBlue, 
-            style: ButtonStyle(iconSize: WidgetStateProperty.all(25.sp)),
-          )
-        ),
-      ),
-      
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 20.h),
@@ -37,12 +25,26 @@ class SignupScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Create Account',
-                  style: TextStyles.font24BlueBold,
+                Row(
+                  children: [
+                    GestureDetector(
+                      onTap: () => Navigator.pop(context),
+                      child: Icon(
+                        Icons.arrow_back,
+                        size: 22.sp,
+                        color: ColorsManager.darkBlue,
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        'Create Account',
+                        style: TextStyles.font20DarkBlueBold,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ],
                 ),
-                verticalSpace(8),
-                
+                verticalSpace(20),
                 Text(
                   'Sign up now and start exploring all that our app has to offer. We\'re excited to welcome you to our community!',
                   style: TextStyles.font14GrayRegular,

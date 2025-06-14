@@ -4,8 +4,8 @@ import 'package:healthstack/core/theming/styles.dart';
 import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:healthstack/core/helpers/extensions.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:healthstack/core/widgets/app_text_button.dart';
 import 'package:healthstack/core/widgets/custom_top_bar.dart';
+import 'package:healthstack/core/widgets/app_text_button.dart';
 import 'package:healthstack/features/home/data/models/doctors_response_model.dart';
 import 'package:healthstack/features/home/data/models/hospitals_response_model.dart';
 import 'package:healthstack/features/home/data/models/departments_response_model.dart';
@@ -38,14 +38,14 @@ class HospitalDetailsScreen extends StatelessWidget {
                   child: Column(
                     children: [
                      const CustomTopBar(title: 'Hospital Details'),
-                     verticalSpace(30), // Spacing after top bar
+                     verticalSpace(15), // Spacing after top bar
                       _buildHospitalProfileCard(), // Hospital Profile Card
                       _buildAboutSection(), // About Section
                       _buildContactInfoSection(), // Contact Information Section
                       _buildFacilitiesSection(), // Facilities Section
                       verticalSpace(20), // Spacing before button
                       _buildViewDoctorsButton(context), // Button moved to scrollable content
-                      verticalSpace(20), // Bottom spacing
+                      verticalSpace(10), // Bottom spacing
                     ],
                   ),
                 ),
@@ -118,7 +118,7 @@ class HospitalDetailsScreen extends StatelessWidget {
 
     return Container(
       margin: EdgeInsets.all(16.w),
-      padding: EdgeInsets.all(24.w),
+      padding: EdgeInsets.all(20.w),
       decoration: BoxDecoration(
         color: ColorsManager.moreLightGray,
         borderRadius: BorderRadius.circular(16.r),
@@ -149,13 +149,13 @@ class HospitalDetailsScreen extends StatelessWidget {
                   )
                 : placeholderImage,
           ),
-
           verticalSpace(20),
-
           // Hospital Name
           Text(
             getDisplayText(hospitalsData?.name),
             style: TextStyles.font20DarkBlueBold,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
           ),
           verticalSpace(8),
           // Hospital Type Badge
@@ -232,8 +232,8 @@ class HospitalDetailsScreen extends StatelessWidget {
           verticalSpace(16),
           Text(
             getDisplayText(hospitalsData?.description),
-            style: TextStyles.font14GrayRegular.copyWith(height: 1.6),
-            textAlign: TextAlign.justify,
+            style: TextStyles.font14GrayRegular.copyWith(height: 1.6.h),
+            textAlign: TextAlign.left,
           ),
         ],
       ),
@@ -263,7 +263,7 @@ class HospitalDetailsScreen extends StatelessWidget {
               Icon(
                 Icons.contact_phone,
                 color: ColorsManager.mainBlue,
-                size: 24.sp,
+                size: 26.sp,
               ),
               horizontalSpace(8),
               Text(
@@ -371,7 +371,7 @@ class HospitalDetailsScreen extends StatelessWidget {
             ),
             child: Icon(
               icon,
-              size: 20.sp,
+              size: 24.sp,
               color: ColorsManager.mainBlue,
             ),
           ),

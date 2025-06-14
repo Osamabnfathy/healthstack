@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/core/theming/styles.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomTopBar extends StatelessWidget {
   final String title;
@@ -24,15 +23,14 @@ class CustomTopBar extends StatelessWidget {
             onTap: () => Navigator.pop(context),
             child: Icon(
               Icons.arrow_back,
-              size: 20.sp,
+              size: 22.sp,
               color: ColorsManager.darkBlue,
             ),
           ),
-          horizontalSpace(20),
           Expanded(
             child: Text(
               title,
-              style: TextStyles.font18DarkBlueBold,
+              style: TextStyles.font20DarkBlueBold,
               textAlign: TextAlign.center,
             ),
           ),
