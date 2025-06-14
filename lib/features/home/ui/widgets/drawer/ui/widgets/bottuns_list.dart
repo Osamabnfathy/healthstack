@@ -74,11 +74,19 @@ class ButtonsList extends StatelessWidget {
       MenuItemData(
         'About Us',
         Colors.amber.shade50,
-        Colors.amber.shade700,
+        Colors.deepPurple.shade700,
         () => context.pushNamed(Routes.aboutUs),
+        icon: Icons.info_outlined,
+      ),
+      
+      MenuItemData(
+        'Contact Us',
+        Colors.amber.shade50,
+        Colors.amber.shade700,
+        () => context.pushNamed(Routes.contactUs),
         icon: Icons.call,
       ),
-
+      
       MenuItemData(
         'Sign Out',
       Colors.red.shade50,
