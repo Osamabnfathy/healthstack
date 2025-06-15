@@ -34,13 +34,14 @@ class HomeTopBar extends StatelessWidget {
         GestureDetector(
           onTap: onMenuPressed,
           child: CircleAvatar(
-            radius: 24.0,
+            radius: 24.r,
             backgroundColor: ColorsManager.moreLighterGray,
             child: Image.asset(
               'assets/icons/drawer.png',
               height: 40.h,
               width: 40.w,
               color: ColorsManager.darkBlue,
+              scale: 0.7,
             ),
           ),
         )

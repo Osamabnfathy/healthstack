@@ -9,7 +9,13 @@ import 'package:healthstack/features/about_us/widgets/about_us_values.dart';
 import 'package:healthstack/features/about_us/widgets/about_us_team.dart';
 
 class AboutUsScreen extends StatelessWidget {
-  const AboutUsScreen({super.key});
+  final String? doctorsCount;
+  final String? hospitalsCount;
+  const AboutUsScreen({
+    super.key,
+    this.doctorsCount,
+    this.hospitalsCount
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,20 +27,23 @@ class AboutUsScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.w),
+                padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
                 child: const CustomTopBar(title: 'About Us'),
               ),
-              verticalSpace(20),
+              verticalSpace(10),
               const AboutUsHero(),
               verticalSpace(30),
               const AboutUsContent(),
               verticalSpace(30),
-              const AboutUsStats(),
+              AboutUsStats(
+                doctorsCount: doctorsCount,
+                hospitalsCount: hospitalsCount,
+              ),
               verticalSpace(30),
               const AboutUsValues(),
               verticalSpace(30),
               const AboutUsTeam(),
-              verticalSpace(30),
+              verticalSpace(20),
             ],
           ),
         ),

@@ -56,9 +56,9 @@ class SocialIconsSection extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8.r),
                 ),
                 child: Icon(
-                  Icons.share,
+                  FontAwesomeIcons.hashtag,
                   color: ColorsManager.mainBlue,
-                  size: 20.sp,
+                  size: 32.sp,
                 ),
               ),
               horizontalSpace(12),

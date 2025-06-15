@@ -28,30 +28,36 @@ class SearchAndFilterBar extends StatelessWidget {
             controller: searchController,
             decoration: InputDecoration(
               hintText: hintText ?? 'Search...',
-              hintStyle: TextStyles.font15LightGrayMedium,
-              prefixIcon: const Icon(
+              hintStyle: TextStyles.font16LightGrayMedium,
+              prefixIcon: Icon(
                 Icons.search_rounded,
-                color: ColorsManager.lightGray,
+                color: ColorsManager.gray,
+                size: 20.sp,
               ),
               
               filled: true,
-              fillColor: ColorsManager.moreLighterGray,
+              fillColor: ColorsManager.moreLightGray,
               
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12.r),
-                borderSide: BorderSide.none,
+                borderSide: BorderSide(color: ColorsManager.lightGray.withOpacity(0.5), width: 1.6),
               ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12.r),
+                borderSide: BorderSide(color: ColorsManager.lightGray.withOpacity(0.5), width: 1.6),
+              )
             ),
           ),
         ),
         horizontalSpace(12),
         
         Container(
-          height: 50,
-          width: 50,
+          height: 50.h,
+          width: 50.w,
           decoration: BoxDecoration(
-            color: ColorsManager.moreLighterGray,
+            color: ColorsManager.moreLightGray,
             borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: ColorsManager.lightGray.withOpacity(0.5), width: 1.6),
             boxShadow: [
               BoxShadow(
                 color: ColorsManager.gray.withOpacity(0.1),
@@ -62,7 +68,7 @@ class SearchAndFilterBar extends StatelessWidget {
           ),
           
           child: IconButton(
-            icon: const Icon(Icons.filter_list),
+            icon: Icon(Icons.filter_list, size: 32.sp, color: ColorsManager.gray,),
             onPressed: onFilterPressed,
           ),
         ),

@@ -253,8 +253,13 @@ class AppRouter {
       
       
       case Routes.aboutUs:
+        final arguments = settings.arguments as Map<String, dynamic>?;
         return MaterialPageRoute(
-          builder: (_) => const AboutUsScreen(),
+          builder: (_) => AboutUsScreen(
+            doctorsCount: arguments?['doctorsCount'] ?? "Unkown",
+            hospitalsCount: arguments?['hospitalsCount'] ?? "Unkown",
+            
+          ),
         );
         
       case Routes.contactUs:

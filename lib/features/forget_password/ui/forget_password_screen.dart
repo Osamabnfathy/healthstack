@@ -21,15 +21,18 @@ class ForgetPasswordScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: ColorsManager.white,
-          leading: BackButton(
-            onPressed: () => Navigator.of(context).pop(),
-            color: ColorsManager.darkBlue,
-            style: ButtonStyle(iconSize: WidgetStateProperty.all(25.sp)),
-          ),
+          leading: Padding(
+            padding: EdgeInsets.only(left: 13.w),
+            child: BackButton(
+              onPressed: () => Navigator.of(context).pop(),
+              color: ColorsManager.darkBlue,
+              style: ButtonStyle(iconSize: WidgetStateProperty.all(25.sp)),
+            ),
+          )
         ),
         body: SafeArea(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 20.h),
+            padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 20.h),
             child: BlocBuilder<ForgetPasswordCubit, ForgetPasswordState>(
               builder: (context, state) {
                 final cubit = context.read<ForgetPasswordCubit>();

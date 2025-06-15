@@ -71,78 +71,138 @@ class _FirstAppointmentScreenState extends State<FirstAppointmentScreen> {
     final today = DateTime(now.year, now.month, now.day);
     return List.generate(days, (index) => today.add(Duration(days: index)));
   }
-
+  
   int _parseHour(String hourString) {
-    hourString = hourString.trim();
-    final RegExp timeRegex = RegExp(r"(\d{1,2})\s*(am|pm)?", caseSensitive: false);
+    hourString = hourString.trim().toLowerCase();  
+    // Updated regex to be more specific and handle various formats
+    final RegExp timeRegex = RegExp(r"(\d{1,2})(?::\d{2})?\s*(am|pm)", caseSensitive: false);
     final match = timeRegex.firstMatch(hourString);
-
     if (match != null) {
-      int hour = int.tryParse(match.group(1)!) ?? 0;
+      int hour = int.tryParse(match.group(1)!) ?? 9; // Better default
       final period = match.group(2)?.toLowerCase();
-
+  
+      // Fixed AM/PM conversion logic
       if (period == 'pm' && hour != 12) {
         hour += 12;
       } else if (period == 'am' && hour == 12) {
         hour = 0; 
       }
-      return hour;
+      // Ensure hour is within valid range
+      return hour.clamp(0, 23);
     }
-    return 9; 
+    // Try parsing just numbers (assume 24-hour format)
+    final numberMatch = RegExp(r"(\d{1,2})").firstMatch(hourString);
+    if (numberMatch != null) {
+      final hour = int.tryParse(numberMatch.group(1)!) ?? 9;
+      return hour.clamp(0, 23);
+    }
+    return 9; // Default fallback
   }
 
+// Improved method to parse time strings like "9:00 AM" or "1:00 PM"
+TimeOfDay? _parseTime(String timeStr) {
+  try {
+    timeStr = timeStr.trim();
+    
+    // Enhanced regex to handle various time formats
+    final RegExp timeRegex = RegExp(r'(\d{1,2}):?(\d{2})?\s*(AM|PM)', caseSensitive: false);
+    final match = timeRegex.firstMatch(timeStr);
+    
+    if (match != null) {
+      int hour = int.tryParse(match.group(1)!) ?? 0;
+      int minute = int.tryParse(match.group(2) ?? '0') ?? 0;
+      final period = match.group(3)?.toUpperCase();
+      
+      // Convert to 24-hour format
+      if (period == 'PM' && hour != 12) {
+        hour += 12;
+      } else if (period == 'AM' && hour == 12) {
+        hour = 0;
+      }
+      
+      return TimeOfDay(hour: hour, minute: minute);
+    }
+    
+    // Fallback: try to parse just the hour
+    final hourMatch = RegExp(r'(\d{1,2})\s*(AM|PM)', caseSensitive: false).firstMatch(timeStr);
+    if (hourMatch != null) {
+      int hour = int.tryParse(hourMatch.group(1)!) ?? 9;
+      final period = hourMatch.group(2)?.toUpperCase();
+      
+      if (period == 'PM' && hour != 12) {
+        hour += 12;
+      } else if (period == 'AM' && hour == 12) {
+        hour = 0;
+      }
+      
+      return TimeOfDay(hour: hour, minute: 0);
+    }
+    
+    return null;
+  } catch (e) {
+    debugPrint('Time parsing error: $e for timeStr: $timeStr');
+    return null;
+  }
+}
 
+// Improved method to generate time slots
   List<TimeOfDay> _generateTimesForDate(DateTime selectedDate) {
     final now = DateTime.now();
     final bool isToday = selectedDate.year == now.year &&
                          selectedDate.month == now.month &&
                          selectedDate.day == now.day;
-
-    int startHour = 9; 
-    int endHour = 17; 
+  
+    // Default values
+    TimeOfDay startTime = const TimeOfDay(hour: 9, minute: 0);
+    TimeOfDay endTime = const TimeOfDay(hour: 17, minute: 0);
+    
     final visitingHoursString = widget.visitingHour;
+    
     if (visitingHoursString != null && visitingHoursString.contains('-')) {
       final parts = visitingHoursString.split('-');
       if (parts.length >= 2) {
-        startHour = _parseHour(parts[0]);
-        endHour = _parseHour(parts[1]);
-        if (endHour <= startHour && endHour != 0) {
-           endHour = startHour + 8; 
-        }
-      } else if (parts.isNotEmpty) {
-          startHour = _parseHour(parts[0]);
-          endHour = startHour + 8; 
+        final parsedStart = _parseTime(parts[0]);
+        final parsedEnd = _parseTime(parts[1]);
+        
+        if (parsedStart != null) startTime = parsedStart;
+        if (parsedEnd != null) endTime = parsedEnd;
       }
-    } else if (visitingHoursString != null && visitingHoursString.isNotEmpty){
-        startHour = _parseHour(visitingHoursString);
-        endHour = startHour + 8; 
     }
-    endHour = endHour > 24 ? 24 : endHour;
-
+    
     List<TimeOfDay> times = [];
-    final int startMinuteOfDay = startHour * 60;
-    final int endMinuteOfDay = endHour * 60;
-    for (int currentMinuteOfDay = startMinuteOfDay;
-         currentMinuteOfDay < endMinuteOfDay;
-         currentMinuteOfDay += timeSlotIntervalMinutes)
-      {
-        int hour = currentMinuteOfDay ~/ 60;
-        int minute = currentMinuteOfDay % 60;
-        TimeOfDay slotStartTimeOfDay = TimeOfDay(hour: hour, minute: minute);
-
-        DateTime slotStartDateTime = DateTime(
-          selectedDate.year, selectedDate.month, selectedDate.day,
-          hour, minute,
-        );
-        if (isToday) {
-          if (slotStartDateTime.isAfter(now)) {
-             times.add(slotStartTimeOfDay);
-          }
-        } else {
-          times.add(slotStartTimeOfDay);
-        }
+    
+    // Convert TimeOfDay to minutes for easier calculation
+    int startMinutes = startTime.hour * 60 + startTime.minute;
+    int endMinutes = endTime.hour * 60 + endTime.minute;
+    
+    // Handle case where end time is before start time (next day)
+    if (endMinutes <= startMinutes) {
+      endMinutes += 24 * 60; // Add 24 hours
+    }
+    
+    for (int currentMinutes = startMinutes; 
+         currentMinutes < endMinutes; 
+         currentMinutes += timeSlotIntervalMinutes) {
+      
+      int hour = (currentMinutes ~/ 60) % 24; // Handle overflow past 24 hours
+      int minute = currentMinutes % 60;
+      
+      final slotTime = TimeOfDay(hour: hour, minute: minute);
+      final slotDateTime = DateTime(
+        selectedDate.year, 
+        selectedDate.month, 
+        selectedDate.day,
+        hour, 
+        minute,
+      );
+      
+      // Only add future times if it's today
+      if (!isToday || slotDateTime.isAfter(now)) {
+        times.add(slotTime);
       }
-      return times;
+    }
+    
+    return times;
   }
 
 

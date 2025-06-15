@@ -75,9 +75,22 @@ class ButtonsList extends StatelessWidget {
         'About Us',
         Colors.amber.shade50,
         Colors.deepPurple.shade700,
-        () => context.pushNamed(Routes.aboutUs),
+        () {
+          final homeCubit = context.read<HomeCubit>();
+          final doctorsCount = homeCubit.doctorsDataList?.length.toString() ?? '';
+          final hospitalsCount = homeCubit.hospitalsDataList?.length.toString() ?? '';
+      
+          context.pushNamed(
+            Routes.aboutUs,
+            arguments: {
+              'doctorsCount': doctorsCount,
+              'hospitalsCount': hospitalsCount,
+            },
+          );
+        },
         icon: Icons.info_outlined,
       ),
+
       
       MenuItemData(
         'Contact Us',
@@ -105,7 +118,7 @@ class ButtonsList extends StatelessWidget {
 
     return Container(
       color: ColorsManager.lighterGray, 
-      padding: EdgeInsets.symmetric(horizontal: 10.w).copyWith(top: 10.h), 
+      padding: EdgeInsets.symmetric(horizontal: 12.w).copyWith(top: 10.h), 
        
       child: ListView.separated(
         physics: const BouncingScrollPhysics(), 

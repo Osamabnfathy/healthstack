@@ -62,7 +62,7 @@ class DoctorDetailsScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       const CustomTopBar(title: 'Doctor Information'),
-                      verticalSpace(30), // Spacing after top bar
+                      verticalSpace(15), // Spacing after top bar
                       _buildDoctorProfileCard(
                           hospitalName, departmentName), // Doctor Profile Card
                       _buildAboutSection(), // About Section
@@ -71,7 +71,7 @@ class DoctorDetailsScreen extends StatelessWidget {
                       verticalSpace(20), // Spacing before button
                       _buildBookAppointmentButton(context, hospitalName,
                           departmentName), // Button moved to scrollable content
-                      verticalSpace(20), // Bottom spacing
+                      verticalSpace(15), // Bottom spacing
                     ],
                   ),
                 ),
@@ -239,7 +239,7 @@ class DoctorDetailsScreen extends StatelessWidget {
           Text(
             getDisplayText(doctorsData?.description),
             style: TextStyles.font14GrayRegular.copyWith(height: 1.6),
-            textAlign: TextAlign.justify,
+            textAlign: TextAlign.left,
           ),
         ],
       ),
@@ -249,7 +249,7 @@ class DoctorDetailsScreen extends StatelessWidget {
   Widget _buildContactInfoSection() {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-      padding: EdgeInsets.all(20.w),
+      padding: EdgeInsets.symmetric(horizontal:20.w, vertical: 15.h),
       decoration: BoxDecoration(
         color: ColorsManager.moreLightGray,
         borderRadius: BorderRadius.circular(16.r),

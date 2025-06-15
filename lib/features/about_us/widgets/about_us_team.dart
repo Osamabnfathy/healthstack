@@ -17,8 +17,8 @@ class AboutUsTeam extends StatelessWidget {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            ColorsManager.lightBlue.withOpacity(0.3),
-            ColorsManager.lightBlue.withOpacity(0.1),
+            ColorsManager.lightBlue.withOpacity(0.8),
+            ColorsManager.lightBlue.withOpacity(0),
           ],
         ),
         borderRadius: BorderRadius.circular(16.r),

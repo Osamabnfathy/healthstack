@@ -31,27 +31,27 @@ class ProfileInformation extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () => Navigator.pop(context), 
-                child: Icon(Icons.arrow_back, color: ColorsManager.darkBlue, size: 20.sp,),
+                child: Icon(Icons.arrow_back, color: ColorsManager.darkBlue, size: 22.sp,),
               ),
             ],
           ),
-          verticalSpace(15),
+          verticalSpace(10),
           
           Stack(
             alignment: Alignment.bottomRight,
             children: [
               Container(
-                width: 90.w,
-                height: 90.h,
+                width: 100.w,
+                height: 100.h,
                 
                 decoration: BoxDecoration(
                   color: Colors.purple.shade50, 
                   shape: BoxShape.circle,
-                  border: Border.all(color: Colors.white, width: 3),
+                  border: Border.all(color: ColorsManager.mainBlue.withOpacity(0.5), width: 3),
                 ),
                 
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(40.r),
+                  borderRadius: BorderRadius.circular(70.r),
                   child: patientProfileData?.featuredImage != null && patientProfileData!.featuredImage!.isNotEmpty
                     ? Image.network(
                         patientProfileData!.featuredImage!,
@@ -79,7 +79,7 @@ class ProfileInformation extends StatelessWidget {
                 child: Container(
                   padding: EdgeInsets.all(4.r),
                   decoration: const BoxDecoration(
-                    color: Colors.white,
+                    color: ColorsManager.lightBlue,
                     shape: BoxShape.circle,
                   ),
                   

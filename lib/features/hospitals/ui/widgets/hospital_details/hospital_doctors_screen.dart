@@ -5,6 +5,7 @@ import 'package:healthstack/core/theming/styles.dart';
 import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:healthstack/core/widgets/custom_top_bar.dart';
+import 'package:healthstack/core/widgets/icon_text_row.dart';
 import 'package:healthstack/core/widgets/search_bar.dart';
 import 'package:healthstack/features/home/data/models/doctors_response_model.dart';
 import 'package:healthstack/features/home/data/models/hospitals_response_model.dart';
@@ -129,66 +130,69 @@ class _HospitalDoctorsScreenState extends State<HospitalDoctorsScreen> {
       backgroundColor: ColorsManager.lightBlue,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
-        child: Column(
-          children: [
-            // Header
-             CustomTopBar(title: hospitalName),
-             verticalSpace(15),
-            // Search and Filter Section
-            Container(
-              color: ColorsManager.lightBlue,
-              padding: EdgeInsets.all(16.w),
-              child: Column(
-                children: [
-                  SearchAndFilterBar(
-                    searchController: _searchController, 
-                    onFilterPressed: _onFilterPressed,
-                  ),
-                  
-                  verticalSpace(12),
-                  
-                  // Department Filter
-                  Row(
-                    children: [
-                      Text(
-                        'Department:',
-                        style: TextStyles.font18DarkBlueBold,
-                      ),
-                      horizontalSpace(12),
-                      Expanded(
-                        child: Container(
-                          padding: EdgeInsets.symmetric(horizontal: 12.w),
-                          decoration: BoxDecoration(
-                            color: ColorsManager.moreLightGray,
-                            borderRadius: BorderRadius.circular(8.r),
-                            border: Border.all(color: ColorsManager.lightGray),
-                          ),
-                          child: DropdownButtonHideUnderline(
-                            child: DropdownButton<String>(
-                              value: _selectedDepartment,
-                              isExpanded: true,
-                              style: TextStyles.font14DarkBlueRegular,
-                              items: _departments.map((String department) {
-                                return DropdownMenuItem<String>(
-                                  value: department,
-                                  child: Text(department),
-                                );
-                              }).toList(),
-                              onChanged: (String? newValue) {
-                                setState(() {
-                                  _selectedDepartment = newValue ?? 'All';
-                                });
-                              },
+          padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 20.h),
+          child: Column(
+            children: [
+              // Header
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 14.w),
+                child: CustomTopBar(title: hospitalName),
+              ),
+              verticalSpace(15),
+              // Search and Filter Section
+              Container(
+                color: ColorsManager.lightBlue,
+                padding: EdgeInsets.all(16.w),
+                child: Column(
+                  children: [
+                    SearchAndFilterBar(
+                      searchController: _searchController, 
+                      onFilterPressed: _onFilterPressed,
+                    ),
+                    
+                    verticalSpace(12),
+                    
+                    // Department Filter
+                    Row(
+                      children: [
+                        Text(
+                          'Department:',
+                          style: TextStyles.font18DarkBlueBold,
+                        ),
+                        horizontalSpace(12),
+                        Expanded(
+                          child: Container(
+                            padding: EdgeInsets.symmetric(horizontal: 12.w),
+                            decoration: BoxDecoration(
+                              color: ColorsManager.moreLightGray,
+                              borderRadius: BorderRadius.circular(8.r),
+                              border: Border.all(color: ColorsManager.lightGray.withOpacity(0.5), width: 1.6),
+                            ),
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton<String>(
+                                value: _selectedDepartment,
+                                isExpanded: true,
+                                style: TextStyles.font14DarkBlueRegular,
+                                items: _departments.map((String department) {
+                                  return DropdownMenuItem<String>(
+                                    value: department,
+                                    child: Text(department),
+                                  );
+                                }).toList(),
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    _selectedDepartment = newValue ?? 'All';
+                                  });
+                                },
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
             
             // Results Summary
             Container(
@@ -199,23 +203,23 @@ class _HospitalDoctorsScreenState extends State<HospitalDoctorsScreen> {
                   Text(
                     '${filteredDoctors.length} Doctor${filteredDoctors.length != 1 ? 's' : ''} Found',
                     style: TextStyles.font12GrayMedium,
-                  ),
-                  const Spacer(),
-                  if (_searchQuery.isNotEmpty || _selectedDepartment != 'All')
-                    TextButton(
-                      onPressed: () {
-                        setState(() {
-                          _searchQuery = '';
-                          _selectedDepartment = 'All';
-                        });
-                      },
-                      child: Text(
-                        'Clear Filters',
-                        style: TextStyles.font13DarkBlueMedium,
-                      ),
+                ),
+                const Spacer(),
+                if (_searchQuery.isNotEmpty || _selectedDepartment != 'All')
+                  TextButton(
+                    onPressed: () {
+                      setState(() {
+                        _searchQuery = '';
+                        _selectedDepartment = 'All';
+                      });
+                    },
+                    child: Text(
+                      'Clear Filters',
+                      style: TextStyles.font13DarkBlueMedium,
                     ),
-                ],
-              ),
+                  ),
+              ],
+            ),
             ),
             
             // Doctors List
@@ -279,11 +283,11 @@ class _HospitalDoctorsScreenState extends State<HospitalDoctorsScreen> {
     final departmentName = _getDepartmentName(doctor.departmentName);
     
     final Widget placeholderImage = Container(
-      width: 80.w,
-      height: 80.h,
+      width: 110.w,
+      height: 110.h,
       decoration: BoxDecoration(
         color: ColorsManager.lighterGray,
-        borderRadius: BorderRadius.circular(12.r),
+        borderRadius: BorderRadius.circular(1200.r),
       ),
       child: Icon(
         Icons.person,
@@ -294,16 +298,18 @@ class _HospitalDoctorsScreenState extends State<HospitalDoctorsScreen> {
 
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => DoctorDetailsScreen(
-              doctorsData: doctor,
-              hospitalsData: widget.hospitalsDataList,
-              departmentsData: widget.departmentsDataList,
+        if (doctor.doctorId != null) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => DoctorDetailsScreen(
+                doctorsData: doctor,
+                hospitalsData: widget.hospitalsDataList,
+                departmentsData: widget.departmentsDataList,
+              ),
             ),
-          ),
-        );
+          );
+        }
       },
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 12.h),
@@ -324,27 +330,27 @@ class _HospitalDoctorsScreenState extends State<HospitalDoctorsScreen> {
           children: [
             // Doctor Image
             ClipRRect(
-              borderRadius: BorderRadius.circular(12.r),
+              borderRadius: BorderRadius.circular(1200.r),
               child: doctor.featuredImage != null && doctor.featuredImage!.isNotEmpty
                   ? Image.network(
                       doctor.featuredImage!,
-                      width: 115.w,
-                      height: 130.h,
-                      fit: BoxFit.cover,
+                      width: 110.w,
+                      height: 110.h,
+                      fit: BoxFit.contain,
                       errorBuilder: (context, error, stackTrace) => placeholderImage,
                       loadingBuilder: (context, child, loadingProgress) {
                         if (loadingProgress == null) return child;
                         return Container(
-                          width: 80.w,
-                          height: 80.h,
+                          width: 110.w,
+                          height: 110.h,
                           decoration: BoxDecoration(
                             color: ColorsManager.moreLighterGray,
                             borderRadius: BorderRadius.circular(12.r),
                           ),
                           child: Center(
                             child: SizedBox(
-                              width: 20.w,
-                              height: 20.h,
+                              width: 50.w,
+                              height: 50.h,
                               child: CircularProgressIndicator(
                                 strokeWidth: 2,
                                 valueColor: AlwaysStoppedAnimation<Color>(
@@ -375,21 +381,22 @@ class _HospitalDoctorsScreenState extends State<HospitalDoctorsScreen> {
                   // Department Badge
                   if (departmentName != null)
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+                      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 5.h),
                       decoration: BoxDecoration(
                         color: ColorsManager.mainBlue.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(12.r),
                       ),
                       child: Text(
-                        departmentName,
+                        getDisplayText(departmentName),
                         style: TextStyles.font15DarkBlueMedium,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                    ),     
+                    ),
                   verticalSpace(8),
                   // Contact Info
-                  _buildInfoRow(Icons.phone, doctor.phoneNumber),
-                  _buildInfoRow(Icons.schedule, doctor.visitingHour),
-                  verticalSpace(4),
+                  buildInfoRow(Icons.phone, getDisplayText(doctor.phoneNumber)),
+                  buildInfoRow(Icons.schedule, getDisplayText(doctor.visitingHour)),
                   // Fees
                   Row(
                     children: [
@@ -400,8 +407,10 @@ class _HospitalDoctorsScreenState extends State<HospitalDoctorsScreen> {
                       ),
                       horizontalSpace(4),
                       Text(
-                        'Fees: ${getDisplayText(doctor.consultationFee?.toString())} EGP',
+                        'Fees: ${getDisplayText(doctor.reportFee?.toString())} - ${getDisplayText(doctor.consultationFee?.toString())} EGP',
                         style: TextStyles.font12GrayMedium,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ],
                   ),
@@ -410,39 +419,16 @@ class _HospitalDoctorsScreenState extends State<HospitalDoctorsScreen> {
             ),
             
             // Arrow Icon
-            Icon(
-              Icons.arrow_forward_ios,
-              size: 16.sp,
-              color: ColorsManager.gray.withOpacity(0.7),
+            Padding(
+              padding: EdgeInsets.only(left: 8.w, right: 2.w),
+              child: Icon(
+                Icons.arrow_forward_ios,
+                size: 16.sp,
+                color: ColorsManager.gray.withOpacity(0.7),
+              ),
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildInfoRow(IconData icon, String? value) {
-    if (value == null || value.isEmpty) return const SizedBox.shrink();
-    
-    return Padding(
-      padding: EdgeInsets.only(bottom: 4.h),
-      child: Row(
-        children: [
-          Icon(
-            icon,
-            size: 14.sp,
-            color: ColorsManager.gray.withOpacity(0.7),
-          ),
-          horizontalSpace(4),
-          Expanded(
-            child: Text(
-              getDisplayText(value),
-              style: TextStyles.font12GrayMedium,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-        ],
       ),
     );
   }

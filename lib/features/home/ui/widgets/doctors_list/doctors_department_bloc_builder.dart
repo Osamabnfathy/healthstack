@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/core/theming/styles.dart';
 import 'package:healthstack/core/helpers/spacing.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:healthstack/features/home/logic/cubit/home_cubit.dart';
 import 'package:healthstack/features/home/logic/cubit/home_state.dart';
 import 'package:healthstack/features/home/data/models/hospitals_response_model.dart';
@@ -44,24 +46,31 @@ class DoctorsDepartmentBlocBuilder extends StatelessWidget {
             
             if (filteredDoctors.isEmpty) {
               return Column(
+                mainAxisSize: MainAxisSize.min,
                 children:[
-                  verticalSpace(130),
+                  // verticalSpace(80),
                   Center(
-                    child: Text(
-                      "No doctors found in this department.",
-                      style: TextStyles.font14DarkBlueMedium,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        verticalSpace(40),
+                        Icon(Icons.no_accounts_outlined, size: 64.sp, color: ColorsManager.lightGray,),
+                        verticalSpace(20),
+                        Text(
+                          "No doctors found in this department.",
+                          style: TextStyles.font16GrayRegular,
+                        ),
+                      ],
                     ),
                   ),
                 ]
               );
             }
                 
-            return Expanded(
-              child: DoctorsDepartmentListView(
-                doctorsDataList: filteredDoctors,
-                hospitalsDataList: hospitalsDataList,
-                departmentsDataList: departmentsDataList,
-              )
+            return DoctorsDepartmentListView(
+              doctorsDataList: filteredDoctors,
+              hospitalsDataList: hospitalsDataList,
+              departmentsDataList: departmentsDataList,
             );
           },
           
@@ -78,8 +87,6 @@ class DoctorsDepartmentBlocBuilder extends StatelessWidget {
   }
   
   Widget setupLoading() {
-    return Expanded(
-      child: const DoctorsShimmerLoading(),
-    );
+    return const DoctorsShimmerLoading();
   }
 }

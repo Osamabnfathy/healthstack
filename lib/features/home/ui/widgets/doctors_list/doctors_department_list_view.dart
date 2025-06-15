@@ -8,7 +8,7 @@ class DoctorsDepartmentListView extends StatelessWidget {
   final List<DoctorsResponseModel>? doctorsDataList; 
   final List<HospitalsResponseModel>? hospitalsDataList;
   final List<DepartmentsResponseModel>? departmentsDataList;
-  final int? departmentId; // Pass this to the "See All" screen
+  final int? departmentId; 
 
   const DoctorsDepartmentListView({
     super.key, 
@@ -21,27 +21,26 @@ class DoctorsDepartmentListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final doctors = doctorsDataList ?? [];
-    final showSeeAll = doctors.length > 2;
-    final displayDoctors = showSeeAll ? doctors.take(2).toList() : doctors;
+    final showSeeAll = doctors.length > 3;
+    final displayDoctors = showSeeAll ? doctors.take(3).toList() : doctors;
 
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          ListView.builder(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemCount: displayDoctors.length,
-            itemBuilder: (context, index) {
-              return DoctorsDepartmentListViewItem(
-                itemIndex: index,
-                doctorsData: displayDoctors[index],
-                hospitalsDataList: hospitalsDataList,
-                departmentsDataList: departmentsDataList,
-              );
-            },
-          ),
-        ],
-      ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        ListView.builder(
+          itemCount: displayDoctors.length,
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemBuilder: (context, index) {
+            return DoctorsDepartmentListViewItem(
+              itemIndex: index,
+              doctorsData: displayDoctors[index],
+              hospitalsDataList: hospitalsDataList,
+              departmentsDataList: departmentsDataList,
+            );
+          },
+        )
+      ]
     );
   }
 }

@@ -29,7 +29,7 @@ class HospitalDetailsScreen extends StatelessWidget {
       backgroundColor: ColorsManager.lightBlue,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
+          padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 20.h),
           child: Column(
             children: [
               // Scrollable content
@@ -37,8 +37,11 @@ class HospitalDetailsScreen extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                     const CustomTopBar(title: 'Hospital Details'),
-                     verticalSpace(15), // Spacing after top bar
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10.w),
+                        child: const CustomTopBar(title: 'Hospital Details'),
+                      ),
+                      verticalSpace(15), // Spacing after top bar
                       _buildHospitalProfileCard(), // Hospital Profile Card
                       _buildAboutSection(), // About Section
                       _buildContactInfoSection(), // Contact Information Section
