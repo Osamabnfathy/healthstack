@@ -95,28 +95,11 @@ class HospitalDetailsScreen extends StatelessWidget {
   }
 
   Widget _buildHospitalProfileCard() {
-    final Widget placeholderImage = Container(
-      height: 250.h,
+    final Widget placeholderImage = Image.asset(
+      'assets/icons/hospital.png', 
+      height: 250.h, 
       width: double.infinity,
-      decoration: BoxDecoration(
-        color: ColorsManager.moreLightGray,
-        borderRadius: BorderRadius.circular(16.r),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            Icons.local_hospital,
-            size: 60.sp,
-            color: Colors.grey[400],
-          ),
-          verticalSpace(8),
-          Text(
-            'Hospital Image',
-            style: TextStyles.font12GrayMedium,
-          ),
-        ],
-      ),
+      fit: BoxFit.fill, 
     );
 
     return Container(
@@ -234,7 +217,7 @@ class HospitalDetailsScreen extends StatelessWidget {
           ),
           verticalSpace(16),
           Text(
-            getDisplayText(hospitalsData?.description),
+            getDisplayText(hospitalsData?.description?.trim()),
             style: TextStyles.font14GrayRegular.copyWith(height: 1.6.h),
             textAlign: TextAlign.left,
           ),

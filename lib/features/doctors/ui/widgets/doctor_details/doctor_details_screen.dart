@@ -119,11 +119,12 @@ class DoctorDetailsScreen extends StatelessWidget {
         color: ColorsManager.lightGray,
         borderRadius: BorderRadius.circular(100.r),
       ),
-      child: Icon(
-        Icons.person,
-        size: 80.sp,
-        color: Colors.grey[400],
-      ),
+      child: Image.asset(
+        'assets/icons/doctor.png',
+        width: 70.w,
+        height: 70.h,
+        fit: BoxFit.cover,
+      )
     );
 
     return Container(
@@ -237,7 +238,7 @@ class DoctorDetailsScreen extends StatelessWidget {
           ),
           verticalSpace(16),
           Text(
-            getDisplayText(doctorsData?.description),
+            getDisplayText(doctorsData?.description?.trim()),
             style: TextStyles.font14GrayRegular.copyWith(height: 1.6),
             textAlign: TextAlign.left,
           ),

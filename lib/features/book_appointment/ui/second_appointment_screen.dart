@@ -136,15 +136,15 @@ Widget build(BuildContext context) {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomTopBar(title: 'Book Appointment'),
-                    verticalSpace(30),
+                    verticalSpace(20),
                     SummaryStepsNumbers(currentStep: 2),
-                    verticalSpace(30),
+                    verticalSpace(20),
                     BookingInfoCard(bookingInfo: bookingInfo),
-                    verticalSpace(30),
+                    verticalSpace(20),
                     DoctorInfoCard(doctorInfo: doctorInfo, bookingInfo: bookingInfo,),
-                    verticalSpace(30),
+                    verticalSpace(20),
                     MessageTextField(messageController: messageController),
-                    verticalSpace(30),
+                    verticalSpace(20),
                     // Moved the button here inside the scrollable content
                     Padding(
                       padding: EdgeInsets.all(15.w),
@@ -160,7 +160,6 @@ Widget build(BuildContext context) {
                         buttonHeight: 52.0.h,
                       ),
                     ),
-                    verticalSpace(10), // Add some bottom spacing
                   ],
                 ),
               ),

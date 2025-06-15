@@ -247,28 +247,28 @@ TimeOfDay? _parseTime(String timeStr) {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomTopBar(title: 'Book Appointment'), 
-                verticalSpace(30),
+                verticalSpace(20),
                 StepsNumbers(),
-                verticalSpace(30),
+                verticalSpace(20),
                 DateSelection(
                   dates: displayDates,
                   selectedDateIndex: selectedDateIndex,
                   onDateSelected: updateSelectedDate,
                 ),
-                verticalSpace(30),
+                verticalSpace(20),
                 TimeSelection(
                   times: displayTimes,
                   selectedTimeIndex: selectedTimeIndex,
                   onTimeSelected: updateSelectedTime,
                 ),
-                verticalSpace(30),
+                verticalSpace(20),
                 AppointmentType(
                   appointmentTypes: appointmentTypes,
                   appointmentIcons: appointmentIcons,
                   selectedAppointmentType: selectedAppointmentType,
                   onAppointmentTypeSelected: updateAppointmentType,
                 ),
-                verticalSpace(30),
+                verticalSpace(20),
                 if (selectedTimeIndex == -1) 
                   Padding(
                     padding: EdgeInsets.only(bottom: 10.h),
@@ -309,6 +309,7 @@ TimeOfDay? _parseTime(String timeStr) {
                   borderRadius: 12.0.r,
                   buttonHeight: 52.0.h,
                 ),
+                verticalSpace(16),
               ],
             ),
           ),

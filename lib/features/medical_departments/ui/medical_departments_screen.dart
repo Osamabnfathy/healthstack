@@ -98,27 +98,29 @@ class _MedicalDepartmentsScreenState extends State<MedicalDepartmentsScreen> {
     return Scaffold(
       backgroundColor: ColorsManager.white,
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const CustomTopBar(title: "Medical Departments",),
-                verticalSpace(20),
-                SearchAndFilterBar(
-                  searchController: searchController,
-                  onFilterPressed: _onFilterPressed,
-                  hintText: "Search Hospital's Name....",
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
+          child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const CustomTopBar(title: "Medical Departments",),
+              verticalSpace(20),
+              SearchAndFilterBar(
+                searchController: searchController,
+                onFilterPressed: _onFilterPressed,
+                hintText: "Search Hospital's Name....",
+              ),
+              verticalSpace(16),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: MedicalDepartmentsGridView(
+                    departmentsDataList: _filteredDepartments,
+                    doctorsDataList: widget.doctorsDataList,
+                    hospitalsDataList: widget.hospitalsDataList,
+                  ),
                 ),
-                verticalSpace(12),
-                MedicalDepartmentsGridView(
-                  departmentsDataList: _filteredDepartments,
-                  doctorsDataList: widget.doctorsDataList,
-                  hospitalsDataList: widget.hospitalsDataList,
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
