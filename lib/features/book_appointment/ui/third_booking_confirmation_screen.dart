@@ -48,7 +48,7 @@ class SummaryScreen extends StatelessWidget {
                 verticalSpace(30),
                 ConfirmationBookingInfoCard(bookingInfo: bookingInfo),
                 verticalSpace(20),  
-                ConfirmationDoctorInfoCard(doctorInfo: doctorInfo),
+                ConfirmationDoctorInfoCard(doctorInfo: doctorInfo, bookingInfo: bookingInfo,),
                 verticalSpace(30),
                 Padding(
                   padding: EdgeInsets.all(15.w),
@@ -65,7 +65,7 @@ class SummaryScreen extends StatelessWidget {
                     buttonHeight: 52.0.h,
                   ),
                 ),
-                verticalSpace(20), // Add some bottom spacing
+                // verticalSpace(20), // Add some bottom spacing
               ],
             ),
           ),

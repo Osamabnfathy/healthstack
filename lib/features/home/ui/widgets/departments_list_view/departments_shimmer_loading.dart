@@ -19,6 +19,7 @@ class DepartmentsShimmerLoading extends StatelessWidget {
           return Padding(
             padding: EdgeInsetsDirectional.only(start: index == 0 ? 0 : 24.w),
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Shimmer.fromColors(
                   baseColor: ColorsManager.lightGray,

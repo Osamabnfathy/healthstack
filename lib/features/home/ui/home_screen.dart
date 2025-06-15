@@ -32,55 +32,57 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SafeArea(
         child: Builder(
           builder: (BuildContext context) {
-            return Container(
-              width: double.infinity,
-              margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  HomeTopBar(
-                    onMenuPressed: () => Scaffold.of(context).openEndDrawer(),
-                    patientName: context.watch<HomeCubit>().patientProfileData?.name ?? 'Patient',
-                  ),
-                  const DoctorsBlueContainer(),
-                  verticalSpace(24),
-                  DepartmentsAndSeeAll(
-                    departmentsDataList: context.watch<HomeCubit>().departmentsDataList,
-                    doctorsDataList: context.watch<HomeCubit>().doctorsDataList,
-                    hospitalsDataList: context.watch<HomeCubit>().hospitalsDataList,
-                  ),
-                  verticalSpace(14),
-                  DepartmentsBlocBuilder(
-                    selectedIndex: _getSelectedIndex(context),
-                    onDepartmentSelected: (departmentId) {
-                      setState(() {
-                        selectedDepartmentId = departmentId;
-                      });
-                    },
-                    onDepartmentsLoaded: (departments) {
-                      if (selectedDepartmentId == null &&
-                          departments.isNotEmpty) {
-                        WidgetsBinding.instance.addPostFrameCallback((_) {
-                          setState(() {
-                            selectedDepartmentId =
-                                departments.first.hospitalDepartmentId;
-                          });
+            return SingleChildScrollView(
+              child: Container(
+                width: double.infinity,
+                margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    HomeTopBar(
+                      onMenuPressed: () => Scaffold.of(context).openEndDrawer(),
+                      patientName: context.watch<HomeCubit>().patientProfileData?.name ?? 'Patient',
+                    ),
+                    const DoctorsBlueContainer(),
+                    verticalSpace(24),
+                    DepartmentsAndSeeAll(
+                      departmentsDataList: context.watch<HomeCubit>().departmentsDataList,
+                      doctorsDataList: context.watch<HomeCubit>().doctorsDataList,
+                      hospitalsDataList: context.watch<HomeCubit>().hospitalsDataList,
+                    ),
+                    verticalSpace(14),
+                    DepartmentsBlocBuilder(
+                      selectedIndex: _getSelectedIndex(context),
+                      onDepartmentSelected: (departmentId) {
+                        setState(() {
+                          selectedDepartmentId = departmentId;
                         });
-                      }
-                    },
-                  ),
-                  verticalSpace(20),
-                  DepartmentDoctorsAndSeeall(
-                    departmentId: selectedDepartmentId,
-                    doctorsDataList: context.watch<HomeCubit>().doctorsDataList,
-                    hospitalsDataList: context.watch<HomeCubit>().hospitalsDataList,
-                    departmentsDataList: context.watch<HomeCubit>().departmentsDataList,
-                  ),
-                  verticalSpace(12),
-                  DoctorsDepartmentBlocBuilder(
-                    selectedDepartmentId: selectedDepartmentId,
-                  ),
-                ],
+                      },
+                      onDepartmentsLoaded: (departments) {
+                        if (selectedDepartmentId == null &&
+                            departments.isNotEmpty) {
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            setState(() {
+                              selectedDepartmentId =
+                                  departments.first.hospitalDepartmentId;
+                            });
+                          });
+                        }
+                      },
+                    ),
+                    verticalSpace(20),
+                    DepartmentDoctorsAndSeeall(
+                      departmentId: selectedDepartmentId,
+                      doctorsDataList: context.watch<HomeCubit>().doctorsDataList,
+                      hospitalsDataList: context.watch<HomeCubit>().hospitalsDataList,
+                      departmentsDataList: context.watch<HomeCubit>().departmentsDataList,
+                    ),
+                    verticalSpace(12),
+                    DoctorsDepartmentBlocBuilder(
+                      selectedDepartmentId: selectedDepartmentId,
+                    ),
+                  ],
+                ),
               ),
             );
           },

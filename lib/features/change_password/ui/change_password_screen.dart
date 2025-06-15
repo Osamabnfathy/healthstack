@@ -19,13 +19,16 @@ class ChangePasswordScreen extends StatelessWidget {
       backgroundColor: ColorsManager.lightBlue,
       body: SafeArea(
         child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 16.w),
+            padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 10.w),
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CustomTopBar(title: 'Change Password'),
-                  verticalSpace(30),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 12.w),
+                    child: CustomTopBar(title: 'Change Password'),
+                  ),
+                  verticalSpace(20),
                   Padding(
                     padding:
                         EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),

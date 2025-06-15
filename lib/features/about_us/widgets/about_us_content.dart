@@ -17,7 +17,7 @@ class AboutUsContent extends StatelessWidget {
           _buildContentCard(
             icon: Icons.business_outlined,
             title: 'Who We Are',
-            content: 'MediCare is a revolutionary online healthcare platform that bridges the gap between multiple hospitals and healthcare providers. We specialize in emergency medical assistance, comprehensive patient record management, and seamless healthcare coordination across medical institutions.\n\nOur platform empowers patients with instant access to hospital information, qualified medical professionals, and convenient online appointment scheduling, making quality healthcare accessible to everyone.',
+            content: 'MediCare is a revolutionary online healthcare platform that bridges the gap between multiple hospitals and healthcare providers. \n\nWe specialize in emergency medical assistance, comprehensive patient record management, and seamless healthcare coordination across medical institutions.\n\nOur platform empowers patients with instant access to hospital information, qualified medical professionals, and convenient online appointment scheduling, making quality healthcare accessible to everyone.',
             gradient: LinearGradient(
               colors: [
                 ColorsManager.mainBlue.withOpacity(0.1),
@@ -25,43 +25,38 @@ class AboutUsContent extends StatelessWidget {
               ],
             ),
           ),
-          
           verticalSpace(20),
-          
           // Mission & Vision Row
-          Row(
-            children: [
-              Expanded(
-                child: _buildContentCard(
-                  icon: Icons.visibility_outlined,
-                  title: 'Our Vision',
-                  content: 'To provide high-quality healthcare services to patients from all over the country, ensuring no one is left behind in accessing quality medical care.',
-                  isCompact: true,
-                  gradient: LinearGradient(
-                    colors: [
-                      Colors.green.withOpacity(0.1),
-                      Colors.green.withOpacity(0.05),
-                    ],
-                  ),
-                ),
-              ),
-              horizontalSpace(15),
-              Expanded(
-                child: _buildContentCard(
-                  icon: Icons.flag_outlined,
-                  title: 'Our Mission',
-                  content: 'To provide high-quality healthcare services through qualified medical staff and a safe environment for patients, leveraging technology for better healthcare outcomes.',
-                  isCompact: true,
-                  gradient: LinearGradient(
-                    colors: [
-                      Colors.orange.withOpacity(0.1),
-                      Colors.orange.withOpacity(0.05),
-                    ],
-                  ),
-                ),
-              ),
-            ],
+          _buildContentCard(
+            icon: Icons.visibility_outlined,
+            title: 'Our Vision',
+            content: 'To provide high-quality healthcare services to patients from all over the country, ensuring no one is left behind in accessing quality medical care.',
+            isCompact: true,
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Colors.green.withOpacity(0.05),
+                Colors.green.withOpacity(0.1),
+              ],
+            ),
           ),
+          verticalSpace(20),
+          _buildContentCard(
+            icon: Icons.flag_outlined,
+            title: 'Our Mission',
+            content: 'To provide high-quality healthcare services through qualified medical staff and a safe environment for patients, leveraging technology for better healthcare outcomes.',
+            isCompact: true,
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Colors.orange.withOpacity(0.05),
+                Colors.orange.withOpacity(0.1),
+              ],
+            ),
+          ),
+              
         ],
       ),
     );
@@ -101,7 +96,7 @@ class AboutUsContent extends StatelessWidget {
                   size: isCompact ? 20.sp : 24.sp,
                 ),
               ),
-              horizontalSpace(12),
+              horizontalSpace(10),
               Expanded(
                 child: Text(
                   title,
@@ -112,13 +107,13 @@ class AboutUsContent extends StatelessWidget {
               ),
             ],
           ),
-          verticalSpace(12),
+          verticalSpace(10),
           Text(
             content,
             style: isCompact 
                 ? TextStyles.font14GrayRegular
                 : TextStyles.font16GrayRegular,
-            textAlign: TextAlign.justify,
+            textAlign: TextAlign.left,
           ),
         ],
       ),

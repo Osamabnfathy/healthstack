@@ -76,13 +76,13 @@ class DepartmentDoctorsAndSeeall extends StatelessWidget {
               children: [
                 Text(
                   'See All',
-                  style: TextStyles.font12BlueRegular,
+                  style: TextStyles.font13BlueRegular,
                 ),
                 horizontalSpace(3),
                 Icon(
                   Icons.arrow_forward_ios,
                   size: 10.sp,
-                  color: TextStyles.font12BlueRegular.color,
+                  color: TextStyles.font13BlueRegular.color,
                 ),
               ],
             ),

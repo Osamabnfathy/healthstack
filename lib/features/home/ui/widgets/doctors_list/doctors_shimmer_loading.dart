@@ -9,13 +9,14 @@ class DoctorsShimmerLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return SizedBox(
+      height: 280.h,
       child: ListView.builder(
-        itemCount: 10,
+        itemCount: 2,
         itemBuilder: (context, index) {
           return Container(
-            margin: EdgeInsets.symmetric(vertical: 12.h),
-            padding: EdgeInsetsDirectional.symmetric(horizontal: 10.w, vertical: 10.h),
+            margin: EdgeInsets.symmetric(vertical: 6.h),
+            padding: EdgeInsetsDirectional.symmetric(horizontal: 10.w,),
             child: Row(
               children: [
                 Shimmer.fromColors(
@@ -32,7 +33,8 @@ class DoctorsShimmerLoading extends StatelessWidget {
                   ),
                 ),
                 horizontalSpace(16),
-                Expanded(
+                Flexible(
+                  flex: 1,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

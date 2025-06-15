@@ -36,7 +36,6 @@ class BookAppointmentCubit extends Cubit<BookAppointmentState> {
         emit(BookAppointmentState.error(error: "Please select all fields"));
         return;
     }
-    print("Selected Time: $selectedTime");
     emit(const BookAppointmentState.loading());
       
     final requestModel = BookAppointmentRequestModel(

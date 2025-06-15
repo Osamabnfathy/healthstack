@@ -141,7 +141,7 @@ Widget build(BuildContext context) {
                     verticalSpace(30),
                     BookingInfoCard(bookingInfo: bookingInfo),
                     verticalSpace(30),
-                    DoctorInfoCard(doctorInfo: doctorInfo),
+                    DoctorInfoCard(doctorInfo: doctorInfo, bookingInfo: bookingInfo,),
                     verticalSpace(30),
                     MessageTextField(messageController: messageController),
                     verticalSpace(30),
@@ -152,7 +152,6 @@ Widget build(BuildContext context) {
                         onPressed: () {
                           bookApptCubit.updateMessage(messageController.text);
                           bookApptCubit.submitBooking();
-                          print("time: ${_parseTimeFromString(selectedTime!)}");
                         },
                         buttonText: "Book Now",
                         textStyle: TextStyles.font18WhiteMedium,
@@ -161,7 +160,7 @@ Widget build(BuildContext context) {
                         buttonHeight: 52.0.h,
                       ),
                     ),
-                    verticalSpace(20), // Add some bottom spacing
+                    verticalSpace(10), // Add some bottom spacing
                   ],
                 ),
               ),

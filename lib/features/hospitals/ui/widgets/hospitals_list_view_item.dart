@@ -4,6 +4,7 @@ import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/core/theming/styles.dart';
 import 'package:healthstack/core/helpers/extensions.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:healthstack/core/widgets/icon_text_row.dart';
 import 'package:healthstack/features/home/data/models/doctors_response_model.dart';
 import 'package:healthstack/features/home/data/models/hospitals_response_model.dart';
 import 'package:healthstack/features/home/data/models/departments_response_model.dart';
@@ -28,7 +29,7 @@ class HospitalsListViewItem extends StatelessWidget {
     final Widget placeholderImage = Image.asset(
       'assets/icons/hospital.png', 
       height: 110.h, 
-      width: 120.w,
+      width: 100.w,
       fit: BoxFit.fill, 
     );
     
@@ -45,11 +46,11 @@ class HospitalsListViewItem extends StatelessWidget {
       },
     
       child: Container(
-        margin: EdgeInsetsDirectional.symmetric(horizontal: 12.w, vertical: 12.h),
+        margin: EdgeInsetsDirectional.symmetric(horizontal: 10.w, vertical: 12.h),
         padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
           color: ColorsManager.moreLightGray,
+          borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
               color: ColorsManager.gray.withOpacity(0.2),
@@ -67,25 +68,38 @@ class HospitalsListViewItem extends StatelessWidget {
               child: hospitalsData?.featuredImage != null && hospitalsData!.featuredImage!.isNotEmpty
                   ? Image.network(
                     hospitalsData!.featuredImage!, 
-                    width: 110.w, 
-                    height: 120.h, 
+                    width: 100.w, 
+                    height: 110.h, 
                     fit: BoxFit.fill,
                     
                     errorBuilder: (context, error, stackTrace) => placeholderImage,
                     loadingBuilder: (context, child, loadingProgress) {
                       if (loadingProgress == null) return child;
-                      return Center(
-                        child: CircularProgressIndicator(
-                          value: loadingProgress.expectedTotalBytes != null
-                              ? loadingProgress.cumulativeBytesLoaded / (loadingProgress.expectedTotalBytes ?? 1)
-                              : null,
+                      return Container(
+                        width: 100.w,
+                        height: 110.h,
+                        decoration: BoxDecoration(
+                          color: ColorsManager.moreLighterGray,
+                          borderRadius: BorderRadius.circular(12.r),
+                        ),
+                        child: Center(
+                          child: SizedBox(
+                            width: 50.w,
+                            height: 50.h,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                ColorsManager.mainBlue,
+                              ),
+                            ),
+                          ),
                         ),
                       );
                     },
                   )
                   : placeholderImage,
             ),
-            horizontalSpace(10.w),
+            horizontalSpace(12),
             
             Expanded(
               child: Column(
@@ -93,35 +107,39 @@ class HospitalsListViewItem extends StatelessWidget {
                 children: [
                   Text(
                     hospitalsData?.name ?? 'Hospital',
-                    style: TextStyles.font18DarkBlueBold,
+                    style: TextStyles.font16DarkBlueBold,
                     maxLines: 1, 
                     overflow: TextOverflow.ellipsis, 
                   ),
-                  verticalSpace(5.h),
-                  
-                  Text(
-                    'Phone: ${getDisplayText(hospitalsData?.phoneNumber.toString())}',
-                    style: TextStyles.font12GrayMedium,
-                    maxLines: 1, 
-                    overflow: TextOverflow.ellipsis, 
-                  ),
-                  verticalSpace(5.h),
-                  
-                  Text(
-                    'Email: ${getDisplayText(hospitalsData?.email)}',
-                    style: TextStyles.font12GrayMedium,
-                    maxLines: 1, 
-                    overflow: TextOverflow.ellipsis, 
-                  ),
-                  verticalSpace(5.h),
-                  
-                  Text(
-                    'Address: ${getDisplayText(hospitalsData?.address)}',
-                    style: TextStyles.font12GrayMedium,
-                    maxLines: 1, 
-                    overflow: TextOverflow.ellipsis, 
-                  ),
+                  verticalSpace(4), 
+                  // Department Badge
+                  if (hospitalsData?.hospitalType != null)
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 5.h),
+                      decoration: BoxDecoration(
+                        color: ColorsManager.mainBlue.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(12.r),
+                      ),
+                      child: Text(
+                        getDisplayText(hospitalsData?.hospitalType),
+                        style: TextStyles.font15DarkBlueMedium,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),     
+                  verticalSpace(8),
+                  buildInfoRow(Icons.phone, getDisplayText(hospitalsData?.phoneNumber.toString())),
+                  buildInfoRow(Icons.email_rounded, getDisplayText(hospitalsData?.email)),
+                  buildInfoRow(Icons.location_on, getDisplayText(hospitalsData?.address)),
                 ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 8.w, right: 2.w),
+              child: Icon(
+                Icons.arrow_forward_ios,
+                size: 16.sp,
+                color: ColorsManager.gray.withOpacity(0.7),
               ),
             ),
           ],

@@ -54,7 +54,7 @@ class _HospitalsScreenState extends State<HospitalsScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const CustomTopBar(title:'Find Hospital'),
-              verticalSpace(30),
+              verticalSpace(20),
               SearchAndFilterBar(
                 searchController: searchController,
                 onFilterPressed: _onFilterPressed,

@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:healthstack/core/helpers/extensions.dart';
 import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/core/theming/styles.dart';
 
 class AboutUsStats extends StatelessWidget {
-  const AboutUsStats({super.key});
+  final String? doctorsCount;
+  final String? hospitalsCount;
+  const AboutUsStats({
+    super.key,
+    this.doctorsCount,
+    this.hospitalsCount
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +47,9 @@ class AboutUsStats extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              _buildStatItem('50+', 'Partner\nHospitals'),
+              _buildStatItem(getDisplayText(hospitalsCount), 'Partner\nHospitals'),
               _buildDivider(),
-              _buildStatItem('1000+', 'Happy\nPatients'),
+              _buildStatItem(getDisplayText(doctorsCount), 'Doctors\nOnboarded'),
               _buildDivider(),
               _buildStatItem('24/7', 'Emergency\nSupport'),
             ],
@@ -71,7 +78,7 @@ class AboutUsStats extends StatelessWidget {
 
   Widget _buildDivider() {
     return Container(
-      height: 40.h,
+      height: 50.h,
       width: 1.w,
       color: ColorsManager.white.withOpacity(0.3),
     );

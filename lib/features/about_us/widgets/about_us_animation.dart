@@ -15,11 +15,11 @@ class AboutUsHero extends StatelessWidget {
       padding: EdgeInsets.all(24.w),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
           colors: [
-            ColorsManager.mainBlue,
-            ColorsManager.mainBlue.withOpacity(0.8),
+            ColorsManager.lightBlue,
+            ColorsManager.lightBlue.withOpacity(0.5),
           ],
         ),
         borderRadius: BorderRadius.circular(20.r),
@@ -61,7 +61,7 @@ class AboutUsHero extends StatelessWidget {
           verticalSpace(8),
           Text(
             'Connecting Healthcare, Caring for Lives',
-            style: TextStyles.font14LightGrayRegular,
+            style: TextStyles.font14DarkBlueMedium,
             textAlign: TextAlign.center,
           ),
         ],

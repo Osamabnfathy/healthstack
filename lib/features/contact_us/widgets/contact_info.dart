@@ -9,21 +9,28 @@ import 'package:url_launcher/url_launcher.dart';
 class ContactInfoSection extends StatelessWidget {
   const ContactInfoSection({super.key});
 
-  void _launchEmail() async {
+  void _launchEmail(BuildContext context) async {
     final Uri emailUri = Uri(
       scheme: 'mailto',
       path: 'medicaresvu@gmail.com',
-      query: 'subject=Contact%20from%20HealthStack%20App',
+      queryParameters: {
+        'subject': 'Contact from MediCare App',
+      },
     );
-    
-    try {
-      if (await canLaunchUrl(emailUri)) {
-        await launchUrl(emailUri);
-      }
-    } catch (e) {
-      debugPrint('Error launching email: $e');
+  
+    if (await canLaunchUrl(emailUri)) {
+      await launchUrl(emailUri, mode: LaunchMode.externalApplication);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('No email app is available to handle this action.'),
+          backgroundColor: Colors.red,
+        ),
+      );
     }
   }
+
+
 
   void _launchMaps() async {
     const String query = 'Qena, Qena Governorate, Egypt';
@@ -136,7 +143,7 @@ class ContactInfoSection extends StatelessWidget {
             icon: Icons.email_outlined,
             title: 'Email Address',
             subtitle: 'medicaresvu@gmail.com',
-            onTap: _launchEmail,
+            onTap: () => _launchEmail(context),
             onLongPress: () => _copyToClipboard(context, 'medicaresvu@gmail.com', 'Email'),
           ),
         ],

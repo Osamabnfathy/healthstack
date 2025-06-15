@@ -36,15 +36,14 @@ class DepartmentsBlocBuilder extends StatelessWidget {
           
           departmentsSuccess: (departmentsResponseModel) {
             onDepartmentsLoaded?.call(departmentsResponseModel);
-            return Column(
-              children: [       
-                DepartmentsListView(
-                  selectedIndex: selectedIndex,
-                  onDepartmentSelected: onDepartmentSelected,
-                  departmentsDataList: departmentsResponseModel,
-                  hospitalsDataList: context.read<HomeCubit>().hospitalsDataList,
-                ),
-              ]
+            return SingleChildScrollView(
+              physics: NeverScrollableScrollPhysics(),
+              child: DepartmentsListView(
+                selectedIndex: selectedIndex,
+                onDepartmentSelected: onDepartmentSelected,
+                departmentsDataList: departmentsResponseModel,
+                hospitalsDataList: context.read<HomeCubit>().hospitalsDataList,
+              ),
             );
           },
           
@@ -61,14 +60,14 @@ class DepartmentsBlocBuilder extends StatelessWidget {
   }
   
   Widget setupLoading() {
-    return Expanded(
-      child: Column(
-        children: [
-          DepartmentsShimmerLoading(),
-          verticalSpace(10),
-          DoctorsShimmerLoading(),
-        ]
-      )      
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        verticalSpace(10),
+        DepartmentsShimmerLoading(),
+        verticalSpace(35),
+        DoctorsShimmerLoading()
+      ]           
     );
   }
 }

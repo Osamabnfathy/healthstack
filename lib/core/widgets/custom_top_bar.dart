@@ -13,29 +13,24 @@ class CustomTopBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: 10.w,
-      ),
-      child: Row(
-        children: [
-          GestureDetector(
-            onTap: () => Navigator.pop(context),
-            child: Icon(
-              Icons.arrow_back,
-              size: 22.sp,
-              color: ColorsManager.darkBlue,
-            ),
+    return Row(
+      children: [
+        GestureDetector(
+          onTap: () => Navigator.pop(context),
+          child: Icon(
+            Icons.arrow_back,
+            size: 22.sp,
+            color: ColorsManager.darkBlue,
           ),
-          Expanded(
-            child: Text(
-              title,
-              style: TextStyles.font20DarkBlueBold,
-              textAlign: TextAlign.center,
-            ),
+        ),
+        Expanded(
+          child: Text(
+            title,
+            style: TextStyles.font20DarkBlueBold,
+            textAlign: TextAlign.center,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

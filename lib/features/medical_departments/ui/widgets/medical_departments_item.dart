@@ -12,7 +12,7 @@ class MedicalDepartmentsItem extends StatelessWidget {
   final int? doctorsCount;
   final String? hospitalName;
 
-  const MedicalDepartmentsItem({
+  MedicalDepartmentsItem({
     super.key,
     required this.iconAsset,
     required this.name,
@@ -83,11 +83,7 @@ class MedicalDepartmentsItem extends StatelessWidget {
           iconAsset,
           width: 70.w,
           height: 70.h,
-          placeholderBuilder: (context) => Icon(
-            Icons.local_hospital,
-            size: 70.w,
-            color: ColorsManager.mainBlue,
-          ),
+          placeholderBuilder: (context) => placeholderImage,
         );
       } else {
         return ClipOval(
@@ -114,11 +110,7 @@ class MedicalDepartmentsItem extends StatelessWidget {
               );
             },
             errorBuilder: (context, error, stackTrace) {
-              return Icon(
-                Icons.local_hospital,
-                size: 70.w,
-                color: ColorsManager.mainBlue,
-              );
+              return placeholderImage;
             },
           ),
         );
@@ -141,4 +133,10 @@ class MedicalDepartmentsItem extends StatelessWidget {
       }
     }
   }
+  final Widget placeholderImage = Image.asset(
+    'assets/icons/general.png', 
+    height: 75.h, 
+    width: 75.w,
+    fit: BoxFit.cover, 
+  );  
 }

@@ -82,7 +82,12 @@ class _DepartmentDoctorsScreenState extends State<DepartmentDoctorsScreen> {
       filteredDoctors = _getSortedDoctors(filteredDoctors, isAscending);
     });
   }
-
+  
+  String getDepartmentName() {
+    return widget.departmentsDataList?.firstWhere((element) 
+      => element.hospitalDepartmentId == widget.departmentId).hospitalDepartmentName ?? '';
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,7 +96,7 @@ class _DepartmentDoctorsScreenState extends State<DepartmentDoctorsScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
           child: Column(
             children: [
-              const CustomTopBar(title: 'Doctors'),
+              CustomTopBar(title: '${getDepartmentName().split(' ').first} Doctors'),
               verticalSpace(30),
 
               SearchAndFilterBar(

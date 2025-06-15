@@ -1,45 +1,55 @@
+import 'package:lottie/lottie.dart';
 import 'package:flutter/material.dart';
+import 'package:healthstack/core/theming/colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:healthstack/core/theming/styles.dart';
 
-
-class ContactHeader extends StatelessWidget {
-  const ContactHeader({super.key});
+class ContactUsHeader extends StatelessWidget {
+  const ContactUsHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          foregroundDecoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Colors.white,
-                Colors.white.withOpacity(0.0),
-              ],
-              begin: Alignment.bottomCenter,
-              end: Alignment.topCenter,
-              stops: const [0.14, 0.6],
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 5.w),
+      padding: EdgeInsets.all(16.w),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            ColorsManager.lightBlue,
+            ColorsManager.lightBlue.withOpacity(0.7),
+          ],
+        ),
+        borderRadius: BorderRadius.circular(20.r),
+        boxShadow: [
+          BoxShadow(
+            color: ColorsManager.mainBlue.withOpacity(0.3),
+            blurRadius: 20,
+            offset: const Offset(0, 8),
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          // Animation Container
+          Container(
+            width: 300.w,
+            height: 300.h,
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(16.r),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(16.r),
+              child: Lottie.asset(
+                'assets/animations/contact.json',
+                repeat: true,
+                fit: BoxFit.contain,
+              ),
             ),
           ),
-          
-          child: Image.asset("assets/images/contactUs.jpg", 
-            height: 260.h,
-            width: 380.w,
-          ),
-        ),
-        
-        Positioned(
-          bottom: 10, left: 0, right: 0,
-          child: Text(
-            'GET IN TOUCH!\nWe\'d love to hear from you. Send us a message and we\'ll respond as soon as possible.',
-            textAlign: TextAlign.center,
-            style: TextStyles.font32BlueBold.copyWith(
-              height: 1.3,
-            ),
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
