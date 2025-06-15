@@ -27,17 +27,22 @@ class MedicalDepartmentsGridView extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              Icons.local_hospital_outlined,
-              size: 64.sp,
-              color: Colors.grey[400],
+            verticalSpace(200),
+            Center(
+              child: Icon(
+                Icons.local_hospital_outlined,
+                size: 64.sp,
+                color: Colors.grey[400],
+              ),
             ),
-            verticalSpace(20),
-            Text(
-              'No departments available',
-              style: TextStyle(
-                fontSize: 16.sp,
-                color: Colors.grey[600],
+            verticalSpace(10),
+            Center(
+              child: Text(
+                'No departments available',
+                style: TextStyle(
+                  fontSize: 16.sp,
+                  color: Colors.grey[600],
+                ),
               ),
             ),
           ],

@@ -124,7 +124,7 @@ class TestSection extends StatelessWidget {
           _buildFieldRow('Test Price', getDisplayText(test.testInfoPrice)),
           _buildDivider(),
           
-          _buildFieldRow('Description', getDisplayText(test.testDescription)),
+          _buildFieldRow('Description', getDisplayText(test.testDescription?.trim())),
           _buildDivider(),
         ],
       ),

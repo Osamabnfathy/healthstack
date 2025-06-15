@@ -289,11 +289,12 @@ class _HospitalDoctorsScreenState extends State<HospitalDoctorsScreen> {
         color: ColorsManager.lighterGray,
         borderRadius: BorderRadius.circular(1200.r),
       ),
-      child: Icon(
-        Icons.person,
-        size: 40.sp,
-        color: Colors.grey[400],
-      ),
+      child: Image.asset(
+        'assets/icons/doctor.png',
+        width: 70.w,
+        height: 70.h,
+        fit: BoxFit.cover,
+      )
     );
 
     return GestureDetector(
@@ -336,7 +337,7 @@ class _HospitalDoctorsScreenState extends State<HospitalDoctorsScreen> {
                       doctor.featuredImage!,
                       width: 110.w,
                       height: 110.h,
-                      fit: BoxFit.contain,
+                      fit: BoxFit.cover,
                       errorBuilder: (context, error, stackTrace) => placeholderImage,
                       loadingBuilder: (context, child, loadingProgress) {
                         if (loadingProgress == null) return child;

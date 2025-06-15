@@ -58,11 +58,12 @@ class DoctorsListViewItem extends StatelessWidget {
         color: ColorsManager.lighterGray,
         borderRadius: BorderRadius.circular(1200.r),
       ),
-      child: Icon(
-        Icons.person,
-        size: 40.sp,
-        color: Colors.grey[400],
-      ),
+      child: Image.asset(
+        'assets/icons/doctor.png',
+        width: 70.w,
+        height: 70.h,
+        fit: BoxFit.cover,
+      )
     );
     
     return GestureDetector(

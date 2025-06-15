@@ -19,6 +19,20 @@ class DoctorInfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Widget placeholderImage = Container(
+      height: 110.h,
+      width: 110.w,
+      decoration: BoxDecoration(
+        color: ColorsManager.lightGray,
+        borderRadius: BorderRadius.circular(100.r),
+      ),
+      child: Image.asset(
+        'assets/icons/doctor.png',
+        width: 70.w,
+        height: 70.h,
+        fit: BoxFit.cover,
+      )
+    );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -53,12 +67,7 @@ class DoctorInfoCard extends StatelessWidget {
                   height: 110.h,
                   fit: BoxFit.cover,
                   doctorInfo['Doctor Image'] ?? "",
-                  errorBuilder: (context, error, stackTrace) => Image.asset(
-                    "assets/icons/doctor.png",
-                    width: 110.w,
-                    height: 110.h,
-                    fit: BoxFit.cover,
-                  ),
+                  errorBuilder: (context, error, stackTrace) => placeholderImage,
                   loadingBuilder: (context, child, loadingProgress) {
                     if (loadingProgress == null) return child;
                     return Container(

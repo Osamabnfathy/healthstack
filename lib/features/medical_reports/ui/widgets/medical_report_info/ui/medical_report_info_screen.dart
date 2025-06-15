@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:healthstack/core/theming/colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:healthstack/core/widgets/custom_top_bar.dart';
 import 'package:healthstack/features/home/data/models/patient_profile_response_model.dart';
 import 'package:healthstack/features/medical_reports/data/models/medical_reports_response_model.dart';
 import 'package:healthstack/features/medical_reports/ui/widgets/medical_report_info/ui/widgets/header.dart';
 import 'package:healthstack/features/medical_reports/ui/widgets/medical_report_info/ui/widgets/other_informations.dart';
 import 'package:healthstack/features/medical_reports/ui/widgets/medical_report_info/ui/widgets/specimen_details.dart';
 import 'package:healthstack/features/medical_reports/ui/widgets/medical_report_info/ui/widgets/test_results.dart';
-import 'package:healthstack/features/medical_reports/ui/widgets/medical_report_info/ui/widgets/top_bar.dart';
 
 
 class MedicalReportInfoScreen extends StatelessWidget {
@@ -48,7 +48,10 @@ class MedicalReportInfoScreen extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 15.h),
           child: Column(
             children: [
-              const MedicalReportTopBar(),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10.w),
+                child: const CustomTopBar(title: "Medical Report Information"),
+              ),
               verticalSpace(6),
               
               Header(
@@ -62,13 +65,13 @@ class MedicalReportInfoScreen extends StatelessWidget {
               verticalSpace(16),
               
               SpecimenDetailsSection(specimenDetails: matchedspecimen),
-              verticalSpace(16.h),
+              verticalSpace(16),
               
               TestResultsSection(tests: matchedTests),
-              verticalSpace(16.h),
+              verticalSpace(16),
               
               OtherInformations(advice: medicalReport.otherInformation),
-              verticalSpace(24.h),
+              verticalSpace(20),
             ],
           ),
         ),
