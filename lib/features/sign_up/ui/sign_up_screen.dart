@@ -1,3 +1,5 @@
+import 'package:healthstack/core/widgets/custom_app_bar.dart';
+
 import '../logic/sign_up_cubit.dart';
 import 'package:flutter/material.dart';
 import '../../../core/theming/styles.dart';
@@ -10,7 +12,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../login/ui/widgets/terms_and_conditions_text.dart';
 import 'package:healthstack/features/sign_up/ui/widgets/sign_up_form.dart';
 import 'package:healthstack/features/sign_up/ui/widgets/sign_up_bloc_listener.dart';
-
 
 class SignupScreen extends StatelessWidget {
   const SignupScreen({super.key});
@@ -25,37 +26,19 @@ class SignupScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    GestureDetector(
-                      onTap: () => Navigator.pop(context),
-                      child: Icon(
-                        Icons.arrow_back,
-                        size: 22.sp,
-                        color: ColorsManager.darkBlue,
-                      ),
-                    ),
-                    Expanded(
-                      child: Text(
-                        'Create Account',
-                        style: TextStyles.font20DarkBlueBold,
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
+                CustomAppBar(
+                    title: 'Create Account',
+                    backgroundColor: ColorsManager.white),
                 verticalSpace(20),
                 Text(
                   'Sign up now and start exploring all that our app has to offer. We\'re excited to welcome you to our community!',
                   style: TextStyles.font14GrayRegular,
                 ),
                 verticalSpace(20),
-                
                 Column(
                   children: [
                     const SignupForm(),
                     verticalSpace(20),
-                    
                     AppTextButton(
                       buttonText: "Create Account",
                       textStyle: TextStyles.font16WhiteSemiBold,
@@ -64,10 +47,8 @@ class SignupScreen extends StatelessWidget {
                       },
                     ),
                     verticalSpace(16),
-                    
                     const TermsAndConditionsText(),
                     verticalSpace(20),
-                    
                     const AlreadyHaveAccountText(),
                     const SignupBlocListener(),
                   ],

@@ -28,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
       endDrawer: EndDrawer(
         patientProfileData: context.watch<HomeCubit>().patientProfileData,
       ),
-      backgroundColor: ColorsManager.white,
+      backgroundColor: ColorsManager.lightBlue,
       body: SafeArea(
         child: Builder(
           builder: (BuildContext context) {

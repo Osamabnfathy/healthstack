@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:healthstack/core/widgets/custom_top_bar.dart';
+import 'package:healthstack/core/widgets/custom_app_bar.dart';
 import 'package:healthstack/features/home/data/models/patient_profile_response_model.dart';
 import 'package:healthstack/features/prescriptions/data/models/prescriptions_response_model.dart';
 import 'package:healthstack/features/prescriptions/ui/widgets/prescription_info/ui/widgets/prescription_info_advice.dart';
@@ -41,7 +41,7 @@ class PrescriptionInfoScreen extends StatelessWidget {
       .toList();
   
     return Scaffold(
-      backgroundColor: ColorsManager.white,
+      backgroundColor: ColorsManager.lightBlue,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 15.h),
@@ -49,7 +49,7 @@ class PrescriptionInfoScreen extends StatelessWidget {
             children: [
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10.w),
-                child: const CustomTopBar(title: "Prescription Information"),
+                child: const CustomAppBar(title: "Prescription Information",backgroundColor: ColorsManager.lightBlue,),
               ),
               verticalSpace(6),
               
@@ -62,13 +62,10 @@ class PrescriptionInfoScreen extends StatelessWidget {
                 departmentName: departmentName,
               ),
               verticalSpace(16),
-              
               MedicineSection(medicines: matchedMedicines),
               verticalSpace(16),
-              
               TestSection(tests: matchedTests),
               verticalSpace(16),
-              
               AdviceSection(advice: prescription.extraInformation),
               verticalSpace(24),
             ],
