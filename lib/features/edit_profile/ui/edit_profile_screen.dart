@@ -63,45 +63,54 @@ class _EditProfileScreenBody extends StatelessWidget {
         backgroundColor: ColorsManager.lightBlue,
         body: SafeArea(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  const CustomTopBar(title: 'Edit Profile'),
-                  verticalSpace(30),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(20.w, 0, 20.w, 15.h),
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(bottom: 5.h, left: 8.w),
+                  child: const CustomTopBar(title: 'Edit Profile'),
+                ),
+                Expanded(
+                  child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        ProfileImage(
-                          data: cubit.profileData,
-                          onImagePicked: cubit.setProfileImage,
-                        ),
-                        verticalSpace(20),
-                        ProfileForms(
-                          formKey: cubit.formKey,
-                          nameController: cubit.nameController,
-                          usernameController: cubit.usernameController,
-                          emailController: cubit.emailController,
-                          dobController: cubit.dobController,
-                          ageController: cubit.ageController,
-                          bloodController: cubit.bloodController,
-                          phoneController: cubit.phoneController,
-                          addressController: cubit.addressController,
-                          nidController: cubit.nidController,
-                        ),
-                        verticalSpace(30),
-                        SaveChangesButton(
-                          onPressed: () async {
-                            await cubit.emitEditProfileDataStates();
-                            await cubit.updateProfilePhoto();
-                          },
-                        ),
+                        verticalSpace(15),
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(20.w, 0, 20.w, 15.h),
+                          child: Column(
+                            children: [
+                              ProfileImage(
+                                data: cubit.profileData,
+                                onImagePicked: cubit.setProfileImage,
+                              ),
+                              verticalSpace(20),
+                              ProfileForms(
+                                formKey: cubit.formKey,
+                                nameController: cubit.nameController,
+                                usernameController: cubit.usernameController,
+                                emailController: cubit.emailController,
+                                dobController: cubit.dobController,
+                                ageController: cubit.ageController,
+                                bloodController: cubit.bloodController,
+                                phoneController: cubit.phoneController,
+                                addressController: cubit.addressController,
+                                nidController: cubit.nidController,
+                              ),
+                              verticalSpace(30),
+                              SaveChangesButton(
+                                onPressed: () async {
+                                  await cubit.emitEditProfileDataStates();
+                                  await cubit.updateProfilePhoto();
+                                },
+                              ),
+                            ],
+                          ),
+                        )
                       ],
                     ),
-                  )
-                ],
-              ),
+                  ),
+                ),
+              ],
             ),
           ),
         ),

@@ -48,9 +48,9 @@ class SummaryScreen extends StatelessWidget {
                 BookingSuccessWidget(),
                 verticalSpace(30),
                 ConfirmationBookingInfoCard(bookingInfo: bookingInfo),
-                verticalSpace(20),  
+                verticalSpace(30),  
                 ConfirmationDoctorInfoCard(doctorInfo: doctorInfo, bookingInfo: bookingInfo,),
-                verticalSpace(65),
+                verticalSpace(45),
                 
                 Padding(
                   padding: EdgeInsets.all(15.w),

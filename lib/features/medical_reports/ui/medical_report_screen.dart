@@ -35,11 +35,14 @@ class MedicalReportScreen extends StatelessWidget {
       backgroundColor: ColorsManager.lightBlue,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
           child: Column(
             children: [
-              const CustomTopBar(title: 'Medical Reports'),
-              verticalSpace(30),
+              Padding(
+                padding: EdgeInsets.only(bottom: 5.h),
+                child: const CustomTopBar(title: 'Medical Reports'),
+              ),
+              verticalSpace(20),
               Expanded(
                 child: MedicalReportList(
                   doctors: doctors,

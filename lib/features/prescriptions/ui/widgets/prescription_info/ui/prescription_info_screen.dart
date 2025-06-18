@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:healthstack/core/theming/colors.dart';
 import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:healthstack/core/widgets/custom_app_bar.dart';
+import 'package:healthstack/core/widgets/custom_top_bar.dart';
 import 'package:healthstack/features/home/data/models/patient_profile_response_model.dart';
 import 'package:healthstack/features/prescriptions/data/models/prescriptions_response_model.dart';
 import 'package:healthstack/features/prescriptions/ui/widgets/prescription_info/ui/widgets/prescription_info_advice.dart';
@@ -43,33 +43,37 @@ class PrescriptionInfoScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: ColorsManager.lightBlue,
       body: SafeArea(
-        child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 15.h),
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10.w),
-                child: const CustomAppBar(title: "Prescription Information",backgroundColor: ColorsManager.lightBlue,),
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 14.w),
+              child: const CustomTopBar(title: "Prescription Information"),
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                padding: EdgeInsets.symmetric(horizontal: 14.w,),
+                child: Column(
+                  children: [
+                    HeaderWidget(
+                      patientProfileData: patientProfileData,
+                      prescription: prescription,
+                      doctorName: doctorName,
+                      doctorEmail: doctorEmail,
+                      hospitalName: hospitalName,
+                      departmentName: departmentName,
+                    ),
+                    verticalSpace(16),
+                    MedicineSection(medicines: matchedMedicines),
+                    verticalSpace(16),
+                    TestSection(tests: matchedTests),
+                    verticalSpace(16),
+                    AdviceSection(advice: prescription.extraInformation),
+                    verticalSpace(24),
+                  ],
+                ),
               ),
-              verticalSpace(6),
-              
-              HeaderWidget(
-                patientProfileData: patientProfileData,
-                prescription: prescription,
-                doctorName: doctorName,
-                doctorEmail: doctorEmail,
-                hospitalName: hospitalName,
-                departmentName: departmentName,
-              ),
-              verticalSpace(16),
-              MedicineSection(medicines: matchedMedicines),
-              verticalSpace(16),
-              TestSection(tests: matchedTests),
-              verticalSpace(16),
-              AdviceSection(advice: prescription.extraInformation),
-              verticalSpace(24),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

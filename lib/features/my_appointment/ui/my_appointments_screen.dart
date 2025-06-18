@@ -64,14 +64,13 @@ class _UpcomingScreenState extends State<MyAppointmentScreen> {
           padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
           child: Column(
             children: [
-              verticalSpace(10),
               const CustomTopBar(title: 'My Appointments',),
-              verticalSpace(30),
+              verticalSpace(20),
               MyAppointmentTaps(
                 selectedIndex: selectedTabIndex,
                 onTabChanged: _onTabChanged,
               ),
-              verticalSpace(20),
+              verticalSpace(10),
               
               Expanded(
                 child: MyAppointmentList(

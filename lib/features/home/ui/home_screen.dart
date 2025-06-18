@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
             return SingleChildScrollView(
               child: Container(
                 width: double.infinity,
-                margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
+                margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -50,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       doctorsDataList: context.watch<HomeCubit>().doctorsDataList,
                       hospitalsDataList: context.watch<HomeCubit>().hospitalsDataList,
                     ),
-                    verticalSpace(14),
+                    verticalSpace(12),
                     DepartmentsBlocBuilder(
                       selectedIndex: _getSelectedIndex(context),
                       onDepartmentSelected: (departmentId) {
@@ -77,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       hospitalsDataList: context.watch<HomeCubit>().hospitalsDataList,
                       departmentsDataList: context.watch<HomeCubit>().departmentsDataList,
                     ),
-                    verticalSpace(12),
+                    verticalSpace(8),
                     DoctorsDepartmentBlocBuilder(
                       selectedDepartmentId: selectedDepartmentId,
                     ),

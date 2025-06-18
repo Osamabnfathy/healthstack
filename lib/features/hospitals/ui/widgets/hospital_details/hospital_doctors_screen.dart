@@ -130,7 +130,7 @@ class _HospitalDoctorsScreenState extends State<HospitalDoctorsScreen> {
       backgroundColor: ColorsManager.lightBlue,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 20.h),
+          padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
           child: Column(
             children: [
               // Header
@@ -138,7 +138,7 @@ class _HospitalDoctorsScreenState extends State<HospitalDoctorsScreen> {
                 padding: EdgeInsets.symmetric(horizontal: 14.w),
                 child: CustomTopBar(title: hospitalName),
               ),
-              verticalSpace(15),
+              verticalSpace(5),
               // Search and Filter Section
               Container(
                 color: ColorsManager.lightBlue,

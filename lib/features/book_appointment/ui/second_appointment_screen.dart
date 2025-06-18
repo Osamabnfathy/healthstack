@@ -130,38 +130,47 @@ Widget build(BuildContext context) {
           },
           child: SafeArea(
             child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 16.w),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomTopBar(title: 'Book Appointment'),
-                    verticalSpace(20),
-                    SummaryStepsNumbers(currentStep: 2),
-                    verticalSpace(20),
-                    BookingInfoCard(bookingInfo: bookingInfo),
-                    verticalSpace(20),
-                    DoctorInfoCard(doctorInfo: doctorInfo, bookingInfo: bookingInfo,),
-                    verticalSpace(20),
-                    MessageTextField(messageController: messageController),
-                    verticalSpace(20),
-                    // Moved the button here inside the scrollable content
-                    Padding(
-                      padding: EdgeInsets.all(15.w),
-                      child: AppTextButton(
-                        onPressed: () {
-                          bookApptCubit.updateMessage(messageController.text);
-                          bookApptCubit.submitBooking();
-                        },
-                        buttonText: "Book Now",
-                        textStyle: TextStyles.font18WhiteMedium,
-                        backgroundColor: ColorsManager.mainBlue,
-                        borderRadius: 12.0.r,
-                        buttonHeight: 52.0.h,
+              padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 18.w),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 4.h),
+                    child: CustomTopBar(title: 'Book Appointment'),
+                  ), 
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          verticalSpace(20),
+                          SummaryStepsNumbers(currentStep: 2),
+                          verticalSpace(20),
+                          BookingInfoCard(bookingInfo: bookingInfo),
+                          verticalSpace(20),
+                          DoctorInfoCard(doctorInfo: doctorInfo, bookingInfo: bookingInfo,),
+                          verticalSpace(20),
+                          MessageTextField(messageController: messageController),
+                          verticalSpace(20),
+                          // Moved the button here inside the scrollable content
+                          Padding(
+                            padding: EdgeInsets.all(15.w),
+                            child: AppTextButton(
+                              onPressed: () {
+                                bookApptCubit.updateMessage(messageController.text);
+                                bookApptCubit.submitBooking();
+                              },
+                              buttonText: "Book Now",
+                              textStyle: TextStyles.font18WhiteMedium,
+                              backgroundColor: ColorsManager.mainBlue,
+                              borderRadius: 12.0.r,
+                              buttonHeight: 52.0.h,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),

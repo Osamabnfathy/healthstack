@@ -43,9 +43,6 @@ class MedicalReportList extends StatelessWidget {
 
             return Column(
               children: [
-                _buildHeaderRow(),
-                verticalSpace(16),
-                
                 Expanded(
                   child: ListView.builder(
                     itemCount: medicalReports.report!.length,
@@ -95,48 +92,6 @@ class MedicalReportList extends StatelessWidget {
           },
         );
       },    
-    );
-  }
-
-
-  Widget _buildHeaderRow() {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
-      decoration: BoxDecoration(
-        color: ColorsManager.lighterGray,
-        borderRadius: BorderRadius.circular(8.r),
-        border: Border.all(color: ColorsManager.gray.withOpacity(0.2)),
-        boxShadow: [
-          BoxShadow(
-            color: ColorsManager.darkBlue.withOpacity(0.1),
-            spreadRadius: 1.r,
-            blurRadius: 5.r,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      
-      child: Row(
-        children: [
-          Expanded(
-            flex: 2,
-            child: Text(
-              'ID',
-              style: TextStyles.font16DarkBlueBold,
-            ),
-          ),
-          horizontalSpace(16),
-          
-          Expanded(
-            flex: 3,
-            child: Text(
-              'Doctor ',
-              style: TextStyles.font16DarkBlueBold,
-            ),
-          ),
-          horizontalSpace(60),
-        ],
-      ),
     );
   }
 

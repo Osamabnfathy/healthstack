@@ -14,7 +14,7 @@
       </intent>
       <intent>
         <action android:name="android.intent.action.SEND" />
-        <data android:mimeType="/" />
+        <data android:mimeType="*/*" />
       </intent>
     </queries>
     <application

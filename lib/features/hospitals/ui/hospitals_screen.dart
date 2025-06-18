@@ -49,7 +49,7 @@ class _HospitalsScreenState extends State<HospitalsScreen> {
       backgroundColor: ColorsManager.lightBlue,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 16.w),
+          padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 16.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

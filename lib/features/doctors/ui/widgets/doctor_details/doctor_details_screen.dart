@@ -52,16 +52,17 @@ class DoctorDetailsScreen extends StatelessWidget {
       backgroundColor: ColorsManager.lightBlue,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
           child: Column(
             children: [
-              // Header with custom top bar
-              // Scrollable content
+              Padding(
+                padding: EdgeInsets.only(bottom: 5.h, left: 10.w),
+                child: const CustomTopBar(title: 'Doctor Information'),
+              ),
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      const CustomTopBar(title: 'Doctor Information'),
                       verticalSpace(15), // Spacing after top bar
                       _buildDoctorProfileCard(
                           hospitalName, departmentName), // Doctor Profile Card
@@ -128,8 +129,8 @@ class DoctorDetailsScreen extends StatelessWidget {
     );
 
     return Container(
-      margin: EdgeInsets.all(16.w),
-      padding: EdgeInsets.all(24.w),
+      margin: EdgeInsets.symmetric(horizontal:16.w, vertical: 10.h),
+      padding: EdgeInsets.symmetric(horizontal:16.w, vertical: 16.h),
       decoration: BoxDecoration(
         color: ColorsManager.moreLightGray,
         borderRadius: BorderRadius.circular(16.r),
