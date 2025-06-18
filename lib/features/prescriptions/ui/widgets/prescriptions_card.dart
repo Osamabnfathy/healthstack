@@ -54,11 +54,8 @@ class PrescriptionCard extends StatelessWidget {
       
       child: Row(
         children: [
-          _buildIdBadge(),
-          horizontalSpace(12),
-        
           _buildAvatar(),
-          horizontalSpace(12),
+          horizontalSpace(10),
         
           Expanded(
             child: _buildDoctorInfo(),
@@ -70,23 +67,7 @@ class PrescriptionCard extends StatelessWidget {
     );
   }
 
-  Widget _buildIdBadge() {
-    return Container(
-      width: 35.w,
-      height: 35.h,
-      decoration: BoxDecoration(
-        color: ColorsManager.mainBlue.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(6.r),
-      ),
-      
-      child: Center(
-        child: Text(
-          '${prescription.prescriptionId}',
-          style: TextStyles.font14BlueSemiBold,
-        ),
-      ),
-    );
-  }
+
 
   Widget _buildAvatar() {
     return CircleAvatar(
