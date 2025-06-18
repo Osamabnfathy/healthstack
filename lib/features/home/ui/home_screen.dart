@@ -25,6 +25,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 0,
+        backgroundColor: ColorsManager.white,
+      ),
       endDrawer: EndDrawer(
         patientProfileData: context.watch<HomeCubit>().patientProfileData,
       ),

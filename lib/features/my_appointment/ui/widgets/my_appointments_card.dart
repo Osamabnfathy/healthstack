@@ -41,7 +41,41 @@ class MyAppintmentCard extends StatelessWidget {
     super.key,
     required this.data,
   });
+  
+   DateTime? _parseAppointmentDateTime() {
+    try {
+      if (data.date == null || data.time == null) return null;
+      
+      final dateParts = data.date!.split('-');
+      final timeParts = data.time!.split(':');
+      
+      return DateTime(
+        int.parse(dateParts[0]),
+        int.parse(dateParts[1]),
+        int.parse(dateParts[2]),
+        int.parse(timeParts[0]),
+        int.parse(timeParts[1]),
+      );
+    } catch (e) {
+      return null;
+    }
+  }
 
+  // NEW: Get display status (show "cancelled" for expired pending appointments)
+  String _getDisplayStatus() {
+    final status = data.status?.toLowerCase();
+    
+    // If status is pending, check if appointment time has passed
+    if (status == 'pending') {
+      final appointmentTime = _parseAppointmentDateTime();
+      if (appointmentTime != null && appointmentTime.isBefore(DateTime.now())) {
+        return 'cancelled'; // Show as cancelled for expired pending appointments
+      }
+    }
+    
+    return status ?? '';
+  }
+  
   Color _getPaymentStatusColor() {
     String? paymentStatus = data.paymentStatus!.toLowerCase();
     if (paymentStatus == 'confirmed') {
@@ -60,30 +94,30 @@ class MyAppintmentCard extends StatelessWidget {
   }
 
   Color _getConfirmationStatusColor() {
-    String statusLower = data.status!.toLowerCase();
-    if (statusLower == 'confirmed') {
+    String displayStatus = _getDisplayStatus();
+    if (displayStatus == 'confirmed') {
       return ColorsManager.green;
     } 
-    else if (statusLower == 'pending') {
+    else if (displayStatus == 'pending') {
       return Colors.orange;
     } 
-    else if (statusLower == 'unconfirmed') {
+    else if (displayStatus == 'unconfirmed' || displayStatus == 'cancelled') {
       return Colors.red;
     }
     return Colors.grey;
   }
   
   String formatDateTime(String? date, String? time) {
-  if (date == null || time == null) return '';
-  try {
-    final dt = DateTime.parse('${date}T$time');
-    final formattedDate = DateFormat('MMMM d, y').format(dt); 
-    final formattedTime = DateFormat('h:mm a').format(dt).toLowerCase(); 
-    return '$formattedDate  ||  $formattedTime';
-  } catch (e) {
-    return '$date  ||  $time';
+    if (date == null || time == null) return '';
+    try {
+      final dt = DateTime.parse('${date}T$time');
+      final formattedDate = DateFormat('MMMM d, y').format(dt); 
+      final formattedTime = DateFormat('h:mm a').format(dt).toLowerCase(); 
+      return '$formattedDate  ||  $formattedTime';
+    } catch (e) {
+      return '$date  ||  $time';
+    }
   }
-}
 
   @override
   Widget build(BuildContext context) {
@@ -154,10 +188,10 @@ class MyAppintmentCard extends StatelessWidget {
           _buildInfoRow(" Type & Amount:", "${data.type ?? ''}  ||  ${data.amount ?? ''} EGP"),
           verticalSpace(10),
           
-          _buildColoredInfoRow(" Status:", data.status  ?? '', _getConfirmationStatusColor()),
+          _buildColoredInfoRow(" Status:", _getDisplayStatus().toUpperCase(), _getConfirmationStatusColor()),
           verticalSpace(10),
           
-          _buildColoredInfoRow(" Payment Status:", data.paymentStatus ?? '', _getPaymentStatusColor()),
+          _buildColoredInfoRow(" Payment Status:", data.paymentStatus?.toUpperCase() ?? '', _getPaymentStatusColor()),
         ],
       ),
     );

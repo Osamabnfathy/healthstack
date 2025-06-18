@@ -222,18 +222,16 @@ class _MyAppointmentListState extends State<MyAppointmentList> {
         
         switch (selectedTab) {
           case 0: // Upcoming
-            return apt.appointmentStatus?.toLowerCase() == 'pending' && 
-                   aptTime.isAfter(now);
-            
+            return aptTime.isAfter(now) && 
+                 (apt.appointmentStatus == 'pending' || apt.appointmentStatus == 'confirmed');
+                 
           case 1: // Completed
-            return (apt.appointmentStatus?.toLowerCase() == 'confirmed' || 
-                    apt.paymentStatus?.toLowerCase() == 'confirmed') &&
-                   aptTime.isBefore(now);
+            return aptTime.isBefore(now) && 
+                 apt.appointmentStatus == 'confirmed';
                     
           case 2: // Cancelled
-            return apt.appointmentStatus?.toLowerCase() == 'cancelled' || 
-                   (apt.appointmentStatus?.toLowerCase() == 'pending' && 
-                    aptTime.isBefore(now));
+            return aptTime.isBefore(now) && 
+                 (apt.appointmentStatus == 'pending' || apt.appointmentStatus == 'cancelled');
                     
           default: return false;
         }
