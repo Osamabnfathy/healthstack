@@ -57,7 +57,7 @@ A complete healthcare mobile application developed using **Flutter** for Android
 
 | Appointments (Upcoming)          | Appointments (Completed)          | Appointments (Cancelled)          |
 | -------------------------------- | --------------------------------- | --------------------------------- |
-| ![021 my appointments upcomming](https://github.com/user-attachments/assets/503482da-c94b-4049-b883-3ae6b1b5e75c) | ![022 my appointments completed](https://github.com/user-attachments/assets/76398e5b-7d6a-417a-8373-483746398081) | ![023 my appointments cancelled](https://github.com/user-attachments/assets/d1a3d16b-2a2d-46db-a0e1-deb04cfd0555) |
+| ![021 my appointments upcomming](https://github.com/user-attachments/assets/48cdf645-5271-459d-8bbe-5f9a167e6ffd) | ![022 my appointments completed](https://github.com/user-attachments/assets/ca96acd5-1056-4436-92e9-78662bedc089) | ![023 my appointments cancelled](https://github.com/user-attachments/assets/0a586cc1-3d90-4551-98d5-2837a8660a61) |
 
 | Prescriptions                        | Prescription Detail                |
 | ------------------------------------ | ---------------------------------- |
