@@ -1,3 +1,4 @@
+import 'package:healthstack/core/helpers/spacing.dart';
 import 'package:healthstack/features/home/data/models/patient_profile_response_model.dart';
 
 import 'widgets/bottuns_list.dart';
@@ -18,17 +19,18 @@ class EndDrawer extends StatelessWidget {
     return Drawer(
       backgroundColor: ColorsManager.lighterGray,
       shadowColor: Colors.grey.withOpacity(0.3),
-      elevation: 10,
+      elevation: 8,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           ProfileInformation(patientProfileData: patientProfileData),
           const CircularEdgeItemsDrawer(),
           Padding(
-            padding: EdgeInsets.only(top: 10.h, left: 15.w, right: 15.w),
+            padding: EdgeInsets.only(top: 5.h, left: 15.w, right: 15.w, bottom: 10.h),
             child: const MyAppointmentAndMedicalRecords(),
           ),
           const Expanded(child: ButtonsList()),
+          verticalSpace(12)
         ],
       ),
     );

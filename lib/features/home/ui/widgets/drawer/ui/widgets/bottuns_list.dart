@@ -118,7 +118,7 @@ class ButtonsList extends StatelessWidget {
 
     return Container(
       color: ColorsManager.lighterGray, 
-      padding: EdgeInsets.symmetric(horizontal: 12.w).copyWith(top: 10.h), 
+      padding: EdgeInsets.symmetric(horizontal: 12.w), 
        
       child: ListView.separated(
         physics: const BouncingScrollPhysics(), 

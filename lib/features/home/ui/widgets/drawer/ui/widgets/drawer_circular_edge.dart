@@ -10,7 +10,7 @@ class CircularEdgeItemsDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 20.h, 
+      height: 10.h, 
       color: ColorsManager.lightBlue, 
       
       child: Container(
