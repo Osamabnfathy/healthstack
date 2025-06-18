@@ -93,11 +93,11 @@ class _DepartmentDoctorsScreenState extends State<DepartmentDoctorsScreen> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
           child: Column(
             children: [
               CustomTopBar(title: '${getDepartmentName().split(' ').first} Doctors'),
-              verticalSpace(30),
+              verticalSpace(15),
 
               SearchAndFilterBar(
                 searchController: searchController,

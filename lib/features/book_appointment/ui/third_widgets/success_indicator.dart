@@ -15,8 +15,8 @@ class BookingSuccessWidget extends StatelessWidget {
       children: [
         Lottie.asset(
           'assets/animations/success_checkmark.json',
-          width: 120.w, 
-          height: 120.h,
+          width: 130.w, 
+          height: 130.h,
           repeat: false, 
         ),
         verticalSpace(10), 

@@ -14,21 +14,31 @@ class ContactUsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorsManager.lightBlue,
-      body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
+      body: SafeArea(
         child: Column(
           children: [
-            verticalSpace(20),
-            const CustomTopBar(title: 'Contact Us'),
-            verticalSpace(20),
-            const ContactUsHeader(),
-            verticalSpace(30),
-            const ContactInfoSection(),
-            verticalSpace(30),
-            // const ContactForm(),
-            // verticalSpace(40),
-            const SocialIconsSection(),
-            verticalSpace(30),
+            Padding(
+              padding: EdgeInsets.only(bottom: 5.h, top: 8.h, left: 18.w),
+              child: CustomTopBar(title: 'Contact Us'),
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+                child: Column(
+                  children: [
+                    verticalSpace(5),
+                    const ContactUsHeader(),
+                    verticalSpace(30),
+                    const ContactInfoSection(),
+                    verticalSpace(30),
+                    // const ContactForm(),
+                    // verticalSpace(40),
+                    const SocialIconsSection(),
+                    verticalSpace(20),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),

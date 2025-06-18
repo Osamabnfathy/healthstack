@@ -49,7 +49,7 @@ class _DoctorPageState extends State<DoctorsScreen> {
       backgroundColor: ColorsManager.lightBlue,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 14.w),
+          padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 14.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

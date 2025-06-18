@@ -241,77 +241,86 @@ TimeOfDay? _parseTime(String timeStr) {
       backgroundColor: ColorsManager.lightBlue,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 16.w),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CustomTopBar(title: 'Book Appointment'), 
-                verticalSpace(20),
-                StepsNumbers(),
-                verticalSpace(20),
-                DateSelection(
-                  dates: displayDates,
-                  selectedDateIndex: selectedDateIndex,
-                  onDateSelected: updateSelectedDate,
-                ),
-                verticalSpace(20),
-                TimeSelection(
-                  times: displayTimes,
-                  selectedTimeIndex: selectedTimeIndex,
-                  onTimeSelected: updateSelectedTime,
-                ),
-                verticalSpace(20),
-                AppointmentType(
-                  appointmentTypes: appointmentTypes,
-                  appointmentIcons: appointmentIcons,
-                  selectedAppointmentType: selectedAppointmentType,
-                  onAppointmentTypeSelected: updateAppointmentType,
-                ),
-                verticalSpace(20),
-                if (selectedTimeIndex == -1) 
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 10.h),
-                    child: Text(
-                      "Please select a Time",
-                      style: TextStyles.font14RedRegular.copyWith(fontSize: 18.sp),
-                    ),
+          padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 18.w),
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 5.h),
+                child: CustomTopBar(title: 'Book Appointment'),
+              ), 
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      verticalSpace(20),
+                      StepsNumbers(),
+                      verticalSpace(20),
+                      DateSelection(
+                        dates: displayDates,
+                        selectedDateIndex: selectedDateIndex,
+                        onDateSelected: updateSelectedDate,
+                      ),
+                      verticalSpace(20),
+                      TimeSelection(
+                        times: displayTimes,
+                        selectedTimeIndex: selectedTimeIndex,
+                        onTimeSelected: updateSelectedTime,
+                      ),
+                      verticalSpace(20),
+                      AppointmentType(
+                        appointmentTypes: appointmentTypes,
+                        appointmentIcons: appointmentIcons,
+                        selectedAppointmentType: selectedAppointmentType,
+                        onAppointmentTypeSelected: updateAppointmentType,
+                      ),
+                      verticalSpace(20),
+                      if (selectedTimeIndex == -1) 
+                        Padding(
+                          padding: EdgeInsets.only(bottom: 10.h),
+                          child: Text(
+                            "Please select a Time",
+                            style: TextStyles.font14RedRegular.copyWith(fontSize: 18.sp),
+                          ),
+                        ),
+                      AppTextButton(
+                        onPressed: selectedTimeIndex == -1 
+                          ? () {} 
+                          : () {
+                              final String selectedDate = availableDates[selectedDateIndex].toString();
+                              final String selectedTime = availableTimes[selectedTimeIndex].format(context);
+                              final String selectedappointmentType = appointmentTypes[selectedAppointmentType];
+                            
+                              Navigator.pushNamed(
+                                context,
+                                Routes.secondAppointmentScreen,
+                                arguments: {
+                                  'selectedDate': selectedDate,
+                                  'selectedTime': selectedTime,
+                                  'selectedAppointmentType': selectedappointmentType,
+                                  'doctorId': widget.doctorId,
+                                  'doctorName': widget.doctorName,
+                                  'doctorImage': widget.doctorImage,
+                                  'hospitalName': widget.hospitalName,
+                                  'departmentName': widget.departmentName,
+                                  'cubit': context.read<BookAppointmentCubit>(),
+                                },
+                              );              
+                            },
+                        buttonText: "Continue",
+                        textStyle: TextStyles.font18WhiteMedium,
+                        backgroundColor: selectedTimeIndex == -1
+                          ? ColorsManager.mainBlue.withOpacity(0.6)
+                          : ColorsManager.mainBlue,
+                        borderRadius: 12.0.r,
+                        buttonHeight: 52.0.h,
+                      ),
+                      verticalSpace(16),
+                    ],
                   ),
-                AppTextButton(
-                  onPressed: selectedTimeIndex == -1 
-                    ? () {} 
-                    : () {
-                        final String selectedDate = availableDates[selectedDateIndex].toString();
-                        final String selectedTime = availableTimes[selectedTimeIndex].format(context);
-                        final String selectedappointmentType = appointmentTypes[selectedAppointmentType];
-                      
-                        Navigator.pushNamed(
-                          context,
-                          Routes.secondAppointmentScreen,
-                          arguments: {
-                            'selectedDate': selectedDate,
-                            'selectedTime': selectedTime,
-                            'selectedAppointmentType': selectedappointmentType,
-                            'doctorId': widget.doctorId,
-                            'doctorName': widget.doctorName,
-                            'doctorImage': widget.doctorImage,
-                            'hospitalName': widget.hospitalName,
-                            'departmentName': widget.departmentName,
-                            'cubit': context.read<BookAppointmentCubit>(),
-                          },
-                        );              
-                      },
-                  buttonText: "Continue",
-                  textStyle: TextStyles.font18WhiteMedium,
-                  backgroundColor: selectedTimeIndex == -1
-                    ? ColorsManager.mainBlue.withOpacity(0.6)
-                    : ColorsManager.mainBlue,
-                  borderRadius: 12.0.r,
-                  buttonHeight: 52.0.h,
                 ),
-                verticalSpace(16),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

@@ -22,30 +22,36 @@ class AboutUsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-                child: const CustomTopBar(title: 'About Us'),
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
+              child: const CustomTopBar(title: 'About Us'),
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    verticalSpace(10),
+                    const AboutUsHero(),
+                    verticalSpace(30),
+                    const AboutUsContent(),
+                    verticalSpace(30),
+                    AboutUsStats(
+                      doctorsCount: doctorsCount,
+                      hospitalsCount: hospitalsCount,
+                    ),
+                    verticalSpace(30),
+                    const AboutUsValues(),
+                    verticalSpace(30),
+                    const AboutUsTeam(),
+                    verticalSpace(20),
+                  ],
+                ),
               ),
-              verticalSpace(10),
-              const AboutUsHero(),
-              verticalSpace(30),
-              const AboutUsContent(),
-              verticalSpace(30),
-              AboutUsStats(
-                doctorsCount: doctorsCount,
-                hospitalsCount: hospitalsCount,
-              ),
-              verticalSpace(30),
-              const AboutUsValues(),
-              verticalSpace(30),
-              const AboutUsTeam(),
-              verticalSpace(20),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

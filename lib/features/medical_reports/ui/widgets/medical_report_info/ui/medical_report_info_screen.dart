@@ -44,34 +44,41 @@ class MedicalReportInfoScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: ColorsManager.white,
       body: SafeArea(
-        child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 15.h),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10.w),
+                padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
                 child: const CustomTopBar(title: "Medical Report Information"),
               ),
-              verticalSpace(6),
-              
-              Header(
-                patientProfileData: patientProfileData,
-                medicalReport: medicalReport,
-                doctorName: doctorName,
-                doctorEmail: doctorEmail,
-                hospitalName: hospitalName,
-                departmentName: departmentName,
+              verticalSpace(4),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Header(
+                        patientProfileData: patientProfileData,
+                        medicalReport: medicalReport,
+                        doctorName: doctorName,
+                        doctorEmail: doctorEmail,
+                        hospitalName: hospitalName,
+                        departmentName: departmentName,
+                      ),
+                      verticalSpace(16),
+                      
+                      SpecimenDetailsSection(specimenDetails: matchedspecimen),
+                      verticalSpace(16),
+                      
+                      TestResultsSection(tests: matchedTests),
+                      verticalSpace(16),
+                      
+                      OtherInformations(advice: medicalReport.otherInformation),
+                      verticalSpace(20),
+                    ],
+                  ),
+                ),
               ),
-              verticalSpace(16),
-              
-              SpecimenDetailsSection(specimenDetails: matchedspecimen),
-              verticalSpace(16),
-              
-              TestResultsSection(tests: matchedTests),
-              verticalSpace(16),
-              
-              OtherInformations(advice: medicalReport.otherInformation),
-              verticalSpace(20),
             ],
           ),
         ),
