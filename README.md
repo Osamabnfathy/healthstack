@@ -126,7 +126,7 @@ flutter run
 ## 👥 Authors
 
 ### * [*Osama Fathy Mohammed*](https://github.com/Osamabnfathy)
-### * [*Mahmoud Ahmed Sayed*](https://github.com/Mahmoud-5ayed)
+### * [*Mahmoud Ahmed Mohammed Sayed*](https://github.com/Mahmoud-5ayed)
 ### * [*Abd-ElRahman Adel Kamal*](https://github.com/abdelrahman880)
 
 <p>&nbsp;</p>
