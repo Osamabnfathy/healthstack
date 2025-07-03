@@ -92,7 +92,7 @@ git clone https://github.com/Osamabnfathy/healthstack.git
 * Navigate to the project directory
 
 ```bash
-cd healthstack
+cd MediCare
 ```
 
 * Install dependencies
@@ -106,6 +106,10 @@ flutter pub get
 ```bash
 flutter run
 ```
+
+* Download the Built app
+   
+  >> [Download Latest APK](https://github.com/your-username/your-repo/releases/latest)
 
 ---
 
